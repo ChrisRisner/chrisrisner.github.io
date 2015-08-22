@@ -1,0 +1,38 @@
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
+
+paginate: 2 # pagination based on number of posts
+paginate_path: "page:num"
+exclude: ["README.md"] # files to exclude
+highlighter: pygments
+markdown: kramdown
+disqus: chrisrisnercom
+disqus_show_comment_count: true
+google_analytics: UA-3295765-1
+permalink: /:title
+title: ChrisRisner.com
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: ChrisRisner.com
+
+description: 
+author:
+  name: Chris Risner
+  email: chris@chrisrisner.com
+  github: chrisrisner
+  twitter: chrisrisner
+  bio:     
+#  email_md5: 726351295ec82e145928582f595aa3aa
+  email_md5: 285584b876f2d45cfbbfb29ce656fde0
+
+github_repo_url: https://github.com/chrisrisner/chrisrisner.github.io/
+
+rss_path: feed.xml
+rss_url: http://feeds.feedburner.com/chrisrisnercom
+categories_path: categories.html
+tags_path: tags.html
+
+BASE_PATH:
