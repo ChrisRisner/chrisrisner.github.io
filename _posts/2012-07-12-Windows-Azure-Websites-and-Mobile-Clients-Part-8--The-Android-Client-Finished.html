@@ -1,0 +1,607 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 8: The Android Client Finished"
+date: Thu Jul 12 2012 13:50:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Azure, Java, Mobile]
+excerpt: "This article wraps up the Android client for a URL Shortening service written in PHP running on Windows Azure Websites.  In it, we detail how to add a new shortened URL by creating the UI and doing the necessary posting to a web service using HttpURLConnections and Async Tasks."
+logoUrl: null
+keywords: Android,Eclipse,Java,Windows Azure,Azure,PHP on Azure,Mobile connectivity to Windows Azure,Android Azure,URL Shortener,HttpURLConnection,AsyncService,Web connection,Post
+filepath: 2012-07-12-Windows-Azure-Websites-and-Mobile-Clients-Part-8--The-Android-Client-Finished.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-8--The-Android-Client-Finished
+---
+<p><img style="margin: 0px 0px 5px 6px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-emulator-with-azure.jpg" width="244" height="368" />Today we’re going to wrap up our first Android client that connects to <a title="Windows Azure" href="http://windowsazure.com">WIndows Azure</a> Websites.&#160; If you’ve been <a title="Android Client from part 7" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-7--The-Android-Client-Continued">following along, then as of now we have an app</a> that displays a list of shortened URL slugs and will allow the user to tap in to see more details on them.&#160; Today we’re going to complete our app by giving the user the ability to add new shortened URLs from the app.&#160; You can <a title="Android Client Source Code from Part 7" href="http://chrisrisner.com/upload/ShortifierDemo-Android-part2.zip">download the code we left off with in part 7 here</a>.</p>  <p>Let’s start by changing the default menu that was created when we created our project (again this is the latest version of ADT.&#160; If you are using an older version, a menu may not have been created for you.&#160; If you aren’t sure how to add a menu to your application, take a look at this <a title="Android Options Menus and Base Activities" href="http://chrisrisner.com/31-Days-of-Android--Day-6%E2%80%93Options-Menus-and-Base-Activities">article about options menus and base activities</a>).&#160; Go in your <strong>res/menu/activity_main.xml </strong>file and change it from the default settings to this:</p>  <pre class="csharpcode">    <span class="kwrd">&lt;</span><span class="html">menu</span> <span class="attr">xmlns:android</span><span class="kwrd">=&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="kwrd">&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">item</span> <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/menu_add_url&quot;</span>
+            <span class="attr">android:title</span><span class="kwrd">=&quot;Add URL&quot;</span>
+            <span class="attr">android:orderInCategory</span><span class="kwrd">=&quot;100&quot;</span>
+            <span class="attr">android:showAsAction</span><span class="kwrd">=&quot;never&quot;</span> <span class="kwrd">/&gt;</span>
+    <span class="kwrd">&lt;/</span><span class="html">menu</span><span class="kwrd">&gt;</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>For brevity, we are putting the text for the <strong>Title</strong> right in the XML file.&#160; We really shouldn’t be doing this.&#160; Instead we should be using the <strong>strings.xml</strong> resource file so localization is easy to do.&#160; If you run your app and hit the menu button on the main activity, you should see the “Add URL” option appear at the bottom:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Shortifier Menu" alt="Android Shortifier Menu" src="http://chrisrisner.com/upload/shortifier-android-menu.jpg" width="221" height="328" /></p>
+
+<p>Now we need to wire that up to do something.&#160; We already have the <strong>UrlDetailsActivity</strong> which has most of the controls we’d need to create a new shortened URL.&#160; We should be able to reuse that activity for adding new URLs with some slight additions and modifications.&#160; Let’s look at the menu click listener first:</p>
+
+<pre class="csharpcode">    @Override
+    <span class="kwrd">public</span> boolean onOptionsItemSelected(MenuItem item) {
+        <span class="kwrd">switch</span> (item.getItemId()) {
+        <span class="kwrd">case</span> (R.id.menu_add_url):
+            Intent urlDetailsIntent = <span class="kwrd">new</span> Intent(getApplicationContext(),
+                    UrlDetailsActivity.<span class="kwrd">class</span>);
+            urlDetailsIntent.putExtra(<span class="str">&quot;AddingNewUrl&quot;</span>, <span class="kwrd">true</span>);
+            startActivityForResult(urlDetailsIntent,1);
+            <span class="kwrd">return</span> <span class="kwrd">true</span>;            
+        <span class="kwrd">default</span>:
+            <span class="kwrd">return</span> super.onOptionsItemSelected(item);
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This isn’t much different from what we do when a user taps on a URL slug.&#160; We’re creating a new <strong>Intent</strong> for the <strong>UrlDetailsActivity</strong> and we’re passing in an extra before we start it.&#160; Specifically, we’re passing in a new extra named <strong>AddingNewUrl</strong>.&#160; One minor difference is that here we’re calling <strong>startActivityForResult</strong> instead of <strong>startActivity</strong>.&#160; This let’s Android know that we’re expecting to get a message passed back when the <strong>UrlDetailsActivity</strong> finishes.&#160; Here I’m just using “1” as the code, but you’d probably want to define a constant somewhere and use that instead.&#160; Now let’s go ahead and go back to the other spot in <strong>MainActivity</strong> where we’re creating this intent and add our new extra there, but set it to false:</p>
+
+<pre class="csharpcode">        ...
+        <span class="rem">//Load the details intent for this specific slug</span>
+        Intent urlDetailsIntent = <span class="kwrd">new</span> Intent(getApplicationContext(),
+            UrlDetailsActivity.<span class="kwrd">class</span>);
+        urlDetailsIntent.putExtra(<span class="str">&quot;UrlSlug&quot;</span>, tv.getText().toString());
+        <span class="rem">//We need to get the Full URL somehow and send it as an extra</span>
+        urlDetailsIntent.putExtra(<span class="str">&quot;FullUrl&quot;</span>,
+                mUrlMap.get(tv.getText().toString()));
+        urlDetailsIntent.putExtra(<span class="str">&quot;AddingNewUrl&quot;</span>, <span class="kwrd">true</span>);
+        startActivity(urlDetailsIntent);
+        ...</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>We’ve just added the new extra here, other than that it is the same as what we were <a title="Android Client Part 7" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-7--The-Android-Client-Continued">doing in the last article</a>.&#160; Before we leave <strong>MainActivity</strong>, let’s implement a handler for when a result is passed back to the activity:</p>
+
+<pre class="csharpcode">    @Override
+    <span class="kwrd">protected</span> <span class="kwrd">void</span> onActivityResult(<span class="kwrd">int</span> requestCode, <span class="kwrd">int</span> resultCode, Intent data) {
+        <span class="kwrd">if</span> (requestCode == 1) {
+            final Intent serviceIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_SYNC, <span class="kwrd">null</span>, 
+                    getApplicationContext(), UrlFetchService.<span class="kwrd">class</span>);
+            <span class="rem">// put the specifics for the submission service commands</span>
+            serviceIntent.putExtra(UrlFetchService.RECEIVER_KEY, mReceiver);
+            serviceIntent.putExtra(UrlFetchService.COMMAND_KEY, UrlFetchService.PERFORM_SERVICE_ACTIVITY);
+            <span class="rem">//Start the service</span>
+            startService(serviceIntent);
+        }
+        <span class="kwrd">else</span> 
+            super.onActivityResult(requestCode, resultCode, data);
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If <strong>onActivitiyResult</strong> is called and the <strong>requestCode</strong> matches what we expect to get back from <strong>urlDetailsActivity </strong>(1) then we are repeating the code to pull the URLs from the server.&#160; Since the code to start our <strong>serviceIntent</strong> is the exact same as what happens in the <strong>onCreate </strong>method, this would be a good opportunity to refactor that code out into a separate method (if you download the source, you’ll see that has been done).&#160; Now we’re ready to start making changes in <strong>UrlDetailsActivity</strong>.&#160; First, we’ll add a new private field to track if we’re adding a new URL or not:</p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> boolean mIsAddingNewUrl;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Then in the <strong>onCreate</strong> after we get the <strong>Intent</strong>, we’ll pull that extra out and change what we’re doing according to that field’s value:</p>
+
+<pre class="csharpcode">        ...
+        <span class="rem">//Get extra data from intent</span>
+        Intent intent = getIntent();        
+        mIsAddingNewUrl = intent.getBooleanExtra(<span class="str">&quot;AddingNewUrl&quot;</span>, <span class="kwrd">false</span>);
+        
+        <span class="kwrd">if</span> (mIsAddingNewUrl) {
+            TextView lblShortyUrl = (TextView) findViewById(R.id.lblShortyUrl);
+            TextView lblGoToUrl = (TextView) findViewById(R.id.lblGoToUrl);
+            lblShortyUrl.setVisibility(View.GONE);
+            mTxtShortyUrl.setVisibility(View.GONE);
+            lblGoToUrl.setVisibility(View.GONE);
+            mBtnGoToUrl.setVisibility(View.GONE);            
+        } <span class="kwrd">else</span> {
+            final String urlSlug = intent.getStringExtra(<span class="str">&quot;UrlSlug&quot;</span>);
+            final String fullUrl = intent.getStringExtra(<span class="str">&quot;FullUrl&quot;</span>);
+            <span class="rem">//Set our text fields and disable them</span>
+            mTxtUrlSlug.setText(urlSlug);
+            mTxtUrlSlug.setFocusable(<span class="kwrd">false</span>);
+            mTxtFullUrl.setText(fullUrl);
+            mTxtFullUrl.setFocusable(<span class="kwrd">false</span>);
+            mTxtShortyUrl.setText(<span class="str">&quot;http://urlshortener.azurewebsites.net/&quot;</span> + urlSlug);
+            mTxtShortyUrl.setFocusable(<span class="kwrd">false</span>);
+            
+            mBtnGoToUrl.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {
+                @Override
+                <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {
+                    <span class="rem">//Fire intent to view URL in web browser</span>
+                    Intent webIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW);
+                    webIntent.setData(Uri.parse
+                            (<span class="str">&quot;http://urlshortener.azurewebsites.net/&quot;</span> + urlSlug));
+                    startActivity(webIntent);
+                }
+            });
+        }
+        ...</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>So if we are adding a new URL, we hide the Shorty fields and the “Go to URL” button.&#160; If we aren’t adding a new URL, then everything is the same.&#160; This is great, but we need to add a <strong>Save</strong> button to be used when adding.&#160; Let’s add that button at the bottom of our <strong>activity_url_details.xml</strong> file:</p>
+
+<pre class="csharpcode">    ...
+            android:text=&quot;Go To URL&quot; <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">Button</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/btnSaveUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;match_parent&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;Save URL&quot;</span> <span class="kwrd">/&gt;</span>
+    <span class="kwrd">&lt;/</span><span class="html">LinearLayout</span><span class="kwrd">&gt;</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>After that, go back to <strong>UrlDetailsActivity.java</strong> and add a new private member variable for this button.&#160; In the <strong>onCreate</strong>, where we are getting references to the other UI controls, get a reference to the new button and store it in the private variable.&#160; Then in the conditional, if we aren’t adding a new URL, hide the button:</p>
+
+<pre class="csharpcode">        ...
+        mTxtShortyUrl.setFocusable(<span class="kwrd">false</span>);
+        mBtnSaveUrl.setVisibility(View.GONE);
+        mBtnGoToUrl.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {
+        ...</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If we are adding a new URL, let’s add a <strong>onClickListener</strong> and call a method to save the URL:</p>
+
+<pre class="csharpcode">        ...
+        mBtnGoToUrl.setVisibility(View.GONE);    
+        mBtnSaveUrl.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {
+            @Override
+            <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {
+                SaveUrl(mTxtUrlSlug.getText().toString(), mTxtFullUrl
+                        .getText().toString());
+            }
+        });
+    } <span class="kwrd">else</span> {
+    ...</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now we just need to implement that method.&#160; It turns out, we won’t do very much from this method.&#160; We don’t want to lock the UI thread by doing the network communication on it (as of API9, you actually throw an exception if you try).&#160; So, instead, we’ll create an <strong>AsyncTask</strong> and have it process the saving for us:</p>
+
+<pre class="csharpcode">    <span class="kwrd">protected</span> <span class="kwrd">void</span> SaveUrl(String urlSlug, String fullUrl) {        
+        <span class="kwrd">new</span> AddUrlTask(<span class="kwrd">this</span>).execute(urlSlug, fullUrl);
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The <strong>AddUrlTask</strong> class is a private class within <strong>UrlDetailsActivity</strong>.&#160; First we have the constructor for it:</p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> <span class="kwrd">class</span> AddUrlTask extends AsyncTask&lt;String, Void, String&gt; {
+        
+        <span class="kwrd">private</span> Activity mContext;
+        
+        <span class="kwrd">public</span> AddUrlTask(Activity activity) {
+            mContext = activity;
+        }
+        ...</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>We need a reference to the calling activity later on, so our constructor takes that in.&#160; The stuff to the left of the <strong>extends AsyncTask</strong> dictates how the header for the <strong>doInBackground </strong>method will look.&#160; Here we’re saying that it will take in and return a <strong>String</strong>.&#160; </p>
+
+<pre class="csharpcode">        @Override
+        <span class="kwrd">protected</span> String doInBackground(String... <span class="kwrd">params</span>) {         
+            JSONObject jsonUrl = <span class="kwrd">new</span> JSONObject();
+            <span class="kwrd">try</span> {
+                jsonUrl.put(<span class="str">&quot;key&quot;</span>, <span class="str">&quot;my_key&quot;</span>);
+                jsonUrl.put(<span class="str">&quot;url_slug&quot;</span>, <span class="kwrd">params</span>[0]);
+                jsonUrl.put(<span class="str">&quot;url&quot;</span>, <span class="kwrd">params</span>[1]);
+            } <span class="kwrd">catch</span> (JSONException e) {
+                Log.e(<span class="str">&quot;UrlDetailsActivity&quot;</span>, <span class="str">&quot;Error creating JSON object: &quot;</span> 
+                        + e.getMessage());
+            }
+            Log.i(<span class="str">&quot;UrlDetailsActivity&quot;</span>, <span class="str">&quot;JSON: &quot;</span> + jsonUrl.toString());
+            
+            HttpURLConnection urlConnection = <span class="kwrd">null</span>;
+            <span class="kwrd">try</span> {
+                URL url = <span class="kwrd">new</span> URL(<span class="str">&quot;http://urlshortener.azurewebsites.net/api-add&quot;</span>);
+                 urlConnection= (HttpURLConnection) url<span class="rem">//</span>
+                        .openConnection();
+                urlConnection.setDoOutput(<span class="kwrd">true</span>);
+                urlConnection.setDoInput(<span class="kwrd">true</span>);
+                urlConnection.setRequestMethod(<span class="str">&quot;POST&quot;</span>);
+                urlConnection.addRequestProperty(<span class="str">&quot;Content-Type&quot;</span>, <span class="str">&quot;application/json&quot;</span>);
+                urlConnection.setRequestProperty(<span class="str">&quot;Content-Length&quot;</span>, <span class="str">&quot;&quot;</span> + 
+                           Integer.toString(jsonUrl.toString().getBytes().length));            
+                <span class="kwrd">byte</span>[] bytes = jsonUrl.toString().getBytes(<span class="str">&quot;UTF-8&quot;</span>);            
+                <span class="rem">//Write JSON to Server</span>
+                  DataOutputStream wr = <span class="kwrd">new</span> DataOutputStream (
+                              urlConnection.getOutputStream ());
+                  wr.writeBytes(jsonUrl.toString());
+                  wr.flush ();
+                  wr.close ();
+                <span class="rem">//Get response code</span>
+                <span class="kwrd">int</span> response = urlConnection.getResponseCode();
+                <span class="rem">//Read response</span>
+                InputStream inputStream = 
+                        <span class="kwrd">new</span> BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader bufferedReader = 
+                        <span class="kwrd">new</span> BufferedReader(<span class="kwrd">new</span> InputStreamReader(inputStream));
+                StringBuilder stringBuilderResult = <span class="kwrd">new</span> StringBuilder();
+                String line;
+                <span class="kwrd">while</span> ((line = bufferedReader.readLine()) != <span class="kwrd">null</span>) {
+                    stringBuilderResult.append(line);
+                }
+                JSONObject statusObject = <span class="kwrd">new</span> JSONObject(stringBuilderResult.toString());
+                String status = statusObject.getString(<span class="str">&quot;Status&quot;</span>);
+                <span class="kwrd">return</span> status;
+                
+            } <span class="kwrd">catch</span> (IOException e) {            
+                Log.e(<span class="str">&quot;UrlDetailsActivity&quot;</span>, <span class="str">&quot;IO Exeception: &quot;</span> + e.getMessage());
+                e.printStackTrace();
+                <span class="kwrd">return</span> <span class="str">&quot;IOERROR&quot;</span>;
+            } <span class="kwrd">catch</span> (JSONException e) {
+                Log.e(<span class="str">&quot;UrlDetailsActivity&quot;</span>, <span class="str">&quot;JSON Exception: &quot;</span> + e.getMessage());
+                e.printStackTrace();
+                <span class="kwrd">return</span> <span class="str">&quot;JSONERROR&quot;</span>;
+            } <span class="kwrd">finally</span> {
+                urlConnection.disconnect();
+            }
+        }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The <strong>params</strong> it takes in is actually an array of strings.&#160; So first, we pull the URL slug and full URL out of there.&#160; Next we build our <strong>JSONObject</strong> with those fields as well as the key.&#160; We create a <strong>HttpURLConnection</strong> and set it’s content type, HTTP method, content length, and specify that we’re doing both input and output.&#160; We then open the connection and write out to it.&#160; Then we read in the response.&#160; Finally, we put the response data into a <strong>JSONObject</strong> and return the <strong>Status</strong> field from that JSON.&#160; Lastly, in <strong>onPostExecute</strong> we have access to the UI again and can update it:</p>
+
+<pre class="csharpcode">        @Override
+        <span class="kwrd">protected</span> <span class="kwrd">void</span> onPostExecute(String status) {
+            <span class="rem">//Do something with result</span>
+            <span class="kwrd">if</span> (status.equals(<span class="str">&quot;SUCCESS&quot;</span>)) {
+                Toast.makeText(getApplicationContext(), 
+                        <span class="str">&quot;URL Created Successfully&quot;</span>, Toast.LENGTH_SHORT).show();
+                mContext.finishActivity(1);
+                finish();
+            } <span class="kwrd">else</span> <span class="kwrd">if</span> (status.equals(<span class="str">&quot;Already Exists&quot;</span>)) {
+                Toast.makeText(getApplicationContext(), 
+                        <span class="str">&quot;A URL with this SLUG already exists&quot;</span>, Toast.LENGTH_SHORT).show();
+            } <span class="kwrd">else</span> {
+                Toast.makeText(getApplicationContext(), 
+                        <span class="str">&quot;There was an error creating the Shorty URL(1): &quot;</span> 
+                        + status, Toast.LENGTH_SHORT).show();
+            }
+        }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, if things were successful, we show a toast to let the user know that and then finish the activity with the <strong>requestCode</strong> we used earlier (1).&#160; Finally, if it wasn’t a success, we show a toast with a different message and don’t finish.</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Shortifer in Android Adding a URL" alt="Shortifer in Android Adding a URL" src="http://chrisrisner.com/upload/shortifier-android-finish.jpg" width="584" height="380" /></p>
+
+<p>&#160;</p>
+
+<p>And that does it, our client is complete.&#160; There is a lot of room for improvement in this app.&#160; We’re not doing any validation on the URL slug or the full URL so the user could easily enter something that wouldn’t be valid on the server side (remember the web service runs a regex against the full URL to make sure it’s valid).&#160; There isn’t anyway to refresh the URLs on the list view (you could easily do this from another menu option if you wanted).&#160; However, the core functionality and integration with our Windows Azure Website is there.&#160; You can <a title="Completed Android Client for URL Shortening" href="http://chrisrisner.com/upload/ShortifierDemo-android-part3.zip">download the completed code from our Android client here</a>.</p>
+
+<p>&#160;</p>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

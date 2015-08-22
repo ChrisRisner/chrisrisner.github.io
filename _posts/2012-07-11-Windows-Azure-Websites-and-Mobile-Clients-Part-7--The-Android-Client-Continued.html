@@ -1,0 +1,459 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 7: The Android Client Continued"
+date: Wed Jul 11 2012 14:01:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Azure, Java, Mobile]
+excerpt: "Today we will continue our Android URL Shortening client by detailing how to go from viewing a list of shortened URLs to viewing the details on the URLs.  We'll make use of Intents, extras, xml layouts, and more."
+logoUrl: null
+keywords: Android,Eclipse,Java,Windows Azure,Azure,PHP on Azure,Mobile connectivity to Windows Azure,Android Azure,URL Shortener
+filepath: 2012-07-11-Windows-Azure-Websites-and-Mobile-Clients-Part-7--The-Android-Client-Continued.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-7--The-Android-Client-Continued
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-emulator-with-azure.jpg" width="244" height="368" />We left off working on our <a title="Android client for URL Shortener" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-6--The-Android-Client">Android client for the URL Shortener</a> able to display all of the URL slugs that were saved on the server.&#160; Today we’re going to continue on by giving the user the ability to tap into a slug and see the details on that shortened URL.&#160; You can <a title="Source for Part 1 of the Android client" href="http://chrisrisner.com/upload/ShortifierDemo-android-part1.zip">download the code that we left of from here</a>.</p>  <p>If you run the app right now, you’ll see that you can tap on an individual item in our list view and it will highlight when you do, but nothing else will happen.&#160; We want to show a new <strong>Activity</strong> when the user taps those with the URL information.&#160; Let’s start by adding a new class to your project.&#160; Let’s name the class <strong>UrlDetailsActivity</strong> and make it extend <strong>android.app.Activity</strong>.&#160; Before we can set up the <strong>onCreate</strong> method for our new <strong>Activity</strong>, we need to create a new layout for it as well.&#160; In your <strong>layout</strong> folder, add a new <strong>Android XML File </strong>named <strong>activity_url_details</strong>.&#160; You can leave it with a root element of a <strong>LinearLayout</strong>.&#160; Now we can go back to <strong>UrlDetailsActivity.java</strong> and implement the <strong>onCreate</strong> method:</p>  <pre class="csharpcode">    @Override
+    <span class="kwrd">protected</span> <span class="kwrd">void</span> onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_url_details);
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Nothing fancy here yet, just setting the content view.&#160; Now, let’s go back to <strong>MainActivity.java</strong> and create an <strong>onClickListener</strong> for our list view:</p>
+
+<pre class="csharpcode">    getListView().setOnItemClickListener(<span class="kwrd">new</span> OnItemClickListener() {
+        @Override
+        <span class="kwrd">public</span> <span class="kwrd">void</span> onItemClick(AdapterView&lt;?&gt; parent, View view,
+                <span class="kwrd">int</span> position, <span class="kwrd">long</span> id) {                
+        }
+    });</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, inside of the listener, we need to create an <strong>Intent</strong> to represent our <strong>UrlDetailsActivity</strong> and start it:</p>
+
+<pre class="csharpcode">  getListView().setOnItemClickListener(<span class="kwrd">new</span> OnItemClickListener() {
+    @Override
+    <span class="kwrd">public</span> <span class="kwrd">void</span> onItemClick(AdapterView&lt;?&gt; parent, View view,
+        <span class="kwrd">int</span> position, <span class="kwrd">long</span> id) {
+      <span class="rem">//Convert the tapped view into a TextView</span>
+          TextView tv = (TextView) view;        
+          <span class="rem">//Load the details intent for this specific slug</span>
+          Intent urlDetailsIntent = <span class="kwrd">new</span> Intent(getApplicationContext(),
+              UrlDetailsActivity.<span class="kwrd">class</span>);
+          urlDetailsIntent.putExtra(<span class="str">&quot;UrlSlug&quot;</span>, tv.getText().toString());
+          <span class="rem">//We need to get the Full URL somehow and send it as an extra</span>
+          startActivity(urlDetailsIntent);
+    }
+  });</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re casting the <strong>View</strong> sent into the listener as a <strong>TextView </strong>so we can pull out the text of the item tapped, creating an <strong>Intent</strong>, adding some extras, and then starting the <strong>Activity</strong>.&#160; The one problem we have here is that we don’t have the Full URL to send as an extra.&#160; We could do another post to the server and say “what’s the Full URL for this slug” but that wouldn’t be very efficient since we’re already pulling that data down.&#160; If you recall from the <a title="Android Client Part 1" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-6--The-Android-Client">last article</a>, when our service finishes pulling down all of the shortened URLs, it sends that data back to the <strong>MainActivity</strong> as an extra.&#160; When <strong>MainActivity</strong> get’s that data back, it just uses it to fill the list view.&#160; Let’s change that to save the data.&#160; First, add a new private member variable to the class to store the <strong>HashMap</strong>:</p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> ServiceResultReceiver mReceiver;
+    <span class="kwrd">private</span> HashMap&lt;String, String&gt; mUrlMap;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, in your <strong>onResultReceived </strong>method, when you pull out the <strong>HashMap</strong> from the <strong>Bundle</strong>, store it into <strong>mUrlMap</strong>:</p>
+
+<pre class="csharpcode">    ...
+    <span class="kwrd">case</span> UrlFetchService.STATUS_SUCCESS:
+        boolean wasSuccess = resultBundle
+                .getBoolean(UrlFetchService.SERVICE_WAS_SUCCESS_KEY);
+        <span class="kwrd">if</span> (wasSuccess) {
+          <span class="rem">//Success, update the ListView</span>
+          mUrlMap = (HashMap&lt;String, String&gt;) 
+              resultBundle.getSerializable(<span class="str">&quot;urlMap&quot;</span>);
+            showUrlsInListView(mUrlMap);
+        } <span class="kwrd">else</span> {
+        ...</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now we can go back to the click listener and send the full URL data over as an extra:</p>
+
+<pre class="csharpcode">    ...
+    <span class="rem">//We need to get the Full URL somehow and send it as an extra</span>
+    urlDetailsIntent.putExtra(<span class="str">&quot;FullUrl&quot;</span>,
+            mUrlMap.get(tv.getText().toString()));
+    ...</pre>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Now the last thing we need to do before testing, is add the <strong>UrlDetailsActivity</strong> to our <strong>AndroidManifest.xml </strong>file.&#160; So open that and add this in side your <strong>application</strong> block:</p>
+
+<pre class="csharpcode">    &lt;activity android:name=<span class="str">&quot;UrlDetailsActivity&quot;</span>/&gt;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, when you run your app and tap on an item in the list, you’ll see a new activity come up.&#160; It doesn’t actually show anything yet though, so let’s fix that.&#160; Go into your <strong>activity_url_details.xml</strong>.&#160; We want to be able to show the user the URL slug, full URL, shortified URL, and a button to go to that short URL.&#160; So we’re going to need a label for each of those, edit texts for the first three, and a button for the last.&#160; When we’re done, our XML looks like this:</p>
+
+<pre class="csharpcode">    <span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">=&quot;1.0&quot;</span> <span class="attr">encoding</span><span class="kwrd">=&quot;utf-8&quot;</span>?<span class="kwrd">&gt;</span>
+    <span class="kwrd">&lt;</span><span class="html">LinearLayout</span> <span class="attr">xmlns:android</span><span class="kwrd">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+        <span class="attr">android:layout_width</span><span class="kwrd">=&quot;match_parent&quot;</span>
+        <span class="attr">android:layout_height</span><span class="kwrd">=&quot;match_parent&quot;</span>
+        <span class="attr">android:orientation</span><span class="kwrd">=&quot;vertical&quot;</span> <span class="kwrd">&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">TextView</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/lblHeader&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;URL Details&quot;</span>
+            <span class="attr">android:textAppearance</span><span class="kwrd">=&quot;?android:attr/textAppearanceLarge&quot;</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">TextView</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/lblUrlSlug&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;URL Slug&quot;</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">EditText</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/txtUrlSlug&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;match_parent&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:inputType</span><span class="kwrd">=&quot;text&quot;</span>
+            <span class="attr">android:ems</span><span class="kwrd">=&quot;10&quot;</span><span class="kwrd">&gt;</span>
+            <span class="kwrd">&lt;</span><span class="html">requestFocus</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;/</span><span class="html">EditText</span><span class="kwrd">&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">TextView</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/lblFulLUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;Full URL&quot;</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">EditText</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/txtFullUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;match_parent&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:inputType</span><span class="kwrd">=&quot;text&quot;</span>
+            <span class="attr">android:ems</span><span class="kwrd">=&quot;10&quot;</span><span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">TextView</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/lblShortyUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;Shorty URL&quot;</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">EditText</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/txtShortyUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;match_parent&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:inputType</span><span class="kwrd">=&quot;text&quot;</span>
+            <span class="attr">android:ems</span><span class="kwrd">=&quot;10&quot;</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">TextView</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/lblGoToUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;Go To URL&quot;</span> <span class="kwrd">/&gt;</span>
+        <span class="kwrd">&lt;</span><span class="html">Button</span>
+            <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/btnGoToUrl&quot;</span>
+            <span class="attr">android:layout_width</span><span class="kwrd">=&quot;match_parent&quot;</span>
+            <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span>
+            <span class="attr">android:text</span><span class="kwrd">=&quot;Go To URL&quot;</span> <span class="kwrd">/&gt;</span>
+    <span class="kwrd">&lt;/</span><span class="html">LinearLayout</span><span class="kwrd">&gt;</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now we need to wire things up in the backend.&#160; Let’s start by adding some private variables to our <strong>UrlDetailsActivity</strong> class:</p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> EditText mTxtUrlSlug;
+    <span class="kwrd">private</span> EditText mTxtFullUrl;
+    <span class="kwrd">private</span> EditText mTxtShortyUrl;
+    <span class="kwrd">private</span> Button mBtnGoToUrl;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>We’ll use these in our <strong>onCreate</strong> method to hold references to our UI controls.&#160; After we set the content view in <strong>onCreate</strong> let’s get those references as well as pulling the extras out of the intent that starts our activity:</p>
+
+<pre class="csharpcode">    <span class="rem">// Get controls we'll need regardless of whether we're adding or viewing</span>
+    mTxtUrlSlug = (EditText) findViewById(R.id.txtUrlSlug);
+    mTxtFullUrl = (EditText) findViewById(R.id.txtFullUrl);
+    mTxtShortyUrl = (EditText) findViewById(R.id.txtShortyUrl);
+    mBtnGoToUrl = (Button) findViewById(R.id.btnGoToUrl);
+    
+    <span class="rem">//Get extra data from intent</span>
+    Intent intent = getIntent();
+    final String urlSlug = intent.getStringExtra(<span class="str">&quot;UrlSlug&quot;</span>);
+    final String fullUrl = intent.getStringExtra(<span class="str">&quot;FullUrl&quot;</span>);</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>After that, we just need to wire up our controls to our data and set a click listener on our button:</p>
+
+<pre class="csharpcode">    <span class="rem">//Set our text fields and disable them</span>
+    mTxtUrlSlug.setText(urlSlug);
+    mTxtUrlSlug.setFocusable(<span class="kwrd">false</span>);
+    mTxtFullUrl.setText(fullUrl);
+    mTxtFullUrl.setFocusable(<span class="kwrd">false</span>);
+    mTxtShortyUrl.setText(<span class="str">&quot;http://urlshortener.azurewebsites.net/&quot;</span> + urlSlug);
+    mTxtShortyUrl.setFocusable(<span class="kwrd">false</span>);
+    
+    mBtnGoToUrl.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {
+        @Override
+        <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {
+            <span class="rem">//Fire intent to view URL in web browser</span>
+            Intent webIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW);
+            webIntent.setData(Uri.parse
+                    (<span class="str">&quot;http://urlshortener.azurewebsites.net/&quot;</span> + urlSlug));
+            startActivity(webIntent);
+        }
+    });</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Notice we’re setting the <strong>Focusable</strong> property to be false for the <strong>EditText</strong>s.&#160; This is to that users can’t go in and edit any of the fields (they’re read only).&#160; When the user clicks the button, we’re creating an <strong>ACTION_VIEW</strong> intent and firing that of with the shorty URL as the data on it.&#160; This will bring up the browser at that URL.&#160; Now when we run our app and tap on an item in the list view we get our details:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="URL Details in Android" alt="URL Details in Android" src="http://chrisrisner.com/upload/shortifier-android-url-details.jpg" width="250" height="368" /></p>
+
+<p>That concludes the work on the Android client for this article.&#160; Next time we’ll detail how to give the user the ability to add new shortened URLs.&#160; You can <a title="Android URL Shortener Part 2 Source Code" href="http://chrisrisner.com/upload/ShortifierDemo-Android-part2.zip">grab the completed source code from today here</a>.</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

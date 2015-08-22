@@ -1,0 +1,16 @@
+---
+layout: post
+title: "Configuration 500 Errors when Deploying a .Net 4.0 Site"
+date: Wed May 05 2010 07:37:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: []
+excerpt: ".Net 4.0, .Net, 4.0, Configuration, web.config, system.web.extensions, app pool, missing section declaration"
+logoUrl: null
+keywords: .Net 4.0, .Net, 4.0, Configuration, web.config, system.web.extensions, app pool, missing section declaration
+filepath: 2010-05-05-Configuration-500-Errors-when-Deploying-a--Net-4-0-Site.html
+disqus_identifier: Configuration-500-Errors-when-Deploying-a--Net-4-0-Site
+---
+<p>Recently I started working on a .Net 4.0 project at work.&#160; I was ready to deploy this locally and then to a test environment so a few other people could run through the UI and make sure it made sense.&#160; So I had the Application set up in IIS and deployed my code.&#160; Upon going to the site though, I was greeted by a lovely 500 Server Error.&#160; The error was low on info and basically informed me that there was an issue with the config file:&#160; <br />&#160; <img style="margin: 5px auto; display: block; float: none" title=".Net 4 500 Server Error" alt=".Net 4 500 Server Error" src="http://chrisrisner.com/upload/634086663190550000.jpg" /> </p>  <p>“The configuration section ‘system.web.extensions’ cannot be read because it is missing a section declaration” sounds a lot like an issue with my web config doesn’t it?&#160;&#160; It wasn’t, not really anyway.&#160; Fortunately I had deployed this site prior to converting it from .Net 3.5 to .Net 4.0 and it worked fine.&#160; So I started to think, much like when we had to switch sites from .Net 1.1 to 2.0 in order to host 2.0 (and higher apps) in IIS 6, there was probably somewhere in IIS 7 for me to change my App from .Net 2.0 to 4.0.&#160; And indeed, there is in the App Pool:</p>  <p><img style="margin: 5px auto; display: block; float: none" title="App Pool Framework Version" alt="App Pool Framework Version" src="http://chrisrisner.com/upload/634086667348780000.jpg" /> </p>  <p>Once you change the framework version from 2.0 to 4.0, the “incorrect” config errors disappear.&#160; So if you’re just starting to get into .Net 4.0 web sites, make sure you keep in mind that your App Pool is probably still set to run under .Net 2.0 and you do need to switch to 4.0.</p>

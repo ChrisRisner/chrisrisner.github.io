@@ -1,0 +1,313 @@
+---
+layout: post
+title: "31 Days of Android: Day 5–Adding Multiple Activities and using Intents"
+date: Fri Nov 25 2011 06:05:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll talk about using multiple activities and layouts to your Android Application.  We'll also take a very brief look at the intent system which we'll use extensively in future articles."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Intent,Activity,Multiple Activities,Starting New Activities,Showing New Activity with Intent,Tutorial
+filepath: 2011-11-25-31-Days-of-Android--Day-5–Adding-Multiple-Activities-and-using-Intents.html
+disqus_identifier: 31-Days-of-Android--Day-5–Adding-Multiple-Activities-and-using-Intents
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android" alt="Android" src="http://chrisrisner.com/upload/android-200.png" />Picking up where we left off yesterday in our <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>, let’s get back to our application.&#160; We left off with an application that was only capable of handling some very simple user input.&#160; Your application is currently comprised of only a single activity which means it’s not capable of a lot.&#160; To be fair, there are certainly some applications that only use one activity and accomplish quite a bit.&#160; However, most apps will use multiple activities.&#160; Today we’re going to talk about how to accomplish that.&#160; For today, we’re going to work off of the same application code as last time (though the package / activity names have been renamed DayFive instead of DayFour).&#160; You can <a title="Day Five Starter App Code" href="http://chrisrisner.com/upload/DayFour.zip">download our starter app code here</a>.</p>  <p>In Eclipse, expand the <strong>src</strong> folder in <strong>Package Explorer</strong> and right click on <strong>com.dayfive –&gt; New –&gt; Class</strong>.&#160; You will then be presented with the <strong>New Java Class</strong> window.&#160; Some of the information (the <strong>Source Folder </strong>and <strong>Package</strong>) will already be taken care of leaving the <strong>Name</strong> and <strong>Superclass</strong> for us.&#160; The <strong>Name</strong> here is relatively arbitrary.&#160; The <strong>Superclass</strong> is not however.&#160; If you remember our <strong>DayFourActivity</strong>, it extended from <strong>Activity</strong>.&#160; Setting our <strong>Superclass</strong> here will ensure that our new Activity also extends from Activity.&#160; If you’re not familiar with Eclipse, you can click the <strong>Browse </strong>button on the right, it will help lookup classes in case you don’t know their full path (i.e. if you know you want <strong>Activity </strong>but don’t know it’s <strong>andoird.app.Activity</strong>).&#160; </p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="New Java Class" alt="New Java Class" src="http://chrisrisner.com/upload/android-day-five-one.png" /></p>  <p>After clicking <strong>Finish</strong>, our new <strong>Activity</strong> will be added to our source code.&#160; Opening it will show us a very empty new class:</p>  <pre class="csharpcode"><span class="kwrd">public</span> <span class="kwrd">class</span> ActivityTwo extends Activity {}</pre>
+<style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Like this, your <strong>Activity</strong> won’t do you any good.&#160; You need to override some base functionality.&#160; Placing your cursor inside of the curly braces and hitting <strong>Ctrl+Space</strong> will bring up different methods we can either override or implement for a class.&#160; The method you want to override first is going to be <strong>onCreate</strong> so go ahead and select that method.&#160; Again you have some base code that doesn’t do everything you need it to do:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>@Override</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">protected</span> <span class="kwrd">void</span> onCreate(Bundle savedInstanceState) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre><span class="lnum">   4:  </span>    super.onCreate(savedInstanceState);</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The only thing you’re going to do with your second activity today is connect it to a <strong>Layout</strong>, however, you need to create that <strong>Layout</strong> first.&#160; To do so, expand the <strong>res </strong>folder and right click on the <strong>layout </strong>folder.&#160; From there go to <strong>New –&gt; Other </strong>and then select <strong>Android XML File</strong>.&#160; The Eclipse Android tools are pretty smart and will know what type of XML file you want to create based off of the folder you’ve right clicked on so it should already have <strong>Layout</strong> selected in the <strong>Resource Type</strong> of the next window.&#160; The default <strong>Root Element</strong> is <strong>LinearLayout</strong> so leave that as is.&#160; Enter a name (like “second_layout”) in the <strong>File</strong> textbox and click <strong>Finish</strong>.&#160; If you click <strong>Next</strong> instead of <strong>Finish</strong> you can enter <strong>OPTIONAL </strong>qualifiers for your layout.&#160; So if you wanted to make a layout specific to the <strong>portrait </strong>orientation and a different one for <strong>landscape</strong>, this is where you would do so.&#160; We’ll cover those qualifiers another day in more detail.&#160; After finishing, you’ll be taken to the graphical layout editor.&#160; Again, you’re not going to get very fancy here so drag a <strong>TextView</strong> on to the layout from the <strong>Palette</strong> on the left.&#160; By default your <strong>TextView</strong>’s id will be textView1 which is fine.&#160; Your <strong>TextView</strong> on the other layout has a different id, however, it’s not an issue for different layouts to have views with the same id.&#160; If, however, you have two views on the same layout with the same id, you will run into issues trying to get references to those views in your code.&#160; Now that we’ve created a second layout, let’s go back to our <strong>ActivityTwo</strong> class.&#160; After the call to <strong>super.onCreate</strong> you need to set the <strong>contentView</strong> to your new layout.&#160; This is done via the following line of code:</p>
+
+<pre class="csharpcode">setContentView(R.layout.second_layout);</pre>
+<style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Great, you’ve created a second activity and a layout and you’ve connected that layout to our Activity, but how do you actually show that on the screen?&#160; To do this, you use <strong>Intents</strong>.&#160; <strong>Intents</strong> are essentially messages that you can send between different parts of your application or to the Android OS itself.&#160; You’re going to use it in a very simple way today though <strong>Intents</strong> are incredibly powerful and will come up in several posts later in the series.&#160; To use our first intent, we must return to the <strong>DayFiveActivity</strong> and the <strong>main.xml</strong> layout.&#160; Go to the <strong>layout</strong> and drag another <strong>button</strong> onto the bottom beneath our <strong>“Click Me”</strong> button.&#160; This should default to be id <strong>button2</strong>.&#160; With this done, you can go to our code file, beneath where you get a reference for <strong>button1</strong> and set it’s <strong>onClickListener</strong> you need to do the same for <strong>button2</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre><span class="lnum">   2:  </span>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {                            </pre>
+
+  <pre><span class="lnum">   4:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>});</pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now here’s where you get to the <strong>Intent</strong>.&#160; There are assorted ways to setup an <strong>Intent</strong> and make it run.&#160; You’re going to do the simplest way here:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre><span class="lnum">   4:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>});</pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re instantiating an <strong>Intent</strong> object on the fly using the <strong>Application Context </strong>and your new <strong>Activity</strong>.&#160; That gets passed into <strong>startActivity</strong> which does exactly as named.&#160; You’re nearly ready to run now.&#160; The last thing you need to do is make a small modification to your <strong>AndroidManifest</strong> file.&#160; The manifest file needs to know about all the activities your application is going to run so near the bottom, between the end of the first <strong>activity</strong> and the end of the <strong>application</strong> you need to add an element for your new <strong>activity</strong>:</p>
+
+<pre class="csharpcode">&lt;activity android:name=<span class="str">&quot;.ActivityTwo&quot;</span> android:label=<span class="str">&quot;@string/app_name&quot;</span>/&gt;</pre>
+
+<p><style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Now you can run your application.&#160; Right Click on the application in Package Explorer and go to <strong>Run As –&gt; Android Application </strong>or hit <strong>Ctrl+F11</strong>:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android_day_five_second" alt="android_day_five_second" src="http://chrisrisner.com/upload/android_day_five_second.png" /></p>
+
+<p>So this is your <strong>DayFive </strong>layout with the new button at the bottom.&#160; Tapping that button should cause our new <strong>Activity</strong> to fire and give you this:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Five Third" alt="Android Day Five Third" src="http://chrisrisner.com/upload/android_day_five_third.png" /></p>
+
+<p>You’ve successfully created a second <strong>activity</strong> and <strong>layout</strong> and connected your first <strong>activity</strong> to it.&#160; This basic functionality is actually pretty critical to many applications.&#160; Furthermore, the <strong>Intent</strong> you used was very basic but incredibly powerful.&#160; </p>
+
+<p>One thing I would like to highlight is what happens when you tap the <strong>Back</strong> button on the second activity.&#160; Due to the way you’re starting <strong>ActivityTwo</strong>, if you tap <strong>Back</strong>, you will return to our first <strong>Activity.&#160; </strong>You could think of your <strong>Activities</strong> as a stack of cards.&#160; When your app starts, card 1 is put down.&#160; When you start your second activity, card 2 is put down on top of card 1.&#160; When you hit the back button, card 2 is taken off to reveal card 1.&#160; If you wanted to get rid of card 1 when you show card 2, or prevent the user from backing into the first activity, you could call finish immediately after starting your second activity like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre><span class="lnum">   2:  </span>    startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    finish();</pre>
+
+  <pre><span class="lnum">   4:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>This will end your first activity and start your second activity.&#160; That’s all for today.&#160; You can <a title="Android Day Five Source Code" href="http://chrisrisner.com/upload/DayFive.rar">download the latest source code here</a>. 
+
+

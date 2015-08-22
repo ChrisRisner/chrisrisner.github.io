@@ -1,0 +1,116 @@
+---
+layout: post
+title: "Adding a Web Slice to your Site"
+date: Fri Oct 09 2009 18:58:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, Programming]
+excerpt: ""
+logoUrl: null
+keywords: Web Slice,IE8,MVC,Asp.net
+filepath: 2009-10-10-Adding-a-Web-Slice-to-your-Site.html
+disqus_identifier: Adding-a-Web-Slice-to-your-Site
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/files/media/image/WindowsLiveWriter/AddingaWebSlicetoyourSite_131E1/image_4.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; margin-left: 0px; border-left-width: 0px; margin-right: 0px" title="image" border="0" alt="image" align="right" src="http://chrisrisner.com/files/media/image/WindowsLiveWriter/AddingaWebSlicetoyourSite_131E1/image_thumb_1.png" width="244" height="129" /></a>With the release of IE8, Microsoft introduced the concept of <a href="http://en.wikipedia.org/wiki/Internet_Explorer_8" target="_blank">Web Slices (scroll down a bit)</a>.&#160; Web slices allow you to designate a portion of your site that a viewer can “subscribe too”.&#160; This is similar to the very common rss feed, however, the idea with a web slice is that you can access and view it directly from your browser’s favorite bar.&#160;&#160; From there you can hover over the site and see the most current content in that web slice.&#160; So if there is a particular site you read often, you can quickly hover over to see if there is something new to check out.&#160; As far as I know, as of now, only IE8 supports web slices.&#160; However, according to wikipedia, Microsoft has “donated the specification to the public domain.”&#160; While this might work out well for one or two sites, I can’t image anyone that reads a lot of sites adding that many web slices to their browser.&#160; (re:&#160; It’s kind of cool, but I don’t see it getting a ton of use).&#160; So if you have your own site and you’d like to add a web slice to it, how do you do it?</p>  <p>First you could just go <a href="http://blogs.msdn.com/ie/archive/2009/03/03/create-a-dynamic-web-slice-in-5-minutes.aspx" target="_blank">here</a>.&#160; This seems to give a pretty good explanation on how to set up your web slice.&#160; However, if that site is down (as it was for maintenance at the time of writing this), you can also do this.&#160; Around the content you want to put in your slice (i.e. your most recent blog entry), you’ll put the following:</p>  <div class="csharpcode">   <div class="csharpcode">     <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">='hslice entry-content'</span> <span class="attr">id</span><span class="kwrd">='blogInfo'</span> </pre>
+
+    <pre><span class="lnum">   2:  </span>    <span class="attr">style</span><span class="kwrd">='width: 100%; background-color: #ffffff;'</span><span class="kwrd">&gt;</span></pre>
+
+    <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">&lt;</span><span class="html">span</span> <span class="attr">class</span><span class="kwrd">='entry-title'</span> <span class="attr">style</span><span class="kwrd">='display: none;'</span><span class="kwrd">&gt;</span>Title<span class="kwrd">&lt;/</span><span class="html">span</span><span class="kwrd">&gt;</span></pre>
+
+    <pre><span class="lnum">   4:  </span>    <span class="rem">&lt;!-- Content --&gt;</span></pre>
+
+    <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>          </pre>
+  </div>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p></p>
+
+<p>So what’s important here?&#160; Well the first div specifies that this is your slice.&#160; The style on that div is used for actually displaying your content when the user clicks on the slice in their favorites bar.&#160; The span line is used to specify what the default title of the web slice.&#160; So in the image above, my slice is “Chris Risner . Com” so that’s what I would have where “Title” is shown in the example.&#160; Finally the content area is where you put whatever you want to show.&#160; The page linked above shows how to link to a different page for your slice content which I won’t show but you can mess around with yourself.</p>
+
+<p>One final comment on web slices has to do with the Favicon that shows up with your slice.&#160; When I first added mine, it was showing up with the default IE icon.&#160; After seeing this I realized that IE wasn’t actually showing up with my favicon at all.&#160; However, my favicon, which I had just placed in the root directory of my site was showing up with both Chrome and Firefox.&#160; After looking around for a while, I realized that while those two browsers were content with just looking for my favicon in the default location, IE needed more instruction.&#160; If this happens to you, add an explicit shortcut icon link in your header html like so:</p>
+
+<div class="csharpcode">
+  <pre><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">link</span> <span class="attr">rel</span><span class="kwrd">=&quot;SHORTCUT ICON&quot;</span> <span class="attr">href</span><span class="kwrd">=&quot;http://mysite/favicon.ico&quot;</span> <span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p></p>
+Happy slicing. 
+

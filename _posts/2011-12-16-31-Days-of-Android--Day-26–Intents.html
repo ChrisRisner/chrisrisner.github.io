@@ -1,0 +1,567 @@
+---
+layout: post
+title: "31 Days of Android: Day 26–Intents"
+date: Fri Dec 16 2011 01:09:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we're going to talk about one of the most powerful features of the Android ecosystem:  Intents."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Intents,Switching activities,making phone calls,sharing with intents,sending emails,opening websites,pulling up maps,adding to the calendar,intent filters,tutorial
+filepath: 2011-12-16-31-Days-of-Android--Day-26–Intents.html
+disqus_identifier: 31-Days-of-Android--Day-26–Intents
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to talk about something we touched on earlier in the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>:&#160; <strong>Intents</strong>.&#160; If you’ve been following along, you’ll recall that you <a title="Using Intents to Change Activities" href="http://chrisrisner.com/31-Days-of-Android--Day-5%E2%80%93Adding-Multiple-Activities-and-using-Intents">used intents when you wanted to go from one Activity in your application to another</a>.&#160; This is certainly one common use for intents and might be the only time you use them.&#160; However, intents can be used for so much more.&#160; In addition to be using to send messages within your application (say if you’re running a service or hosting a broadcast receiver), intents can be used to communicate with other applications.&#160; You will see that intents are key to enabling the Android operating system to feature the rich interconnectivity that it does. You can <a title="Android Day TwentySix Initial Code" href="http://chrisrisner.com/upload/DayTwentySixInitial.zip">download the sample code we’re going to start with here</a>.</p>  <p><strong>Note</strong>:&#160; Some of the examples won’t work very well on the emulator due to the inability to install other applications.&#160; If you have a device I would suggest testing with it.</p>  <p><strong>What are Intents</strong></p>  <p>Simply put, intents are messages.&#160; More specifically, they are data structures that contain information on an operation to be performed or the description of something that has happened.&#160; Typically messages specifying an operation to be performed will be sent to either an <strong>Activity </strong>or a <strong>Service</strong>.&#160; Messages about something that has happened are usually delivered to <strong>Broadcast Receivers</strong>.&#160; An intent can explicitly declare which component should receive (as is the case when you launch one <strong>Activity </strong>in your app from another) or it can be open ended.&#160; These open ended <strong>Intent</strong>s are one of the ways in which Android enables new applications to become connected to others without everyone needing to go back and update things.&#160; We’ll get into more about how the open ended <strong>Intent</strong>s work a little later today.</p>  <p>&#160;</p>  <p><strong>Launching Activities with Intents</strong></p>  <p>If you were around for <a title="Opening Activites with Intents" href="http://chrisrisner.com/31-Days-of-Android--Day-5%E2%80%93Adding-Multiple-Activities-and-using-Intents">Day 5 where we went over using multiple activities in your application</a>, moving between activities with intents will already be familiar.&#160; Since the sample code is actually the results of Day 5, the code for this is already done.&#160; Open <strong>src/com.daytwentysix/DayTwentySixActivity.java</strong> and look at the <strong>button2 onClickListener</strong>:</p>  <div class="csharpcode">   <pre class="alt">startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre>finish();</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The first line of this code is actually all that is necessary to start <strong>ActivityTwo</strong>.&#160; Here you are creating a new <strong>Intent</strong> object with the application <strong>Context</strong> and the <strong>class</strong> for the <strong>Activity </strong>that should be started.&#160; The call to <strong>finish </strong>means that the current <strong>Activity</strong> will be terminated.&#160; As such, if you run your app and tap the second button, you’ll be taken to the second <strong>Activity</strong> and if you hit back, you will back out of the app.&#160; If you remove the call to <strong>finish</strong> and do the same thing, the second <strong>Activity</strong> will be stacked on top of the first one and when you hit back, you’ll return to the first <strong>Activity</strong>.&#160;&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>Passing Data with Intents</strong></p>
+
+<p>Intents wouldn’t be very powerful if you could only start things with them but couldn’t pass any data.&#160; This <a title="Sharing Data Between Activities" href="http://chrisrisner.com/31-Days-of-Android--Day-7%E2%80%93Sharing-Data-Between-Activities">concept of sharing data was covered in detail in Day 7</a> but we’ll review it again as a refresher.&#160; Intents, in addition to specifying an action or a receiver, can contain any data you want to pass as “extras”.&#160; Adding extras to an intent is very easy and just requires a call to <strong>putExtra</strong>.&#160; This method is overloaded to accept a key name and then most primitive types.&#160; You can also pass in a <a title="Parcelable" href="http://chrisrisner.com/31-Days-of-Android--Day-7%E2%80%93Sharing-Data-Between-Activities">parcelable object (similar to serializing) but I’ll point you back to Day 7 for more info on that</a>.&#160; Let’s say that you want to change the <strong>onClickListener</strong> to send the text you’ve entered in the <strong>EditText</strong> over to the second <strong>Activity</strong>.&#160; Here’s how you’d accomplish that:</p>
+
+<div class="csharpcode">
+  <pre class="alt">button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt">        Intent intent = <span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>);</pre>
+
+  <pre>        intent.putExtra(<span class="str">&quot;MyStringValue&quot;</span>, editText1.getText().toString());</pre>
+
+  <pre class="alt">        startActivity(intent);</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’ve had to take the creation of the <strong>Intent</strong> out of the call to <strong>startActivity </strong>so that you can put your extra in it.&#160; Now in <strong>ActivityTwo</strong> you can access the data passed over by getting the intent and pulling out the extra:</p>
+
+<div class="csharpcode">
+  <pre class="alt">TextView textView1 = (TextView) findViewById(R.id.textView1);</pre>
+
+  <pre>Intent intent = getIntent();</pre>
+
+  <pre class="alt">textView1.setText(intent.getStringExtra(<span class="str">&quot;MyStringValue&quot;</span>));</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>&#160;</p>
+
+<p><strong>Making Phone Calls with Intents</strong></p>
+
+<p>If you wanted to make a phone call out of your application, it’s extremely easy thanks to <strong>Intent</strong>s.&#160; First though, you need to add a permission to your manifest file:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-permission</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.permission.CALL_PHONE&quot;</span><span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This permission means your app has access to interact with the phone.&#160; Once that is done, you just need to alter your intent creation:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent callIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_CALL, Uri.parse(<span class="str">&quot;tel:8887676424&quot;</span>)); </pre>
+
+  <pre>startActivity(callIntent);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your app and tap the second button, it will open up and start dialing the number passed in.&#160; If you wanted to open up the phone dialer without immediately dialing (i.e. the user would have to hit the dial button) you could change <strong>ACTION_CALL </strong>to <strong>ACTION_DIAL</strong>.&#160; If you wanted to open up the dialer and not pass any number in, you could use <strong>ACTION_DIAL</strong> and not use a second parameter.</p>
+
+<p>&#160;</p>
+
+<p><strong>Sharing with an Intent</strong></p>
+
+<p>One fairly common feature in Android is “sharing”.&#160; Many of the apps Android users might use (Google+, Camera, Twitter, Facebook, Reader, etc) enable users to Share things.&#160; Let’s take a look at the code first:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent shareIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_SEND);</pre>
+
+  <pre>shareIntent.setType(<span class="str">&quot;text/plain&quot;</span>);</pre>
+
+  <pre class="alt">shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, editText1.getText().toString());</pre>
+
+  <pre>startActivity(Intent.createChooser(shareIntent,<span class="str">&quot;Share with&quot;</span>));</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><strong>Intent.ACTION_SEND </strong>tells Android you want this intent to be handled by something capable of handling <strong>ACTION_SEND</strong>.&#160; Many applications (such as Google+, Twitter, Facebook, etc) have set up <strong>Intent Filters</strong> that tell Android that they can handle <strong>ACTION_SEND</strong>.&#160; The call’s to <strong>setType</strong> and <strong>putExtra</strong> specify what type of data you’re going to pass and what that data is.&#160; Lastly, instead of just passing the <strong>Intent </strong>into <strong>startActivity</strong> you’re calling the <strong>createChooser</strong> method.&#160; This will present a dialog to the user so they can select which application they want to handle the <strong>Intent</strong>.&#160; When I run this on my phone here are some of the apps that say they are capable of sharing:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Sharing Options" alt="Android Sharing Options" src="http://chrisrisner.com/upload/android_day_twentysix_share_chooser.png" width="188" height="335" /></p>
+
+<p>&#160;</p>
+
+<p>Each application on the list might handle what you pass in a different manner and it’s entirely up to them.&#160; Some, such as Facebook (at least as of writing) require you to pass a URL over in the <strong>EXTRA_TEXT</strong>.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>Sending an Email (only) with an Intent</strong></p>
+
+<p>You might notice as you look at all of the apps capable of handling <strong>ACTION_SEND</strong> that there are a lot.&#160; Furthermore, some of them are capable of handling very different things.&#160; For example, Twitter limits posts to 144 characters.&#160; Conversely, an email’s body can be much larger and can also use a subject.&#160; While it’s not impossible, it can be difficult to limit which apps will show up in the chooser.&#160; If you wanted to limit to only programs that handle emails, you could change the type to be “<strong>message/rfc822</strong>”.&#160; You could also pass in a subject to give email programs even more information about what you’re trying to share:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent shareIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_SEND);</pre>
+
+  <pre>shareIntent.setType(<span class="str">&quot;message/rfc822&quot;</span>);</pre>
+
+  <pre class="alt">shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, <span class="str">&quot;the subject&quot;</span>);                </pre>
+
+  <pre>shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, editText1.getText().toString());</pre>
+
+  <pre class="alt">startActivity(Intent.createChooser(shareIntent,<span class="str">&quot;Email with&quot;</span>));</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You’ll find as you continue to explore intents that there are other values you can send over and other ways you might be able to limit the responding applications.</p>
+
+<p><strong></strong></p>
+
+<p><strong>Opening a Website with an Intent</strong></p>
+
+<p>Opening a web page via an <strong>Intent</strong> is also easy to accomplish:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent webIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW);  </pre>
+
+  <pre>webIntent.setData(Uri.parse(<span class="str">&quot;http://www.chrisrisner.com&quot;</span>));  </pre>
+
+  <pre class="alt">startActivity(webIntent);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here <strong>Intent.ACTION_VIEW</strong> is passed in as the action and the URI of the web site you want to visit is passed in as the data.</p>
+
+<p>&#160;</p>
+
+<p><strong>Showing an Address on the Map</strong></p>
+
+<p>Provided you have the mailing address of the location you want to show on a map, pulling it up is very easy.&#160; Note that this will present to the user a dialog to choose which map program they want to use (if there are multiple):</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent myIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW, </pre>
+
+  <pre>        Uri.parse(<span class="str">&quot;geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA+94043&quot;</span>));</pre>
+
+  <pre class="alt">startActivity(myIntent);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><strong>Intent.ACTION_VIEW</strong> is used again to open the maps.&#160; This time though, you’re passing in the address as the Uri.&#160; This should demonstrate how specific apps can be with what <strong>Intent</strong>s they are capable of dealing with.&#160; Map programs are set to handle addresses and geo coordinates.&#160; Browsers are used for URLs.&#160; Furthermore, an application can specify URLs that it can handle as well.&#160; As an example, if you have the <strong>Yelp</strong> app installed and fire an intent to view a restaurant at the Yelp web page, Android will ask if you want to view it in the browser or the Yelp app.&#160; This is another way that Android makes it possible to interconnect apps without having to go back and change older applications.</p>
+
+<p>&#160;</p>
+
+<p><strong>Opening a New Calendar Entry with an Intent</strong></p>
+
+<p>Creating a calendar entry is fairly straight forward and can be done.&#160; However, it doesn’t seem to be well documented.&#160; In addition, in Android 4.0 they’ve released a Calendar <a title="Content Providers" href="http://chrisrisner.com/31-Days-of-Android--Day-25%E2%80%93Content-Providers">Content Provider</a> that you should be able to use instead of this method.&#160; Until then, you can use this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent calendarIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_EDIT);</pre>
+
+  <pre>calendarIntent.setType(<span class="str">&quot;vnd.android.cursor.item/event&quot;</span>);</pre>
+
+  <pre class="alt">calendarIntent.putExtra(<span class="str">&quot;title&quot;</span>, <span class="str">&quot;The event title&quot;</span>);</pre>
+
+  <pre>calendarIntent.putExtra(<span class="str">&quot;description&quot;</span>, <span class="str">&quot;The event description&quot;</span>);</pre>
+
+  <pre class="alt">calendarIntent.putExtra(<span class="str">&quot;eventLocation&quot;</span>, <span class="str">&quot;1600+Amphitheatre+Parkway,+Mountain+View,+CA+94043&quot;</span>);</pre>
+
+  <pre>startActivity(calendarIntent);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here the action is <strong>Intent.ACTION_EDIT</strong>.&#160; You’re passing a specific type that maps to an event and then details for the title, description, and location. </p>
+
+<p>&#160;</p>
+
+<p><strong>Launching the Marketplace via Intent</strong></p>
+
+<p>If you have multiple apps and you want to encourage people to install your other applications, you can send them to the Android Marketplace from your app with an <strong>Intent</strong>.&#160; To do so, you just need to know the package name of your application.&#160; The demo application’s package is <strong>com.daytwentyfive</strong> but for our demo let’s send people to <strong>Google+</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Uri marketUri = Uri.parse(<span class="str">&quot;market://search?q=com.google.android.apps.plus&quot;</span>);</pre>
+
+  <pre>Intent marketIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW).setData(marketUri);</pre>
+
+  <pre class="alt">startActivity(marketIntent);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You can get the package name for an application by finding it in the Marketplace and looking at the URL.&#160; When you start this activity it will take the user to a search page with the results for this app.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>Listening for Intents:&#160; The Intent Filter</strong></p>
+
+<p>The way that all of these intents work is that the applications they correspond to have set up <strong>Intent Filter</strong>s to respond to the actions you sent over.&#160; The only <strong>REQUIRED</strong> step for setting up your <strong>Intent Filter</strong> is a change to your manifest file.&#160; Let’s alter your <strong>ActivityTwo</strong> manifest details so you can share text to your app:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">activity</span> <span class="attr">android:name</span><span class="kwrd">=&quot;.ActivityTwo&quot;</span> <span class="attr">android:label</span><span class="kwrd">=&quot;@string/app_name&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre>    <span class="kwrd">&lt;</span><span class="html">intent-filter</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt">        <span class="kwrd">&lt;</span><span class="html">action</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.intent.action.SEND&quot;</span><span class="kwrd">/&gt;</span></pre>
+
+  <pre>        <span class="kwrd">&lt;</span><span class="html">category</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.intent.category.DEFAULT&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt">        <span class="kwrd">&lt;</span><span class="html">data</span> <span class="attr">android:mimeType</span><span class="kwrd">=&quot;text/*&quot;</span><span class="kwrd">/&gt;</span>                </pre>
+
+  <pre>    <span class="kwrd">&lt;/</span><span class="html">intent-filter</span><span class="kwrd">&gt;</span>    </pre>
+
+  <pre class="alt"><span class="kwrd">&lt;/</span><span class="html">activity</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The <strong>action</strong> you specify is the <strong>ACTION_SEND</strong> that you used earlier to share out text.&#160; The <strong>category</strong> is just the default.&#160; Lastly the <strong>data</strong> type specifies that if an app wants to share String data, your app can respond to it.&#160;&#160; Now after you install your app, start up a different app that is capable of sharing text.&#160; I started the Twitter app for example.&#160; After tapping the app’s share button, you should now see your application in the chooser dialog:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="DayTwentySix in the Share Chooser" alt="DayTwentySix in the Share Chooser" src="http://chrisrisner.com/upload/android_day_twentysix_share_chooser_with_custom.png" width="192" height="342" /></p>
+
+<p>In order to handle actually getting shared to your <strong>ActivityTwo</strong> you will need to make some code changes.&#160; You’re already getting the intent that fired the <strong>Activity</strong>.&#160; Now you can check to see if the action of that <strong>Intent</strong> is <strong>ACTION_SEND</strong> and if so, pull out the <strong>EXTRA_TEXT </strong>variable passed in:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent intent = getIntent();</pre>
+
+  <pre>        </pre>
+
+  <pre class="alt"><span class="kwrd">if</span> (intent.getStringExtra(<span class="str">&quot;MyStringValue&quot;</span>) != <span class="kwrd">null</span>)</pre>
+
+  <pre>    textView1.setText(intent.getStringExtra(<span class="str">&quot;MyStringValue&quot;</span>));</pre>
+
+  <pre class="alt"><span class="kwrd">else</span> <span class="kwrd">if</span> (intent.getAction().equals(Intent.ACTION_SEND)) {         </pre>
+
+  <pre>    textView1.setText(<span class="str">&quot;Created by sharing! And text is &quot;</span> + </pre>
+
+  <pre class="alt">            intent.getStringExtra(android.content.Intent.EXTRA_TEXT));</pre>
+
+  <pre>}</pre>
+</div>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Now your <strong>ActivityTwo</strong> is capable of being created within your app and having <strong>MyStringValue </strong>sent into it, or it can be created via another application sharing to it.&#160; If you do decide to create an <strong>Intent Filter</strong> in your app, make sure you understand if other people are using it before you go and remove it.&#160; If someone else designs an application that makes use of your app via <strong>intent</strong>, it’s poor etiquette to go and break their functionality by altering or removing your filter.</p>
+
+<p>&#160;</p>
+
+<p><strong>Intents are Awesome</strong></p>
+
+<p>This just skims the surface of what is possible with <strong>Intents</strong>.&#160; I truly believe that <strong>Intents </strong>are one of the most powerful parts of Android and really help differentiate it from iOS.&#160; Instead of all the apps being sandboxed, there is interconnectivity and ways to make things easier and more convenient for users.&#160; </p>
+
+<p>You can <a title="Android Day TwentySix Final Source Code" href="http://chrisrisner.com/upload/DayTwentySixFinal.zip">download the final code from the sample app here</a>.</p>

@@ -1,0 +1,89 @@
+---
+layout: post
+title: "SEO Blog Entry Links using MVC"
+date: Wed Jan 13 2010 12:00:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Programming]
+excerpt: "SEO,MVC,Blog link,Blog entry,link,entry,Search Engine Optimization"
+logoUrl: null
+keywords: chris risner, .net, technology, programming, asp .net, mvc, life
+filepath: 2010-01-13-SEO-Blog-Entry-Links-using-MVC.html
+disqus_identifier: SEO-Blog-Entry-Links-using-MVC
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/upload/633990090370163974.jpg"><img style="border-right-width: 0px; margin: 0px 0px 5px 10px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="ASP .Net MVC" border="0" alt="ASP .Net MVC" align="right" src="http://chrisrisner.com/upload/633990090370163974.jpg" width="159" height="74" /></a> One of the coolest things about the ASP .Net MVC framework is how it allows you to extensively control URL routing.&#160; Currently this is a huge benefit over web forms (though Web Forms will be <a title="Web Forms in 4.0" href="http://weblogs.asp.net/scottgu/archive/2009/10/13/url-routing-with-asp-net-4-web-forms-vs-2010-and-net-4-0-series.aspx">capable of this too with .net 4.0</a>).&#160; I won’t get to deep into what URL Routing is but for the sake of this article, URL Routing is a way to expose SEO friendly and “good looking” URLs that don’t necessarily map to a physical file but don’t require the use of parameters to get to your content.&#160; An example of this can be found on this site.&#160; The url of the last entry is this:</p>  <p><a title="http://chrisrisner.com/Windows-7-IIS-7-5-Site-Failure" href="http://chrisrisner.com/Blog/Archive/Windows-7-IIS-7-5-Site-Failure">http://chrisrisner.com/Blog/Archive/Windows-7-IIS-7-5-Site-Failure</a></p>  <p>However, prior to URL routing, we’d probably have something like this:</p>  <p><a href="http://chrisrisner.com/Blog/Entry?Title=Windows&mdash;IIS-7-5-Site-Failure">http://chrisrisner.com/Blog/Entry?Title=Windows—IIS-7-5-Site-Failure</a></p>  <p>It’s not horrible but it’s not the best thing for SEO.&#160; However, one part of making a link as SEO friendly as possible is using as few directories as possible.&#160; So instead of having /Blog/Archive/EntryTitle, I’d rather just have <a href="http://chrisrisner.com/EntryTitle">http://chrisrisner.com/EntryTitle</a>.&#160; Thankfully, URL Routing allows for this.&#160;&#160; Let’s say in my route registrar, I have the following:    <br /></p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span>routes.MapRoute(</pre>
+
+  <pre><span class="lnum">   2:  </span>                <span class="str">&quot;Blog&quot;</span>,                                              <span class="rem">// Route name</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>                <span class="str">&quot;Blog/{action}/{id}&quot;</span>,                           <span class="rem">// URL with parameters</span></pre>
+
+  <pre><span class="lnum">   4:  </span>                <span class="kwrd">new</span> { controller = <span class="str">&quot;Blog&quot;</span>, action = <span class="str">&quot;Index&quot;</span>, id = <span class="str">&quot;&quot;</span> }  <span class="rem">// Parameter defaults</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>            );</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This would allow the easy /Blog/Archive/EntryTitle links.&#160; I could then follow that up with this to allow the even more friendly chrisrisner.com/EntryTitle links:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>routes.MapRoute(</pre>
+
+  <pre><span class="lnum">   2:  </span>                <span class="str">&quot;BlogEntry&quot;</span>,                                              <span class="rem">// Route name</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>                <span class="str">&quot;{id}&quot;</span>,                           <span class="rem">// URL with parameters</span></pre>
+
+  <pre><span class="lnum">   4:  </span>                <span class="kwrd">new</span> { controller = <span class="str">&quot;Blog&quot;</span>, action = <span class="str">&quot;Archive&quot;</span>, id = <span class="str">&quot;&quot;</span> }  <span class="rem">// Parameter defaults</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>            );</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>

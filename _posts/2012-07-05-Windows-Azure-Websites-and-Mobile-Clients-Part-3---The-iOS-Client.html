@@ -1,0 +1,342 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 3:  The iOS Client"
+date: Thu Jul 05 2012 13:55:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [iOS, Objective-C, Mobile, Web, XCode]
+excerpt: "In this article we will go over the creation of an iOS client (iPhone app) that will start to consume our URL Shortener written in PHP and running on Windows Azure.  We will use XCode 4.3, storyboards, and a background queue to pull the data down from the server."
+logoUrl: null
+keywords: Xcode,Objective C,iOS,iPhone,Windows Azure,Azure,PHP on Azure,Mobile connectivity to Windows Azure
+filepath: 2012-07-05-Windows-Azure-Websites-and-Mobile-Clients-Part-3---The-iOS-Client.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-3---The-iOS-Client
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/iOSImage3.png" width="158" height="296" />By now, we’ve gone through <a title="Creating a new PHP website with Windows Azure" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-1--The-URL-Shortener">creating a new PHP site in Windows Azure</a> as well as gone over the <a title="URL Shortening Site in PHP on Windows Azure Websites" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-2--The-PHP-Code">code for a URL Shortening service running in Windows Azure</a>.&#160; Now it’s time to get to our mobile clients.&#160; We’ll start by looking at the mobile client.&#160; The functionality exposed by our website is very simple:&#160; we can list all of the URLs that have been shortened, get details on a specific one, add new ones, and go to a shortened URL and be redirected to the full URL (for testing purposes the site will just print out the full URL that matches the slug you go to for now).&#160; So naturally, we want the same functionality to exist in our app.&#160; When the app starts, we want to see a list of the URLs.&#160; If the user taps on one, we want to show them the details and give them the ability to go to the full URL.&#160; Finally, we want to give them a way to add a new shortened URL.&#160; Let’s dive into XCode and get started.&#160; One thing to note, I’m doing this in XCode 4.3.3.&#160; If your version is newer or older, things may be a little bit different.</p>  <p>Open up XCode and choose to create a new Project.&#160; For today, a Single View Application will be fine.&#160; I’ll name my project <strong>ShortifierDemo</strong>, make it for iPhone only, and use storyboards.&#160; You don’t have to make any of the same choices for this to work, it’s just what we’ll to for demo purposes.&#160; </p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" src="http://chrisrisner.com/upload/shortifier-demo-xcode-1.jpg" width="393" height="263" /></p>  <p>After clicking Next, and picking the location for your project, you should have a new app ready to go.&#160; Running the app at this point will just present you a white screen in the simulator.&#160; The first thing we’re going to do is pull down all of the existing URLs and present them to the user.&#160; The best way to do that will be to use a table view.&#160; Open the MainStoryboard.storyboard and locate your view controller.&#160; In the bottom right control picker, find table view (not table view controller) and drag a table view onto your view controller.&#160; You should be left with something looking like this:</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" src="http://chrisrisner.com/upload/shortifier-demo-xcode-table-view.jpg" width="172" height="248" /></p>  <p>Now you need to tie that to your view controller code.&#160; In the top right of XCode, click the button to “Show the Assistant editor” (also affectionately known as the button that looks like a tuxedo or an alien face).&#160; Now you should be able to hold down <strong>Control</strong>, click on and then drag from the table view to the code inside your ViewController.h file.&#160; Let go of the mouse when the pointer is inbetween the <strong>@interface</strong> and <strong>@end</strong> tags and you’ll be prompted to name your <strong>IBOutlet</strong>.&#160; For now just name it something like <strong>tableView</strong>.&#160; Your code should now look something like this:</p>  <pre class="csharpcode">    @<span class="kwrd">interface</span> ViewController : UIViewController
+    @<span class="kwrd">property</span> (weak, nonatomic) IBOutlet UITableView *tableView;
+
+    @end</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>While you have that open, go ahead and add a private Bool named success and make <strong>ViewController</strong> implement <strong>UITableViewDelegate </strong>and <strong>UITableViewDataSource</strong>.&#160; When you’re finished, you’re code will look like this:</p>
+
+<pre class="csharpcode">    @<span class="kwrd">interface</span> ViewController : UIViewController &lt;UITableViewDelegate, UITableViewDataSource&gt; {
+    @<span class="kwrd">private</span>
+        BOOL _success;
+    }
+    @<span class="kwrd">property</span> (weak, nonatomic) IBOutlet UITableView *tableView;
+
+    @<span class="kwrd">end</span></pre>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>You can close out the assistant editor now.&#160; Before you leave the storyboard, there are two more things you need to do.&#160; Control click the table view again, but this time drag and drop to the View Controller on the <strong>View Controller Scene</strong>.&#160; When you do, you should see that the table view has two outlets:&#160; dataSource and delegate.&#160; Click on one of them and then drag drop and click on the other so they are both selected:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" src="http://chrisrisner.com/upload/shortifier-demo-view-controller-scene.jpg" /></p>
+
+<p>Now you’ve connected your table view to your view controller and vice versa.&#160; Lets open up the <strong>AppDelegate.h</strong> file next.&#160; We are going to store the URLs that come back from the server on the AppDelegate so we can access them from several different places, so add a NSMutableDictionary named urls here (why NSMutable?&#160; We’ll want to add to it later):</p>
+
+<pre class="csharpcode">    @<span class="kwrd">interface</span> AppDelegate : UIResponder &lt;UIApplicationDelegate&gt;
+
+    @property (strong, nonatomic) UIWindow *window;
+    <span class="rem">//We're using a MutableDictionary so we can add a URL Slug to it </span>
+    <span class="rem">//without having to pull all new data</span>
+    @property (strong, nonatomic) NSMutableDictionary *urls;
+
+    @end</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now go to your <strong>AppDelegate.m</strong> file and synthesize the urls property:</p>
+
+<pre class="csharpcode">    @implementation AppDelegate
+
+    @synthesize window = _window;
+    @synthesize urls;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now the only thing left to do is modify the <strong>ViewController.m</strong> file so open that up.&#160; When the view loads, we want to pull data down from the server, so look at your <strong>viewDidLoad</strong> method and add this code to start an asynchronous queue to pull down the URLs:</p>
+
+<pre class="csharpcode">    - (<span class="kwrd">void</span>)viewDidLoad
+    {
+        [super viewDidLoad];
+        <span class="rem">//Hit the server for URL data</span>
+        dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(backgroundQueue, ^{
+            NSData* data = [NSData dataWithContentsOfURL: 
+                            [NSURL URLWithString: <span class="str">@&quot;http://urlshortener.azurewebsites.net/api-getall&quot;</span>]];
+            [self performSelectorOnMainThread:@selector(fetchedData:) 
+                                   withObject:data waitUntilDone:YES];
+        });
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re telling the background queue to fetch whatever is at that URL and when done, call <strong>fetchedData</strong> with the results.&#160; So next we’ll need to handle that method.&#160; </p>
+
+<pre class="csharpcode">  - (<span class="kwrd">void</span>)fetchedData:(NSData *)responseData {
+      <span class="rem">//parse out the json data</span>
+      NSError* error;
+      NSDictionary* json = [NSJSONSerialization 
+                JSONObjectWithData:responseData
+                
+                options:kNilOptions 
+                error:&amp;error];
+      
+      NSString* status =[json objectForKey:<span class="str">@&quot;Status&quot;</span>];
+      NSLog(<span class="str">@&quot;status: %@&quot;</span>, status);
+      _success = [status isEqualToString:<span class="str">@&quot;SUCCESS&quot;</span>];
+      
+      <span class="rem">//If we successfuly pulled the URLs, show them</span>
+      <span class="kwrd">if</span> (_success) {
+          NSDictionary* urls = [json objectForKey:<span class="str">@&quot;Urls&quot;</span>];
+          NSLog(<span class="str">@&quot;urls: %@&quot;</span>, urls);
+          AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+          appDelegate.urls = [urls mutableCopy];
+          
+          [self.tableView reloadData];
+      } <span class="kwrd">else</span> {
+          <span class="rem">//Otherwise, show an error</span>
+          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="str">@&quot;Error&quot;</span> 
+                      message:<span class="str">@&quot;There was an error loading the URL data.  Please try again later.&quot;</span> 
+                     <span class="kwrd">delegate</span>:self 
+            cancelButtonTitle:<span class="str">@&quot;OK&quot;</span>
+            otherButtonTitles:nil];
+          [alert show];
+      }
+  }    </pre>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Here we’re deserializing the json data into an NSDictionary.&#160; We’re checking to make sure the <strong>Status</strong> that comes over is <strong>SUCCESS</strong> and, if it is, we’re pulling out the URL data from the dictionary, setting the <strong>AppDelegate’</strong>s urls property to be equal to it (actually a mutable copy) and finally telling the table view to reload it’s data.&#160; If pulling the data was not a success, we’re showing a UIAlertView.&#160; If you run the app now, you’ll see in the debug console that we’re outputting the URLs that come back from the server but nothing is showing up.&#160; That’s because we haven’t implemented the UITableDataSource methods.&#160; Let’s do that now.&#160; The first two methods we need to implement tell the table view how many sections and rows it has:</p>
+
+<pre class="csharpcode">  - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+  {
+      <span class="kwrd">return</span> 1;
+  }
+
+  - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+  {    
+      <span class="rem">// Return the number of rows in the section.</span>
+      AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+      <span class="kwrd">return</span> [appDelegate.urls count];
+  }</pre>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>We’re not going to do anything fancy with sections so we’ll just use one.&#160; To get the number of rows, we get access to the <strong>AppDelegate</strong> and get a count from the urls property.&#160; The last method we need to implement right now is <strong>tableView cellForRowAtIndexPath</strong>:</p>
+
+<pre class="csharpcode">    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        <span class="kwrd">static</span> NSString *CellIdentifier = <span class="str">@&quot;Cell&quot;</span>;
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];    
+        <span class="kwrd">if</span> (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                    reuseIdentifier:CellIdentifier];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        NSLog( <span class="str">@&quot;Indexpath %i&quot;</span>, [ indexPath row ] );
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+        NSArray *keys = [[appDelegate.urls allKeys] sortedArrayUsingSelector:
+                        @selector(caseInsensitiveCompare:)];
+        NSString *key = [keys objectAtIndex:[indexPath row]];
+        cell.textLabel.text = key;
+        
+        <span class="kwrd">return</span> cell;
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re attempting to dequeue a reusable cell if the user has been scrolling up and down the list.&#160; If we can’t get a reference to an existing cell (to reuse it’s memory) then we allocate a new one and set it’s accessory type to be the disclosure indicator.&#160; Next, we pull out the <strong>AppDelegate</strong> again, get all of the keys from the <strong>urls</strong> property, and index into those keys to set the text label.&#160; Now when you run your app, after just a second, you should see URLs:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="URLs showing in Shortifier" alt="URLs showing in Shortifier" src="http://chrisrisner.com/upload/shortifier-demo-urls-showing.jpg" /></p>
+
+<p>&#160;</p>
+
+<p>That’s all for today.&#160; In the next article we’ll go over what happens when you tap on one of the URL slugs and see the details.&#160; Last, we’ll go over adding a new URL.&#160; You can <a title="iOS URL Shortener Part 1" href="http://chrisrisner.com/upload/ShortifierDemo-Part1.zip">download the completed source from today’s coding here</a>.</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

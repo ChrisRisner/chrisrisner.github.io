@@ -1,0 +1,738 @@
+---
+layout: post
+title: "31 Days of Android: Day 24–Using SQLite Databases"
+date: Wed Dec 14 2011 01:27:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll wrap up the third day on persistence by talking about using SQLite in your Android applications."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,SQLite,databases,database,SQLite crud,Android database,using ADB to connect to your emulator,using ADB to explore database,upgrading Android databases,tutorial
+filepath: 2011-12-14-31-Days-of-Android--Day-24–Using-SQLite-Databases.html
+disqus_identifier: 31-Days-of-Android--Day-24–Using-SQLite-Databases
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android SQLite Databases" alt="Android SQLite Databases" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to wrap up our sub-series on persistence as we continue on with the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; We’ve already covered <a title="Android Shared Preferences" href="http://chrisrisner.com/31-Days-of-Android--Day-22%E2%80%93Shared-Preferences">Shared Preferences</a> and <a title="Android Writing and Reading Files" href="http://chrisrisner.com/31-Days-of-Android--Day-23%E2%80%93Writing-and-Reading-Files">writing and reading files</a>.&#160; This leaves today to talk about <a title="SQLite" href="http://en.wikipedia.org/wiki/Sqllite">SQLite</a>.&#160; SQLite is a small format embedded relational database system which is fancy talk for saying it’s a tiny database that you can use in your applications.&#160; For any database needs, SQLite is the recommended approach you should take.&#160; Today we’ll look at how to create a database for your app, how to do the standard CRUD (Create, Read, Update, and Delete) with your db, and lastly, how to handle changes to your database.&#160; You can <a title="Android Day Twenty Four Initial Source Code" href="http://chrisrisner.com/upload/DayTwentyFourInitial.zip">grab the sample code we’ll start with today here</a>.</p>  <p>&#160;</p>  <p><strong>Creating a Database</strong></p>  <p>In order to create a database you need to override the <strong>SQLiteOpenHelper</strong> class and override the <strong>onCreate</strong> method to handle the actual creation.&#160; Let’s start by adding a new class to your project.&#160; Right click on <strong>src/com.daytwentyfour</strong> and go to <strong>New –&gt; Class</strong>.&#160; Name your class “<strong>DatabaseOpenHelper</strong>” and enter <strong>android.database.sqlite.SQLiteOpenHelper</strong> as the superclass.&#160; When you create the class it will already have stubs for <strong>onCreate</strong> and <strong>onUpgrade</strong> for you to implement.&#160; You will still need to add a constructor for your class though:</p>  <div class="csharpcode">   <pre class="alt"><span class="kwrd">private</span> final <span class="kwrd">static</span> String databaseName = <span class="str">&quot;DayTwentyFourDb&quot;</span>;</pre>
+
+  <pre><span class="kwrd">private</span> final <span class="kwrd">static</span> <span class="kwrd">int</span>    databaseVersion = 1;</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre><span class="kwrd">public</span> DatabaseOpenHelper(Context context) {</pre>
+
+  <pre class="alt">    super(context, databaseName, <span class="kwrd">null</span>, databaseVersion);</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here in your constructor, you’re passing in a static database name and a static database version.&#160; The variables need to be static to be accessible in the constructor.&#160; The database version is important for upgrading purposes which we’ll get into later.&#160; Next, in the <strong>onCreate</strong> method, you will do the actual database creation:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> <span class="kwrd">void</span> onCreate(SQLiteDatabase sqLiteDB) {</pre>
+
+  <pre class="alt">    String createSql = <span class="str">&quot;CREATE TABLE DayTwentyFour &quot;</span> +</pre>
+
+  <pre>            <span class="str">&quot;(_id integer primary key autoincrement, &quot;</span> + </pre>
+
+  <pre class="alt">            <span class="str">&quot;name text not null);&quot;</span>;</pre>
+
+  <pre>    sqLiteDB.execSQL(createSql);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re creating a SQL command that will create a new database table named “<strong>DayTwentyFour</strong>” with two columns.&#160; <strong>_id</strong> which is an integer, a primary key, and will auto increment.&#160; Name is a text field and is not allowed to be null.&#160; Once you’ve created that command in String form, you pass it into the <strong>SQLiteDatabase</strong> passed into the <strong>onCreate </strong>method.&#160; Lastly we’ll only take a brief look at the <strong>onUpgrade</strong> method:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> <span class="kwrd">void</span> onUpgrade(SQLiteDatabase sqLiteDB, <span class="kwrd">int</span> oldVersion, <span class="kwrd">int</span> newVersion) {</pre>
+
+  <pre class="alt">    sqLiteDB.execSQL(<span class="str">&quot;DROP TABLE IF EXISTS DayTwentyFour&quot;</span>);</pre>
+
+  <pre>    onCreate(sqLiteDB);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, you’re dropping the “<strong>DayTwentyFour</strong>” table if it exists and then recreating it.&#160; We will talk more about upgrading later but for now, this will suffice.&#160; Next you need to create an Adapter.&#160; This isn’t a defined concept but seems to be an accepted pattern for database access in Android.&#160; Right click on <strong>src/com.daytwentyfour </strong>and go to <strong>New –&gt; Class</strong>.&#160; Name your new class “<strong>DatabaseAdapter</strong>” and leave it with the <strong>java.lang.Object</strong> as it’s superclass.&#160; The first step is to add a few member variables and a constructor:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">private</span> Context context;</pre>
+
+  <pre><span class="kwrd">private</span> SQLiteDatabase database;</pre>
+
+  <pre class="alt"><span class="kwrd">private</span> DatabaseOpenHelper dbHelper;</pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt"><span class="kwrd">public</span> DatabaseAdapter(Context context) {</pre>
+
+  <pre>    <span class="kwrd">this</span>.context = context;</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><strong>Context</strong> should be familiar to you by now.&#160; The <strong>SQLiteDatabase</strong> variable is the Android SDK’s way of exposing methods to perform CRUD on your database.&#160; Lastly you have a reference to the <strong>DatabaseOpenHelper</strong> you just created.&#160; Next you need methods to open and close your database helper:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> DatabaseAdapter open() throws SQLException {</pre>
+
+  <pre>    dbHelper = <span class="kwrd">new</span> DatabaseOpenHelper(context);</pre>
+
+  <pre class="alt">    database = dbHelper.getWritableDatabase();</pre>
+
+  <pre>    <span class="kwrd">return</span> <span class="kwrd">this</span>;</pre>
+
+  <pre class="alt">}</pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt"><span class="kwrd">public</span> <span class="kwrd">void</span> close() {</pre>
+
+  <pre>    dbHelper.close();</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>In the <strong>open</strong> method you’re creating a new instance of the <strong>DatabaseOpenHelper</strong> and then using it to get a writable database.&#160; In the close, you’re simply calling <strong>close</strong> on the database helper.&#160; Now you’ve done enough work to actually get the database created.&#160; Open the <strong>src/com.daytwentyfour/DayTwentyFourActivity.java </strong>class and go to the bottom of the <strong>onCreate</strong> method.&#160; You haven’t done anything that will interact with the database and save any data, but just calling <strong>open </strong>will create the database.&#160; Add the following code to the end of the <strong>onCreate</strong> method:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="rem">//Create our database by opening it and closing it</span></pre>
+
+  <pre>DatabaseAdapter databaseAdapter = <span class="kwrd">new</span> DatabaseAdapter(getApplicationContext());</pre>
+
+  <pre class="alt">databaseAdapter.open();</pre>
+
+  <pre>databaseAdapter.close();</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><strong></strong></p>
+
+<p><strong>Checking that your Database was Created</strong></p>
+
+<p>Now after you run your application, you have two ways to check to make sure it worked and created the database.&#160; The first option is to load the <strong>DDMS Perspective</strong> and switch to <strong>File Explorer</strong>.&#160; If you select your emulator in the <strong>Devices</strong> view in the top left, you should then be able to navigate down to <strong>/data/data/com.daytwentyfour/databases</strong> and you should see a <strong>DayTwentyFourDb</strong> file:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="file explorer showing database" alt="file explorer showing database" src="http://chrisrisner.com/upload/android_day_twentyfour_file_explorer.png" /></p>
+
+<p>The second option is slightly more complicated but important for something we’re going to do later.&#160; Open up a command line window and navigate to your android SDK directory.&#160; For example, mine is located at c:\Program files (x86)\Android\android-sdk.&#160; From there, you need to go into the platform-tools folder so you can access <strong>adb.exe</strong>.&#160; ADB can be used to connect to emulators and devices from the command line.&#160; If you’re not sure what the device or emulator you want to connect to is named, you can run <strong>adb devices</strong>.&#160; This should list out all currently connected devices and running emulators.&#160; My emulator is showing up as <strong>emulator-5554</strong>.&#160; Next you need to run <strong>adb</strong> and connect to the emulator with a shell like so:</p>
+
+<p>$ adb –s emulator-5554 shell</p>
+
+<p>After that, you’ll be running the command line ON the device.&#160; To check the same directory you did above in <strong>File Explorer</strong>, execute this command:</p>
+
+<p># ls /data/data/com.daytwentyfour/databases</p>
+
+<p>Doing so should yield a single file, <strong>DayTwentyFourDb</strong>.&#160; The reason I showed you the arguably more complicated command line method is that later, after you’ve inserted data, you can open and check the database via this command line where as with <strong>File Explorer</strong>, you can’t.</p>
+
+<p>&#160;</p>
+
+<p><strong>Dealing with CRUD</strong></p>
+
+<p>Now that you’ve checked and made sure your database is being created successfully, it’s time to look at some CRUD (Create, Read, Update, Delete).&#160; Open the <strong>DatabaseAdapter</strong> class you created and add the following:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> <span class="kwrd">long</span> createRecord(String text) {</pre>
+
+  <pre>    ContentValues contentValue = <span class="kwrd">new</span> ContentValues();        </pre>
+
+  <pre class="alt">    contentValue.put(<span class="str">&quot;name&quot;</span>, text);            </pre>
+
+  <pre>    <span class="kwrd">return</span> database.insert(<span class="str">&quot;DayTwentyFour&quot;</span>, <span class="kwrd">null</span>, contentValue);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><strong>ContentValues</strong> implements <strong>Parcelable</strong> which <a title="Using Parcelable" href="http://chrisrisner.com/31-Days-of-Android--Day-7%E2%80%93Sharing-Data-Between-Activities">you may have dealt with for sending data between activities</a>.&#160; Here you’re just putting a text value into the <strong>ContentValues</strong> that matches the name of the only column you put in the database, outside the auto incremented ID column.&#160; After that, you use the <strong>SQLiteDatabase</strong> class to do the <strong>insert</strong>.&#160; Go back to the <strong>DayTwentyFourActivity</strong> class and change your <strong>button1</strong> <strong>onClickListener</strong> to do the following:</p>
+
+<div class="csharpcode">
+  <pre class="alt">button1.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(editText1.getText());</pre>
+
+  <pre>        DatabaseAdapter databaseAdapter = <span class="kwrd">new</span> DatabaseAdapter(getApplicationContext());</pre>
+
+  <pre class="alt">        databaseAdapter.open();</pre>
+
+  <pre>        databaseAdapter.createRecord(editText1.getText().toString());</pre>
+
+  <pre class="alt">        databaseAdapter.close();</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>The only thing different here from what you were doing before to create the database, is the call to the adapter to create a record.&#160; Now go ahead and run your app.&#160; When you tap on the button, you won’t see anything, but the data should insert behind the scenes.&#160; To check and see that data was inserted, you need to return to the command line.&#160; Provided you are still “ADBed” into your emulator, you can enter the following to get into the SQLite database:</p>
+
+<p>sqlite3 /data/data/com.daytwentyfour/databases/DayTwentyFourDb</p>
+
+<p>Now there are many different commands you can use here (run <strong>.help</strong> to have them listed).&#160; Running <strong>.tables</strong> will give you a list of tables that are in your database.&#160; <strong>.dump &lt;tablename&gt;</strong> will output the contents of the table.&#160; Go ahead and run:</p>
+
+<p>.dump DayTwentyFour</p>
+
+<p>You should get the following out (you might have fewer statements at the bottom depending on how many times you tapped the button):</p>
+
+<div class="csharpcode">
+  <pre class="alt">sqlite&gt; .tables</pre>
+
+  <pre>.tables</pre>
+
+  <pre class="alt">DayTwentyFour     android_metadata</pre>
+
+  <pre>sqlite&gt; .<span class="kwrd">dump</span> DayTwentyFour</pre>
+
+  <pre class="alt">.<span class="kwrd">dump</span> DayTwentyFour</pre>
+
+  <pre>PRAGMA foreign_keys=<span class="kwrd">OFF</span>;</pre>
+
+  <pre class="alt"><span class="kwrd">BEGIN</span> <span class="kwrd">TRANSACTION</span>;</pre>
+
+  <pre><span class="kwrd">CREATE</span> <span class="kwrd">TABLE</span> DayTwentyFour (_id <span class="kwrd">integer</span> <span class="kwrd">primary</span> <span class="kwrd">key</span> autoincrement, name text <span class="kwrd">not</span></pre>
+
+  <pre class="alt"> <span class="kwrd">null</span>);</pre>
+
+  <pre>INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(1,<span class="str">'This was our DayTwentyFour test.'</span>);</pre>
+
+  <pre class="alt">INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(2,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre>INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(3,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre class="alt">INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(4,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre>INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(5,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre class="alt">INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(6,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre>INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(7,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre class="alt">INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(8,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre>INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(9,<span class="str">'This was our DatyFour test.'</span>);</pre>
+
+  <pre class="alt">INSERT <span class="kwrd">INTO</span> &quot;DayTwentyFour&quot; <span class="kwrd">VALUES</span>(10,<span class="str">'This was our DatyFour test.'</span>);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you know that you’re inserting successfully.&#160; Let’s take a look at how to pull data out.&#160; </p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> ArrayList&lt;String&gt; fetchAllRecords() {</pre>
+
+  <pre>    Cursor cursor = database.query(<span class="str">&quot;DayTwentyFour&quot;</span>, <span class="kwrd">new</span> String[] { <span class="str">&quot;_id&quot;</span>, <span class="str">&quot;name&quot;</span>},</pre>
+
+  <pre class="alt">            <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>);        </pre>
+
+  <pre>    ArrayList&lt;String&gt; records = <span class="kwrd">new</span> ArrayList&lt;String&gt;();        </pre>
+
+  <pre class="alt">    cursor.moveToFirst();</pre>
+
+  <pre>    <span class="kwrd">for</span> (<span class="kwrd">int</span> i = 0; i &lt; cursor.getCount(); i++) {            </pre>
+
+  <pre class="alt">        records.add(cursor.getString(1));        </pre>
+
+  <pre>        cursor.moveToNext();</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>    cursor.close();</pre>
+
+  <pre class="alt">    <span class="kwrd">return</span> records;</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re doing a database query and returning it’s results to a <strong>Cursor</strong>.&#160; The query takes in the table name and the column names.&#160; There are additional parameters that you can pass in to specify order, selection arguments, as well as a record number limit.&#160; Here you’re fetching all of the record and putting them into an array which is returned.&#160; Go ahead and call this method from the second button <strong>onClickListener</strong> in <strong>DayTwentyFourActivity</strong> and set the <strong>EditText</strong> and <strong>TextView</strong> to the first row returned.&#160; You should end up with something like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {                </pre>
+
+  <pre class="alt">        DatabaseAdapter databaseAdapter = <span class="kwrd">new</span> DatabaseAdapter(getApplicationContext());</pre>
+
+  <pre>        databaseAdapter.open();</pre>
+
+  <pre class="alt">        ArrayList&lt;String&gt; records = databaseAdapter.fetchAllRecords();</pre>
+
+  <pre>        <span class="kwrd">if</span> (records.size() &gt; 0) {</pre>
+
+  <pre class="alt">            editText1.setText(records.get(0));</pre>
+
+  <pre>            lblTextViewOne.setText(records.get(0));</pre>
+
+  <pre class="alt">        }</pre>
+
+  <pre>        databaseAdapter.close();</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You’re checking to make sure your database at least had a record before you use it, but that should be it.&#160; Now if you run your app and tap the second button, the text of your two <strong>View</strong>s should be set.&#160; </p>
+
+<p>Very quickly we’ll go over the other CRUD methods you might use.</p>
+
+<p><strong>Fetching a Specific Record</strong></p>
+
+<p>Fetching a specific record is very similar to the method above where you’re fetching all records.&#160; The difference is that one of the <strong>nulls</strong> passed into the <strong>query </strong>method is replaced with selection criteria:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> String fetchRecord(<span class="kwrd">long</span> rowId) throws SQLException {</pre>
+
+  <pre>    Cursor mCursor = database.query(<span class="kwrd">true</span>, <span class="str">&quot;DayTwentyFour&quot;</span>, <span class="kwrd">new</span> String[] { <span class="str">&quot;_id&quot;</span>,</pre>
+
+  <pre class="alt">            <span class="str">&quot;name&quot;</span> }, <span class="str">&quot;_id =&quot;</span>+ rowId, <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>);</pre>
+
+  <pre>    <span class="kwrd">if</span> (mCursor != <span class="kwrd">null</span>) {</pre>
+
+  <pre class="alt">        mCursor.moveToFirst();</pre>
+
+  <pre>        <span class="kwrd">return</span> (mCursor.getString(1));</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>    <span class="kwrd">return</span> <span class="kwrd">null</span>;</pre>
+
+  <pre class="alt">}</pre>
+</div>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style><strong></strong></p>
+
+<p><strong>Updating a Record</strong></p>
+
+<p>Updating a record is very similar to the insertion but, again, you’re specifying criteria:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> boolean updateRecord(<span class="kwrd">long</span> rowId, String text) {</pre>
+
+  <pre>    ContentValues contentValue = <span class="kwrd">new</span> ContentValues();</pre>
+
+  <pre class="alt">    contentValue.put(<span class="str">&quot;name&quot;</span>, text);</pre>
+
+  <pre>    <span class="kwrd">return</span> database.update(<span class="str">&quot;DayTwentyFour&quot;</span>, contentValue, <span class="str">&quot;_id =&quot;</span> + rowId, <span class="kwrd">null</span>) &gt; 0;</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p><strong></strong></p>
+
+<p><strong>Deleting Records</strong></p>
+
+<p>Deleting records is very simple as well, just more criteria:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> boolean deleteRecord(<span class="kwrd">long</span> rowId) {</pre>
+
+  <pre>    <span class="kwrd">return</span> database.delete(<span class="str">&quot;DayTwentyFour&quot;</span>, <span class="str">&quot;_id =&quot;</span> + rowId, <span class="kwrd">null</span>) &gt; 0;</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>&#160;</p>
+
+<p>This should get you pretty far with using databases.&#160; An important reminder is that if the user goes into <strong>Settings –&gt; Manage Applications</strong> and pulls up your application and hits the <strong>Clear Data</strong> button, you’re database WILL be deleted.</p>
+
+<p><strong></strong></p>
+
+<p><strong>What about Upgrades</strong></p>
+
+<p>Earlier on I covered the <strong>onUpgrade </strong>method of your <strong>DatabaseOpenHelper</strong> class very quickly.&#160; This method is actually very important if you’re working on an application that you anticipate making database changes on.&#160; The way that Android handles database changes is that it expects you to do a lot of the work.&#160; As you’ll recall, you created a <strong>databaseVersion</strong> variable in your <strong>DatabaseOpenHelper</strong>.&#160; If you increase this number and release an updated version of your app, the <strong>onUpgrade</strong> method will be called.&#160; Where previously you were just dropping the table and calling on create, here you’d need to handle retrieving all of the data for the table, recreating the table, and then reinserting the data.&#160; Something a lot like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> <span class="kwrd">void</span> onUpgrade(SQLiteDatabase sqLiteDB, <span class="kwrd">int</span> oldVersion, <span class="kwrd">int</span> newVersion) {</pre>
+
+  <pre class="alt">    <span class="rem">//Pull all of your data and keep it in a local variable</span></pre>
+
+  <pre>    sqLiteDB.execSQL(<span class="str">&quot;DROP TABLE IF EXISTS DayTwentyFour&quot;</span>);</pre>
+
+  <pre class="alt">    onCreate(sqLiteDB);</pre>
+
+  <pre>    <span class="rem">//Insert that data you pulled out earlier into the new table</span></pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You can <a title="Implementing onUpgrade with Calendar" href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android-apps/4.0.1_r1/com/android/providers/calendar/CalendarDatabaseHelper.java">view an example of this implemented by a real app here</a>.</p>
+
+<p>Lastly, you can <a title="Android Day Twenty Four Final Source Code" href="http://chrisrisner.com/upload/DayTwentyFourFinal.zip">download the final source code from today here</a>.</p>

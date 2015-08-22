@@ -1,0 +1,10 @@
+<i class="fa fa-edit"></i>
+	<span class="edit">
+	{% if post.url %}
+	  {% assign path = post.path %}
+	{% else %}
+	  {% assign path = page.path %}
+	{% endif %}
+	
+	<a href="{{ site.github_repo_url }}edit/master/{{ path }}">edit</a>
+</span>

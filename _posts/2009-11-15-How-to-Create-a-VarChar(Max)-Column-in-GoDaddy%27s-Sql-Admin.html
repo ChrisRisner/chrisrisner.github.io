@@ -1,0 +1,16 @@
+---
+layout: post
+title: "How to Create a VarChar(Max) Column in GoDaddy’s Sql Admin"
+date: Sun Nov 15 2009 11:39:18 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: []
+excerpt: "null"
+logoUrl: null
+keywords: chris risner, .net, technology, programming, asp .net, mvc, life
+filepath: 2009-11-15-How-to-Create-a-VarChar(Max)-Column-in-GoDaddy%27s-Sql-Admin.html
+disqus_identifier: How-to-Create-a-VarChar(Max)-Column-in-GoDaddy%27s-Sql-Admin
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/files/media/image/WindowsLiveWriter/HowtoCreateaVarCharMaxColumninGoDaddysSq_1306E/image_2.png"><img style="border-right-width: 0px; margin: 0px 15px 5px 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" align="left" src="http://chrisrisner.com/files/media/image/WindowsLiveWriter/HowtoCreateaVarCharMaxColumninGoDaddysSq_1306E/image_thumb.png" width="244" height="187" /></a> Tonight I went in to add a column to one of my sql databases using GoDaddy’s SQL Server Web Admin.&#160; This column happened to be a VarChar(Max).&#160; Now when adding a varchar column, you have to enter an integer in the length column, so there is a VarCharMax field type.&#160; Unfortunately, it doesn’t work.&#160; Instead of creating a VarChar with Max as the length, it leaves it with a length of 1.&#160; The solution is to change the column type via the Query Analyzer.&#160; If you find yourself in this situation, run this query to update your column:</p>  <p>&#160;</p>  <blockquote>   <p>ALTER TABLE MyTable ALTER COLUMN MyColumn VarChar(MAX)</p> </blockquote>  <p>Happy SQLing.</p>

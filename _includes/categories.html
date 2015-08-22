@@ -1,0 +1,36 @@
+<!--{{ page.categories | join: ', ' }}{{ post.categories | join: ', ' }}-->
+<!--{% capture categories %}{{ page.categories }}{{ post.categories }}{% endcapture %}-->
+{% if page.categories != null %}
+	{% assign categories = page.categories %}
+{% else %}
+	{% assign categories = post.categories %}
+{% endif %}
+
+
+{% unless categories == empty %}
+<!--<ul class="tag_box list-unstyled list-inline">-->
+  <!--<li>-->
+	  <i class="fa fa-tags"></i>
+  <!--</li>-->
+  {% assign categories_list = categories %}
+  {% if categories_list.first[0] == null %}
+	{% for category in categories_list %} 
+		<!--<li>-->
+			<a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category }}-ref">
+			{{ category }}
+			<!--{{ category | join: "/" }} <span>({{ site.categories[category].size }})</span>
+			{% unless forloop.last %},{% endunless %}-->
+			</a>
+		<!--</li>-->
+	{% endfor %}
+  {% else %}
+	{% for category in categories_list %} 
+		<li>
+			<a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] }}-ref">
+			{{ category[0] | join: "/" }} <span>/{{ category[1].size }})</span>
+			</a>
+		</li>
+	{% endfor %}
+  {% endif %}
+<!--</ul>-->
+{% endunless %}

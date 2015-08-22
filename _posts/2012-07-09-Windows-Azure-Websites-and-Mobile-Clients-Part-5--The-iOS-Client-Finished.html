@@ -1,0 +1,497 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 5: The iOS Client Finished"
+date: Mon Jul 09 2012 13:37:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Azure, Mobile, Objective-C, Phone, XCode, iOS]
+excerpt: "This article wraps up our mini-series on creating an iOS Client that connects to a URL Shortening service running in PHP on Windows Azure Websites.  With the completion of this demo we have an iOS app that is capable of displaying a list of shortened URLs, seeing details on those URLs, as well as allowing the user to shorten new URLs from within the iOS app."
+logoUrl: null
+keywords: Xcode,Objective C,iOS,iPhone,Windows Azure,Azure,PHP on Azure,Mobile connectivity to Windows Azure
+filepath: 2012-07-09-Windows-Azure-Websites-and-Mobile-Clients-Part-5--The-iOS-Client-Finished.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-5--The-iOS-Client-Finished
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Windows Azure and iOS" alt="Windows Azure and iOS" align="right" src="http://chrisrisner.com/upload/iOSImage3.png" width="158" height="296" />Today we’re going to wrap up our first iOS client that connects to Windows Azure Websites.&#160; If you’ve been <a title="Windows Azure iOS Client Part 4" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-4--The-iOS-Client-Continued">following along, then as of now we have an app</a> that will display a list of shortened URL slugs and will allow the user to tap in to see more details on them.&#160; Today, we’re going to complete our app by giving the user the ability to add new shortened URLs from the app.&#160; You can <a title="iOS URL Shortener Part 4" href="http://chrisrisner.com/upload/ShortifierDemo-Part2.zip">download the code we left off with in part 4 here</a>.</p>  <p>To start, let’s go to our storyboard and go to the view controller with our table view in it.&#160; This is where we’re going to want to add a button to create a new shortened URL.&#160; Drag a <strong>Bar Button Item</strong> from the control selector to the top right of the navigation bar in the view.&#160; When that’s done, in the <strong>Attributes Inspector</strong>, change the <strong>Identifier</strong> drop down to <strong>Add</strong>.&#160; </p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Navigation Controller Bar Button Item" alt="Navigation Controller Bar Button Item" src="http://chrisrisner.com/upload/shortifier-ios-bar-button-item.jpg" /></p>  <p>&#160;</p>  <p>Now, like you did with the prototype cell, control click and drag from the <strong>Add </strong>button to the <strong>UrlDetailsViewController</strong> in the storyboard.&#160; When the dialog comes up to ask what kind of style you want to use, choose <strong>Push</strong>.&#160; Click on the segue that was generated to go between the button and the view controller and give it an identifier of “<strong>AddUrl</strong>”.&#160; Now, go to your <strong>UrlDetailsViewController</strong> in the storyboard and add a <strong>Bar Button Item</strong> to it’s right side.&#160; This time, choose an <strong>Identifier</strong> in the <strong>Attributes Inspector </strong>of <strong>Save</strong>.&#160; Open the <strong>Assistant Editor</strong> and control drag from the new button to your <strong>UrlDetailsViewController.h </strong>file to generate a new IBOutlet and an Action.&#160; Now, before we’re ready to specify what should be done in <strong>prepareForSegue</strong>, we need to make some changes to our classes.&#160; Open the <strong>UrlDetailsViewController.h</strong> class.&#160; We’re going to have our base <strong>ViewController</strong> do all of the heavy lifting, but in order to do that, we need to have a way of telling the <strong>ViewController </strong>class what happened in the <strong>UrlDetailsViewController</strong> class.&#160; For this, the delegate pattern will work great.&#160; Let’s add a new <strong>protocol</strong> to the class.&#160; In addition, we’ll add a new <strong>BOOL</strong> property to indicate if the view is editable, and we’ll make the view controller implement <strong>UITextFieldDelegate</strong>.&#160; When you’re done, your .h file should look something like this:</p>  <pre class="csharpcode">    @<span class="kwrd">class</span> UrlDetailsViewController;
+
+    @protocol UrlDetailsViewControllerDelegate &lt;NSObject&gt;
+    - (<span class="kwrd">void</span>)urlDetailsViewController:(UrlDetailsViewController *)controller didAddUrlWithSlug:(NSString *)urlSlug andFullUrl:(NSString *)fullUrl;
+    @end
+
+    @<span class="kwrd">interface</span> UrlDetailsViewController : UIViewController &lt;UITextFieldDelegate&gt;
+        @property (nonatomic, weak) id &lt;UrlDetailsViewControllerDelegate&gt; <span class="kwrd">delegate</span>;
+        @property (nonatomic, weak) NSString *urlSlug;
+        @property (nonatomic, weak) NSString *fullUrl;
+        @property (weak, nonatomic) IBOutlet UITextField *BmakUItxtUrlSlug;
+        @property (weak, nonatomic) IBOutlet UITextField *txtFullUrl;
+        @property (weak, nonatomic) IBOutlet UITextField *txtUrlSlug;<br />        @property (weak, nonatomic) IBOutlet UITextField *txtShortyUrl;
+        @property (weak, nonatomic) IBOutlet UIButton *btnGoToUrl;
+        @property (weak, nonatomic) IBOutlet UILabel *lblGoToUrl;
+        @property (weak, nonatomic) IBOutlet UILabel *lblShortyUrl;
+        @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnSaveUrl;
+        @property BOOL isEditable;
+        - (IBAction)tapGoToUrl:(id)sender;
+        - (IBAction)tapSaveUrl:(id)sender;
+    @end</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now that the .h is done, switch over to the <strong>UrlDetailsViewController.m</strong>.&#160; First, synthesize the delegate and the new isEditable field:</p>
+
+<pre class="csharpcode">    @synthesize <span class="kwrd">delegate;<br /></span>    @synthesize isEditable;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Next we need to edit our <strong>viewDidLoad</strong> method to handle if the view is editable or not:</p>
+
+<pre class="csharpcode">    - (<span class="kwrd">void</span>)viewDidLoad
+    {
+        [super viewDidLoad];
+        
+        self.txtUrlSlug.<span class="kwrd">delegate</span> = self;
+        self.txtFullUrl.<span class="kwrd">delegate</span> = self;
+        <span class="rem">//Turn on or off editability of text fields</span>
+        self.txtUrlSlug.enabled = self.isEditable;
+        self.txtFullUrl.enabled = self.isEditable;
+        self.txtShortyUrl.enabled = self.isEditable;
+        
+        <span class="kwrd">if</span> (self.isEditable == NO) {
+            self.txtShortyUrl.text = [<span class="str">@&quot;http://urlshortener.azurewebsites.net/&quot;</span> 
+                stringByAppendingFormat:urlSlug];
+            self.title = <span class="str">@&quot;URL Details&quot;</span>;
+            <span class="rem">//Hide the Save bar button item</span>
+            [[self navigationItem] setRightBarButtonItem:nil];
+            self.txtUrlSlug.text = urlSlug;
+            self.txtFullUrl.text = fullUrl;        
+        } <span class="kwrd">else</span> {
+            self.title= <span class="str">@&quot;Add URL&quot;</span>;  
+            self.btnGoToUrl.hidden = YES;
+            self.lblGoToUrl.hidden = YES;
+            self.lblShortyUrl.hidden = YES;
+            self.txtShortyUrl.hidden = YES;
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Note that we’re setting the enabled flag on the text fields to match if editability is turned on.&#160; Also, if this isn’t editable, then we are hiding the necessary fields at the bottom.&#160; Now let’s go back to <strong>ViewController.m</strong>’s <strong>prepareForSegue </strong>method.&#160; Here we need to handle telling the <strong>UrlDetailsViewController </strong>that it is editable if the user taps <strong>Add</strong>:</p>
+
+<pre class="csharpcode">    -(<span class="kwrd">void</span>)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        <span class="kwrd">if</span> ([segue.identifier isEqualToString:<span class="str">@&quot;ViewUrlDetails&quot;</span>])
+        {
+            UrlDetailsViewController *urlDetailsViewController = segue.destinationViewController;
+            UITableViewCell *cell = (UITableViewCell *)sender;
+            urlDetailsViewController.urlSlug = cell.textLabel.text;
+            urlDetailsViewController.isEditable = NO;
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+            urlDetailsViewController.fullUrl = [appDelegate.urls objectForKey:cell.textLabel.text];        
+        } <span class="kwrd">else</span> <span class="kwrd">if</span> ([segue.identifier isEqualToString:<span class="str">@&quot;AddUrl&quot;</span>])
+        {
+            UrlDetailsViewController *urlDetailsViewController = segue.destinationViewController;
+            urlDetailsViewController.<span class="kwrd">delegate</span> = self;
+            urlDetailsViewController.isEditable = YES;
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you should be able to run your app and click on the <strong>Add</strong> button and, when you do, you should be taken to the <strong>UrlDetailsViewController</strong> and it will be set up for editing:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="iOS editing a URL" alt="iOS editing a URL" src="http://chrisrisner.com/upload/shortifier-ios-editing-url.jpg" /></p>
+
+<p>Now, we need to wire up the <strong>UITextFieldDelegate </strong>methods and then handle the <strong>Save</strong> tap.&#160; In our database that we set up earlier in the series, we put specific length limits on the URL slug and the full URL.&#160; We need to have someway of restricting this in iOS to prevent a user from sending too much data.&#160; That’s why we are using the <strong>UITextFieldDelegate</strong> to check for text length whenever the user enters text into our text fields.&#160; Just add this to your <strong>UrlDetailsViewController</strong> and you will be good to go:</p>
+
+<pre class="csharpcode">    -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range 
+            replacementString:(NSString *)<span class="kwrd">string</span> {
+        <span class="kwrd">if</span> (textField == self.txtUrlSlug) {
+            NSInteger newTextLength = [textField.text length] - range.length + [<span class="kwrd">string</span> length];        
+            <span class="rem">//if this is the URL Slug, limit it to 45 characters</span>
+            <span class="kwrd">if</span> (newTextLength &gt; 45) {
+                <span class="kwrd">return</span> NO;
+            }
+            <span class="kwrd">return</span> YES;            
+        }
+        <span class="kwrd">else</span> <span class="kwrd">if</span> (textField == self.txtFullUrl) {
+            NSInteger newTextLength = [textField.text length] - range.length + [<span class="kwrd">string</span> length];        
+            <span class="rem">//if this is the full url, limit it to 500 charactes</span>
+            <span class="kwrd">if</span> (newTextLength &gt; 500) {
+                <span class="kwrd">return</span> NO;
+            }
+            <span class="kwrd">return</span> YES;
+        }
+        <span class="kwrd">return</span> YES;
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is fairly straight forward and just checks to see if the text field sent in is either the txtUrlSlug field or the txtFullUrl field.&#160; Then it does the size check based off which field it is.&#160; Now, to implement the save method:</p>
+
+<pre class="csharpcode">    - (IBAction)tapSaveUrl:(id)sender {
+        NSString *newUrlSlug = self.txtUrlSlug.text;
+        NSString *newFullUrl = self.txtFullUrl.text;
+        
+        <span class="rem">//Check to see if this urlSlug has already been used</span>
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+        id valueForSlug = [appDelegate.urls objectForKey:newUrlSlug];
+        <span class="kwrd">if</span> (valueForSlug != nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="str">@&quot;Failed to Create Shortened URL&quot;</span> 
+                                                            message:<span class="str">@&quot;This URL Slug has already been
+                                                            used.  Please use a different slug.&quot;</span> 
+                                                           <span class="kwrd">delegate</span>:self 
+                                                  cancelButtonTitle:<span class="str">@&quot;OK&quot;</span>
+                                                  otherButtonTitles:nil];
+            [alert show];
+            <span class="kwrd">return</span>;
+        }    
+        <span class="rem">//Pass the details of this URL back to the ViewController</span>
+        [self.<span class="kwrd">delegate</span> urlDetailsViewController:self didAddUrlWithSlug:newUrlSlug andFullUrl:newFullUrl];
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, we check to see that the URL doesn’t already exist locally (note that if some other client inserted it on the server side after we had pulled down our data, we wouldn’t know).&#160; If it does exist, we show a <strong>UIAlertView</strong>.&#160; If it doesn’t, we pass the data back to the delegate for our <strong>UrlDetailsViewController</strong>.&#160; As you’ll recall (or if you look above) we set the delegate on our <strong>UrlDetailsViewController</strong> in the <strong>prepareForSegue</strong> method.&#160; First, go back to your <strong>ViewController</strong>.h and make the class implement <strong>UrlDetailsViewControllerDelegate</strong> as well as <strong>NSUrlConnectionDelegate</strong>.</p>
+
+<pre class="csharpcode">    @<span class="kwrd">interface</span> ViewController : UIViewController &lt;UITableViewDelegate, UITableViewDataSource, 
+        UrlDetailsViewControllerDelegate, NSURLConnectionDelegate&gt; {
+    @<span class="kwrd">private</span>
+        BOOL _success;
+        NSMutableData* receivedData;
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Note that we’ve also added a private <strong>NSMutableData</strong> object to our class.&#160; That will be used by the <strong>NSUrlConnection </strong>object later on.&#160; Open up your <strong>ViewController.m </strong>file and add the following method in:</p>
+
+<pre class="csharpcode">    - (<span class="kwrd">void</span>)urlDetailsViewController:(UrlDetailsViewController *)controller didAddUrlWithSlug:
+                                    (NSString *)urlSlug andFullUrl:(NSString *)fullUrl {
+        
+        <span class="rem">// Create the request.</span>
+        NSMutableURLRequest *theRequest=[NSMutableURLRequest 
+                                         requestWithURL:
+                                         [NSURL URLWithString: <br />                                         <span class="str">@&quot;http://urlshortener.azurewebsites.net/api-add&quot;</span>]
+                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                         timeoutInterval:60.0];
+        [theRequest setHTTPMethod:<span class="str">@&quot;POST&quot;</span>];
+        [theRequest addValue:<span class="str">@&quot;application/json&quot;</span> forHTTPHeaderField:<span class="str">@&quot;Content-Type&quot;</span>];    
+        <span class="rem">//build an info object and convert to json</span>
+        NSDictionary* jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        <span class="str">@&quot;my_key&quot;</span>, <span class="str">@&quot;key&quot;</span>,
+                                        fullUrl, <span class="str">@&quot;url&quot;</span>,
+                                        urlSlug, <span class="str">@&quot;url_slug&quot;</span>,
+                                        nil];
+        <span class="rem">//convert JSON object to data</span>
+        NSError *error;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary 
+                                                options:NSJSONWritingPrettyPrinted error:&amp;error];    
+        [theRequest setHTTPBody:jsonData];        
+        <span class="rem">//prints out JSON</span>
+        NSString *jsonText =  [[NSString alloc] initWithData:jsonData                                        
+                                                    encoding:NSUTF8StringEncoding];
+        NSLog(<span class="str">@&quot;JSON: %@&quot;</span>, jsonText);
+        
+        <span class="rem">// create the connection with the request and start loading the data</span>
+        NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest <span class="kwrd">delegate</span>:self];
+        <span class="kwrd">if</span> (theConnection) {
+            <span class="rem">// Create the NSMutableData to hold the received data.</span>
+            <span class="rem">// receivedData is an instance variable declared elsewhere.</span>
+            receivedData = [NSMutableData data];
+        } <span class="kwrd">else</span> {
+            <span class="rem">// We should inform the user that the connection failed.</span>
+        }
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+        
+        <span class="rem">//Add shortened URL locally</span>
+        [appDelegate.urls setObject:fullUrl forKey:urlSlug];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:appDelegate.urls.count -1 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:
+                        [NSArray arrayWithObject:indexPath] 
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.tableView reloadData];    
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is somewhat complicated so let’s step through it.&#160; First, we create our <strong>NSMutableUrlRequest</strong> and set the HTTP method and content type on it.&#160; Then we put our URL values into a dictionary which we serialize into JSON using <strong>NSJSONSerialiazation</strong>.&#160; That data is set to be the body of the request.&#160; Then, we initiate a <strong>NSUrlConnection</strong> with the request object and set it’s delegate to <strong>self</strong>.&#160; Lastly, we add the URL object to our <strong>AppDelegate</strong>’s collection, popping the <strong>UrlDetailsViewController</strong> off the stack, and reloading the data in the table view.&#160; We’re kind of assuming things will work here because we’re adding the URL object before we know it was successfully saved to the database.&#160; So that is something to consider.&#160; All that’s left, is to implement the <strong>NSUrlConnectionDelegate</strong> methods.&#160; </p>
+
+<pre class="csharpcode">  <span class="preproc">#pragma</span> NSUrlConnectionDelegate Methods
+
+  -(<span class="kwrd">void</span>)connection:(NSConnection*)conn didReceiveResponse:(NSURLResponse *)response 
+  {
+      <span class="kwrd">if</span> (receivedData == NULL) {
+          receivedData = [[NSMutableData alloc] init];
+      }
+      [receivedData setLength:0];
+      NSLog(<span class="str">@&quot;didReceiveResponse: responseData length:(%d)&quot;</span>, receivedData.length);
+  }
+
+  - (<span class="kwrd">void</span>)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+  {
+      <span class="rem">// Append the new data to receivedData. </span>
+      <span class="rem">// receivedData is an instance variable declared elsewhere.</span>
+      [receivedData appendData:data];
+  }
+
+  - (<span class="kwrd">void</span>)connection:(NSURLConnection *)connection
+    didFailWithError:(NSError *)error
+  {    
+      <span class="rem">// inform the user</span>
+      NSLog(<span class="str">@&quot;Connection failed! Error - %@ %@&quot;</span>,
+            [error localizedDescription],
+            [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+  }
+
+  - (<span class="kwrd">void</span>)connectionDidFinishLoading:(NSURLConnection *)connection
+  {
+      NSLog(<span class="str">@&quot;Succeeded! Received %d bytes of data&quot;</span>,[receivedData length]);
+      NSString *responseText = [[NSString alloc] initWithData:receivedData encoding: NSASCIIStringEncoding];
+      NSLog(<span class="str">@&quot;Response: %@&quot;</span>, responseText);    
+      NSError* error;
+      NSDictionary* json = [NSJSONSerialization 
+                            JSONObjectWithData:receivedData                     
+                            options:kNilOptions 
+                            error:&amp;error];    
+      NSString *status = (NSString *)[json valueForKey:<span class="str">@&quot;Status&quot;</span>];
+      NSLog(<span class="str">@&quot;Status response from creating URL: %@&quot;</span>, status);
+      <span class="kwrd">if</span> ([status isEqualToString:<span class="str">@&quot;SUCCESS&quot;</span>]) {
+          
+      } <span class="kwrd">else</span> <span class="kwrd">if</span> ([status isEqualToString:<span class="str">@&quot;Already Exists&quot;</span>]) {
+          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="str">@&quot;Failed to Create Shortened URL&quot;</span> 
+                                message:<span class="str">@&quot;This URL Slug has already been used.  Please use a different slug.&quot;</span> 
+                                                         <span class="kwrd">delegate</span>:self 
+                                                cancelButtonTitle:<span class="str">@&quot;OK&quot;</span>
+                                                otherButtonTitles:nil];
+          [alert show];
+      } <span class="kwrd">else</span> <span class="kwrd">if</span> ([status isEqualToString:<span class="str">@&quot;FAILURE&quot;</span>]) {
+          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="str">@&quot;Failed to Create Shortened URL&quot;</span> 
+                                message:<span class="str">@&quot;There was an error creating this shortened URL.  Please try again.&quot;</span> 
+                                                         <span class="kwrd">delegate</span>:self 
+                                                cancelButtonTitle:<span class="str">@&quot;OK&quot;</span>
+                                                otherButtonTitles:nil];
+          [alert show];
+      } <span class="kwrd">else</span> {
+          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:<span class="str">@&quot;Failed to Create Shortened URL&quot;</span> 
+                                message:<span class="str">@&quot;There was an error creating this shortened URL.  Please try again.&quot;</span> 
+                                                         <span class="kwrd">delegate</span>:self 
+                                                cancelButtonTitle:<span class="str">@&quot;OK&quot;</span>
+                                                otherButtonTitles:nil];
+          [alert show];
+      }
+  }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you’ve used <strong>NSUrlConnection</strong> before, these methods should all look fairly familiar.&#160; The only thing worth stepping through a little bit is the <strong>connectionDidFinishLoading</strong> method.&#160; In that method, we’re deserializing the JSON that comes from the server and then checking the status.&#160; If it was a success, we don’t do anything.&#160; If there was a failure, the URL already existed, or we get back any other response, we show an <strong>UIAlertView</strong> with a warning message.&#160; That’s all there is to it and now our client is able to add new shortened URLs.&#160; There’s ample room for improvement on some of the features here.&#160; For example, we’re not checking the validity of a full URL on the client side, but we are on the server side.&#160; It wouldn’t take much to implement the same check and present feedback to the user in a friendly way.&#160; </p>
+
+<p>If you’ve stuck through it this far, we’ve completed a simple iOS client connecting to a Windows Azure Website written in PHP.&#160; Outside of a little PHP understanding, none of this required ever moving away from OSX, XCode, or a simple text editor.&#160; You can <a title="iOS URL Shortener Demo Part 5" href="http://chrisrisner.com/upload/ShortifierDemo-Part3.zip">download the full source to this demo here</a>.</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

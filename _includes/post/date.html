@@ -1,0 +1,11 @@
+{% capture date %}{{ page.date }}{{ post.date }}{% endcapture %}
+{% capture has_date %}{{ date | size }}{% endcapture %}
+
+{% if has_date != '0' %}
+<span class="post-date">
+	<i class="fa fa-calendar"></i>
+	{{ date | date: "%B" }} 
+	{{ date | date: "%d" }},
+	{{ date | date: "%Y" }}
+</span>
+{% endif %}

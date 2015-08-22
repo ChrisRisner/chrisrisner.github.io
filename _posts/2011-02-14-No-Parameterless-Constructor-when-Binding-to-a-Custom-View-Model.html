@@ -1,0 +1,168 @@
+---
+layout: post
+title: "No Parameterless Constructor when Binding to a Custom View Model"
+date: Sun Feb 13 2011 18:46:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Programming]
+excerpt: "MVC,.Net,C#,Binding,Model View,Custom Model View,No parameterless constructor when binding to a custom view model"
+logoUrl: null
+keywords: MVC,.Net,C#,Binding,Model View,Custom Model View,No parameterless constructor when binding to a custom view model
+filepath: 2011-02-14-No-Parameterless-Constructor-when-Binding-to-a-Custom-View-Model.html
+disqus_identifier: No-Parameterless-Constructor-when-Binding-to-a-Custom-View-Model
+---
+<div>In the process of <a title="Working on Veritas Blog Framework" href="http://chrisrisner.com/Veritas%E2%80%93Continuing-the-UI%E2%80%93Part-12">rewriting this blog’s framework</a>, I ran across an issue with binding my MVC views to custom view models.&#160; Specifically, when I tried updating my model on post back like so:    <br /></div>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span>[AcceptVerbs(HttpVerbs.Post)]</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> ActionResult Contact()</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>{</pre>
+
+  <pre><span class="lnum">   4:  </span>    ContactScreen screen = <span class="kwrd">new</span> ContactScreen();</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    TryUpdateModel(screen);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<div>
+  <br />Or when I tried to get the view model object directly in as a parameter for the method like so:
+
+  <br /></div>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>[AcceptVerbs(HttpVerbs.Post)]</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> ActionResult Contact(ContactScreen screen)</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>{</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<div>
+  <br />I was consistently getting this error:</div>
+
+<blockquote>
+  <div>No parameterless constructor defined for this object.</div>
+</blockquote>
+
+<div>Unfortunately the stack trace didn’t really give me much information.&#160; What it did tell me was that the issue was coming from the DefaultModelBinder.&#160; After commenting out different properties of my ContactScreen object (the view model my view was bound to) I discovered that the culprit was this right here:
+  <br />
+
+  <pre class="csharpcode"><span class="kwrd">public</span> SelectList AuthorSelectList { get; set; }</pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></div>
+
+<div>Basically, the default data binder in MVC 2.0 doesn’t understand how to instantiate a select list when you’re not passing data over.&#160; Since my SelectList is normally instantiated in a method that loads different data to the screen, I only ran into the error when it was trying to do the data binding behind the scenes.&#160; Fortunately, there is a way around this that doesn’t involve us having to alter the default binder.&#160; We can tell the class to exclude certain elements when it’s binding.&#160; This is done very easily by putting a Bind attribute on the class and telling it to exclude our property like so:</div>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>[Bind(Exclude=<span class="str">&quot;AuthorSelectList&quot;</span>)]</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> ContactScreen : ScreenBase</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>{</pre>
+
+  <pre><span class="lnum">   4:  </span>     <span class="kwrd">public</span> SelectList AuthorSelectList { get; set; }</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<div>&#160;</div>
+
+<div>Unfortunately, we do have to handle custom binding of the value selected for the select list, but we only have to do it for our one value instead of everything in our class.</div>
+
+<div></div>

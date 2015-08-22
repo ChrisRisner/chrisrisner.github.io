@@ -1,0 +1,405 @@
+---
+layout: post
+title: "Veritas–Continuing the UI–Part 11"
+date: Mon Feb 07 2011 20:31:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Programming, Veritas, Visual Studio, Web]
+excerpt: "Veritas,Blog,Weblog,UI,MVC,ASP .Net,.Net"
+logoUrl: null
+keywords: Veritas,Blog,Weblog,UI,MVC,ASP .Net,.Net
+filepath: 2011-02-08-Veritas–Continuing-the-UI–Part-11.html
+disqus_identifier: Veritas–Continuing-the-UI–Part-11
+---
+<p>The first thing we do as we continue working on our UI is clean up a few things <a title="Vertias Part 10" href="http://chrisrisner.com/Veritas-%E2%80%93-Designing-the-UI-%E2%80%93-Part-10">from the last time</a>.&#160; While we created screen objects so we could tightly bind our views to something, we didn’t do the same for the Master pages.&#160; Since we didn’t do that, we ended up casting our BlogConfig object on the master page like so:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">'https://www.google.com/jsapi?key=</pre>
+
+  <pre><span class="lnum">   2:  </span>&lt;%: (ViewData[&quot;BlogConfig&quot;] as BlogConfig).GoogleApiKey %&gt;'</span>&gt;&lt;/script&gt;</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Specifically we’re talking about line 2.&#160; We really want to avoid this wherever possible.&#160; However, since this is the Master Page, we’re not currently binding it to a specific object type (besides our VeritasViewMasterPage).&#160; We can get past this by binding it to the ScreenBase object.&#160; Since we’re passing screen objects which all descend from ScreenBase to our views as the model, this will work and it means that on our master page, we can access any public properties or methods of the ScreenBase class.&#160; So in our master pages (all of them, not just Site.Master), we’ll change our inherits line to: 
+  <br /></p>
+
+<pre class="csharpcode">Inherits=&quot;Veritas.UI.Web.Views.VeritasViewMasterPage<span class="kwrd">&lt;</span><span class="html">Veritas.BusinessLayer.Screens.ScreenBase</span><span class="kwrd">&gt;</span>&quot;</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Now, we’ll just add a BlogConfig variable to our ScreenBase class: 
+
+<br />
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> BlogConfig blogConfig</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    get { <span class="kwrd">return</span> CacheHandler.GetBlogConfig(); }</pre>
+
+  <pre><span class="lnum">   4:  </span>}</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<br />Now, we can change the javascript reference up above to this cleaner version: 
+
+<br />
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">type</span><span class="kwrd">=&quot;text/javascript&quot;</span> <span class="attr">src</span><span class="kwrd">='https://www.google.com/jsapi?key=</pre>
+
+  <pre><span class="lnum">   2:  </span>&lt;%: Model.blogConfig.GoogleApiKey %&gt;'</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<br />We’re going to continue making a few more changes to our site master’s head element:
+
+<br />
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">title</span><span class="kwrd">&gt;&lt;</span><span class="html">asp:ContentPlaceHolder</span> <span class="attr">ID</span><span class="kwrd">=&quot;TitleContent&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span> <span class="kwrd">/&gt;&lt;/</span><span class="html">title</span><span class="kwrd">&gt;</span>    </pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">asp:ContentPlaceHolder</span> <span class="attr">ID</span><span class="kwrd">=&quot;MetaContent&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">type</span><span class="kwrd">=&quot;text/javascript&quot;</span> <span class="attr">src</span><span class="kwrd">='https://www.google.com/jsapi?key=</pre>
+
+  <pre><span class="lnum">   4:  </span>&lt;%: Model.blogConfig.GoogleApiKey %&gt;'</span><span class="kwrd">&gt;&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;https://ajax.googleapis.com/ajax/libs</pre>
+
+  <pre><span class="lnum">   6:  </span>/jquery/1.4.4/jquery.min.js&quot;</span>&gt;&lt;/script&gt;</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;https://ajax.googleapis.com/ajax</pre>
+
+  <pre><span class="lnum">   8:  </span>/libs/jqueryui/1.8.9/jquery-ui.min.js&quot;</span>&gt;&lt;/script&gt;    </pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>&lt;script language=<span class="str">&quot;javascript&quot;</span> type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;</pre>
+
+  <pre><span class="lnum">  10:  </span>&lt;%= Url.Content(&quot;</span>~/Scripts/watermark/jquery.watermark.min.js<span class="str">&quot;) %&gt;&quot;</span>&gt;&lt;/script&gt;</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>&lt;script language=<span class="str">&quot;javascript&quot;</span> type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;</pre>
+
+  <pre><span class="lnum">  12:  </span>&lt;%= Url.Content(&quot;</span>~/Scripts/highslide/highslide-with-gallery.min.js<span class="str">&quot;) %&gt;&quot;</span>&gt;&lt;/script&gt;</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>&lt;script language=<span class="str">&quot;javascript&quot;</span> type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;</pre>
+
+  <pre><span class="lnum">  14:  </span>&lt;%= Url.Content(&quot;</span>~/Scripts/site.js<span class="str">&quot;) %&gt;&quot;</span>&gt;<span class="kwrd">&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span><span class="kwrd">&lt;</span><span class="html">link</span> <span class="attr">rel</span><span class="kwrd">=&quot;stylesheet&quot;</span> <span class="attr">type</span><span class="kwrd">=&quot;text/css&quot;</span> <span class="attr">href</span><span class="kwrd">=&quot;</pre>
+
+  <pre><span class="lnum">  16:  </span>&lt;%= Url.Content(&quot;</span>~/<span class="attr">Scripts</span>/<span class="attr">highslide</span>/<span class="attr">highslide</span>.<span class="attr">css</span><span class="kwrd">&quot;) %&gt;&quot;</span> <span class="kwrd">/&gt;</span>    </pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span><span class="asp">&lt;%</span>= Model.blogConfig.WebStatsJavascript <span class="asp">%&gt;</span></pre>
+
+  <pre><span class="lnum">  18:  </span><span class="asp">&lt;%</span>= Model.blogConfig.HeaderScript <span class="asp">%&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />This is everything in the head but we’ll just cover the new stuff.&#160; Line 2 is a new Content Place Holder that we’ll use for meta data.&#160; This way we can inject things like the page description and keywords into the page based on the content (i.e. so the keywords for a certain blog entry are specific to it’s content).&#160; Lines 9 through 12 are for loading up the <a title="Highslide" href="http://highslide.com/">Highslide javascript library</a> and the <a title="jQuery Watermark" href="http://code.google.com/p/jquery-watermark/">jQuery Watermark library</a>.&#160; Lines 13 and 14 are just to load up our site.js which we’ll put all or most of our site’s javascript into (later on we should probably change this to use&#160; a minimized version).&#160; 15 and 16 are for the Highslide css file.&#160; Lastly 17 and 18 bind to stuff we have in the Blog Config.&#160; Specifically, whatever javascript we want to load for analytics or statistics (<a title="Google Analytics" href="http://google.com/analytics">Google Analytics</a>) and any javascript we want to store in the database (this way we can make quick and global script changes).
+
+  <br />
+
+  <br />We’ve already done quite a bit and we haven’t even gotten to anything that actually shows up in the UI!&#160; Let’s do one more config related thing and then actually start making our UI.&#160; The last thing I want to do before doing some visual stuff is add a way for us to load a custom CSS file.&#160; The idea is that eventually we’ll want to give users the ability to change between CSS files from the admin portal and alter the appearance of their site.&#160; So, let’s add this to our head:</p>
+
+<p class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">link</span> <span class="attr">href</span><span class="kwrd">=&quot;&lt;%= Url.Content(&quot;</span>~/<span class="attr">Content</span>/<span class="attr">Themes</span>/<span class="kwrd">&quot; + </pre>
+
+  <pre><span class="lnum">   2:  </span>Model.blogConfig.Skin + &quot;</span>.<span class="attr">css</span><span class="kwrd">&quot;) %&gt;&quot;</span> <span class="attr">rel</span><span class="kwrd">=&quot;Stylesheet&quot;</span> <span class="attr">type</span><span class="kwrd">=&quot;text/css&quot;</span> <span class="kwrd">/&gt;</span></pre>
+</p>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />Again we’re pulling from the BlogConfig.&#160; Now we want to have a default in case of the Skin not being set.&#160; However, instead of specifying that here in the UI, we’ll go to the BlogConfig class and change it from an Automatic Property to something with a little logic:
+
+  <br />
+
+  <div class="csharpcode">
+    <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">private</span> <span class="kwrd">string</span> _skin;</pre>
+
+    <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> <span class="kwrd">string</span> Skin</pre>
+
+    <pre class="alt"><span class="lnum">   3:  </span>{</pre>
+
+    <pre><span class="lnum">   4:  </span>    get { <span class="kwrd">return</span> (String.IsNullOrEmpty(_skin) ?  <span class="str">&quot;Default&quot;</span> :  _skin); }</pre>
+
+    <pre class="alt"><span class="lnum">   5:  </span>    set { _skin = <span class="kwrd">value</span>; }</pre>
+
+    <pre><span class="lnum">   6:  </span>}</pre>
+  </div>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>Now we’ll always get “Default” if something isn’t set.&#160; For our UI, we’re going to go with a <a title="2 Column Fixed Fixed Layout" href="http://www.dynamicdrive.com/style/layouts/item/css-fixed-layout-22-fixed-fixed/">2 column Fixed Fixed layout</a> with the content column on the left and the menu column on the right.&#160; The html for this is actually pretty simple:
+
+  <br /></p>
+
+<p class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;maincontainer&quot;</span><span class="kwrd">&gt;</span>        </pre>
+
+  <pre><span class="lnum">   2:  </span>   <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;topsection&quot;</span><span class="kwrd">&gt;</span>            </pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>      <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">=&quot;innertube&quot;</span><span class="kwrd">&gt;</span>            </pre>
+
+  <pre><span class="lnum">   4:  </span>      <span class="kwrd">&lt;</span><span class="html">p</span> <span class="attr">id</span><span class="kwrd">=&quot;logo&quot;</span><span class="kwrd">&gt;</span>                        </pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>      <span class="kwrd">&lt;/</span><span class="html">p</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span>      <span class="kwrd">&lt;</span><span class="html">h1</span> <span class="attr">class</span><span class="kwrd">=&quot;titleOnlyHeader&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>         <span class="asp">&lt;%</span>= Model.blogConfig.Title <span class="asp">%&gt;</span></pre>
+
+  <pre><span class="lnum">   8:  </span>      <span class="kwrd">&lt;/</span><span class="html">h1</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>      <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  10:  </span>   <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>   <span class="kwrd">&lt;!</span><span class="html">--</span>  <span class="attr">Legacy</span> <span class="attr">support</span> <span class="attr">for</span> <span class="attr">rounded</span> <span class="attr">corners</span> <span class="attr">--</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>   <span class="kwrd">&lt;</span><span class="html">b</span> <span class="attr">class</span><span class="kwrd">=&quot;rtop&quot;</span><span class="kwrd">&gt;&lt;</span><span class="html">b</span> <span class="attr">class</span><span class="kwrd">=&quot;r1&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>   <span class="kwrd">&lt;</span><span class="html">b</span> <span class="attr">class</span><span class="kwrd">=&quot;r2&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;&lt;</span><span class="html">b</span> <span class="attr">class</span><span class="kwrd">=&quot;r3&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;&lt;</span><span class="html">b</span></pre>
+
+  <pre><span class="lnum">  14:  </span>   <span class="attr">class</span><span class="kwrd">=&quot;r4&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;</span> </pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>   <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">name</span><span class="kwrd">=&quot;contentwrapper&quot;</span> <span class="attr">id</span><span class="kwrd">=&quot;contentwrapper&quot;</span><span class="kwrd">&gt;</span>                              </pre>
+
+  <pre><span class="lnum">  16:  </span>      <span class="kwrd">&lt;</span><span class="html">b</span> <span class="attr">style</span><span class="kwrd">=&quot;background:#000;height:2px;display:block;width:700px;margin-left:30px;&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>      <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;contentcolumn&quot;</span><span class="kwrd">&gt;</span>                                </pre>
+
+  <pre><span class="lnum">  18:  </span>         <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">=&quot;innertube&quot;</span><span class="kwrd">&gt;</span>                    </pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>            <span class="kwrd">&lt;</span><span class="html">asp:ContentPlaceHolder</span> <span class="attr">ID</span><span class="kwrd">=&quot;ContentPlaceHolder1&quot;</span> <span class="attr">runat</span><span class="kwrd">=&quot;server&quot;</span> <span class="kwrd">/&gt;</span>                                            </pre>
+
+  <pre><span class="lnum">  20:  </span>         <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>      <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  22:  </span>   <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>   <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;rightcolumn&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  24:  </span>      <span class="kwrd">&lt;</span><span class="html">b</span> <span class="attr">style</span><span class="kwrd">=&quot;background:#000;height:2px;display:block;width:170px;&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;</span> </pre>
+
+  <pre class="alt"><span class="lnum">  25:  </span>      <span class="kwrd">&lt;</span><span class="html">b</span> <span class="attr">class</span><span class="kwrd">=&quot;leftMenuBar&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  26:  </span>      <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">=&quot;innertube&quot;</span> <span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  27:  </span>      <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  28:  </span>   <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>           </pre>
+
+  <pre class="alt"><span class="lnum">  29:  </span>   <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;footer&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  30:  </span>      <span class="kwrd">&lt;</span><span class="html">p</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  31:  </span>         <span class="asp">&lt;%</span>= Model.blogConfig.CopyrightText<span class="asp">%&gt;</span></pre>
+
+  <pre><span class="lnum">  32:  </span>      <span class="kwrd">&lt;/</span><span class="html">p</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  33:  </span>   <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>                    </pre>
+
+  <pre><span class="lnum">  34:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>    </pre>
+</p>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />There are a couple things to point out here.&#160; At the top there is a P tag for a logo and then a h1 header tag with the class titleOnlyHeader in it.&#160; The idea is that in general we’ll put a logo and the title into the Logo tag and then hide the titleOnlyHeader tag.&#160; If we don’t have a logo though, we can just leave the titleOnlyHeader with the title as visible.&#160; Right above ContentWrapper there is a section that will handle rounding the corners at the top of our main content area.&#160; We might change this down the road to use jQuery but for now, we’ll stick with a css only solution.&#160; The rest of it is more straight forward.&#160; ContentColumn will contain all of our actual content.&#160; The MainContent place holder is where all of the blog entries and page content will end up.&#160; Then we have our RightColumn which will be our menu, links, etc.&#160; Of course all of this is dependent on the CSS that will actually make things look the way we want them to.&#160; Instead of going through all of our CSS (cause there is a fair amount) you can just look at it in the below attached code.&#160; </p>
+
+<p>That’s all we’re going to do for today.&#160; We only got to a little bit of the actual UI, but we did handle a lot of set up.&#160; Next time we’ll actually start putting some content into the site.&#160; As always, the <a title="Veritas Part 11" href="http://chrisrisner.com/upload/Veritas 3 - part 11.zip">latest code is available here</a>.
+
+  </p>

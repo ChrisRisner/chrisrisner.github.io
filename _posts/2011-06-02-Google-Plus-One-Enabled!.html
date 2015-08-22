@@ -1,0 +1,102 @@
+---
+layout: post
+title: "Google Plus One Enabled!"
+date: Wed Jun 01 2011 17:58:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Javascript, Web, Veritas, Google]
+excerpt: "Google,Google Plus One,Google Plus,Google Like"
+logoUrl: null
+keywords: Google,Google Plus One,Google Plus,Google Like
+filepath: 2011-06-02-Google-Plus-One-Enabled!.html
+disqus_identifier: Google-Plus-One-Enabled!
+---
+<p>While going through some of the recent news, I noticed that <a title="Google Plus One" href="http://googleblog.blogspot.com/2011/06/1-button-for-websites-recommend-content.html">Google had officially released their Plus One capabilities</a>.&#160; Plus One seems to be getting a lot of press as being “competition” with Facebook.&#160; As far as I can tell, the idea is that since I can hit the Plus One button on a site or a search result and then my friends will see it as more relevant in search results, that competes with sharing a link in Facebook.&#160; I don’t share links on Facebook that often though so maybe I just don’t see it yet.&#160; At any rate, I felt that I should immediately&#160; comply with Google’s implied wishes and add Plus One to my site and the Veritas source code (now on GIT, more about that later).&#160; Now, whenever you view an entry on the site, you can see the Plus One button near the bottom of the entry.&#160; Feel free to click it as much as possible so that other people will know as well!&#160;&#160; As far as implementation goes, it is VERY SIMPLE.&#160; You can view instructions on implementing it at the <a title="Google Webmaster Plus One" href="http://www.google.com/webmasters/+1/button/index.html">Google Webmaster site</a>.&#160; You need to put two tags in your html.&#160; In the head, or just before the body close, you need to put the javascript include:</p>  <pre class="csharpcode">&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;http://apis.google.com/js/plusone.js&quot;</span>&gt;&lt;/script&gt;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>From there, all you have to do is insert the following where you want the “Plus One” button to appear:</p>
+
+<pre class="csharpcode"><span class="kwrd">&lt;</span><span class="html">g:plusone</span><span class="kwrd">&gt;&lt;/</span><span class="html">g:plusone</span><span class="kwrd">&gt;</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>There are a few <a title="Plus One Parameters" href="http://code.google.com/apis/+1button/#plusonetag-parameters">parameters you can read about for use with the plusone tag</a>.&#160; Since I wanted to show the Plus One on pages where I’m showing multiple entries, I need to specify what URL I’m referring to for each instance of the Plus One.&#160; This is done easily enough by adding a HREF attribute to the plus one tag.&#160; So now the tag from above becomes something like this:</p>
+
+<pre class="csharpcode">&lt;g:plusone href=<span class="str">&quot;http://chrisrisner.com/myUniqueUrl&quot;</span>&gt;&lt;/g:plusone&gt;</pre>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>That’s about all there is to it.&#160; Plus One Away!</p>

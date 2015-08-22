@@ -1,0 +1,16 @@
+---
+layout: post
+title: "Windows 7 IIS 7.5 Site Failure"
+date: Tue Jan 12 2010 16:09:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [IIS, .Net]
+excerpt: ""
+logoUrl: null
+keywords: windows 7,IIS 7.5,failure,mvc
+filepath: 2010-01-13-Windows-7-IIS-7-5-Site-Failure.html
+disqus_identifier: Windows-7-IIS-7-5-Site-Failure
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/upload/633989229224531250.jpg"><img style="border-right-width: 0px; margin: 0px 0px 5px 10px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="IIS7" border="0" alt="IIS7" align="right" src="http://chrisrisner.com/upload/633989229224531250.jpg" width="244" height="149" /></a> Tonight I went to setup a new site on my local computer in IIS.&#160; The web site was a pretty simple Asp .Net MVC app so I didn’t anticipate running into any issues since I already had the MVC framework installed along with .net 3.5.&#160; So, the site was set up as an Application under my Default Web Site.&#160; I went to go it in the browser and bam, error:     <br /></p> <fieldset><legend>Error Summary</legend>    <h2>HTTP Error 500.19 - Internal Server Error</h2>    <h3>The requested page cannot be accessed because the related configuration data for the page is invalid.</h3> </fieldset>   <p></p>  <p>Config Error:&#160; This configuration section cannot be used at this path. This happens when the section is locked at a parent level. Locking is either by default (overrideModeDefault=&quot;Deny&quot;), or set explicitly by a location tag with overrideMode=&quot;Deny&quot; or the legacy allowOverride=&quot;false&quot;.</p>  <p>And then to top it off:    <br /></p> <fieldset><legend>Config Source</legend><code>136: &lt;/modules&gt; <span class="highlight-code">137: &lt;handlers&gt;</span> 138: &lt;remove name=&quot;WebServiceHandlerFactory-Integrated&quot;/&gt; </code></fieldset>  <p>I figured this was some sort of a config issue so after googling it, I found no end of <a href="http://forums.asp.net/t/1220987.aspx">sites</a> <a href="http://blog.donnfelker.com/post/IIS-7-This-configuration-section-cannot-be-used-at-this-path.aspx">talking</a> about going into the ApplicationHost.config file (requiring admin access) and changing a value from Deny to Allow for the “handlers” section.&#160; Unfortunately, I did this and the error was the same.&#160; I frantically restarted the default web site, recycled app pools, restarted IIS, and got nothing.&#160; Out of ideas, I decided to look through the ApplicationHost.config file a bit more.&#160; That’s when I saw this line:    <br /></p>  <p>&lt;location path=&quot;Default Web Site&quot; overrideMode=&quot;Deny&quot;&gt;   <br />&#160;&#160;&#160; &lt;system.webServer&gt;    <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;handlers /&gt;    <br />    <br />I changed the “Deny” here to “Allow” and refreshed my web site and everything was good to go.</p>

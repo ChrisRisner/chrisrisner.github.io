@@ -1,0 +1,757 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 2: The PHP Code"
+date: Thu Jul 05 2012 09:51:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Azure, PHP, IIS, Mobile, Programming, Web]
+excerpt: "This article will dive into the PHP code used for a URL Shortener running on Windows Azure.  The URL Shortener is based off of @khepin's work and uses the Silex PHP micro-framework and MySQL."
+logoUrl: null
+keywords: Windows Azure,Azure,Windows Azure Websites,iOS,Android,mobile,windows azure mobile,PHP,PHP on Windows Azure
+filepath: 2012-07-05-Windows-Azure-Websites-and-Mobile-Clients-Part-2--The-PHP-Code.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-2--The-PHP-Code
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/windowsazurevertical.jpg" width="356" height="153" />Today we’ll continue off where we left with our <a title="PHP URL Shortener running on Windows Azure Websites" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-1--The-URL-Shortener">PHP website running on Windows Azure Websites</a>.&#160; At this point we’ve got a PHP website deployed which will allow us to specify shortened URLs (slugs) and their full URL.&#160; The only real visual interface is that we can list out those shortened URLs.&#160; Our real goal in all of this is to connect to the website (and the web service methods) via an Android and iOS app. However, before we get knee deep in native code, let’s go over the PHP code we deployed.</p>  <p>One thing to note is that for this site, I used the <a title="Silex Framework" href="http://silex.sensiolabs.org/">Silex PHP micro-framework</a>.&#160; It’s not really important that you understand how Silex works to follow along or even to extend what the site already does.&#160; I’ll try to point out where things are “Silex specific” just in case.&#160; Again, I want to thank <a title="Khepin on Twitter" href="https://twitter.com/#!/khepin">@Khepin</a> for his <a title="Silex URL Shortener" href="http://sf.khepin.com/2011/04/a-first-silex-project/">URL Shortener built using Silex</a> as this site is built off of that.&#160; </p>  <p>If you haven’t already done so, pull the <a title="URL Shortener Source Code" href="http://chrisrisner.com/upload/UrlShortenerPHPSite.zip">code for the site down from here</a>.&#160; Let’s start by looking at the index.php file found in the root directory:</p>  <pre class="csharpcode">    <span class="kwrd">&lt;?</span><span class="html">php</span>
+    $<span class="attr">app</span> = <span class="attr">require</span> <span class="attr">__DIR__</span>.<span class="kwrd">'/src/app.php'</span>;
+    $<span class="attr">app</span>[<span class="kwrd">'debug'</span>] = <span class="attr">true</span>;
+    $<span class="attr">app-</span><span class="kwrd">&gt;</span>run();</pre>
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>This is including the app.php file which returns a Silex/Application and then runs it.&#160; The other two files in the root directory are a .htaccess file and a web.config.&#160; These files accomplish the same thing, but .htaccess is for use with Apache and the web.config is for IIS.&#160; Since you have both files, you can run this site locally on Apache (if you’re developing on OS X or Linux) and then move it up to Windows Azure and use the web.config.&#160; The .htaccess is as follows:</p>
+
+<pre class="csharpcode">   &lt;IfModule mod_rewrite.c&gt;
+    Options -MultiViews
+
+       RewriteEngine On
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^(.*)$ index.php [QSA,L]
+   &lt;/IfModule&gt;</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />And the web.config is:</p>
+
+<pre class="csharpcode">   &lt;?xml version=<span class="str">&quot;1.0&quot;</span>?&gt;
+   &lt;configuration&gt;
+      &lt;system.webServer&gt;
+         &lt;rewrite&gt;
+            &lt;rules&gt;
+               &lt;rule name=<span class="str">&quot;Main Rule&quot;</span> stopProcessing=<span class="str">&quot;true&quot;</span>&gt;
+                  &lt;match url=<span class="str">&quot;.*&quot;</span> /&gt;
+                  &lt;conditions logicalGrouping=<span class="str">&quot;MatchAll&quot;</span>&gt;
+                    &lt;add input=<span class="str">&quot;{REQUEST_FILENAME}&quot;</span> matchType=<span class="str">&quot;IsFile&quot;</span> negate=<span class="str">&quot;true&quot;</span> /&gt;
+                    &lt;add input=<span class="str">&quot;{REQUEST_FILENAME}&quot;</span> matchType=<span class="str">&quot;IsDirectory&quot;</span> negate=<span class="str">&quot;true&quot;</span> /&gt;
+                  &lt;/conditions&gt;
+                  &lt;action type=<span class="str">&quot;Rewrite&quot;</span> url=<span class="str">&quot;index.php&quot;</span> /&gt;
+               &lt;/rule&gt;
+            &lt;/rules&gt;
+         &lt;/rewrite&gt;
+      &lt;/system.webServer&gt;
+   &lt;/configuration&gt;</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Both files are redirecting all requests to the index.php file.&#160; So all requests will end up being routed through app.php.&#160;&#160; Now, open up the <strong>src</strong> folder and open up <strong>app.php</strong>.&#160; There’s quite a bit going on here so we’ll break it up.&#160; Let’s start at the top:</p>
+
+<pre class="csharpcode">    <span class="kwrd">&lt;?</span><span class="html">php</span>
+    <span class="attr">use</span> <span class="attr">Symfony</span>\<span class="attr">Component</span>\<span class="attr">HttpFoundation</span>\<span class="attr">Request</span>;
+    <span class="attr">use</span> <span class="attr">Symfony</span>\<span class="attr">Component</span>\<span class="attr">HttpFoundation</span>\<span class="attr">ParameterBag</span>;
+
+    /**  <span class="attr">Bootstraping</span> */
+    <span class="attr">require_once</span> <span class="attr">__DIR__</span>.<span class="kwrd">'/../vendor/Silex/silex.phar'</span>;
+
+    $<span class="attr">app</span> = <span class="attr">new</span> <span class="attr">Silex</span>\<span class="attr">Application</span>();
+    $<span class="attr">app</span>[<span class="kwrd">'autoloader'</span>]<span class="attr">-</span><span class="kwrd">&gt;</span>registerNamespaces(array('Khepin' =<span class="kwrd">&gt;</span> __DIR__,));
+    $app-<span class="kwrd">&gt;</span>register(new Khepin\ShortenerExtension(), array('url_file_name'  =<span class="kwrd">&gt;</span>  __DIR__.'/../resources/urls.ini'));
+    $app-<span class="kwrd">&gt;</span>register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' =<span class="kwrd">&gt;</span> __DIR__.'/templates',
+    'twig.class_path' =<span class="kwrd">&gt;</span> __DIR__.'/../vendor/twig/lib'
+    //Uncomment these lines to turn caching on (just make sure the directory is writeable)
+    //,
+    //'twig.options' =<span class="kwrd">&gt;</span> array('cache' =<span class="kwrd">&gt;</span> __DIR__.'/../cache'),
+    ));
+
+    $app['key'] = 'my_key';</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The first two lines here are pulling in some components (Request and ParameterBag from Symfony (which is what Silex is based on)).&#160; The “require_once” line is pulling in the main silex library (silex.phar).&#160; Then we’re creating our Silex\Application and doing some registering and loading of classes.&#160; Twig is used here for templating the web page side of things (so you can have a decent web experience and not just native mobile).&#160; The last line just creates a key variable that we can check against when someone tries to add a new shortened URL.&#160; Next up:</p>
+
+<pre class="csharpcode">    <span class="rem">/** Decodes JSON Requests */</span>
+    $app-&gt;before(<span class="kwrd">function</span> (Request $request) {
+        <span class="kwrd">if</span> (0 === strpos($request-&gt;headers-&gt;get(<span class="str">'Content-Type'</span>), <span class="str">'application/json'</span>)) {
+            $data = json_decode($request-&gt;getContent(), <span class="kwrd">true</span>);
+            $request-&gt;request = <span class="kwrd">new</span> ParameterBag(is_array($data) ? $data : array());
+        }
+    });</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This “app-&gt;before” means that this code will be called on any requests coming into the system.&#160; Inside of this, we’re checking to see if the content type is “application/json” and if it is, we’re decoding the json.&#160; Now we can look at the real application code.&#160; There are some methods present in the app.php file that we won’t go over because they aren’t relevant to what we’re talking about.&#160; Though, everything is commented so you should be able to easily figure out what the other methods do.&#160; </p>
+
+<pre class="csharpcode">    <span class="rem">/** Shows the home page */</span>
+    $app-&gt;get(<span class="str">'/'</span>, <span class="kwrd">function</span>() use ($app){
+        <span class="kwrd">return</span> $app[<span class="str">'twig'</span>]-&gt;render(<span class="str">'index.html.twig'</span>);
+    }); </pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This says that if a blank request comes in (so if you go to “<a title="http://urlshortener.azurewebsites.net/" href="http://urlshortener.azurewebsites.net/">http://urlshortener.azurewebsites.net/</a>”) then use twig to render the index.html twig template (located in <strong>src/templates</strong>).&#160; </p>
+
+<pre class="csharpcode">    <span class="rem">/** Echos out the full URL for a SLUG */</span>
+    $app-&gt;get(<span class="str">'/{url_slug}'</span>,<span class="kwrd">function</span>($url_slug) use($app){
+        <span class="rem">//NOTE:  switch the commenting on these lines and instead of printing </span>
+        <span class="rem">//out the URL, users will get redirected</span>
+        echo $app[<span class="str">'shortener'</span>]-&gt;get($url_slug);
+        <span class="rem">//return $app-&gt;redirect($app['url_service']-&gt;get($url_slug));</span>
+    });</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is what (would) handles redirecting a user from the shortened URL to the full URL.&#160; As you can see in the code, instead of actually redirecting them, we’re just echoing out what the full URL that corresponds to the slug sent in is.&#160; To actually do a redirection, you would just need to uncomment the app-&gt;redirect line.</p>
+
+<pre class="csharpcode">    <span class="rem">/** Shows a view of all the URLs and their Slugs */</span>
+    $app-&gt;get(<span class="str">'/view/list'</span>, <span class="kwrd">function</span>() use($app){
+        <span class="kwrd">return</span> $app[<span class="str">'twig'</span>]-&gt;render(<span class="str">'list.html.twig'</span>, array(<span class="str">'list'</span>  =&gt;  $app[<span class="str">'shortener'</span>]-&gt;getAll()));
+    });</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re using twig again and rendering the list.html template and we’re passing in the data retrieved from shortener-&gt;getAll() to the rendering engine.&#160; So, if you go to <a title="http://urlshortener.azurewebsites.net/view/list" href="http://urlshortener.azurewebsites.net/view/list">http://urlshortener.azurewebsites.net/view/list</a> you’ll see a list of all of the URL slugs next to their full URLs.</p>
+
+<pre class="csharpcode">    <span class="rem">/** Adds a URL via query string parameters alone */</span>
+    $app-&gt;get(<span class="str">'/add/{key}/{url_slug}'</span>, <span class="kwrd">function</span>($url_slug, $key) use ($app){
+        <span class="rem">//Check that the key sent over is valid</span>
+        <span class="kwrd">if</span>($app[<span class="str">'key'</span>] != $key){
+            <span class="kwrd">throw</span> <span class="kwrd">new</span> Exception(<span class="str">'Invalid key'</span>);
+        }
+        $app[<span class="str">'shortener'</span>]-&gt;add($url_slug, $app[<span class="str">'request'</span>]-&gt;get(<span class="str">'url'</span>));
+        <span class="kwrd">return</span> $app[<span class="str">'twig'</span>]-&gt;render(<span class="str">'add.html.twig'</span>, array(
+            <span class="str">'url_slug'</span>  =&gt;  $url_slug,
+            <span class="str">'url'</span>  =&gt;  $app[<span class="str">'request'</span>]-&gt;get(<span class="str">'url'</span>)));
+    });</pre>
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>This is the method that will handle adding a new URL (from a query string, not what we’ll use for our mobile clients).&#160; It expects the key that we defined up above to be sent in, along with the URL slug and the full URL.&#160; If the key doesn’t match, we throw an exception.&#160; We then call shortener-&gt;add(…) to add the shortened URL and finally we use twig to render the add.html template with the information for the URL passed into the renderer.&#160; Now, as I said above, this isn’t the method we’ll use for the mobile clients.&#160; For those, we have API specific methods that take in, and return, json data.&#160; Let’s have a look at these:</p>
+
+<pre class="csharpcode">    <span class="rem">/** API Method to fetch all URLs */</span>
+    $app-&gt;match(<span class="str">'/api-getall'</span>, <span class="kwrd">function</span> () use ($app){
+        $response = array();<span class="rem">   </span>
+        $response[<span class="str">'Urls'</span>] = $app[<span class="str">'shortener'</span>]-&gt;getAll();    
+        $response[<span class="str">'Status'</span>] = <span class="str">&quot;SUCCESS&quot;</span>;
+        <span class="kwrd">return</span> $app-&gt;json($response, 200);
+    });</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is similar to the getAll method above except now we’re putting the URL data into an array and serializing it to json.</p>
+
+<pre class="csharpcode">    <span class="rem">/**  Gets the details for a single URL */</span>
+    $app-&gt;match(<span class="str">'/api-get'</span>, <span class="kwrd">function</span> (Request $request) use ($app){
+        $url_slug = $request-&gt;get(<span class="str">'url_slug'</span>);
+
+        <span class="kwrd">if</span> ($app[<span class="str">'shortener'</span>]-&gt;exists($url_slug)) {
+            $response = array(<span class="str">'Status'</span> =&gt; <span class="str">&quot;SUCCESS&quot;</span>, <span class="str">'Url_Slug'</span> =&gt; $url_slug, 
+            <span class="str">'Url'</span> =&gt; $app[<span class="str">'shortener'</span>]-&gt;get($url_slug));
+        } <span class="kwrd">else</span> {
+            $response = array(<span class="str">'Status'</span> =&gt; <span class="str">&quot;Does not exist&quot;</span>);
+        }
+        <span class="kwrd">return</span> $app-&gt;json($response, 201);
+    });</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, we’re checking to see if we have a shortened URL for the slug that is sent in.&#160; If we do, we add the data on that slug to the response array, if not, we set the Status to “Does not exist”.&#160; Again, we then serialize that to json and return it.</p>
+
+<pre class="csharpcode">    <span class="rem">/** API method to add a new URL */</span>
+    $app-&gt;match(<span class="str">'/api-add'</span>, <span class="kwrd">function</span> (Request $request) use ($app){
+        $key = $request-&gt;get(<span class="str">'key'</span>);
+        $url = $request-&gt;get(<span class="str">'url'</span>);
+        $url_slug = $request-&gt;get(<span class="str">'url_slug'</span>);
+        <span class="kwrd">if</span>($app[<span class="str">'key'</span>] != $key){
+            <span class="kwrd">throw</span> <span class="kwrd">new</span> Exception(<span class="str">'Invalid key'</span>);
+        }
+
+        <span class="kwrd">if</span> ($app[<span class="str">'shortener'</span>]-&gt;exists($url_slug)) {
+            $response = array(<span class="str">'Status'</span> =&gt; <span class="str">&quot;Already Exists&quot;</span>);
+        }
+        <span class="kwrd">else</span> {
+            <span class="kwrd">try</span> {
+                $app[<span class="str">'shortener'</span>]-&gt;add($url_slug, $url);
+                $response = array(<span class="str">'Status'</span> =&gt; <span class="str">&quot;SUCCESS&quot;</span>);
+            } <span class="kwrd">catch</span> (Exception $e) {
+                $response = array(<span class="str">'Status'</span> =&gt; <span class="str">&quot;FAILURE&quot;</span>);        
+            }
+        }    
+        <span class="kwrd">return</span> $app-&gt;json($response, 201);
+    });</pre>
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>And finally, here is the api method to add a new URL.&#160; In this case, we’re pulling the data out of the request, checking to see if the URL slug already exists, and then adding it (provided we can).&#160; The response is serialized to json and that’s&#160; it.&#160; The last bit of code from <strong>app.php</strong> that I’ll highlight is the very last line:</p>
+
+<pre class="csharpcode">     <span class="kwrd">return</span> $app;</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you recall from <strong>index.php</strong>, we were pulling in <strong>app.php </strong>and then calling run on that.&#160; This is why it’s necessary to return the <strong>$app</strong> here.&#160; Quickly, let’s look at the <strong>src/Khepin/ShortenerExtension.php </strong>class:</p>
+
+<pre class="csharpcode">    <span class="kwrd">class</span> ShortenerExtension implements ServiceProviderInterface {
+
+        <span class="kwrd">public</span> <span class="kwrd">function</span> register(Application $app){
+            $app[<span class="str">'shortener'</span>] = $app-&gt;share(<span class="kwrd">function</span>() use($app){
+                <span class="kwrd">return</span> <span class="kwrd">new</span> UrlShortener($app[<span class="str">'url_file_name'</span>]);
+            });
+        }
+    }</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is what enables us to use $app[‘shortener’] inside of <strong>app.php</strong>.&#160; Since we register <strong>ShortenerExtension</strong> at the top of <strong>app.php</strong> we are free to call $app[‘shortener’] whenever we want to call a method on <strong>UrlShortener</strong>.&#160; Speaking of which, let’s look at that class next.&#160; Near the top you’ll see the connection string variables, which if you’ve pushed this to your own server, you’ve changed:</p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> $db_server = <span class="str">'localhost'</span>;
+    <span class="kwrd">private</span> $db_user   = <span class="str">'phptestuser'</span>;
+    <span class="kwrd">private</span> $db_password = <span class="str">'phptestuser'</span>;
+    <span class="kwrd">private</span> $db_name     = <span class="str">'shorty'</span>;</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Beneath that is a regex we use to make sure URL’s are valid.&#160; Then we have our constructor which loads all of the data from the database:</p>
+
+<pre class="csharpcode">  <span class="rem">/** Loads the URLs from the DB */</span>
+      <span class="kwrd">public</span> <span class="kwrd">function</span> __construct($url_file_name) {
+          $<span class="kwrd">this</span>-&gt;url_file = $url_file_name;
+          $db_url_list = array();
+          $con = mysql_connect($<span class="kwrd">this</span>-&gt;db_server,$<span class="kwrd">this</span>-&gt;db_user,$<span class="kwrd">this</span>-&gt;db_password);
+          <span class="kwrd">if</span> (!$con)
+            {
+            die(<span class="str">'Could not connect: '</span> . mysql_error());
+            }
+          mysql_select_db($<span class="kwrd">this</span>-&gt;db_name, $con);
+          $result = mysql_query(<span class="str">&quot;SELECT Name, Url FROM Url&quot;</span>);
+          <span class="kwrd">while</span>($row = mysql_fetch_array($result))
+            {
+              $<span class="kwrd">this</span>-&gt;url_list[$row[<span class="str">'Name'</span>]] = $row[<span class="str">'Url'</span>];
+            }
+          mysql_close($con);
+          <span class="kwrd">return</span> $<span class="kwrd">this</span>-&gt;url_list;
+      }</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>There isn’t anything complex here.&#160; We’re connecting to the database, doing a <strong>SELECT</strong> query and then filling an array (<strong>url_list</strong>).&#160; </p>
+
+<pre class="csharpcode">    <span class="rem">/** Gets a sepcfici URL slug */</span>
+    <span class="kwrd">public</span> <span class="kwrd">function</span> get($url_slug) {
+        <span class="kwrd">return</span> $<span class="kwrd">this</span>-&gt;url_list[$url_slug];
+    }
+
+    <span class="rem">/** Checks to see if a specific slug exists */</span>
+    <span class="kwrd">public</span> <span class="kwrd">function</span> exists($url_slug) {
+        <span class="kwrd">return</span> isset($<span class="kwrd">this</span>-&gt;url_list[$url_slug]);
+    }</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>These two methods nearly accomplish the same thing.&#160; One of them will return the URL info for a slug.&#160; The other one will return a boolean for if a slug exists.</p>
+
+<pre class="csharpcode">    <span class="rem">/** Returns all URLs */</span>
+    <span class="kwrd">public</span> <span class="kwrd">function</span> getAll(){
+        <span class="kwrd">return</span> $<span class="kwrd">this</span>-&gt;url_list;
+    }</pre>
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Another exceedingly straightforward method.&#160; This just returns the whole URL array.</p>
+
+<pre class="csharpcode">    <span class="rem">/** Adds a new SLUG to the DB (and file) */</span>
+    <span class="kwrd">public</span> function add($url_slug, $url) {
+        <span class="kwrd">if</span> (!\preg_match(self::url_regex, $url)) {
+            <span class="kwrd">throw</span> <span class="kwrd">new</span> \Exception(<span class="str">'Invalid url'</span>);
+        }
+        <span class="kwrd">if</span> (isset($<span class="kwrd">this</span>-&gt;url_list[$url_slug])) {
+            <span class="kwrd">throw</span> <span class="kwrd">new</span> \Exception(<span class="str">'Url short name already exists'</span>);
+        }
+        $<span class="kwrd">this</span>-&gt;url_list[$url_slug] = $url;
+        <span class="rem">//comment this out to remove file writing</span>
+        $<span class="kwrd">this</span>-&gt;dump();
+        <span class="rem">//Add to DB</span>
+        $con = mysql_connect($<span class="kwrd">this</span>-&gt;db_server,$<span class="kwrd">this</span>-&gt;db_user,$<span class="kwrd">this</span>-&gt;db_password);
+        <span class="kwrd">if</span> (!$con)
+        {
+          die(<span class="str">'Could not connect: '</span> . mysql_error());
+        }
+        mysql_select_db($<span class="kwrd">this</span>-&gt;db_name, $con);
+        $sqlInsert = <span class="str">&quot;INSERT into URL (Name, Url) values ('$url_slug', '$url')&quot;</span>;        
+        <span class="kwrd">if</span> (!mysql_query($sqlInsert,$con))
+          {
+          die(<span class="str">'Error: '</span> . mysql_error());
+          }
+        mysql_close($con);
+    }</pre>
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>This method is a little bit more busy.&#160; First, we use the regex to make sure the URL is valid.&#160; Then we check to make sure the URL slug hasn’t already been used.&#160; Then we add the slug.&#160; We dump the URL array to a local file (optional) and finally, we insert to the database.&#160; </p>
+
+<p>That’s all the code this website and service will use.&#160; There are a few more files like the templates in <strong>src/templates </strong>but I won’t go through those right now.&#160; You can dig into those on your own and let me know if you have questions.&#160; Next up, we’ll actually start making our mobile clients to connect to these services.</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

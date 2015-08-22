@@ -1,0 +1,208 @@
+---
+layout: post
+title: "Veritas – Designing the UI – Part 10"
+date: Wed Feb 02 2011 11:40:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, IIS, MVC, Programming, Veritas, Visual Studio, Web]
+excerpt: "Veritas,Blog,Weblog,User Interface,Initial User Interface,Controller,screen,view,viewmodel"
+logoUrl: null
+keywords: Veritas,Blog,Weblog,User Interface,Initial User Interface,Controller,screen,view,viewmodel
+filepath: 2011-02-02-Veritas-–-Designing-the-UI-–-Part-10.html
+disqus_identifier: Veritas-–-Designing-the-UI-–-Part-10
+---
+<p>Now that we’ve shown how to <a title="Incorporating MetaWeblogAPI" href="http://chrisrisner.com/Veritas-%E2%80%93-Incorporating-MetaWeblog-API-%E2%80%93-Part-9">incorporate MetaWeblog API</a>, we’re able to get data into our blog.&#160; This means that once we actually have a UI around our site, we can actually show off our blog.&#160; So today’s entry is going to create our basic UI.&#160; Important to note is that we’re not going to do anything REALLY fancy.&#160; Meaning that we’re not going to create any awesome templating engine or make it super easy to change the UI through any sort of administration engine.&#160; Hopefully we’ll do this down the road (so you wouldn’t have to mess with CSS if you wanted to change how the site looks or where different elements appear) but that’s beyond the scope of this entry.</p>  <p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/BlogMasterAndViewFolders.jpg" /></p>  <p>&#160;</p>  <p>The first thing we’re going to do is lay a few ground work pieces.&#160; Specifically, we need to add some folders beneath our Web projects Views folder.&#160; Then we’re going to create our master pages.&#160; Specifically we’re going to need a folder for the Admin section, the Blog section, and our home section.&#160; Then we’ll need both Admin and Site master pages.&#160; As you can see from the screenshot, we also have a Forum folder and Forum master page.&#160; We’re not going to do anything with these for a while yet but eventually we’ll add a forum to the engine.</p>  <p>&#160;</p>  <p>We aren’t going to do anything to the master pages yet, except add some links to the javascript files we’ll use.&#160; For now, we’re just going to add references to JQuery and JQueryUI.&#160; Now, we could easily grab the latest version of these scripts and plop them into our scripts folder.&#160; However, wouldn’t it be nice if we could just let someone else host these files?&#160; Someone that was capable of hosting tons of data and serving it up quickly and efficiently?&#160; Thankfully, <a title="Google Javascript APIs" href="http://code.google.com/apis/loader/">Google is going to help us out here</a>.&#160; After requesting an API key, you can load up several different javascript files without having to worry about it yourself.&#160; Here is what we’ve put in the head section of our master pages:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">'https://www.google.com/jsapi?key=&lt;%: <br />                  (ViewData[&quot;BlogConfig&quot;] as BlogConfig).GoogleApiKey %&gt;'</span>&gt;&lt;/script&gt;</pre>
+
+  <pre><span class="lnum">   2:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;https://ajax.googleapis.com/ajax/libs/<br />                  jquery/1.4.4/jquery.min.js&quot;</span>&gt;&lt;/script&gt;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">&quot;https://ajax.googleapis.com/ajax/libs/<br />                  jqueryui/1.8.9/jquery-ui.min.js&quot;</span>&gt;&lt;/script&gt;</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, we’re loading the primary google javascript API file with an API key we get from the blog config.&#160; Then we’re just loading up the JQuery and JQueryUI libraries.</p>
+
+<p><img style="margin: 0px 3px 5px 0px; display: inline; float: left" title="Blog Home Screens" alt="Blog Home Screens" align="left" src="http://chrisrisner.com/upload/BlogHomeScreens.jpg" />We’re going to tie all of our Views directly to screen objects (or View Models if you prefer).&#160; We could create our view files, and then our screen objects, but then we’d have to manually change the inherit Page Directive in each page.&#160; We aren’t going to create every single screen object we’ll need right now, but we’ll create the majority of what we’ll need for the public portion of the site.&#160; Just like we did for the Views, we’ll create subfolders in our BusinessLayer’s screens folder for Admin, Blog, and Home.&#160; First and foremost, we’ll create the Screen objects for our Home views.&#160; We’re going to need an About page, a Contact Us page, and a Home page.&#160; We’re also going to have a page to make it easier to upload files, a generic page for displaying messages, and a page to display generic data we store in the database (think of it like the ability to create add an html page to our website where the content is stored in the database.&#160; So if someone went to ViewContent/Page1, they’d get whatever html we stored in the database for Page1).&#160; For now we’re just going to create Screen objects for all of those and make them inherit from our screen base.&#160; All of these screen objects will descend from the <a title="Screenbase Abstract Class" href="http://chrisrisner.com/Veritas-%E2%80%93-Base-Objects-%E2%80%93-Part-5">ScreenBase abstract class we added earlier</a>.&#160; For now, we’ll add the methods and properties we’re required to implement from ScreenBase (IsValid and LoadScreen).&#160; We won’t implement these until we’re actually ready to.&#160; We’ve got a lot of other screen objects to create but for now, we’ll jump over to views.</p>
+
+<p><img style="margin: 0px 0px 5px 4px; display: inline; float: right" title="New View" alt="New View" align="right" src="http://chrisrisner.com/upload/Blog-NewView.jpg" width="323" height="319" />To start, we’ll just create our Home views.&#160; So beneath the Home folder, let’s add the Index view.&#160; When you go to add a new View, you’ll be able to name it (in this case just “Index”) and then we can decide if we want to strongly type the View.&#160; There’s nothing requiring you to strongly type your view to an object.&#160; However, we’re gong to do this directly to our screen objects.&#160; As we’ll see when we get to actually putting stuff on our Views, being strongly typed will make things much easier.&#160; After checking the “strongly-typed view” checkbox, we’ll be able to select our Home.IndexScreen.&#160; After picking our data class, we can select what type of View Content the page will be (Create, Delete, Details, Edit, Empty, List).&#160; If we were binding to an actual Model we might choose something other than Empty, which is what we’ll choose now.&#160; Since we haven’t put anything interesting into any of our Screen objects, choosing something else wouldn’t really help us much.&#160; What get’s created is a very basic view.&#160; All it has is the Page directive line and a little html.&#160; One thing we’re going to have to immediately change is the Inherit’s line in the Page directives.&#160; Right now it’s descending from a System.Web.Mvc.ViewPage.&#160; </p>
+
+<pre class="csharpcode">Inherits=&quot;System.Web.Mvc.ViewPage<span class="kwrd">&lt;</span><span class="html">Veritas.BusinessLayer.Screens.Home.IndexScreen</span><span class="kwrd">&gt;</span>&quot;</pre>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is fine for normal sites.&#160; However, we created a VeritasViewPage we want all of our pages to descend to.&#160; So this will now become: 
+  <br /></p>
+
+<pre class="csharpcode">Inherits=&quot;Veritas.UI.Web.Views.VeritasViewPage<span class="kwrd">&lt;</span><span class="html">Veritas.BusinessLayer.Screens.Home.IndexScreen</span><span class="kwrd">&gt;</span>&quot;</pre>
+
+<p>dfdsJust like in the Master pages, this will just give us access to our VeritasForm class in our View.&#160; </p>
+
+<p>Next we’ll create a HomeController class in our Controllers folder.&#160; This will inherit from a ControllerBase class.&#160; The ControllerBase in turn, will inherit from the MVC controller class and will give all of our controllers access to things like our data repository, our BlogConfig, MenuItems, Authentication and Login data in addition to handling unknown actions.&#160; To our HomeController we’ll just add some base ActionResult methods to load our views:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> ActionResult About(){</pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">return</span> View();</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>}</pre>
+
+  <pre><span class="lnum">   4:  </span>        </pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">public</span> ActionResult Contact()</pre>
+
+  <pre><span class="lnum">   6:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    <span class="kwrd">return</span> View();</pre>
+
+  <pre><span class="lnum">   8:  </span>}</pre>
+</div>
+
+<p>Now we’re able to load our views. Well, we’re kind of ready.&#160; If you were to run exactly what we’ve got right now, you’d run into a few issues.&#160; Some of them make sense and others seems like they shouldn’t be issues.&#160; First and foremost, in order for our Master pages to understand what the BlogConfig class is without using the full namespace (how we’re using in the first javascript reference above), we need to import the namespace into the view.&#160; This can be thought of as being similar to a using statement in the cs file.&#160; We need to reference the Models namespace like so: 
+  <br /></p>
+
+<pre class="csharpcode"><span class="asp">&lt;%@ Import Namespace=&quot;Veritas.DataLayer.Models&quot; %&gt;</span></pre>
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Now instead of saying Veritas.DataLayer.Models.BlogConfig, we can just use BlogConfig.&#160; Next we’re going to run into a problem with referencing an “Entity” in the Web project.&#160; The exception you’ll get will be this:</p>
+
+<blockquote>
+  <p>error CS0012: The type 'System.Data.Objects.DataClasses.EntityObject' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.</p>
+</blockquote>
+
+<p>So, we’ll add the reference for System.Data.Entity to our web project.&#160; However, we’ll still get this error after adding the reference.&#160; The assembly needs to be added into the assemblies node in our web.config like so: 
+  <br /></p>
+
+<pre class="csharpcode"><span class="kwrd">&lt;</span><span class="html">add</span> <span class="attr">assembly</span><span class="kwrd">=&quot;System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;</span><span class="kwrd">/&gt;</span></pre>
+
+
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This will fix the problem.&#160; Now things will load correctly and we’ll get to our Index page.&#160; However, if you were to watch the BlogLog table or put a breakpoint in the Application_Error() in the Global.asax.cs, you’d see we’re getting 404 errors.&#160; What could be causing this?&#160; We’re not loading anything in our index view or our Master page.&#160; However, if we look closer at the error, we realize that something is automatically requesting something from our site: the Favicon.&#160; If you <a title="Favicon" href="http://en.wikipedia.org/wiki/Favicon">read here</a>, you’ll see that browsers don’t need any html to automatically request and load a site’s favicon.&#160; So even though we’re returning a 404 right now, we don’t need to actually fix the problem for the site to work.&#160; We’ll go ahead and add one now.&#160; We’ve got a lot of work left for the UI, but for now, we’ve made a lot of progress so we’ll leave it off here.&#160; You can check out the <a title="Latest Code" href="http://chrisrisner.com/upload/Veritas Part 10.zip">latest code here</a>.</p>
+
+
+
+<p><style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>

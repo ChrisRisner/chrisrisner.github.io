@@ -1,0 +1,133 @@
+---
+layout: post
+title: "Importing Comments into Disqus"
+date: Sun Apr 10 2011 15:40:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Veritas, Web]
+excerpt: "Disqus,Import,Comment Import,Comment,Disqus Comments,Veritas,Blog Comments,Feedback"
+logoUrl: null
+keywords: Disqus,Import,Comment Import,Comment,Disqus Comments,Veritas,Blog Comments,Feedback
+filepath: 2011-04-10-Importing-Comments-into-Disqus.html
+disqus_identifier: Importing-Comments-into-Disqus
+---
+<p>After seeing <a title="Disqus" href="http://disqus.com">Disqus</a> in action on <a title="Keith Elder&#39;s Blog" href="http://keithelder.net/">Keith Elder’s blog</a>, I decided to incorporate it in my <a title="Veritas Blog Engine" href="http://chrisrisner.com/Category/Veritas">Veritas Blog Engine</a> redesign.&#160; Setting up Disqus is pretty easy.&#160; If you’re using a more standard blog engine (Wordpress, Blogger, etc) than they have plugins and very easy to use integration methods.&#160; If you’re writing your own site, you just need to drop some javascript onto your page and replace a few values.&#160; Specifically, you have to put in your account name, the blog entry url, and the unique page title (or disqus identifier).&#160; There are a couple caveats to using Disqus.&#160; Prior to using it, a viewer could comment on any entry shown on the home page without having to go to the entry’s unique page (so the comments for multiple entries were viewable on the same page).&#160; Unfortunately, Disqus can’t handle this.&#160; You can only show the “disqus comments” for one entry at a time.&#160; So now, viewers have to click and go to the unique page to add comments (or even just view the comments).&#160; I think that with the ease of use of Disqus for administering comments as well as users logging in with their info to add comments makes this trade off worth it.&#160; Importing is another issue though.</p>  <p>When I first started looking at Disqus, I saw that you could import comments and figured that as long as I could import, I could figure things out and make it work.&#160; This did prove to be true, however, there were a few hoops to jump through.&#160; If you checkout Disqus and want to import from WordPress or Blogger, then they have an easy to use format for importing your comments.&#160; If, however, you’re using your own format, they do provide a generic format (WXR) to import your comments.&#160; You can <a title="Disqus WXR Comment Importing" href="http://docs.disqus.com/developers/export/import_format/">read about and checkout this format here</a>.&#160; The format is documented, though not as well as it could be.&#160; Both the Content:Encoded and the comment_content are shown using CDATA for the content.&#160; Presumably so you don’t have to bother encoding the html of your blog entry and the comment.&#160; In the course of running into issues I ended up just encoding my html and not using CDATA at all.&#160; </p>  <p>Another issue I ran into while getting my xml ready was the link to the blog entries.&#160; I had a few links that had apostrophes in them.&#160; While this seemed to work fine in several browsers, it ended up being very problematic after I imported my comments (this was my own fault and not Disqus’).&#160; Just make sure your urls are properly encoded (i.e. replace your apostrophes with %27). </p>  <p>The last issue I ran into, I will blame on Disqus.&#160; Their import example has the following in the xml:   <br />    <div class="csharpcode">     <pre class="alt"><span class="lnum">   1:  </span><span class="rem">&lt;!-- sso only; see docs --&gt;</span></pre>
+
+    <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">dsq:remote</span><span class="kwrd">&gt;</span></pre>
+
+    <pre class="alt"><span class="lnum">   3:  </span>  <span class="rem">&lt;!-- unique internal identifier; username, user id, etc. --&gt;</span></pre>
+
+    <pre><span class="lnum">   4:  </span>  <span class="kwrd">&lt;</span><span class="html">dsq:id</span><span class="kwrd">&gt;</span>user id<span class="kwrd">&lt;/</span><span class="html">dsq:id</span><span class="kwrd">&gt;</span></pre>
+
+    <pre class="alt"><span class="lnum">   5:  </span>  <span class="rem">&lt;!-- avatar --&gt;</span></pre>
+
+    <pre><span class="lnum">   6:  </span>  <span class="kwrd">&lt;</span><span class="html">dsq:avatar</span><span class="kwrd">&gt;</span>http://url.to/avatar.png<span class="kwrd">&lt;/</span><span class="html">dsq:avatar</span><span class="kwrd">&gt;</span></pre>
+
+    <pre class="alt"><span class="lnum">   7:  </span><span class="kwrd">&lt;/</span><span class="html">dsq:remote</span><span class="kwrd">&gt;</span></pre>
+  </div>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>Now I don’t know if there are some docs (as in “see docs”) that I didn’t see but I assumed (incorrectly) that I should send over my ID for the commenter.&#160; That was a bad assumption.&#160; This section caused my comments and threads to not be imported at all.&#160; Furthermore, the import process doesn’t really give you any information about why your xml does or does not work.&#160; I did send a couple <a title="Disqus Twitter" href="http://twitter.com/#!/disqus">tweets back and forth with Disqus</a>, though I don’t think they actually looked at the xml I was trying to import (and presumably they would have seen the DSQ Remote section and told me to drop it right away).&#160; Once I dropped that section from all of my item elements, the import worked great (besides the URL encoding issue I mentioned above).&#160;&#160;&#160; Below you can see an example of the xml I ended up importing.&#160; There is one Item element in this xml where my full import had one item for each comment.</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">=&quot;1.0&quot;</span> <span class="attr">encoding</span><span class="kwrd">=&quot;UTF-8&quot;</span>?<span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">&lt;</span><span class="html">rss</span> <span class="attr">version</span><span class="kwrd">=&quot;2.0&quot;</span>  <span class="attr">xmlns:content</span><span class="kwrd">=&quot;http://purl.org/rss/1.0/modules/content/&quot;</span>  <span class="attr">xmlns:dsq</span><span class="kwrd">=&quot;http://www.disqus.com/&quot;</span>  <span class="attr">xmlns:dc</span><span class="kwrd">=&quot;http://purl.org/dc/elements/1.1/&quot;</span>  <span class="attr">xmlns:wp</span><span class="kwrd">=&quot;http://wordpress.org/export/1.0/&quot;</span><span class="kwrd">&gt;</span>  </pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>        <span class="kwrd">&lt;</span><span class="html">channel</span><span class="kwrd">&gt;</span>    </pre>
+
+  <pre><span class="lnum">   4:  </span>            <span class="kwrd">&lt;</span><span class="html">item</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>                <span class="kwrd">&lt;</span><span class="html">title</span><span class="kwrd">&gt;</span>re: Detroit Restaurant Week: My First Android App<span class="kwrd">&lt;/</span><span class="html">title</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span>                <span class="kwrd">&lt;</span><span class="html">link</span><span class="kwrd">&gt;</span>http://chrisrisner.com/Detroit-Restaurant-Week--My-First-Android-App<span class="kwrd">&lt;/</span><span class="html">link</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>                <span class="kwrd">&lt;</span><span class="html">content:encoded</span><span class="kwrd">&gt;</span><span class="attr">&amp;lt;</span>p<span class="attr">&amp;gt;</span><span class="attr">&amp;lt;</span>My Encoded Html<span class="attr">&amp;lt;</span>p<span class="attr">&amp;gt;</span><span class="kwrd">&lt;/</span><span class="html">content:encoded</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   8:  </span>                <span class="kwrd">&lt;</span><span class="html">dsq:thread_identifier</span><span class="kwrd">&gt;</span>Detroit-Restaurant-Week--My-First-Android-App<span class="kwrd">&lt;/</span><span class="html">dsq:thread_identifier</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>            <span class="kwrd">&lt;</span><span class="html">wp:post_date_gmt</span><span class="kwrd">&gt;</span>2011-03-20 23:32:00<span class="kwrd">&lt;/</span><span class="html">wp:post_date_gmt</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  10:  </span>            <span class="kwrd">&lt;</span><span class="html">wp:comment_status</span><span class="kwrd">&gt;</span>open<span class="kwrd">&lt;/</span><span class="html">wp:comment_status</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>            <span class="kwrd">&lt;</span><span class="html">wp:comment</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_id</span><span class="kwrd">&gt;</span>188<span class="kwrd">&lt;/</span><span class="html">wp:comment_id</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_author</span><span class="kwrd">&gt;</span>MyName<span class="kwrd">&lt;/</span><span class="html">wp:comment_author</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  14:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_author_email</span><span class="kwrd">&gt;</span>Test@TestComment.com<span class="kwrd">&lt;/</span><span class="html">wp:comment_author_email</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_author_url</span><span class="kwrd">&gt;</span>http://www.chrisrisner.com<span class="kwrd">&lt;/</span><span class="html">wp:comment_author_url</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  16:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_author_IP</span><span class="kwrd">&gt;</span>24.145.221.93<span class="kwrd">&lt;/</span><span class="html">wp:comment_author_IP</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_date_gmt</span><span class="kwrd">&gt;</span>2011-03-27 18:00:35<span class="kwrd">&lt;/</span><span class="html">wp:comment_date_gmt</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  18:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_content</span><span class="kwrd">&gt;</span>Now to port it to WinPhone7!<span class="kwrd">&lt;/</span><span class="html">wp:comment_content</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_approved</span><span class="kwrd">&gt;</span>1<span class="kwrd">&lt;/</span><span class="html">wp:comment_approved</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  20:  </span>                <span class="kwrd">&lt;</span><span class="html">wp:comment_parent</span><span class="kwrd">&gt;</span>0<span class="kwrd">&lt;/</span><span class="html">wp:comment_parent</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>            <span class="kwrd">&lt;/</span><span class="html">wp:comment</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  22:  </span>        <span class="kwrd">&lt;/</span><span class="html">item</span><span class="kwrd">&gt;</span>  </pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>    <span class="kwrd">&lt;/</span><span class="html">channel</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  24:  </span><span class="kwrd">&lt;/</span><span class="html">rss</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+<p>
+<strong>UPDATE</strong>:  Dex informed me (below in comments) that if you go to <a href="http://import.disqus.com">http://import.disqus.com</a> and click on the "All Imports" tab, you can see the status of your import as well as if an error occurred and on which line it occurred.  Thanks Dex!</p>

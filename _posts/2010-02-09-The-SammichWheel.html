@@ -1,0 +1,51 @@
+---
+layout: post
+title: "The SammichWheel"
+date: Mon Feb 08 2010 18:29:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Sammiches]
+excerpt: ""
+logoUrl: null
+keywords: sammichnow, sammich, sammiches, sandwich, deli
+filepath: 2010-02-09-The-SammichWheel.html
+disqus_identifier: The-SammichWheel
+---
+<p>The next time you get a little hungry, don’t fret about making a decision for yourself.&#160; Let our trusty and reliable Sammich Wheel decided what you should eat.&#160; You’re guaranteed to get a Sammich one way or another!</p>  <p>&#160;<script language="javascript" type="text/javascript" src="content/SammichWheel/silverlight.js"></script><script type="text/javascript">
+        function onSilverlightError(sender, args) {
+            var appSource = "";
+            if (sender != null && sender != 0) {
+              appSource = sender.getHost().Source;
+            }
+            
+            var errorType = args.ErrorType;
+            var iErrorCode = args.ErrorCode;
+
+            if (errorType == "ImageError" || errorType == "MediaError") {
+              return;
+            }
+
+            var errMsg = "Unhandled Error in Silverlight Application " +  appSource + "\n" ;
+
+            errMsg += "Code: "+ iErrorCode + "    \n";
+            errMsg += "Category: " + errorType + "       \n";
+            errMsg += "Message: " + args.ErrorMessage + "     \n";
+
+            if (errorType == "ParserError") {
+                errMsg += "File: " + args.xamlFile + "     \n";
+                errMsg += "Line: " + args.lineNumber + "     \n";
+                errMsg += "Position: " + args.charPosition + "     \n";
+            }
+            else if (errorType == "RuntimeError") {           
+                if (args.lineNumber != 0) {
+                    errMsg += "Line: " + args.lineNumber + "     \n";
+                    errMsg += "Position: " +  args.charPosition + "     \n";
+                }
+                errMsg += "MethodName: " + args.methodName + "     \n";
+            }
+
+            throw new Error(errMsg);
+        }
+    </script></p>  <div id="silverlightControlHost"><!--<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="100%" height="100%">--><object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="500px" height="550px"> 		  <param name="source" value="Content/SammichWheel/SammichWheel.xap" /> 		  <param name="onError" value="onSilverlightError" /> 		  <param name="background" value="white" /> 		  <param name="minRuntimeVersion" value="3.0.40624.0" /> 		  <param name="autoUpgrade" value="true" /> 		  <a onclick="return hs.expand(this)" class="highslide" href="http://go.microsoft.com/fwlink/?LinkID=149156&amp;v=3.0.40624.0" style="text-decoration:none">  			  <img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style:none" /> 		  </a> 	    </object><iframe style="border-right-width: 0px; width: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; visibility: hidden; border-left-width: 0px" id="_sl_historyFrame"></iframe></div>

@@ -1,0 +1,134 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 1: The URL Shortener"
+date: Tue Jul 03 2012 11:02:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, .Net, Azure, Microsoft, Mobile, Phone, Programming, Web, iOS]
+excerpt: "Today we'll start a multi-article arc covering connecting mobile clients for iOS and Android to a backend hosted in Windows Azure Websites.  In this first article, we'll walk through setting up a new PHP website with a MySQL backend.  In the following articles, we'll discuss the PHP code as well as create iOS and Android clients."
+logoUrl: null
+keywords: Windows Azure,Azure,Windows Azure Websites,iOS,Android,mobile,windows azure mobile
+filepath: 2012-07-03-Windows-Azure-Websites-and-Mobile-Clients-Part-1--The-URL-Shortener.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-1--The-URL-Shortener
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Windows Azure" alt="Windows Azure" align="right" src="http://chrisrisner.com/upload/windowsazurevertical.jpg" />A couple weeks ago at a DevCamp in London, I gave a presentation on connecting mobile clients to <a href="https://www.windowsazure.com/en-us/home/scenarios/web-sites/">Windows Azure Websites</a>.&#160; Today I’d like to start covering some of the details of that talk.</p>  <p>&#160;&#160; <br /><strong>Prior to Windows Azure Websites      <br />      <br /></strong>Briefly, I’d like to cover the approach taken prior to Windows Azure Websites.&#160; Before being able to quickly and easily deploy a new website to Windows Azure, we instead would deploy Cloud Services to Windows Azure.&#160; If you were using the <a href="https://github.com/WindowsAzure-Toolkits/wa-toolkit-ios/">Windows Azure iOS Toolkit</a> or the <a title="Windows Azure Android Toolkit" href="https://github.com/WindowsAzure-Toolkits/wa-toolkit-android">Windows Azure Android Toolkit</a>, then you were more than likely using a <a href="https://github.com/windowsazure-toolkits/wa-toolkit-cloudreadypackages">Cloud Ready Package</a> as your backend.&#160; These Cloud Ready Packages were prebuilt .NET web apps made for Windows Azure.&#160; They provided access to things like the Access Control Service (ACS) and Windows Azure Storage (blobs, queues, tables).&#160; They worked, and continue to work, very well if that is all you need them for.&#160; However, if you want to grow beyond the cloud ready package defaults, you’re in a bit of a pickle.&#160; <a href="http://watwp.codeplex.com/">You can certainly download the source code used to compile the Cloud Ready Packages</a> (part of the Windows Azure Toolkit for Windows Phone), however, to enhance this at all, you need to know .NET.&#160; Furthermore, you’re going to need to be running Windows and Visual Studio.&#160; As an Android or iOS developer, that might be scary.&#160; That may be downright unlikely.&#160; Fortunately with Windows Azure Websites, we can move to a paradigm that doesn’t necessitate using .NET if you don’t want to.&#160; </p>  <p>   <br /><strong>Windows Azure Websites      <br />      <br /></strong>With the release of <a href="https://www.windowsazure.com/en-us/home/scenarios/web-sites/">Windows Azure Websites</a>, it is now possible to create PHP and Node.js websites hosted by Windows Azure.&#160; Using Windows Azure Websites gives you access to many things including MySQL, MSSQL, caching, CDN, and Storage.&#160; In addition, you can deploy via FTP, Git, and TFS.&#160; It really is amazing how quickly you can get up to speed with Windows Azure Websites.&#160; If you’d like to do a full walk through of setting up a new Windows Azure Website, you should <a href="https://github.com/WindowsAzure-TrainingKit/HOL-PHPAppsAzureWebSites-OSX/blob/master/HOL.md">check out this hands on lab on GitHub which will walk you through the basic set up and publishing of a site</a>.&#160; In addition, <a href="https://www.windowsazure.com/en-us/develop/php/tutorials/website-w-mysql-and-git/">this tutorial on WindowsAzure.com will walk you through setting up a PHP site with a MySQL backend</a>.&#160; The good news is that if you go through the second tutorial, you really won’t see a lot of new stuff in the backend I’m going to use for the URL Shortener in this article.&#160; It’s a PHP website with a MySQL backend as well.&#160; Prior to getting into the code, I would like to thank <a href="https://twitter.com/khepin">@Kehpin</a> for the foundation of this application.&#160; It’s an adoption and slight modification to the <a href="http://sf.khepin.com/2011/04/a-first-silex-project/">URL Shortener he created using the Silex framework</a> for PHP.</p>  <p>   <br /><strong>Creating our PHP Site</strong></p> Once you’ve created your account and signed up at <a href="">http://manage.windowsazure.com,</a> log into the portal.&#160; From there, go to New at the bottom of the screen and pick website.   <br /><strong><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="New Windows Azure Website 1" alt="New Windows Azure Website 1" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-1.png" /></strong>   <p>   <br />You’ll want to choose “Create with Database”.&#160; In the URL, you can enter anything you’d like.&#160; For the database, select “Create a new MySQL database” and then pick whichever region is closer to where you think your userbase will be.&#160; When you’re done, the form should look like this:     <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="New Windows Azure Website Naming" alt="New Windows Azure Website Naming" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-2.png" /></p>  <p>After hitting next, you’re given the option to name your database and choose a region for that.&#160; Make sure the region of your database is the same as your website.&#160; Since they’ll be talking to each other, you don’t want them to have to leave the DC.&#160;&#160; <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="New Windows Azure Website Name Database" alt="New Windows Azure Website Name Database" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-3.png" /></p>  <p>Once you’re done, click the checkmark and your site will be created.&#160; Within a few seconds, you should see your site go from starting to running in the site list.&#160; Click on your site and you’ll be taken to the dashboard.&#160; Here you’ll find a wealth of information.&#160; The first thing you’ll want to do is get the connection string information for your database, so click on the Configure link near the top:    <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Windows Azure Website Dashboard" alt="Windows Azure Website Dashboard" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-4.png" /></p>  <p>Scroll down the page until you get to the “connection strings” section:    <br /></p> <img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Getting the database connection string" alt="database connection string" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-5.png" />   <p>Either remember where to get that or copy it down for later.&#160; Now it’s time to set up Git publishing for your site.&#160; At the top, go back to Dashboard.&#160; On the mid-right, under “Quick Glance” you should see “Set up Git publishing”, click that.    <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Quick Glance in Windows Azure Portal" alt="Quick Glance in Windows Azure Portal" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-6.png" /></p>  <p>&#160;</p>  <p>The page will say “Creating Git repository” for a few moments and then, it will finish and show you some important info.&#160; The first thing there will be your Git URL, followed by instructions on installing Git.&#160; Lastly, you’ll see how to create a local git repo wherever your files are and then how to add your new Windows Azure Website as a remote endpoint.&#160; Note that if the directory you have your files in is already a Git repo, you can (AND SHOULD) skip the “git init” step and proceed directly to adding the remote Windows Azure Git Repo to your existing repo.&#160; Once that is done, you can <a href="http://chrisrisner.com/upload/UrlShortenerPHPSite.zip">pull down this PHP code</a>.&#160; Go ahead and unzip that and, if you’re familiar with hosting a site locally, put the files in a directory you’re hosting.&#160; If you’re not familiar, that’s ok and we’re going to mostly bypass that step.&#160; One thing to note, whether you’re familiar with Apache or IIS (both web hosting servers), there is a .htaccess and a web.config file in the root folder.&#160; If you don’t know what those are, they are both configuration files.&#160; They accomplish the same task which is to tell the server that all requests should go to index.php.&#160; The .htaccess is specific to Apache, and the web.config is specific to IIS.&#160;&#160; <br />    <br />Before setting up Git on your side, you will need to make changes to one file.&#160; Open up the src/Khepin/UrlShortener.php file.&#160; In this file, you’ll see these lines:     <br /></p>  <pre class="csharpcode">   <span class="rem">//Local</span>
+   <span class="kwrd">private</span> $db_server = <span class="str">'localhost'</span>;
+   <span class="kwrd">private</span> $db_user   = <span class="str">'phptestuser'</span>;
+   <span class="kwrd">private</span> $db_password = <span class="str">'phptestuser'</span>;
+   <span class="kwrd">private</span> $db_name     = <span class="str">'shorty'</span>;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />This might work if you set up MySQL locally, but not for the one hosted by Windows Azure.&#160; Go ahead and replace those values with the connection string information you got above and then save the file.&#160;&#160; <br />
+
+  <br />Now, if you’re putting the files into a folder that is already a Git repo, skip the “git init” part and just add and commit your files to the repo.&#160; Otherwise, do the “git init” and then follow along with the add and commit.&#160; When that is done, add your remote and push. 
+
+  <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Windows Azure Website Remote Repo" alt="Windows Azure Website Remote Repo" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-7.png" /></p>
+
+<p>One thing to note is that if you haven’t set up deployment credentials yet, you won’t be able to push.&#160; Click the “Reset your deployment credentials” link at the bottom of the Git web page and after that you should be fine.&#160; Now when you go to your site (if you didn’t copy down the URL, go back to the dashboard in the Windows Azure portal and it will be on the bottom right) you should be greated by a “Welcome to Shorty” message.&#160; There will be a link to view available URLs but, if you click on it, it won’t work right.&#160; The reason for this is that we haven’t set up the MySQL database yet.&#160; In order to do that, first ensure you have MySQL installed.&#160; If you’re running OS X, you should find MySQL in /usr/local/mysql.&#160; If you don’t, go ahead and install it.&#160; Afterwards, open up a terminal window and navigate to /usr/local/mysql.&#160; You’ll then need to connect to your database like so: 
+  <br />
+
+  <pre class="csharpcode">$cd /usr/local/mysql 
+$mysql --host=hostname.cloudapp.net --user=userName --password=password databasename </pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>Just replace the hostname, username, password, and databasename with values from your connection string.&#160; Once that is done, you can create your database table.&#160; Copy and paste this into the terminal and hit enter: 
+  <br />
+
+  <pre class="csharpcode">  CREATE TABLE <span class="str">'url'</span> ( 
+  <span class="str">'Id'</span> <span class="kwrd">int</span>(11) NOT NULL AUTO_INCREMENT, 
+  <span class="str">'Name'</span> varchar(45) NOT NULL, 
+  <span class="str">'Url'</span> varchar(500) NOT NULL, 
+  <span class="str">'CreateDate'</span> timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,  
+  PRIMARY KEY (<span class="str">'Id'</span>), 
+  UNIQUE KEY <span class="str">'Id_UNIQUE'</span> (<span class="str">'Id'</span>) 
+  ) </pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>
+  <br />Your response should be something like “Query OK, 0 rows affected”.&#160; Your table is now created.&#160; Now if you go back to the website and click on the link to view your URLs, you won’t get an error but you won’t see anything.&#160; You still need to save a URL.&#160; To quickly add a new URL for testing, change the subdomain of this url to match your site: 
+
+  <br />
+
+  <br /><a href="http://subdomain.azurewebsites.net/add/my_key/ms?url=http://microsoft.com">http://subdomain.azurewebsites.net/add/my_key/ms?url=http://microsoft.com</a> 
+
+  <br />
+
+  <br />If everything goes ok, you’ll get a success message and when you view the URLs you’ll now see that MS is the shortened version of <a href="http://microsoft.com./">http://microsoft.com.</a>&#160; Huzzah!&#160; You can see it <a title="PHP Shortener Live" href="http://urlshortener.azurewebsites.net/">running live right now here</a>.</p>
+
+<p>In the next article, we’ll briefly go over the code you just pushed to the server.&#160; Then, we’ll get to the fun stuff:&#160; our mobile clients!</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

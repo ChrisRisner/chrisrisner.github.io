@@ -1,0 +1,20 @@
+---
+layout: post
+title: "AtomicInternet Killed my Site"
+date: Wed Dec 16 2009 04:37:33 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: []
+excerpt: "null"
+logoUrl: null
+keywords: chris risner, .net, technology, programming, asp .net, mvc, life
+filepath: 2009-12-16-AtomicInternet-Killed-my-Site.html
+disqus_identifier: AtomicInternet-Killed-my-Site
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/files/media/image/WindowsLiveWriter/AtomicInternetKilledmySite_CB95/image_2.png"><img style="border-right-width: 0px; margin: 0px 10px 0px 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="KillSite" border="0" alt="KillSite" align="right" src="http://chrisrisner.com/files/media/image/WindowsLiveWriter/AtomicInternetKilledmySite_CB95/image_thumb.png" width="240" height="58" /></a> Ok, he didn’t really kill my site but his site did kill my attempts to run <a href="http://www.iis.net/expand/SEOToolkit">Microsoft’s SEO Toolkit</a> against my site. While most of the blame really falls on Microsoft, I feel it’s critical that <a href="http://atomicinternet.homeip.net/">AtomicInternet</a> understand his role in bringing the SEO Toolkit to it’s knees. The specific error that is thrown is this:</p>  <p>&#160;<span>There was an error while performing this operation.      <br />Details:       <br />Invalid name character in ‘_META_RSS:LANGUAGE’.&#160; The ‘:’ character, hexadecimal value 0x3A, cannot be included in a name.</span></p>  <p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/files/media/image/WindowsLiveWriter/AtomicInternetKilledmySite_CB95/image_9.png"><img style="border-bottom: 0px; border-left: 0px; margin: 0px 10px 0px 0px; display: inline; border-top: 0px; border-right: 0px" title="image" border="0" alt="image" align="left" src="http://chrisrisner.com/files/media/image/WindowsLiveWriter/AtomicInternetKilledmySite_CB95/image_thumb_3.png" width="147" height="244" /></a> The short and skinny of it is that his site has the following line in the header: </p>  <div id="codeSnippetWrapper">   <pre style="border-bottom-style: none; text-align: left; padding-bottom: 0px; line-height: 12pt; border-right-style: none; background-color: #f4f4f4; margin: 0em; padding-left: 0px; width: 100%; padding-right: 0px; font-family: &#39;Courier New&#39;, courier, monospace; direction: ltr; border-top-style: none; color: black; font-size: 8pt; border-left-style: none; overflow: visible; padding-top: 0px" id="codeSnippet"><span style="color: #0000ff">&lt;</span><span style="color: #800000">meta</span> <span style="color: #ff0000">name</span><span style="color: #0000ff">=&quot;rss:language&quot;</span> <span style="color: #ff0000">content</span><span style="color: #0000ff">=&quot;en-us&quot;</span> <span style="color: #0000ff">/&gt;</span> </pre>
+
+  <br /></div>
+
+<div id="codeSnippetWrapper">So while no, there isn’t any good reason for this to be in the header of a website (as opposed to say, in an RSS feed) there really isn’t any reason that the toolkit should die because of what it found in a linked web page.&#160; In addition, there are no options to run the toolkit without checking specific linked sites or all linked sites.&#160; After that failed, I turned back to the <a href="http://validator.w3.org">W3C Validator</a> which proved once again that <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fchrisrisner.com&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0&amp;user-agent=W3C_Validator%2F1.654">my&#160; site</a> is better then <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fatomicinternet.homeip.net&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0&amp;user-agent=W3C_Validator%2F1.654">Atomic’s site</a> by the low low number of 402 errors and 89 warnings.&#160; </div>

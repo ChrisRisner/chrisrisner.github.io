@@ -1,0 +1,396 @@
+---
+layout: post
+title: "Veritas – Error Logging – Part 8"
+date: Wed Aug 18 2010 19:00:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Programming, Veritas, Web]
+excerpt: "Veritas,Error Logging,Database Logging,FileLogging,Blog, Web Log"
+logoUrl: null
+keywords: Veritas,Error Logging,Database Logging,FileLogging,Blog, Web Log
+filepath: 2010-08-19-Veritas-–-Error-Logging-–-Part-8.html
+disqus_identifier: Veritas-–-Error-Logging-–-Part-8
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/upload/634003144233522332.jpg"><img style="border-right-width: 0px; margin: 0px 0px 5px 10px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="Veritas" border="0" alt="Veritas" align="right" src="http://chrisrisner.com/upload/634003144233522332.jpg" width="195" height="36" /></a> Today’s short article is about error handling.&#160; In addition to recording errors to our BlogLog table which we <a title="Veritas DB Design" href="http://chrisrisner.com/Veritas--Database-Design-%E2%80%93-Part-2">discussed previously</a>, we’ll also program in the capability to log to both email and a text file.&#160; If you controlled the server you were going to host on, you could look at other options (writing to the event log, logging through a MSMQ) but since we’re writing this to work on a shared host, we’ll only use the options that we know (should) work.&#160; To begin with we’ll add some settings to the BlogConfig class to control whether or not we log to each source:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">string</span> LogEmailAddress { get; set; }</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> <span class="kwrd">string</span> LogFilePath { get; set; }</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="kwrd">public</span> <span class="kwrd">bool</span> LogToDb { get; set; }</pre>
+
+  <pre><span class="lnum">   4:  </span><span class="kwrd">public</span> <span class="kwrd">bool</span> LogToEmail { get; set; }</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">public</span> <span class="kwrd">bool</span> LogToFile { get; set; }</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>3 of these will just control where we’re going to log to and the other two just control to what file or email address we log to.&#160; We’ll also add those fields into all of the load and build xml methods in our BlogConfig class.&#160; Once that’s done, we’ll add a new Logging Handler class into our Business Layer.&#160; The first thing we need is a property to check and see if each type of logging is enabled.&#160; These getters will just reach into our BlogConfig to see if the property above is set to true or false:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">static</span> <span class="kwrd">bool</span> IsDbLoggingEnabled</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>     get</pre>
+
+  <pre><span class="lnum">   4:  </span>     {</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>          <span class="kwrd">return</span> CacheHandler.GetBlogConfig().LogToDb;</pre>
+
+  <pre><span class="lnum">   6:  </span>     }</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p></p>
+
+<p>We’re going to create two methods for each type of logging.&#160; One that takes in an exception and one that takes in individual details (in case we’re not logging a specific exception).&#160; Both of these methods will also take in the “logging source” (the method or file calling the logging method).&#160; Before we create those, we’ll create our helper methods to take in those details and create a BlogLog object:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">private</span> <span class="kwrd">static</span> BlogLog GetBlogLog(<span class="kwrd">string</span> message, <span class="kwrd">string</span> details, <span class="kwrd">string</span> level, <span class="kwrd">string</span> logger)</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    BlogLog log = <span class="kwrd">new</span> BlogLog()</pre>
+
+  <pre><span class="lnum">   4:  </span>    {</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        BlogConfigId = CacheHandler.BlogConfigId,</pre>
+
+  <pre><span class="lnum">   6:  </span>        CreateDate = DateTime.Now,</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        EventLevel = level,</pre>
+
+  <pre><span class="lnum">   8:  </span>        Exception = details,</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        Message = message,</pre>
+
+  <pre><span class="lnum">  10:  </span>        Url = HttpContext.Current.Request.Url.ToString(),</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        Logger = logger</pre>
+
+  <pre><span class="lnum">  12:  </span>    };</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>    <span class="kwrd">return</span> log;</pre>
+
+  <pre><span class="lnum">  14:  </span>}</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>&#160;</pre>
+
+  <pre><span class="lnum">  16:  </span><span class="kwrd">private</span> <span class="kwrd">static</span> BlogLog GetBlogLog(Exception ex, <span class="kwrd">string</span> logger)</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>{</pre>
+
+  <pre><span class="lnum">  18:  </span>    BlogLog log = <span class="kwrd">new</span> BlogLog()</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>    {</pre>
+
+  <pre><span class="lnum">  20:  </span>        BlogConfigId = CacheHandler.BlogConfigId,</pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>        CreateDate = DateTime.Now,</pre>
+
+  <pre><span class="lnum">  22:  </span>        EventLevel = <span class="str">&quot;Error&quot;</span>,</pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>        Exception = GetInfoFromException(ex),</pre>
+
+  <pre><span class="lnum">  24:  </span>        Message = ex.Message,</pre>
+
+  <pre class="alt"><span class="lnum">  25:  </span>        Url = HttpContext.Current.Request.Url.ToString(),</pre>
+
+  <pre><span class="lnum">  26:  </span>        Logger = logger</pre>
+
+  <pre class="alt"><span class="lnum">  27:  </span>    };</pre>
+
+  <pre><span class="lnum">  28:  </span>    <span class="kwrd">return</span> log;</pre>
+
+  <pre class="alt"><span class="lnum">  29:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>One last item before we get to the logging methods is the GetInfoFromException method we see called above.&#160; It will simply concatenate a few of the details of the exception:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">private</span> <span class="kwrd">static</span> <span class="kwrd">string</span> GetInfoFromException(Exception ex)</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">string</span> stackTrace = ex.StackTrace + <span class="str">&quot;\n\n&quot;</span>;</pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">if</span> (ex.InnerException != <span class="kwrd">null</span>)</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        stackTrace += LoggingHandler.GetInfoFromException(ex.InnerException);</pre>
+
+  <pre><span class="lnum">   6:  </span>    <span class="kwrd">return</span> stackTrace;</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p></p>
+
+<p>Finally we’ll create our two actual logging methods.&#160; As you’ll see, these will both make use of our GetBlogLog methods above:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">static</span> <span class="kwrd">void</span> LogToDb(<span class="kwrd">string</span> message, <span class="kwrd">string</span> details, <span class="kwrd">string</span> level, <span class="kwrd">string</span> logger)</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsDbLoggingEnabled)</pre>
+
+  <pre><span class="lnum">   4:  </span>    {</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        BlogLog log = LoggingHandler.GetBlogLog(message, details, level, logger);</pre>
+
+  <pre><span class="lnum">   6:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        var repo = VeritasRepository.GetInstance();</pre>
+
+  <pre><span class="lnum">   8:  </span>        repo.Add(log);</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        repo.Save();</pre>
+
+  <pre><span class="lnum">  10:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>}</pre>
+
+  <pre><span class="lnum">  12:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span><span class="kwrd">public</span> <span class="kwrd">static</span> <span class="kwrd">void</span> LogToDb(Exception ex, <span class="kwrd">string</span> logger)</pre>
+
+  <pre><span class="lnum">  14:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsDbLoggingEnabled)</pre>
+
+  <pre><span class="lnum">  16:  </span>    {</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>        BlogLog log = LoggingHandler.GetBlogLog(ex, logger);</pre>
+
+  <pre><span class="lnum">  18:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>        var repo = VeritasRepository.GetInstance();</pre>
+
+  <pre><span class="lnum">  20:  </span>        repo.Add(log);</pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>        repo.Save();</pre>
+
+  <pre><span class="lnum">  22:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>That’s it for logging to the database.&#160; We've got two additional methods that will log to email and log to a file but we won’t show those for brevity’s sake.&#160; If you want, you can check out the code attached to see what those look like.&#160; We’re now able to log any errors or information we might want to from anywhere else in the code and we can do it in several different ways.&#160; However, we need a method that will handle figuring out where and what to log to so we don’t have to pick and choose in other locations:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">static</span> <span class="kwrd">void</span> Log(<span class="kwrd">string</span> message, <span class="kwrd">string</span> details, <span class="kwrd">string</span> level, <span class="kwrd">string</span> logger)</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsDbLoggingEnabled)</pre>
+
+  <pre><span class="lnum">   4:  </span>        LogToDb(message, details, level, logger);</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsEmailLoggingEnabled)</pre>
+
+  <pre><span class="lnum">   6:  </span>        LogToEmail(message, details, level, logger);</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsFileLoggingEnabled)</pre>
+
+  <pre><span class="lnum">   8:  </span>        LogToFile(message, details, level, logger);</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>}</pre>
+
+  <pre><span class="lnum">  10:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span><span class="kwrd">public</span> <span class="kwrd">static</span> <span class="kwrd">void</span> Log(Exception ex, <span class="kwrd">string</span> logger)</pre>
+
+  <pre><span class="lnum">  12:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsDbLoggingEnabled)</pre>
+
+  <pre><span class="lnum">  14:  </span>        LogToDb(ex, logger);</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsEmailLoggingEnabled)</pre>
+
+  <pre><span class="lnum">  16:  </span>        LogToEmail(ex, logger);</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>    <span class="kwrd">if</span> (LoggingHandler.IsFileLoggingEnabled)</pre>
+
+  <pre><span class="lnum">  18:  </span>        LogToFile(ex, logger);</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p></p>
+So that’s it for our logging.&#160; If you want to download the latest code with all of the unit tests, <a title="Veritas Part 8" href="http://chrisrisner.com/upload/Veritas Part 8.zip">you can do so here</a>.&#160; You may notice that they’re missing tests for the email logging.&#160; I haven’t decided on the best way to handle those yet so they aren’t there.&#160; 

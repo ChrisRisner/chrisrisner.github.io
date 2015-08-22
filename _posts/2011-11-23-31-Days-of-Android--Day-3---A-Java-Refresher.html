@@ -1,0 +1,268 @@
+---
+layout: post
+title: "31 Days of Android: Day 3 - A Java Refresher"
+date: Tue Nov 22 2011 22:29:24 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Java, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  In this article we'll step away from the Android specific stuff to get a brief review of Java.  This is meant for people that have done Java in the past but it's been a while since they've gotten their hands dirty with it."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Java,Java Refresher,Other Languages for Android,Tutorial
+filepath: 2011-11-23-31-Days-of-Android--Day-3---A-Java-Refresher.html
+disqus_identifier: 31-Days-of-Android--Day-3---A-Java-Refresher
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/java_logo.png" width="79" height="145" />Before we start getting really in to Android development in our <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android series</a>, we need to go back and take a quick run through of Java.&#160; This series is assuming you have a decent understanding of the Java programming language.&#160; For the most part things will be pretty readable so if you’re familiar with object oriented programming but not specifically Java, you shouldn’t have a problem following along.&#160; If you’re already familiar with Java, this article can probably be skipped.</p>  <p><strong>A bit about Java</strong></p>  <p>Java was created in the early and mid 90’s.&#160; Today it’s “owned” by Oracle (due to their purchase of Sun).&#160; Java was designed as an object-oriented language that would be portable and usable on all sorts of hardware.&#160; To this end, Java is not compiled down to native executable (like C or C++).&#160; Java, instead, is compiled to an intermediate bytecode which is then interpreted by a virtual machine that is built specific to the hardware on the device.&#160; This allows a program you create in Java to be run on x86, ARM, PowerPC, and more.&#160; Furthermore, Java is a very structured and ceremonial language.&#160; If you’ve stuck to primarily functional languages in the past, Java may be a bit to swallow.&#160; if you’ve worked with C#, Java will feel like an old friend (though you’ll probably hate Eclipse).&#160; </p>  <p><strong>Data Types</strong></p>  <p>Java is a strongly statically typed language.&#160; This means that there are some restrictions in place, but they are good, helpful restrictions.&#160; The <strong>STRONG </strong>aspect means that once you create a variable as an integer, it’s an integer for the life of that variable.&#160; You CANNOT set it to a string or a boolean.&#160; The <strong>STATIC</strong> part means that when your Java program is compiled, it’s going to type check your code to make sure you’re not attempting to break the STRONG typing.&#160; Java has the same sort of variables that you’re used to if you’ve developed in other languages.&#160; String, int, double, boolean, arrays, etc.&#160; Going into every variable type is beyond the scope of this article, so we won’t do it.&#160; If you’re unfamiliar with the basic data types I mentioned before, I would look into going through a full programming tutorial.&#160; You can find all sorts of <a title="Java Programming Tutorials" href="http://www.google.com/search?gcx=w&amp;sourceid=chrome&amp;ie=UTF-8&amp;q=java+programming+tutorial">resources online to help learn Java programming</a> from the ground up.&#160; One note I will make is regarding the String class.&#160; When comparing strings, doing stringA == stringB compares the reference (do they point to the same spot in memory).&#160; If you want to compare two string values (i.e. “Chris” == “Chris”) then you want to do stringA.equals(stringB).</p>  <p><strong>Operators</strong></p>  <p>I don’t have a lot to say about Java operators.&#160; Things here function very similarly to the default behavior in most other languages.&#160; One important note to remember is that operator overloading is not possible in Java.&#160; </p>  <p><strong>Classes</strong></p>  <p>If you’re not familiar with classes and-object oriented design, this may be one of the biggest concepts to make sure you understand.&#160; Classes are used very heavily in Java.&#160; In general, all of the code you do will be encapsulated in some sort of class.&#160; </p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> MyClass {</pre>
+
+  <pre><span class="lnum">   2:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If the class is <strong>public</strong> then it must be contained in a file with the same name as the class (appended with .java).&#160; Non-public classes can be stored in any .java file, however, for the sake of keeping an understandable project structure, it’s best to create separate files for each class.&#160; Java offers class inheritance but not multiple inheritance (similar to C#).&#160; In addition, it also allows implementation of multiple interfaces.&#160; In Android programming, you’re going to end up using inheritance quite often so being familiar with how it works would be a good idea.&#160; In general, understand that a class (A) that inherits from a base class (B), has access to any of B’s public or protected member variables and methods, but not anything private.&#160; Classes can be <strong>public</strong>, meaning they can be instantiated from anywhere, <strong>final</strong>, meaning they can’t be extended or altered, or <strong>abstract</strong>,<strong> </strong>meaning they can’t be instantiated but MUST be extended.&#160; Classes can also be <strong>protected</strong> and <strong>private</strong> but only if they are defined as being part of another class.</p>
+
+<p><strong>Methods</strong></p>
+
+<p>Methods, also known as functions, are blocks of code that can be called from other sources.&#160; Let’s say I’m going to add two numbers together in many different places in my application.&#160; Instead of doing this everywhere I want two numbers added, I might create a method that can do that for me, like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">int</span> AddNumbers(<span class="kwrd">int</span> numberOne, <span class="kwrd">int</span> numberTwo) {</pre>
+
+  <pre><span class="lnum">   2:  </span>     <span class="kwrd">return</span> numberOne + numberTwo;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, instead of doing the math, I can call AddNumbers(…) wherever I need the numbers added.&#160; This is a very simplified explanation but should serve to help understand.&#160; All of your logic and functionality will be done inside of methods.&#160; Using my A &amp; B class examples from above, class A can override methods that are a part of class B. When A does this it can call the same method in B by calling super.methodName().&#160; This is useful when you want to create something with similar functionality as something else but alter it slightly.&#160; An example of this is the <strong>Activity</strong> class.&#160; You’ll use <strong>Activity</strong> a lot in Android development, initially just for showing data.&#160; For this you’ll inherit from the Android Activity base class.&#160; Within your class, you’ll override the onCreate method that is found in Activity.&#160; Within that method you’ll call super.onCreate since the base <strong>Activity</strong> class needs to setup some plumbing for you.&#160; Then after you call that, you’ll continue setting up your UI, initializing values, etc.</p>
+
+<p><strong>Loops and Conditionals</strong></p>
+
+<p>Java features the standard loops and conditionals you’ll know from any other language.&#160; Here we have a typical <strong>If Then, Else If, Else </strong>block.</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">if</span> (<span class="kwrd">this</span> <span class="kwrd">is</span> <span class="kwrd">true</span>) {</pre>
+
+  <pre><span class="lnum">   2:  </span>     <span class="rem">//Do this</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>} <span class="kwrd">else</span> <span class="kwrd">if</span> (actually <span class="kwrd">this</span> <span class="kwrd">is</span> <span class="kwrd">true</span>) {</pre>
+
+  <pre><span class="lnum">   4:  </span>     <span class="rem">//Actually do this</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>} <span class="kwrd">else</span> {</pre>
+
+  <pre><span class="lnum">   6:  </span>     <span class="rem">//None of those things were true so do this</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Furthermore, we have the standard <strong>switch</strong> statement:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">switch</span> (my variable) {</pre>
+
+  <pre><span class="lnum">   2:  </span>   <span class="kwrd">case</span> <span class="str">&quot;Test&quot;</span>:</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>     <span class="rem">//Do some stuff</span></pre>
+
+  <pre><span class="lnum">   4:  </span>     <span class="kwrd">break</span>;</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>   <span class="kwrd">case</span> <span class="str">&quot;For Realz&quot;</span>:</pre>
+
+  <pre><span class="lnum">   6:  </span>     <span class="rem">//    Do some real stuff</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>     <span class="kwrd">break</span>;</pre>
+
+  <pre><span class="lnum">   8:  </span>   <span class="kwrd">default</span>:</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>     <span class="rem">//This isn't a test or for realz            </span></pre>
+
+  <pre><span class="lnum">  10:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>One important thing to know about the Java switch statement is that the <strong>case statements</strong> MUST use final <del>static</del> variables.&#160; That’s the only way you can use variables as cases.&#160; We also have our <strong>While</strong> loops:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">do</span> { </pre>
+
+  <pre><span class="lnum">   2:  </span>     <span class="rem">//Do some stuff</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>} <span class="kwrd">while</span> (<span class="kwrd">true</span>);</pre>
+
+  <pre><span class="lnum">   4:  </span>        </pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">while</span> (<span class="kwrd">true</span>) {</pre>
+
+  <pre><span class="lnum">   6:  </span>     <span class="rem">//Do some stuff        </span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Lastly we have the foreach loop:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>String[] names = { <span class="str">&quot;Chris&quot;</span>, <span class="str">&quot;Risner&quot;</span> };</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">for</span> (String name : names) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>     <span class="rem">//Do something with name</span></pre>
+
+  <pre><span class="lnum">   4:  </span>}</pre>
+</div>
+
+<p>Two last, but very important, concepts for loops are <strong>break </strong>and <strong>continue</strong>.&#160; These keywords can be used within your loops to either break out of your loop or to stop the current iteration and go to the next instance in the loop, respectively.&#160; </p>
+
+<p><strong>Memory Management</strong></p>
+
+<p>In Java, memory management is not as much of a concern as it is in a language like C++ where you need to explicitly handle memory.&#160; Java has a garbage collector which handles repossessing blocks of memory that are no longer in use by your program.&#160; Now, just because there is a garbage collector does NOT mean that you can’t still run into memory issues.&#160; You are limited to how much memory you can use and if your application just consumes and consumes memory, your app isn’t likely to perform very well.&#160; </p>
+
+<p><strong>Do I have to develop in Java if I want to do Android?</strong></p>
+
+<p>Lastly, I’d like to touch on programming languages for Android.&#160; Java is by far the most well known and popular approach to developing for Android.&#160; The <a title="Andoid SDK" href="http://developer.android.com/sdk/index.html">Android SDK</a> is Java based and is the primary entry point for Android.&#160; However, <a title="Android NDK" href="http://developer.android.com/sdk/ndk/index.html">Android also offers the Native Development Kit (NDK)</a>.&#160; The NDK allows you to develop in C and C++ and doesn’t offer the same high level access that the SDK does.&#160; You can write your application in Java as well as using the NDK and use the <a title="Java Native Interface" href="http://developer.android.com/guide/practices/design/jni.html">Java Native Interface</a> to connect the two.&#160; The NDK is good for CPU intensive processes and things you want to have compiled to native code instead of bytecode.&#160; One important thing to consider is that when using the NDK, you no longer have the guarantee that your app will run on any Android device with a Java Virtual Machine.&#160; Your NDK code has to be compiled for the right processor architecture as well.</p>
+
+<p>&#160;</p>
+
+<p>Hopefully this refresher has given you enough to go off of to start doing some real Android development.&#160; Tomorrow we’ll take a look at our first application.</p>

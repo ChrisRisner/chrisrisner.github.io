@@ -1,0 +1,353 @@
+---
+layout: post
+title: "Mobile Geolocation Apps with Windows Azure Websites Part 1: The PHP Code"
+date: Tue Sep 18 2012 10:23:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Azure, Mobile, PHP, Open Source, Web]
+excerpt: "This article will walk through deploying a PHP web service to Windows Azure Websites.  We'll go through how to create a new website in the Windows Azure Portal, pulling our source code down from GitHub, and pushing the service into Windows Azure using GIT.  We'll also walk through the code's functionality."
+logoUrl: null
+keywords: Windows Azure,Windows Azure Websites,PHP,Hosting PHP in Azure,Mobile Client Backend,Mobile Client API,Connecting WIndows Azure to Mobile Clients
+filepath: 2012-09-18-Mobile-Geolocation-Apps-with-Windows-Azure-Websites-Part-1--The-PHP-Code.html
+disqus_identifier: Mobile-Geolocation-Apps-with-Windows-Azure-Websites-Part-1--The-PHP-Code
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/windowsazurevertical.jpg" width="354" height="152" />The first article in this <a title="Mobile Geolocation Apps with Windows Azure" href="http://chrisrisner.com/Mobile-Geolocation-Apps-with-Windows-Azure-Websites">mini-series</a> on creating geolocation apps with the backend hosted in Windows Azure Websites is going to be a walkthrough of the PHP code that we’ll host in Windows Azure.&#160; The PHP site will be simple and expose just a few methods.&#160; Prior to getting into the code for the service, we need to setup a new website in Windows Azure and set up our database.&#160; If you don’t already have a Windows Azure account, you can <a title="Free Windows Azure Trial" href="http://aka.ms/MobileGeolocationWithWindowsAzureWebsites">sign up for a free trial here</a>.&#160; After that, you'll need to <a title="Requesting Access to Windows Azure Preview Features" href="https://account.windowsazure.com/PreviewFeatures">request access to the Websites preview feature here</a>.&#160; If you want to bypass the whole below tutorial, you can <a title="PHP Service for Geolocation in GitHub" href="https://github.com/WindowsAzure-Samples/Geolocation-PHP-Service">access the code for the PHP site in GitHub</a>.&#160; Let’s get started.</p>  <p>&#160;</p>  <p>   <br /><strong>Creating our PHP Site</strong></p> Once you’ve created your account and signed up at <a href="">http://manage.windowsazure.com,</a> log into the portal. From there, go to New at the bottom of the screen and pick website.   <br /><strong><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="New Windows Azure Website 1" alt="New Windows Azure Website 1" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-1.png" /></strong>   <p>   <br />You’ll want to choose “Create with Database”. In the URL, you can enter anything you’d like. For the database, select “Create a new MySQL database” and then pick whichever region is closer to where you think your user base will be. When you’re done, the form should look like this: </p>  <p align="center"><img src="http://chrisrisner.com/upload/geodemo-new-site.jpg" width="499" height="373" /></p>  <p>After hitting next, you’re given the option to name your database and choose a region for that. Make sure the region of your database is the same as your website. Since they’ll be talking to each other, you don’t want them to have to leave the DC. </p>  <p align="center"><img src="http://chrisrisner.com/upload/geodemo-new-db.jpg" width="264" height="246" /></p>  <p>Once you’re done, click the checkmark and your site will be created. Within a few seconds, you should see your site go from starting to running in the site list. Click on your site and you’ll be taken to the dashboard. Here you’ll find a wealth of information. The first thing you’ll want to do is get the connection string information for your database, so click on the Configure link near the top:</p>  <p align="center"><img src="http://chrisrisner.com/upload/geodemo-dashboard.jpg" /></p>  <p>Scroll down the page until you get to the “connection strings” section (you’ll have to click the “Show Connection Strings” link): </p>  <p align="center"><img src="http://chrisrisner.com/upload/geodemo-connection-strings.jpg" width="750" height="110" /></p>  <p>Either remember where to get that or copy it down for later. Now it’s time to set up Git publishing for your site. At the top, go back to Dashboard. On the mid-right, under “Quick Glance” you should see “Set up Git publishing”, click that.    <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Quick Glance in Windows Azure Portal" alt="Quick Glance in Windows Azure Portal" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-6.png" /></p>  <p>The page will say “Creating Git repository” for a few moments and then, it will finish and show you some important info. The first thing there will be your Git URL, followed by instructions on installing Git. Lastly, you’ll see how to create a local git repo wherever your files are and then how to add your new Windows Azure Website as a remote endpoint. Note that if the directory you have your files in is already a Git repo, you can (AND SHOULD) skip the “git init” step and proceed directly to adding the remote Windows Azure Git Repo to your existing repo. Once that is done, you can <a title="Geolocation PHP Code in GitHub" href="https://github.com/WindowsAzure-Samples/Geolocation-PHP-Service">pull down this PHP code from GitHub</a>.&#160; You can either download the zip or clone the Git repository locally.&#160; <strong>You’ll need to copy the contents of the source directory to a new directory so you can set up a proper git repo locally later on </strong>(since Git will treat the code you pull from github as it’s own repository, we want a new one with just the contents of source).&#160; You can host this website locally if you choose to, but it isn’t necessary to proceed.&#160; Before we configure the site, we need to download one third party library.</p>  <p>&#160;</p>  <p><strong>Downloading Silex</strong></p>  <p>This web site uses the <a title="Silex" href="http://silex.sensiolabs.org/">Silex</a> framework which is a PHP micro-framework based off of Symfony2.&#160; All you really need to know if you’re not a PHP guru (like I am not) is that the site uses Silex to simplify some of the service related code.&#160; If you go to the Silex site and proceed to the <a title="Silex Download" href="http://silex.sensiolabs.org/download">download page</a>, you can download the code in several ways.&#160; As this site was made a little while ago, it relies on the PHAR deployment method which as since been depreciated.&#160; For now, you can still <a href="http://silex.sensiolabs.org/get/silex.phar">download the PHAR here</a>.&#160; After downloading that, place the PHAR in the following folder structure from your root: <strong>/vendor/Silex</strong>.&#160; So when you’re done, you should see this file in your source directory:&#160; /vendor/Silex/silex.phar.&#160; Now we can proceed with configuring the site:</p>  <p>&#160;</p>  <p><strong>Configuring the site      <br /></strong>Before setting up Git on your side, you will need to make changes to one file. Open up the src/Geo/GeoCode.php file. In this file, you’ll see these lines:     <br /></p>  <pre class="csharpcode">   <span class="rem">//Local</span>
+   <span class="kwrd">private</span> $db_server = <span class="str">'localhost'</span>;
+   <span class="kwrd">private</span> $db_user   = <span class="str">'phptestuser'</span>;
+   <span class="kwrd">private</span> $db_password = <span class="str">'phptestuser'</span>;
+   <span class="kwrd">private</span> $db_name     = <span class="str">'shorty'</span>;</pre>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />This might work if you set up MySQL locally, but not for the one hosted by Windows Azure. Go ahead and replace those values with the connection string information you got above and then save the file.&#160; For this demo, we’re also going to be using <a title="Blob Storage" href="https://www.windowsazure.com/en-us/home/features/data-management/">Blob Storage</a> to store image and video files.&#160; In order to take advantage of that, let’s go back to the portal.&#160; Click on the new button at the bottom left and choose <strong>Storage</strong>:</p>
+
+<p align="center"><img src="http://chrisrisner.com/upload/geodemo-new-storage.jpg" width="164" height="313" /></p>
+
+<p>&#160;</p>
+
+<p>Give your storage account a URL and pick the same datacenter that you set your site and MySQL database in above:</p>
+
+<p align="center"><img src="http://chrisrisner.com/upload/geodemo-naming-storage.jpg" /></p>
+
+<p align="left">Again, remember to choose the same location for your storage account as you did for your website and database.&#160; If you don’t then every communication between your site and storage account will have to leave the datacenter which will rack up your bandwidth.&#160; After it’s been created, select your new storage account in the portal and go to Manage Keys at the bottom:</p>
+
+<p align="center"><img src="http://chrisrisner.com/upload/geodemo-manage-keys.jpg" /></p>
+
+<p align="left">Once there, you’ll see the account name and keys to access your storage account:</p>
+
+<p align="center"><img src="http://chrisrisner.com/upload/geodemo-keys-list.jpg" width="410" height="342" /></p>
+
+<p align="left">Copy the account name and the primary access key.&#160; You’ll need these to access the storage account from your PHP code.&#160; Go back to the code you downloaded and open <strong>src/app.php</strong>.&#160; Locate these lines and replace the values with your account name and key:</p>
+
+<pre class="csharpcode">    <span class="rem">//Define our storage account name and keys</span>
+    define(<span class="str">&quot;STORAGE_ACCOUNT_NAME&quot;</span>, <span class="str">&quot;accountname&quot;</span>);
+    define(<span class="str">&quot;STORAGE_ACCOUNT_KEY&quot;</span>, <span class="str">&quot;accountkey&quot;</span>);</pre>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p align="left">&#160;</p>
+
+<p>Now follow the instructions for setting up your git repository locally (remember these showed up after you went to “Set up Git publishing” above.&#160; </p>
+<img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Windows Azure Website Remote Repo" alt="Windows Azure Website Remote Repo" src="http://chrisrisner.com/upload/NewWindowsAzureWeb-7.png" /> 
+
+<p>One thing to note is that if you haven’t set up deployment credentials yet, you won’t be able to push. Click the “Reset your deployment credentials” link at the bottom of the Git web page and after that you should be fine. Now when you go to your site (if you didn’t copy down the URL, go back to the dashboard in the Windows Azure portal and it will be on the bottom right) you should see the text “Hello geo home”.&#160; This is the only visual display our site really does.&#160; Everything else is behind web methods.&#160; There is one more step we need to complete before we dive into the code, and that is to set up our MySQL database.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>Setting up MySQL</strong></p>
+
+<p>If you’re running OS X, you should find MySQL in /usr/local/mysql. If you don’t, go ahead and install it. Afterwards, open up a terminal window and navigate to /usr/local/mysql. You’ll then need to connect to your database like so: 
+  <br /></p>
+
+<pre class="csharpcode">$cd /usr/local/mysql 
+$mysql --host=hostname.cloudapp.net --user=userName --password=password databasename </pre>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Just replace the hostname, username, password, and databasename with values from your connection string. Once that is done, you can create your database table. Copy and paste this into the terminal and hit enter: 
+  <br /></p>
+
+<pre class="csharpcode">    CREATE TABLE <span class="str">'geodata'</span> (
+      <span class="str">'Id'</span> <span class="kwrd">char</span>(36) NOT NULL,
+      <span class="str">'Type'</span> smallint(6) DEFAULT NULL,
+      <span class="str">'Description'</span> varchar(200) DEFAULT NULL,
+      <span class="str">'Url'</span> varchar(400) DEFAULT NULL,
+      <span class="str">'Location'</span> point DEFAULT NULL,
+      PRIMARY KEY (<span class="str">'Id'</span>)
+    )</pre>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style><style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>
+  <br />Your response should be something like “Query OK, 0 rows affected”. Your table is now created. Now we can look through the functionality that will power our mobile applications.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>The PHP Code</strong></p>
+
+<p>Let’s first take a look at the <strong>index.php </strong>file in the root directory:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=index.php"></script></p>
+
+<p>&#160;</p>
+
+<p>This file creates a new app using the <strong>src/app.php</strong> file and runs it.&#160; This is basically running a Silex app.&#160; Let’s next open the <strong>src/Geo/GeoCode.php</strong> file.&#160; You’ve already seen the variables at the top of this file which contain the connection string details.&#160; Let’s look at the <strong>getAllPointsOfInterest</strong> method next:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=getAllPointsOfInterest"></script></p>
+
+<p>&#160;</p>
+
+<p>This method takes in a latitude, longitude, and radius however it doesn’t actually use them.&#160; This method actually returns ALL points of interest instead of ones for a specific location.&#160; You can see it’s accessing the database and selecting all points of interest with no conditional (WHERE) clause.&#160; The next, and more important method, is <strong>getPointsOfInterstInArea</strong>:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=getPointsOfInterestInArea"></script></p>
+
+<p>&#160;</p>
+
+<p>This method has the same parameters but actually uses them.&#160; The idea is that the calling application wants to know about all of the points of interest within Z meters of point X, Y.&#160; We’re doing something similar to the first method but our SQL query is much more complex.&#160; For unrelated reasons, I couldn’t put a function in my MySQL database so the query had to be done in the PHP code.&#160; <a title="MySQL and PHP Geospatial Query" href="http://www.movable-type.co.uk/scripts/latlong-db.html">You can read more about how this query works from where I got it, here</a>.&#160; When we’re done, we put all of those points into an array and return it.&#160; The last method is <strong>addPOI</strong>:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=AddPoi"></script></p>
+
+<p>&#160;</p>
+
+<p>This method takes in a description, type (whether it’s a video or image), URL (to the file in blob storage), latitude, longitude, and id (which is a GUID we create).&#160; It then saves that point into the database so the next time we query for points of interest, it can be returned.&#160; Let’s take a look at <strong>src/Geo/GeoCodeExtension.php </strong>next:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=geocodeextension"></script></p>
+
+<p>&#160;</p>
+
+<p>This file creates an easy way for us to access our geo code from our Silex application.&#160; In it, we’re creating an extension so whenever we reference <strong>$app[‘geo’]</strong> we get back an instance of the GeoCode class.&#160; Let’s take a look at the last important file, <strong>src/app.php</strong>.&#160; As you’ll recall from looking at <strong>index.php</strong>, this file is our actual application and is also the entry point for any calls into our web site.&#160; The first part of the file is the “bootstrapping” portion that actually sets up our app:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=app.php top"></script></p>
+
+<p>&#160;</p>
+
+<p>First we require a few files including the silex PHAR you downloaded earlier and a file from the old PHP SDK (see below) for accessing blob storage.&#160; We then create our Silex application and set up a reference to the GeoCodeExtension.&#160; Then, we set up a handler to decode any JSON based requests before they get into our app methods.&#160; Lastly, we have a couple variables for our storage account settings.&#160; The first method in our app definition is the method that displays our home page (the thing that says “hello geo home” when you go to the site in the browser):</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=app.php home"></script></p>
+
+<p>&#160;</p>
+
+<p>Nothing very complex here but it does show you to set up a route using Silex.&#160; This says that any request to “oursite.com/” should go to this method.&#160; The next method handles retreiving a shared access signature (SAS):</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=app.php sas"></script></p>
+
+<p>&#160;</p>
+
+<p>A SAS is used when a client needs to upload something to our storage account but we don’t want the client to have access to the storage account name and key.&#160; This is important because if the name and key were in our mobile app code and someone decompiled our app (very easy in Android) they could then have free run of our storage account.&#160; This uses the old PHP SDK to request a SAS from our storage account and then returns that URL to the calling application.&#160; The next method handles finding points of interest:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=app.php findPOI"></script></p>
+
+<p>&#160;</p>
+
+<p>This method gets the latitude, longitude, and radius from the query string parameters and then passes them through to the <strong>GeoCode</strong> class to find the POIs. After it fetches the POIs, it returns them to the calling application in JSON format.&#160; The next method is our pass through for adding new POIs:</p>
+
+<p><script src="https://gist.github.com/3694420.js?file=app.php add poi"></script></p>
+
+<p>&#160;</p>
+
+<p>This is similar to the previous method in that we’re pulling out the parameters and then calling <strong>GeoCode</strong> to do the work.&#160; We return a 201 response code to say that the point was saved or an error.&#160; The last bit of code is necessary for setting up our storage account:</p>
+
+<p><script src="https://gist.github.com/3694556.js?file=app.php create container"></script></p>
+
+<p>&#160;</p>
+
+<p>This method just calls into the storage account to set up a container for blobs to be uploaded to.&#160; You <strong>MUST </strong>call this method (via the browser is fine) before you’ll be able to upload any blobs from the mobile clients.&#160; The way that uploading blobs work is that a blob goes inside a container.&#160; A container can have many different blobs.&#160; The mobile app code we’ll go over in future articles relies on a storage container named “test” so going to this URL will create that container so when we get to the mobile apps, it will be ready to go.&#160; Just remember, prior to working on the mobile apps, change this URL to match your site’s subdomain and view it in the browser:&#160; <a href="http://yoursubdomain.azurewebsites.net/api/Location/AddTextContainer">http://yoursubdomain.azurewebsites.net/api/Location/AddTextContainer</a>.&#160; If it is a success, you should see a “Container created” message.&#160; You’ll only need to go to this once.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>The “Old” SDK</strong></p>
+
+<p>If you look at the root folder of the source code, you’ll see a folder there named <strong>OldSDK</strong>.&#160; The reason for this is that, at the time of writing, the <a title="Windows Azure PHP SDK" href="https://www.windowsazure.com/en-us/develop/php/">new PHP SDK</a> for Windows Azure did not have hooks for connecting to Windows Azure Storage.&#160; The previous SDK did, however, have access to storage.&#160; At some point I’ll update the code base and this tutorial to use only the new PHP SDK.</p>
+
+<p>&#160;</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>Today we walked through creating a new Windows Azure Website, configuring a PHP website, and uploaded it to Windows Azure.&#160; We also looked at the code for this site which we’ll rely as a backend for the next few articles which will focus on creating mobile apps that connect to the service running in Windows Azure Websites.&#160; As a reminder, you can get a <a title="Free Windows Azure Trial" href="http://aka.ms/MobileGeolocationWithWindowsAzureWebsites">free trial for Windows Azure here</a>.</p>

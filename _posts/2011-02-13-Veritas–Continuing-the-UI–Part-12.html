@@ -1,0 +1,254 @@
+---
+layout: post
+title: "Veritas–Continuing the UI–Part 12"
+date: Sun Feb 13 2011 12:23:45 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Programming, Veritas, Web]
+excerpt: "Veritas,Blog,Weblog,UI,MVC,ASP .Net,.Net"
+logoUrl: null
+keywords: Veritas,Blog,Weblog,UI,MVC,ASP .Net,.Net
+filepath: 2011-02-13-Veritas–Continuing-the-UI–Part-12.html
+disqus_identifier: Veritas–Continuing-the-UI–Part-12
+---
+<p>Continuing from where <a title="Veritas Part 11" href="http://chrisrisner.com/Veritas%E2%80%93Continuing-the-UI%E2%80%93Part-11">we left off last time</a>, we’re going to continue trying to focus on the UI for our site.&#160; The first thing we’ll do is create a user control for our top menu.&#160; We’ll put the basic navigation for our site up there and we’ll load it all from the BlogMenuItem table.&#160; In our UserControls folder (in our Views) we’re going to add a new View User Control named UcTopBar.&#160; The markup for this control is pretty simple:     <br /></p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;topBarMenu&quot;</span> <span class="attr">align</span><span class="kwrd">=&quot;center&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">&lt;</span><span class="html">ul</span> <span class="attr">id</span><span class="kwrd">=&quot;topMenu&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>        <span class="asp">&lt;%</span> <span class="kwrd">foreach</span> (BlogMenuItem item <span class="kwrd">in</span> Model.blogMenuItems)</pre>
+
+  <pre><span class="lnum">   4:  </span>           { <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>           <span class="kwrd">&lt;</span><span class="html">li</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span>                <span class="asp">&lt;%</span>= (item.IsView ?</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>                   VeritasForm.ActionLink(item.LinkText, item.ViewName, <span class="str">&quot;Home&quot;</span>)</pre>
+
+  <pre><span class="lnum">   8:  </span>                   :</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>                    VeritasForm.ActionLink(item.LinkText, <span class="str">&quot;ViewContent/&quot;</span>+item.ViewName, <span class="str">&quot;Home&quot;</span>))</pre>
+
+  <pre><span class="lnum">  10:  </span>                 <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>           <span class="kwrd">&lt;/</span><span class="html">li</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>        <span class="asp">&lt;%</span> } <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>    <span class="kwrd">&lt;/</span><span class="html">ul</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  14:  </span>    <span class="kwrd">&lt;</span><span class="html">b</span> <span class="attr">id</span><span class="kwrd">=&quot;topMenuBottom&quot;</span> <span class="attr">style</span><span class="kwrd">=&quot;padding-left:0px&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">b</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+The only really important thing here is the unordered list topMenu.&#160; Within that we’re iterating over the BlogMenuItems.&#160; For each one it’s either a View or a link to something we’ll display using the ViewContent page.&#160; That’s it.&#160; The topMenuBottom bold tag is just used as a line to underline the menu.&#160; That’s it for our navigation menu.&#160; In order to show this View User Control we’ll add this to the master page right under contentcolumn:</div>
+
+<pre class="csharpcode"><span class="asp">&lt;%</span> Html.RenderPartial(<span class="str">&quot;~/Views/UserControls/UcTopBar.ascx&quot;</span>); <span class="asp">%&gt;</span></pre>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<div class="csharpcode">Next, we’ll do the same thing on the side and create a Side Bar View User Control.&#160; Before we get into what this control will look like, we need to figure out what we’re going to put on it.&#160; We’re certainly going to want to put Syndication information so we’ll add a link to our RSS feed.&#160; We’ll also want to have the ability to link to Twitter and Facebook and maybe some others.&#160; We’ll want to show a list of all the categories that our entries fall into.&#160; Lastly, we’ll want to show ads.&#160; We might add more later but this is a good start for now.&#160; One interesting thing to note for the RSS feed is that we want the ability to display our feed through where we’re going to host it and also through Feedburner (if we’re going to use that).&#160; <br /></div>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">=&quot;syndication&quot;</span><span class="kwrd">&gt;</span>    </pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="asp">&lt;%</span>--Blog Entry Feed--<span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="asp">&lt;%</span>= <span class="kwrd">string</span>.IsNullOrEmpty(Model.blogConfig.FeedburnerName) ?</pre>
+
+  <pre><span class="lnum">   4:  </span>        <span class="str">&quot;&lt;a href=\&quot;&quot;</span> + VeritasForm.Content(<span class="str">&quot;~/Syndication/rss.aspx&quot;</span>) + <span class="str">&quot;\&quot;&gt;&lt;img src=\&quot;&quot;</span> </pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>            + VeritasForm.Content(<span class="str">&quot;~/Content/Media/feed.png&quot;</span>) </pre>
+
+  <pre><span class="lnum">   6:  </span>            +<span class="str">&quot;\&quot; alt=\&quot;Site Feed\&quot; style=\&quot;border-width:0px;\&quot; /&gt; RSS (blog)&lt;/a&gt;&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        :</pre>
+
+  <pre><span class="lnum">   8:  </span>        <span class="str">&quot;&lt;a href=\&quot;http://feeds.feedburner.com/&quot;</span>+ Model.blogConfig.FeedburnerName + <span class="str">&quot;\&quot;&gt;&lt;img src=\&quot;&quot;</span> +</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>            VeritasForm.Content(<span class="str">&quot;~/Content/Media/feed.png&quot;</span>) +<span class="str">&quot;\&quot; alt=\&quot;Site Feed\&quot; style=\&quot;border-width:0px;\&quot; /&gt; RSS&lt;/a&gt;&quot;</span>        </pre>
+
+  <pre><span class="lnum">  10:  </span>    <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>    <span class="asp">&lt;%</span>--Blog Feedback Feed--<span class="asp">%&gt;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>    <span class="asp">&lt;%</span> <span class="kwrd">if</span> (Model.blogConfig.EnableFeedbackRssFeed)</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>        { <span class="asp">%&gt;</span>                </pre>
+
+  <pre><span class="lnum">  14:  </span>        <span class="kwrd">&lt;</span><span class="html">br</span> <span class="kwrd">/&gt;&lt;</span><span class="html">a</span> <span class="attr">href</span><span class="kwrd">=&quot;&lt;%= VeritasForm.Content(&quot;</span>~/<span class="attr">Syndication</span>/<span class="attr">commentRss</span>.<span class="attr">aspx</span><span class="kwrd">&quot;) %&gt;&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>                <span class="kwrd">&lt;</span><span class="html">img</span> <span class="attr">src</span><span class="kwrd">=&quot;&lt;%= VeritasForm.Content(&quot;</span>~/<span class="attr">Content</span>/<span class="attr">Media</span>/<span class="attr">feed</span>.<span class="attr">png</span><span class="kwrd">&quot;) %&gt;&quot;</span></pre>
+
+  <pre><span class="lnum">  16:  </span>                 <span class="attr">alt</span><span class="kwrd">=&quot;RSS Feed&quot;</span> <span class="attr">style</span><span class="kwrd">=&quot;border-width:0px;&quot;</span> <span class="kwrd">/&gt;</span> RSS (comment)<span class="kwrd">&lt;/</span><span class="html">a</span><span class="kwrd">&gt;</span>        </pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>    <span class="asp">&lt;%</span> } <span class="asp">%&gt;</span> </pre>
+
+  <pre><span class="lnum">  18:  </span>    <span class="asp">&lt;%</span>--Social Networks--<span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>    <span class="asp">&lt;%</span> <span class="kwrd">if</span> (!<span class="kwrd">string</span>.IsNullOrEmpty(Model.blogConfig.FacebookUrl))</pre>
+
+  <pre><span class="lnum">  20:  </span>       { <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>       <span class="kwrd">&lt;</span><span class="html">a</span> <span class="attr">href</span><span class="kwrd">='&lt;%= Model.blogConfig.FacebookUrl %&gt;'</span><span class="kwrd">&gt;&lt;</span><span class="html">img</span> <span class="attr">src</span>=</pre>
+
+  <pre><span class="lnum">  22:  </span>                                    <span class="kwrd">&quot;../../Content/Media/facebook_logo.png&quot;</span> <span class="kwrd">/&gt;&lt;/</span><span class="html">a</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>       <span class="kwrd">&lt;</span><span class="html">br</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">  24:  </span>    <span class="asp">&lt;%</span> } <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  25:  </span>    <span class="asp">&lt;%</span> <span class="kwrd">if</span> (!<span class="kwrd">string</span>.IsNullOrEmpty(Model.blogConfig.TwitterUrl))</pre>
+
+  <pre><span class="lnum">  26:  </span>       { <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  27:  </span>       <span class="kwrd">&lt;</span><span class="html">a</span> <span class="attr">href</span><span class="kwrd">='&lt;%= Model.blogConfig.TwitterUrl %&gt;'</span><span class="kwrd">&gt;&lt;</span><span class="html">img</span> <span class="attr">src</span>=</pre>
+
+  <pre><span class="lnum">  28:  </span>                                      <span class="kwrd">&quot;../../Content/Media/twitter_logo.png&quot;</span> <span class="kwrd">/&gt;&lt;/</span><span class="html">a</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  29:  </span>       <span class="kwrd">&lt;</span><span class="html">br</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">  30:  </span>    <span class="asp">&lt;%</span> } <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  31:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  32:  </span><span class="asp">&lt;%</span>-- Tags --<span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  33:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">=&quot;sideBarTags&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  34:  </span>    <span class="asp">&lt;%</span> Html.RenderPartial(<span class="str">&quot;~/Views/UserControls/UcTagCloud.ascx&quot;</span>); <span class="asp">%&gt;</span>            </pre>
+
+  <pre class="alt"><span class="lnum">  35:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  36:  </span><span class="asp">&lt;%</span>--Side bar ads--<span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  37:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">class</span><span class="kwrd">=&quot;sideBarAds&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  38:  </span>    <span class="asp">&lt;%</span> <span class="kwrd">if</span> (Model.blogConfig.BlogMarketingInfo.ShowSideBarAds) { <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  39:  </span>        <span class="asp">&lt;%</span>= Model.blogConfig.BlogMarketingInfo.AdScriptSideBar <span class="asp">%&gt;</span></pre>
+
+  <pre><span class="lnum">  40:  </span>    <span class="asp">&lt;%</span> } <span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  41:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<div class="csharpcode">
+  <br />Nothing surprising here.&#160; In the RSS feed part, we’re checking to see if we should show the blog’s rss feed directly or use feedburner.&#160; Then we’re checking to see if we want to show a link to the feedback (comment) rss feed.&#160; All of this links to pages we haven’t actually created yet but eventually will.&#160; Then we’re choosing whether or not to show the facebook and twitter links based off of the blog config.&#160; Then we’re showing a new user control called the Tag Cloud.&#160; Lastly, we’re checking to see if we should show an ad script specific to the side bar.&#160; The last piece we’ll cover today is the tag cloud.&#160; The tag cloud is primarily just a list of the categories we’ve associated with our entries.&#160; However, we want each categories text to be proportional to how many entries are associated with it.&#160; So for example, if I have ten entries associated with “.Net” and one entry associated with “MVC” then &quot;.Net” will be in bigger text.&#160; We’re going to accomplish this by putting specific classes on our html links depending on the association counts.&#160; <br /></div>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">align</span><span class="kwrd">=&quot;center&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">&lt;</span><span class="html">span</span> <span class="attr">id</span><span class="kwrd">=&quot;categoriesHeader&quot;</span><span class="kwrd">&gt;</span>Categories<span class="kwrd">&lt;/</span><span class="html">span</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;tags&quot;</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   4:  </span>      <span class="asp">&lt;%</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        <span class="kwrd">foreach</span> (var categoryTag <span class="kwrd">in</span> Model.blogCategoryTags)</pre>
+
+  <pre><span class="lnum">   6:  </span>        {<span class="asp">%&gt;</span>        </pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>            <span class="asp">&lt;%</span>= <span class="str">&quot;&lt;a href=\&quot;&quot;</span> + VeritasForm.Content(<span class="str">&quot;~/Category/&quot;</span> + categoryTag.CategoryTitle) </pre>
+
+  <pre><span class="lnum">   8:  </span>                + <span class="str">&quot;\&quot; title=\&quot;&quot;</span> + categoryTag.CategoryTitle + <span class="str">&quot;\&quot; class=\&quot;&quot;</span> </pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>                + VeritasForm.GetTagClass(categoryTag.CategoryUseCount, categoryTag.TotalArticles) </pre>
+
+  <pre><span class="lnum">  10:  </span>                + <span class="str">&quot;\&quot;&gt;&quot;</span> + categoryTag.CategoryTitle + <span class="str">&quot;&lt;/a&gt;&quot;</span><span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        <span class="attr">&amp;nbsp;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>        <span class="asp">&lt;%</span> }<span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>    <span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  14:  </span><span class="kwrd">&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<div class="csharpcode">
+  <br />Again, nothing special.&#160; Each link is being built and makes use of the GetTagClass method within the VeritasForm object.&#160; This method will return something like “tag1” or “tag4” dependent upon the popularity of the category.&#160; These class names will then map to our CSS file where we will change the text size from lower (for “tag1”) to higher (for &gt; 1).</div>
+
+<div class="csharpcode">&#160;</div>
+
+<div class="csharpcode">In addition to everything we did above, we’re also going to set up our About page and the Contact page.&#160; I won’t go over this in detail here as it’s all pretty straight forward and should (if you’ve been keeping up so far) be very easy to read and understand.&#160; As always, <a title="Veritas Part 12" href="http://chrisrisner.com/upload/Veritas Part 12.zip">you can download the latest Veritas code</a> to review yourself.
+
+  <br />
+
+  <br /></div>

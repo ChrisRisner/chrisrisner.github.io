@@ -1,0 +1,530 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 6: The Android Client"
+date: Tue Jul 10 2012 11:40:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Azure, Java, Mobile, Phone]
+excerpt: "In this article we'll start to create an Android client that will connect to a URL Shortener written in PHP and running on Windows Azure Websites.  Today we'll cover making a request to the server, getting back JSON data, and displaying it to the user."
+logoUrl: null
+keywords: Android,Eclipse,Java,Windows Azure,Azure,PHP on Azure,Mobile connectivity to Windows Azure,Android Azure,URL Shortener
+filepath: 2012-07-10-Windows-Azure-Websites-and-Mobile-Clients-Part-6--The-Android-Client.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-6--The-Android-Client
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-emulator-with-azure.jpg" width="244" height="368" />Today we’re going to start working on an Android client for our <a title="URL Shortener in Windows Azure Websites" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-1--The-URL-Shortener">URL Shortening website</a>.&#160; We’ve already finished walking through how to make <a title="PHP Code for URL Shortener in Windows Azure Websites" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-2--The-PHP-Code">setup the PHP website in Windows Azure Websites</a> and how to create an <a title="iOS Client for URL SHortener" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-5--The-iOS-Client-Finished">iOS client</a>.&#160; We’ll follow along the same path we did in the iOS client by splitting the Android one into three parts:&#160; displaying the list of URL slugs, displaying details on a specific slug, and adding the ability to add new shortened URLs from the device.&#160; I’m going to be using the latest version of the Android Development Tools (ADT) as of writing which is v20.&#160; Note that v20 made some specific changes in regards to project creation.&#160; Nothing really different if you’ve created Android projects in Eclipse before, but something to look out for.&#160; If you’re not using Eclipse, you should be able to follow along for the majority of the coding stuff without issue.</p>  <p>Open up Eclipse and create a new <strong>Android Application Project</strong>.&#160; We aren’t going to do anything that requires Google APIs so we can stick with a straight Android API.&#160; Here I’ve chosen the latest and greatest Android 4.1, Jellybean:</p>  <p><img title="New Android Project" alt="New Android Project" src="http://chrisrisner.com/upload/shortifier-android-new-project.jpg" width="496" height="297" /></p>  <p>In the next screen, you can configure a launcher icon, and then you can choose what type of activity you’d like to start with.&#160; In this situation, we’ll just use a <strong>BlankActivity</strong>.&#160; Finally, in the settings for the new activity, just leave everything at their defaults.&#160; When finished, you should be able to run your project (right click on the project in <strong>Package Explorer</strong> and go to <strong>Run As –&gt; Android Application</strong>).&#160; You should get something that looks like this (depending on the icon you choose):</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Project Running" alt="Android Project Running" src="http://chrisrisner.com/upload/shortifier-android-new-project-running.jpg" width="249" height="255" /></p>  <p>The first thing we’re going to do is go into <strong>MainActivity.java </strong>and change the class it extends from <strong>Activity</strong> to <strong>ListActivity</strong>.&#160; In addition, you’ll need to remove the call to <strong>setContentView</strong>.&#160; Leaving this in the <strong>onCreate</strong> method of a <strong>ListActivity</strong> causes a crash to occur.&#160; Now we need to work on loading our actual data.&#160; To load our data here, we’re going to use a <a title="Intent Services and Service Result Receiver" href="http://chrisrisner.com/31-Days-of-Android--Day-28%E2%80%93Intents-Part-3--Service-Intents">intent service and a service result receiver</a>.&#160; That is to say, when we want to load the data, we’ll start a service that runs in the background.&#160; When that service is done, it’s going to notify our UI (and load our data) by sending a message to a result receiver which then processes a method on our <strong>ListActivity</strong>.&#160; Let’s get started by adding the a new class to our project and naming it <strong>ServiceResultReceiver</strong>.&#160; Your class should extend from <strong>android.os.ResultReceiver</strong>.&#160; Note that this class could be used for any intent service we might call.&#160; It just so happens we’ll only use it for one in this project.&#160; The code for this class is pretty simple:</p>  <pre class="csharpcode">  <span class="kwrd">public</span> <span class="kwrd">class</span> ServiceResultReceiver extends ResultReceiver {
+    <span class="kwrd">private</span> Receiver mReceiver;
+     
+      <span class="kwrd">public</span> ServiceResultReceiver(Handler handler) {
+          super(handler);
+      }
+   
+      <span class="kwrd">public</span> <span class="kwrd">void</span> setReceiver(Receiver receiver) {
+          mReceiver = receiver;
+      }
+   
+      <span class="kwrd">public</span> <span class="kwrd">interface</span> Receiver {
+          <span class="kwrd">public</span> <span class="kwrd">void</span> onReceiveResult(<span class="kwrd">int</span> resultCode, Bundle resultBundle);
+      }
+   
+      @Override
+      <span class="kwrd">protected</span> <span class="kwrd">void</span> onReceiveResult(<span class="kwrd">int</span> resultCode, Bundle resultBundle) {
+          <span class="kwrd">if</span> (mReceiver != <span class="kwrd">null</span>) {
+              mReceiver.onReceiveResult(resultCode, resultBundle);
+          }
+      }
+  }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The most important parts are the <strong>Receiver </strong>interface that is exposed, and the <strong>onReceiveResult</strong> method which calls the <strong>onReceiveResult</strong> method on the <strong>Receiver</strong>.&#160; Let’s go back to the <strong>MainActivity</strong> class and add a <strong>ServiceResultReceiver</strong> as a private member variable as well as making the class implement <strong>ServiceResultReceiver.Receiver</strong>:</p>
+
+<pre class="csharpcode">  <span class="kwrd">public</span> <span class="kwrd">class</span> MainActivity extends ListActivity implements ServiceResultReceiver.Receiver {
+
+    <span class="kwrd">private</span> ServiceResultReceiver mReceiver;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you may notice that Eclipse is complaining that your class needs to implement a method.&#160; Specifically, you need to implement the <strong>onReceiveResult </strong>method.&#160; Let’s go ahead and add that to our class, but don’t worry about implementing it, we’ll take care of that later:</p>
+
+<pre class="csharpcode">    @Override
+    <span class="kwrd">public</span> <span class="kwrd">void</span> onReceiveResult(<span class="kwrd">int</span> resultCode, Bundle resultBundle) {        
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The next thing we want to do is implement our <strong>IntentService</strong>.&#160; Add a new class to your project named <strong>UrlFetchService</strong> and have it extend <strong>android.app.IntentService</strong>.&#160; Next we’re going to add a few constants to this class:</p>
+
+<pre class="csharpcode">    <span class="rem">// Status Constants</span>
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final <span class="kwrd">int</span> STATUS_RUNNING = 0x1;
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final <span class="kwrd">int</span> STATUS_FINISHED = 0x2;
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final <span class="kwrd">int</span> STATUS_SUCCESS = 0x3;
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final <span class="kwrd">int</span> STATUS_ERROR = 0x4;
+    <span class="rem">// Command Constants</span>
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final <span class="kwrd">int</span> PERFORM_SERVICE_ACTIVITY = 0x5;
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final String COMMAND_KEY = <span class="str">&quot;service_command&quot;</span>;
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final String RECEIVER_KEY = <span class="str">&quot;serivce_receiver&quot;</span>;
+    <span class="kwrd">public</span> <span class="kwrd">static</span> final String SERVICE_WAS_SUCCESS_KEY = <span class="str">&quot;service_was_success&quot;</span>;
+
+    <span class="kwrd">private</span> ResultReceiver mReceiver;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>I won’t explain all of these right now, but will as we use them.&#160; Note that the last variable is actually a <strong>ResultReceiver</strong>.&#160; This is used to keep track of what the intent service should call back to when it’s finished processing.&#160; You may have noticed that again, Eclipse is complaining about the class missing necessary methods.&#160; We need to add constructors to fulfill the implementation of the <strong>IntentService</strong> so let’s add these:</p>
+
+<pre class="csharpcode">    <span class="kwrd">public</span> UrlFetchService() {
+        super(<span class="str">&quot;UrlFetchService&quot;</span>);
+    }
+
+    <span class="kwrd">public</span> UrlFetchService(String name) {
+        super(name);
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, we could technically call this intent service and make it run, but it wouldn’t do anything.&#160; The <strong>onHandleIntent</strong> method isn’t set up.&#160; Let’s set that up:</p>
+
+<pre class="csharpcode">    @Override
+    <span class="kwrd">protected</span> <span class="kwrd">void</span> onHandleIntent(Intent intent) {
+        <span class="kwrd">this</span>.mReceiver = intent.getParcelableExtra(RECEIVER_KEY);
+        <span class="kwrd">int</span> command = intent.getIntExtra(COMMAND_KEY, PERFORM_SERVICE_ACTIVITY);
+        <span class="kwrd">if</span> (<span class="kwrd">this</span>.mReceiver != <span class="kwrd">null</span>)
+            <span class="kwrd">this</span>.mReceiver.send(STATUS_RUNNING, Bundle.EMPTY);
+        <span class="kwrd">switch</span> (command) {
+            <span class="kwrd">case</span> PERFORM_SERVICE_ACTIVITY:
+                fetchUrls(intent);
+                <span class="kwrd">break</span>;
+            <span class="kwrd">default</span>:
+                <span class="kwrd">if</span> (<span class="kwrd">this</span>.mReceiver != <span class="kwrd">null</span>)
+                    mReceiver.send(STATUS_FINISHED, Bundle.EMPTY);
+        }
+        <span class="kwrd">this</span>.stopSelf();
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, we’re pulling the <strong>Receiver</strong> out of the intent passed into the service as well as getting the command.&#160; We then send a message to the <strong>Receiver</strong> saying that the service is running (that’s the <strong>STATUS_RUNNING </strong>flag).&#160; Finally, we do a switch based off of <strong>command</strong> and provided it matches this specific service (<strong>PERFORM_SERVICE_ACTIVITY)</strong> we run a method named <strong>fetchUrls</strong>.&#160; If not, we send a message to the <strong>Receiver</strong> that we’re done.&#160; Note that this means we would use one <strong>IntentService</strong> to do numerous things.&#160; Each different thing would just have a different command.&#160; For the <strong>fetchUrls</strong> method, there is a fair amount of code we’ll go step by step:</p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> <span class="kwrd">void</span> fetchUrls(Intent intent) {
+        boolean fetchFailed = <span class="kwrd">false</span>;
+        HashMap&lt;String, String&gt; urlMap = <span class="kwrd">new</span> HashMap&lt;String, String&gt;();
+        <span class="kwrd">try</span> {
+            URL url = <span class="kwrd">new</span> URL(<span class="str">&quot;http://urlshortener.azurewebsites.net/api-getall&quot;</span>);
+            HttpURLConnection urlConnection = (HttpURLConnection) url
+                    .openConnection();
+            <span class="kwrd">try</span> {
+                InputStream <span class="kwrd">in</span> = <span class="kwrd">new</span> BufferedInputStream(
+                        urlConnection.getInputStream());
+
+                BufferedReader bufferReader = <span class="kwrd">new</span> BufferedReader(<span class="kwrd">new</span> InputStreamReader(<span class="kwrd">in</span>));
+                StringBuilder stringBuilderResponse = <span class="kwrd">new</span> StringBuilder();
+                String line;
+                <span class="kwrd">while</span> ((line = bufferReader.readLine()) != <span class="kwrd">null</span>) {
+                    stringBuilderResponse.append(line);
+                }
+                <span class="rem">//Java needs brackets to surround the JSON so we're adding them manually</span>
+                JSONArray jsonArray = <span class="kwrd">new</span> JSONArray(<span class="str">&quot;[&quot;</span> + stringBuilderResponse.toString()
+                        + <span class="str">&quot;]&quot;</span>);
+                <span class="rem">//Get the array of URLs</span>
+                JSONObject urls = jsonArray.getJSONObject(0).getJSONObject(
+                        <span class="str">&quot;Urls&quot;</span>);
+                <span class="rem">//Iterate over all of the URLs and add them to the URL hashmap</span>
+                Iterator iter = urls.keys();
+                <span class="kwrd">while</span> (iter.hasNext()) {
+                    String key = (String) iter.next();
+                    String <span class="kwrd">value</span> = urls.getString(key);
+                    urlMap.put(key, <span class="kwrd">value</span>);
+                }    
+            } <span class="kwrd">catch</span> (Exception ex) {
+                Log.e(<span class="str">&quot;UrlFetchService&quot;</span>, <span class="str">&quot;Error getting JSON from Server: &quot;</span> + ex.getMessage());
+                fetchFailed = <span class="kwrd">true</span>;
+            } <span class="kwrd">finally</span> {
+                urlConnection.disconnect();
+            }
+        } <span class="kwrd">catch</span> (Exception ex) {
+            Log.e(<span class="str">&quot;UrlFetchService&quot;</span>, <span class="str">&quot;Error opening HTTP Connection: &quot;</span> + ex.getMessage());
+            fetchFailed = <span class="kwrd">true</span>;
+        }
+        <span class="rem">//Provided a result receiver was sent in, send a response back</span>
+        <span class="kwrd">if</span> (mReceiver != <span class="kwrd">null</span>) {
+            <span class="kwrd">if</span> (fetchFailed) { <span class="rem">// error</span>
+                mReceiver.send(STATUS_ERROR, Bundle.EMPTY);
+                <span class="kwrd">this</span>.stopSelf();
+                mReceiver.send(STATUS_FINISHED, Bundle.EMPTY);
+            } <span class="kwrd">else</span> {
+                Bundle bundle = <span class="kwrd">new</span> Bundle();
+                bundle.putBoolean(SERVICE_WAS_SUCCESS_KEY, <span class="kwrd">true</span>);
+                <span class="rem">//put the urlMap into the bundle</span>
+                bundle.putSerializable(<span class="str">&quot;urlMap&quot;</span>, urlMap);
+                mReceiver.send(STATUS_SUCCESS, bundle);
+                <span class="kwrd">this</span>.stopSelf();
+                mReceiver.send(STATUS_FINISHED, Bundle.EMPTY);
+            }
+        } <span class="kwrd">else</span> {
+            <span class="kwrd">this</span>.stopSelf();
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>First, we open a <strong>HttpUrlConnection</strong> using the URL to our service’s <strong>getAll</strong> method.&#160; We then create a <strong>BufferedReader</strong> from the <strong>InputStream</strong> from the connection.&#160; We then read that data into a <strong>StringBuilder</strong>.&#160; Because Java’s <strong>JSONArray</strong> class has an issue with JSON not being properly formatted with braces, we are manually adding them to the data and reading that into a <strong>JSONArray</strong>.&#160; We then iterate through that array and get each URL’s slug and full URL value.&#160; Then we have code to handle any exceptions that might have occurred.&#160; Lastly, we send a response to the <strong>Receiver</strong> depending on if we had a success or not.&#160; If it was a success, we pass over the <strong>HashMap</strong> containing the slugs and full URLs.&#160; Now we just need to handle this back in our <strong>MainActivity</strong>’s <strong>onResultReceived</strong> method.&#160; </p>
+
+<pre class="csharpcode">    <span class="kwrd">public</span> <span class="kwrd">void</span> onReceiveResult(<span class="kwrd">int</span> resultCode, Bundle resultBundle) {
+        <span class="kwrd">switch</span> (resultCode) {
+        <span class="kwrd">case</span> UrlFetchService.STATUS_RUNNING:
+            <span class="rem">// Don't do anything, the service is running</span>
+            <span class="kwrd">break</span>;
+        <span class="kwrd">case</span> UrlFetchService.STATUS_SUCCESS:
+            boolean wasSuccess = resultBundle
+                    .getBoolean(UrlFetchService.SERVICE_WAS_SUCCESS_KEY);
+            <span class="kwrd">if</span> (wasSuccess) {
+                <span class="rem">//Success, update the ListView</span>
+                HashMap&lt;String, String&gt; urlMap = (HashMap&lt;String, String&gt;) 
+                        resultBundle.getSerializable(<span class="str">&quot;urlMap&quot;</span>);
+                showUrlsInListView(urlMap);
+            } <span class="kwrd">else</span> {
+                <span class="rem">// Failure, show error message</span>
+                Toast.makeText(getApplicationContext(),
+                        <span class="str">&quot;There was an error fetching the URL data.  Please try again later.&quot;</span>
+                        , Toast.LENGTH_LONG).show();
+            }
+            <span class="kwrd">break</span>;
+        <span class="kwrd">case</span> UrlFetchService.STATUS_FINISHED:
+            <span class="kwrd">break</span>;
+        <span class="kwrd">case</span> UrlFetchService.STATUS_ERROR:
+            <span class="rem">//Error returned from service, show and error message</span>
+            Toast.makeText(getApplicationContext(), <span class="str">&quot;There was an error fetching the URL data.&quot;</span>
+                    +<span class="str">&quot;Please try again later.&quot;</span>,
+                    Toast.LENGTH_LONG).show();
+            <span class="kwrd">break</span>;
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>We’re doing a switch off the result code sent back in.&#160; For each of these we’re using the constants we set up in <strong>UrlFetchService</strong>.&#160; If there was an error or we did not get back a success message, we show a <strong>Toast</strong> informing the user.&#160; If it was a success, we pull the <strong>HashMap</strong> out of the <strong>Bundle</strong> and call <strong>showUrlsInListView</strong> to update the view.&#160; </p>
+
+<pre class="csharpcode">    <span class="kwrd">private</span> <span class="kwrd">void</span> showUrlsInListView(HashMap&lt;String, String&gt; urlMap) {                
+        TreeSet&lt;String&gt; treeSetKeys = <span class="kwrd">new</span> TreeSet&lt;String&gt;(urlMap.keySet());
+        String[] keys = (String[]) treeSetKeys.toArray(<span class="kwrd">new</span> String[treeSetKeys.size()]);
+        ArrayAdapter adapter = <span class="kwrd">new</span> ArrayAdapter&lt;String&gt;(<span class="kwrd">this</span>,
+                android.R.layout.simple_list_item_1, keys);
+        setListAdapter(adapter);
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re putting the Slugs from our <strong>urlMap</strong> into a <strong>TreeSet</strong> so they will be sorted alphabetically.&#160; Then, we’re using those keys to instantiate a new <strong>ArrayAdapter</strong> and setting it as the adapter on the <strong>List</strong>.&#160; We have two things left to do:&#160; start the service, and tell Android we’re running a service.&#160; First, go to the <strong>onCreate</strong> method in <strong>MainActivity</strong>:</p>
+
+<pre class="csharpcode">    @Override
+    <span class="kwrd">public</span> <span class="kwrd">void</span> onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);        
+        <span class="rem">//Create a result receiver to handle service result call backs</span>
+        mReceiver = <span class="kwrd">new</span> ServiceResultReceiver(<span class="kwrd">new</span> Handler());
+        mReceiver.setReceiver(<span class="kwrd">this</span>);        
+        final Intent serviceIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_SYNC, <span class="kwrd">null</span>, 
+                getApplicationContext(), UrlFetchService.<span class="kwrd">class</span>);
+        <span class="rem">// put the specifics for the submission service commands</span>
+        serviceIntent.putExtra(UrlFetchService.RECEIVER_KEY, mReceiver);
+        serviceIntent.putExtra(UrlFetchService.COMMAND_KEY, UrlFetchService.PERFORM_SERVICE_ACTIVITY);
+        <span class="rem">//Start the service</span>
+        startService(serviceIntent);
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re creating a new <strong>Receiver</strong> and telling it that this <strong>Activity</strong> will handle any call backs.&#160; Then we instantiate our <strong>ServiceIntent</strong>, fill it with extras, and start it.&#160; The last few changes need to occur to the <strong>AndroidManifest.xml </strong>file.&#160; These are easily the most forgettable and frustrating changes because if you forget them, you don’t really get tipped off that you forgot them (at least not easily).&#160; Add this under the <strong>uses-sdk</strong> line:</p>
+
+<pre class="csharpcode">     &lt;uses-permission android:name=<span class="str">&quot;android.permission.INTERNET&quot;</span> /&gt;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This tells Android, and anyone that installs your app, that it needs internet permissions.&#160; Lastly, below <strong>&lt;/activity&gt;</strong> put this to let Android know about your service:</p>
+
+<pre class="csharpcode">     &lt;service android:name=<span class="str">&quot;.services.UrlFetchService&quot;</span>/&gt;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your app, after a second you should see the URL slugs appear in your list:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Shortifier List of URLs" alt="Android Shortifier List of URLs" src="http://chrisrisner.com/upload/shortifier-android-list-of-urls.jpg" width="276" height="253" /></p>
+
+<p>If you’d like to <a title="Shortifier Android Part 1" href="http://chrisrisner.com/upload/ShortifierDemo-android-part1.zip">download the finished source code from today’s demo, you can do so here</a>.&#160; Up next, we’ll be working on displaying details on an individual shortened URL.</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

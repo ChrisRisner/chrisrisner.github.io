@@ -1,0 +1,429 @@
+---
+layout: post
+title: "iOS and Windows Azure Communication using SignalR"
+date: Thu Aug 02 2012 12:53:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, Azure, Javascript, Objective-C, Phone, Web, XCode, iOS]
+excerpt: "This article explains how to use SignalR with a native iOS client.  We'll push out a website hosting SignalR to Windows Azure Websites.  This SignalR site will just keep track of the number of hits the site receives.  Then we'll develop an iOS client, using a native objective-C SignalR library, to hit that site.  "
+logoUrl: null
+keywords: SignalR,iOS,iOS with SignalR,Windows Azure Websites,Azure,iOS and Azure,async communication with iOS,push to iOS,ObjC,Objective-C,Objective C
+filepath: 2012-08-02-iOS-and-Windows-Azure-Communication-using-SignalR.html
+disqus_identifier: iOS-and-Windows-Azure-Communication-using-SignalR
+---
+<p><img style="margin: 0px 0px 15px 5px; display: inline; float: right" title="Windows Azure" alt="Windows Azure" align="right" src="http://chrisrisner.com/upload/windowsazurevertical.jpg" /><strong>UPDATE:  Get a <a href="http://aka.ms/iOSwithSignalRfreeTrial">free trial for Windows Azure Websites here.</a></strong><br /><br />A few weeks ago, I was talking with one of my teammates, <a title="Brady Gaster" href="http://www.bradygaster.com/">Brady</a>, about server to client communication and he introduced me to <a title="SignalR for .NET" href="http://signalr.net/">SignalR</a>.&#160; SignalR is a library to facilitate asynchronous communication from a server to a client (as opposed to from a client to a server).&#160; If you haven’t heard about SignalR yet, I would highly recommend <a title="Brady&#39;s Arizona SignalR Presentation" href="http://azgroups.looplogic.com/2012-brady-gaster-signalr-windows-azure">watching Brady’s presentation from a DevCamp in Arizona</a>.&#160; If you’d rather skip the video, we can just say that the goal of SignalR is to make persistent HTTP connections super easy.&#160; What that means is that instead of just one way communications from a client to the server, the server would be able to communicate with the client really easily.&#160; Today we’ll look at how to create the server side component in .NET and how to consume it from either JavaScript or, more importantly, Objective-C.</p>  <p><strong><font size="4">An Example Hub</font></strong></p>  <p>So let’s take a look at this in action.&#160; If you navigate to <a title="http://msdpe-signalrconnect.azurewebsites.net/HitCounter.html" href="http://msdpe-signalrconnect.azurewebsites.net/HitCounter.html">http://msdpe-signalrconnect.azurewebsites.net/HitCounter.html</a> you’ll see an example of SignalR in action.&#160; I’ll warn you, at the time of writing, SignalR runs a little slow in <a href="http://aka.ms/iOSwithSignalRfreeTrial">Windows Azure Websites</a> (as opposed to Cloud Services or a VM) but remember that all of this stuff is in preview / pre-release.&#160; So open that URL in a few different browser windows.&#160; If you want the full affect, then cascade each browser window so you can see the text update as you refresh one of them.&#160; This site is just a simple hit counter that keeps track of how many times the web page has been hit.&#160; Hit it once and it will say “This site has had 1 hit.”&#160; Hit it again and that updates to 2.&#160; If you’ve cascaded a few browsers with that page open, then you’ll see that when you refresh one of them, it will update them all.&#160; The <a title="AZ SignalR Code" href="https://github.com/bradygaster/AZGroups-SignalR-Azure">code for this is actually incredibly simple and can be found on GitHub</a>.&#160; This is actually the sample code that Brady made for the presentation mentioned above.&#160; Opening this (in Visual Studio 2012 Beta), you will see several solution folders.&#160; The only thing we’re concerned with is the <strong>Basics/BasicExamples</strong> project.&#160; There are actually two “endpoints” here:&#160; <strong>UserCounterConnection</strong> and <strong>HitCounterHub</strong>.&#160; Today we’re just going to look at the hit counter.&#160; If you open up <strong>Hubs/HitCounterHub.cs</strong> you’ll see the following code:</p>  <pre class="csharpcode">    [HubName(<span class="str">&quot;hitCounter&quot;</span>)]
+    <span class="kwrd">public</span> <span class="kwrd">class</span> HitCounterHub : Hub
+    {
+        <span class="kwrd">static</span> <span class="kwrd">int</span> _hitCount;
+
+        <span class="kwrd">public</span> <span class="kwrd">void</span> addHit()
+        {
+            _hitCount += 1;
+            Clients.showHitCount(_hitCount);
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Once you’ve included the proper libraries, that’s all you need to do to set up a SignalR <strong>Hub</strong>.&#160; This hub has one method that clients can call on it: <strong>addHit</strong>.&#160; That method adds to an internal counter and then calls <strong>showHitCount</strong> on all of the connected clients.&#160; Now all we have to do is implement a client that uses this.&#160; Let’s start with JavaScript.</p>
+
+<p><strong><font size="4">The JavaScript Client</font></strong></p>
+
+<p>If you open up <strong>HitCounter.html</strong>, you’ll see how amazingly simple it is to connect to the hub:</p>
+
+<pre class="csharpcode">    <span class="kwrd">&lt;</span><span class="html">div</span> <span class="attr">id</span><span class="kwrd">=&quot;currentHitCount&quot;</span><span class="kwrd">&gt;&lt;/</span><span class="html">div</span><span class="kwrd">&gt;</span>
+
+    <span class="kwrd">&lt;</span><span class="html">script</span> <span class="attr">type</span><span class="kwrd">=&quot;text/javascript&quot;</span><span class="kwrd">&gt;</span>
+        $(<span class="kwrd">function</span> () {
+            <span class="kwrd">var</span> hub = $.connection.hitCounter;
+            $.extend(hub, {
+                showHitCount: <span class="kwrd">function</span> (hitCount) {
+                    <span class="kwrd">if</span> (hitCount &gt; 1) {
+                        $(<span class="str">'#currentHitCount'</span>)
+                            .html(<span class="str">&quot;This site has had &quot;</span> + hitCount + <span class="str">&quot; hits.&quot;</span>);
+                    }
+                    <span class="kwrd">else</span> {
+                        $(<span class="str">'#currentHitCount'</span>)
+                            .html(<span class="str">&quot;This site has had &quot;</span> + hitCount + <span class="str">&quot; hit.&quot;</span>);
+                    }
+                }
+            });
+            $.connection.hub.start(<span class="kwrd">function</span> () {
+                hub.addHit();
+            });
+        });
+    <span class="kwrd">&lt;/</span><span class="html">script</span><span class="kwrd">&gt;</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>First you get an instance of the hitCounter hub.&#160; Then you extend that hub to handle the <strong>showHitCount</strong> method.&#160; That method just updates the <strong>currentHitCount div</strong> which is above the javascript.&#160; Last, you start the hub and call <strong>addHit</strong> on the hub once it’s finished starting.&#160; There really isn’t much more to say about this but that it’s easy.&#160; </p>
+
+<p>For the purposes of this demo, I created a new website in the Windows Azure portal.&#160; Once that site is provisioned, you just need to publish the <strong>BasicsExample </strong>project to the website.&#160; For an example on <a title="Setting up a new Windows Azure Website" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-1--The-URL-Shortener">setting up a new Windows Azure Website and pushing a site up to it, check out this walkthrough I posted a couple weeks ago</a>.&#160; The walkthrough uses GIT to push the code to the server, however, since this is a .NET site, you could <a title="Deploying with WebDeploy" href="https://www.windowsazure.com/en-us/develop/net/tutorials/web-site-with-sql-database/">more easily do it using Web Deploy</a> (look for “Deploy the application to Windows Azure”).&#160; With that done, we can&#160; get into the iOS stuff now.</p>
+
+<p><strong><font size="4">The iOS Client</font></strong></p>
+
+<p>Now if you had to implement the SignalR backend in Objective-C, you wouldn’t be reading this article because I wouldn’t have written it.&#160; Thankfully, someone has already gone through the hard work of doing that for us.&#160; Released by a <a title="GitHub for DyKnow" href="https://github.com/DyKnow">team from a company named DyKnow</a>, <a title="SignalR-ObjC on GitHub" href="https://github.com/DyKnow/SignalR-ObjC">SignalR-ObjC is an active project on GitHub</a> that facilitates making SignalR connections from an iOS or OSX client.&#160; The <a title="Documentation for ObjC SignalR" href="https://github.com/DyKnow/SignalR-ObjC">documentation on the Git site</a> does leave something to be desired but you should be able to stumble your way through connecting SignalR to a project.&#160; Or you can just follow these steps.&#160; First, install <a title="CocoaPods" href="http://cocoapods.org/">Cocoapods</a>.&#160; This can be done from the command line by executing this:</p>
+
+<pre class="csharpcode">     $ [sudo] gem install cocoapods
+     $ pod setup</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now that Cocoapods is installed, you need to add a <strong>podfile</strong> to your project directory.&#160; Navigate to the root of your XCode project and create a new file named <strong>podfile</strong> and fill it with the following contents:</p>
+
+<pre class="csharpcode">  platform :ios, <span class="str">'5.0'</span>
+  pod <span class="str">'SignalR-ObjC'</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you leave off the “, ‘5.0’” and try to install the pods, you’ll end up getting this error:</p>
+
+<p>&#160;&#160;&#160;&#160; <font color="#ff0000">[!] SignalR-ObjC (0.5.2) is not compatible with iOS 4.3.</font>
+
+  <br /></p>
+
+<p>I’m not exactly sure why that is.&#160; If you create a new project in XCode (today) it isn’t set to compile for 4.3.&#160; There must be some specification in the pod that doesn’t like how a default project is set up.&#160; Fixing this is as easy as leaving the “, ‘5.0’” in your podfile as part of the platform.&#160; After that, execute this command in the terminal (after you’ve navigated to your root directory):</p>
+
+<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; $pod install</p>
+
+<p>You should see something like this for the output:</p>
+
+<pre class="csharpcode">    Updating spec repo `master<span class="str">'
+    Installing AFNetworking (1.0RC1)
+    Installing SignalR-ObjC (0.5.2)
+    Generating support files
+    [!] From now on use `projectname.xcworkspace'</span>.
+    -&gt; Integrating `libPods.a<span class="str">' into target `projectname'</span> of Xcode project `projectname.xcodeproj'.</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This installs both the SIgnalR-ObjC dependency and the AFNetworking library which the SignalR one depends on.&#160; Also, note that it has created a new workspace (in this case named <strong>projectname.xcworkspace</strong>) and instructs you to use that from now on.&#160; If you had your project open in XCode, close that and open the newly generated workspace.&#160; That workspace will contain a <strong>Pods </strong>project and your original project.&#160; For my sample project, I’ve just created a simple <strong>Single View Application</strong>.&#160; To the storyboard for my single view controller, I’ve added a label and a button:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="The storyboard with controls" alt="The storyboard with controls" src="http://chrisrisner.com/upload/signalR-hitCounter-storyBoard.jpg" /></p>
+
+<p>After adding your UI elements, you’ll need to tie the button to an <strong>IBAction</strong> and the label to an <strong>IBOutlet</strong>.&#160; After doing so, here’s the code in my <strong>ViewController.h</strong>:</p>
+
+<pre class="csharpcode">    @<span class="kwrd">interface</span> ViewController : UIViewController
+        - (IBAction)tapAddHit:(id)sender;
+        @property (weak, nonatomic) IBOutlet UILabel *txtHitCount;
+    @end</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Flipping over to the <strong>ViewController.m</strong> you’ll need to add an import for SignalR:</p>
+
+<pre class="csharpcode">    #import <span class="str">&quot;SignalR.h&quot;</span></pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>After the <strong>txtHitCount</strong> has been synthesized, we’ll add an instance of <strong>SRHubProxy</strong> to keep track of our hub:</p>
+
+<pre class="csharpcode">    @implementation ViewController
+    @synthesize txtHitCount;
+    SRHubProxy *myHub;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now in the <strong>viewDidLoad</strong> method, we’ll create a new connection, get a hub for the hit counter, specify handlers for client side methods and then start the connection:</p>
+
+<pre class="csharpcode">    - (<span class="kwrd">void</span>)viewDidLoad
+    {
+        [super viewDidLoad];
+        <span class="rem">// Do any additional setup after loading the view, typically from a nib.</span>
+        SRHubConnection *connection = [SRHubConnection connectionWithURL:
+                                       <span class="str">@&quot;http://msdpe-signalrconnect.azurewebsites.net&quot;</span>];
+        myHub = [connection createProxy:<span class="str">@&quot;HitCounter&quot;</span>];
+        [myHub on:<span class="str">@&quot;showHitCount&quot;</span> perform:self selector:@selector(notificationReceived:)];
+        connection.started = ^{
+            [myHub invoke:<span class="str">@&quot;addHit&quot;</span> withArgs:nil];
+        };
+        [connection start];
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Notice that the connection just specifies the root URL of our site.&#160; The hub proxy then specifies the hub name.&#160; Note the capitalization here as it’s a little different than the javascript in the html page (that had “hitCount” and starts with a lower letter).&#160; The <strong>on</strong> call in between <strong>createProxy</strong> and <strong>start</strong> is how well tell it what method should be called whenever <strong>showHitCount</strong> is called by the server.&#160; Finally, we set the connection’s <strong>started</strong> property to be a block that will be called when <strong>start</strong> is finished.&#160; Last, we call <strong>start</strong> on the connection.&#160; Now we need to implement that <strong>notificationReceived</strong> method that will be called whenever <strong>showHitCount</strong> is called by the server:</p>
+
+<pre class="csharpcode">    - (<span class="kwrd">void</span>)notificationReceived:(id)message
+    {
+        <span class="rem">//do something with the message</span>
+        NSLog(<span class="str">@&quot;%@&quot;</span>,message);
+        txtHitCount.text = [<span class="str">@&quot;There have been &quot;</span> stringByAppendingFormat:<span class="str">@&quot;%@ views&quot;</span>, message];
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>All we’re doing is logging what is sent by the server and then using the same value to set the text of our label.&#160; The server just sends a number over when it calls <strong>showHitCount</strong> so we’ll do a little formatting and show it.&#160; Now we could be done, but so you can see things in action a little bit better, let’s make tapping the “Add Hit” button add another hit to the server:</p>
+
+<pre class="csharpcode">    - (IBAction)tapAddHit:(id)sender {
+        [myHub invoke:<span class="str">@&quot;addHit&quot;</span> withArgs:nil];
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when your app runs, after you tap the button, you should see the hit count increase in the app as well as in any browsers that are connected (it may take a few seconds):</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Hit Count Increasing" alt="Hit Count Increasing" src="http://chrisrisner.com/upload/signalR-hitCounter-afterHit.jpg" /></p>
+
+<p>&#160;</p>
+
+<p>And that’s it.&#160; Now we have a simple iOS app connecting to a server side hub with SignalR.&#160; I completely glazed over discussing any of the internals of how SignalR works, so if you’d like to know more about that, I’d start by <a title="Scott Hanselman on SignalR" href="http://www.hanselman.com/blog/AsynchronousScalableWebApplicationsWithRealtimePersistentLongrunningConnectionsWithSignalR.aspx">reading this article by Scott Hanselman</a>.&#160; The guys working on SignalR have some pretty ambitious plans for the technology (think 100k persistent connections when they release 1.0) so its bound to get faster and better at doing what it does.&#160; I’m hoping to follow this up with a more advanced sample in the next few weeks.</p>
+
+<p>&#160;</p>
+
+<p>You can <a title="iOS SignalR client source code" href="http://chrisrisner.com/upload/SignalR-TestProject.zip">download the iOS client source code from this article here</a>.</p>

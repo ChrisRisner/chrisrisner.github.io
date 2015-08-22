@@ -1,0 +1,220 @@
+---
+layout: post
+title: "How to Quickly Show a Gravatar"
+date: Mon Mar 01 2010 15:34:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Veritas, Web, Javascript]
+excerpt: "Gravatar,.net,javascript,ajax"
+logoUrl: null
+keywords: Gravatar,.net,javascript,ajax
+filepath: 2010-03-01-How-to-Quickly-Show-a-Gravatar.html
+disqus_identifier: How-to-Quickly-Show-a-Gravatar
+---
+<p><a onclick="return hs.expand(this)" class="highslide" href="http://chrisrisner.com/upload/634030785250603191.jpg"><img style="border-right-width: 0px; margin: 0px 0px 0px 10px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="Gravatars" border="0" alt="Gravatars" align="right" src="http://chrisrisner.com/upload/634030785250603191.jpg" width="52" height="244" /></a> While most of what these people add to the internet is absolute garbage, many people like other people to know when they’ve said something.&#160; One of the ways people are doing this is through the use of Gravatars.&#160; <a title="Gravatars" href="http://gravatar.com">Gravatars</a> are small images that (can) uniquely identify you as a commenter or contributor on a website, typically a blog.&#160; For example, if you go and look at the comments on this site, you’ll see that any comment I’ve made has a small image of morlock next to it.&#160; Any other site that I comment on that uses gravatars will show the exact same image.&#160; Due to the way it’s set up, where a site will set an image’s source to be a gravatar.com url, I could change my image on all of these sites whenever I want to.</p>  <p>Recently while commenting on a session for <a title="Mix2010" href="http://live.visitmix.com/">Mix, a conference I’m attending</a> in a couple weeks, I noticed that as soon as you entered your email address, it would show your gravatar.&#160; Figuring that this would be a nice little addition to my site, I added it a few days ago.&#160; Since many people do use Gravatars, I thought I’d demonstrate an easy way to add this to your web site.&#160; The sample I’m showing specifically applies to ASP .Net MVC, but it could be taken and easily altered for other applications.&#160; </p>  <p>Our example will consist of three parts:&#160; the view, the javascript, and the controller method.</p>  <p>The View is very simple and just contains a field that we can put our email address in and an image tag that can have it’s source set later:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;</span><span class="html">dl</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span>     <span class="kwrd">&lt;</span><span class="html">dt</span><span class="kwrd">&gt;&lt;</span><span class="html">label</span> <span class="attr">for</span><span class="kwrd">=&quot;EmailAddress&quot;</span><span class="kwrd">&gt;</span>Email Address:<span class="kwrd">&lt;/</span><span class="html">label</span><span class="kwrd">&gt;&lt;/</span><span class="html">dt</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>     <span class="kwrd">&lt;</span><span class="html">dd</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   4:  </span>          <span class="asp">&lt;%</span>=Html.TextBox(<span class="str">&quot;Email&quot;</span>)<span class="asp">%&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>     <span class="kwrd">&lt;/</span><span class="html">dd</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span><span class="kwrd">&lt;/</span><span class="html">dl</span><span class="kwrd">&gt;</span>    </pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span><span class="kwrd">&lt;</span><span class="html">br</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">   8:  </span><span class="kwrd">&lt;</span><span class="html">img</span> <span class="attr">class</span><span class="kwrd">=&quot;newgravatar&quot;</span> <span class="attr">title</span><span class="kwrd">=&quot;Gravatar&quot;</span><span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Our javascript is a bit more complex and shows an example of using ajax to go back to the server to get the path to our email address’ gravatar:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>window._emailRegex = /^[a-z0-9]+([-+\.]*[a-z0-9]+)*@[a-z0-9]+([-\.][a-z0-9]+)*$/i;</pre>
+
+  <pre><span class="lnum">   2:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>$(document).ready(<span class="kwrd">function</span>() {</pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="rem">//Gravatar stuff</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    $(<span class="str">'input[name=Email]'</span>).blur(<span class="kwrd">function</span>() {</pre>
+
+  <pre><span class="lnum">   6:  </span>        <span class="kwrd">var</span> email = $(<span class="kwrd">this</span>).val();</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        <span class="kwrd">if</span> (email.indexOf(<span class="str">&quot;@&quot;</span>) &gt; 0 &amp;&amp; window._emailRegex.test(email)) {</pre>
+
+  <pre><span class="lnum">   8:  </span>            $.post(<span class="str">'/Home/GetGravatarPath'</span>, { value: email }, <span class="kwrd">function</span>(gravatarPath) {</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>                $(<span class="str">'img.newgravatar'</span>).attr(<span class="str">'src'</span>, gravatarPath);</pre>
+
+  <pre><span class="lnum">  10:  </span>            });</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        }</pre>
+
+  <pre><span class="lnum">  12:  </span>    });</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>});</pre>
+</div>
+
+<p><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>You’ll notice here that we’re also checking up against a regex to make sure the email address entered is valid.&#160; Once we’re sure it is, we’ll post back to a method on our Home controller.&#160; The result of that method call is then set to the source attribute of the image with newgravatar as it’s class.</p>
+
+<p>Lastly, we have our controller method:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">string</span> GetGravatarPath(<span class="kwrd">string</span> <span class="kwrd">value</span>)</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>     <span class="kwrd">return</span> Gravatar.GetGravatarURL(<span class="kwrd">value</span>);</pre>
+
+  <pre><span class="lnum">   4:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>and the class that method calls to actually get the path:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> Gravatar</pre>
+
+  <pre><span class="lnum">   2:  </span>{</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>     <span class="kwrd">public</span> <span class="kwrd">static</span> <span class="kwrd">string</span> GetGravatarURL(<span class="kwrd">string</span> emailAddress)</pre>
+
+  <pre><span class="lnum">   4:  </span>     {</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>          <span class="kwrd">string</span> imageUrl = <span class="str">&quot;http://www.gravatar.com/avatar.php?&quot;</span>;</pre>
+
+  <pre><span class="lnum">   6:  </span>          MD5CryptoServiceProvider md5 = <span class="kwrd">new</span> MD5CryptoServiceProvider();</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>          UTF8Encoding encoder = <span class="kwrd">new</span> UTF8Encoding();</pre>
+
+  <pre><span class="lnum">   8:  </span>          <span class="kwrd">byte</span>[] hashedBytes = md5.ComputeHash(encoder.GetBytes(emailAddress));</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>&#160;</pre>
+
+  <pre><span class="lnum">  10:  </span>          StringBuilder sb = <span class="kwrd">new</span> StringBuilder(hashedBytes.Length * 2);</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>          <span class="kwrd">for</span> (<span class="kwrd">int</span> i = 0; i &lt; hashedBytes.Length; i++)</pre>
+
+  <pre><span class="lnum">  12:  </span>          {</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>               sb.Append(hashedBytes[i].ToString(<span class="str">&quot;X2&quot;</span>).ToLower());</pre>
+
+  <pre><span class="lnum">  14:  </span>          }</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>&#160;</pre>
+
+  <pre><span class="lnum">  16:  </span>          imageUrl += <span class="str">&quot;gravatar_id=&quot;</span> + sb.ToString();</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>          imageUrl += <span class="str">&quot;&amp;size=40&quot;</span>;</pre>
+
+  <pre><span class="lnum">  18:  </span>          <span class="kwrd">return</span> imageUrl;</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>     }</pre>
+
+  <pre><span class="lnum">  20:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>This class contains the “important” part where we actually have to build our path to the gravatar.&#160; As you can see, we can create the path without actually ever having to go to gravatar.com.&#160; Instead we just use the agreed upon algorithm and return that url.&#160; That url is then used as the image source above in our javascript.&#160; After all this, we have an “ajaxy” way of displaying our commenter's gravatars that looks pretty slick and was only 47% stolen from the Mix site.&#160; Enjoy!
+
+<p>Source code: <a title="source code download" href="http://chrisrisner.com/upload/634030788465554231.zip">download</a></p>

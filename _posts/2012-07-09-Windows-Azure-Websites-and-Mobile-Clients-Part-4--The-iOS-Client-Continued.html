@@ -1,0 +1,258 @@
+---
+layout: post
+title: "Windows Azure Websites and Mobile Clients Part 4: The iOS Client Continued"
+date: Mon Jul 09 2012 07:15:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Azure, Objective-C, Mobile, XCode, iOS]
+excerpt: "This article continues the creation of an iOS client connecting to a PHP website running on Windows Azure Websites.  The site provides URL Shortening services and our client will have the ability to display the details of a shortened URL today."
+logoUrl: null
+keywords: Xcode,Objective C,iOS,iPhone,Windows Azure,Azure,PHP on Azure,Mobile connectivity to Windows Azure
+filepath: 2012-07-09-Windows-Azure-Websites-and-Mobile-Clients-Part-4--The-iOS-Client-Continued.html
+disqus_identifier: Windows-Azure-Websites-and-Mobile-Clients-Part-4--The-iOS-Client-Continued
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/iOSImage3.png" width="158" height="296" />We left off working on our <a title="Part 3 of the iOS Client" href="http://chrisrisner.com/Windows-Azure-Websites-and-Mobile-Clients-Part-3---The-iOS-Client">iOS client for the URL Shortener</a> able to display all of the URL slugs that were saved on the server.&#160; Today we’re going to continue on by giving the user the ability to tap into a slug and see the details on that URL.&#160; You can <a title="Code For Shortifier iOS Demo" href="http://chrisrisner.com/upload/ShortifierDemo-Part1.zip">download the code that we left off from here</a>.</p>  <p>If you run the app right now, you’ll see that you can tap on an individual item in our table view and it will become highlighted, but nothing happens.&#160; Let’s first wire that up to open a new view controller.&#160; Open the <strong>MainStoryboard.storyboard</strong> and click on the only view controller there.&#160; In the menu, go to <strong>Editor –&gt; Embed In –&gt; Navigation Controller</strong>.&#160; Once that is done, you should see the nav controller show up in the storyboard and point to your view controller.</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="ViewController with Navigation Controller" alt="ViewController with Navigation Controller" src="http://chrisrisner.com/upload/shortifier-demo-new-nav-controller.jpg" /></p>  <p>Now that that is done, we need to edit our table view in order to be able to wire up a tap on an individual cell from the storyboard.&#160; Zoom in our your view controller (not the nav controller) and drag a <strong>Table View Cell</strong> from the control selector to your table view.&#160; You should end up with something that says “Prototype Cell” at the top of your table view.&#160; While cell is still highlighted, go to the <strong>Attributes Inspector</strong> and set the <strong>Identifier</strong> property to “Cell”.&#160; This will match up with the identifier we’re using in our code (specifically in the <strong>cellForRowAtIndexPath </strong>method).</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Shotifier iOS Prototype Cell" alt="Shotifier iOS Prototype Cell" src="http://chrisrisner.com/upload/shortifier-ios-prototype-cell.jpg" /></p>  <p>The last thing you’ll want to do is change the <strong>Accessory</strong> property to be “Disclosure Indicator” in the <strong>Attributes Inspector</strong> right beneath <strong>Identifier</strong>.&#160; Now when you run the app, you’ll see the Navigation Bar at the top, you’ll be able to tap on items, but still, nothing happens.&#160; Now it’s time to change that.&#160; Go back into your storyboard and drag a new <strong>View Controller</strong> from the control selector onto the work space.&#160; Then, highlight your prototype cell (you may need to zoom in to properly highlight it), and control click and drag from your cell to the new view controller.&#160; In the dialog box that comes up, choose <strong>Push</strong>.&#160; Now, when you run your app and tap on an item, you should see the screen transition to your new view controller.&#160; There is a little bit of plumbing we need to do now before we can start displaying information on the view controller though.&#160; First, in the storyboard, highlight the circular thing that is connecting the table view controller and the new view controller (this represents a <strong>Segue</strong>).&#160; When you do, you’ll be able to set an <strong>Identifier</strong> for the segue.&#160; Do that and call it “ViewUrlDetails”.&#160; This is how we can check for this segue in our code behind.</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Segue Identifier" alt="Segue Identifier" src="http://chrisrisner.com/upload/shortifier-ios-segue-editor.jpg" /></p>  <p>Now, in the <strong>Project Navigator</strong>, add a new Objective-C class to your project.&#160; Name it <strong>UrlDetailsViewController</strong> and make it extend from <strong>UIViewController</strong>.&#160; Now, go back to your storyboard and select your new view controller and in the <strong>Identity Inspector</strong>, set the class to be <strong>UrlDetailsViewController</strong>.&#160; Now, if you run the app, nothing will be different from a user perspective, however, we’ve laid the groundwork to do what we need to do in our code.&#160; Open up the <strong>UrlDetailsViewController.h </strong>file and add the following:</p>  <pre class="csharpcode">    @property (nonatomic, weak) NSString *urlSlug;
+    @property (nonatomic, weak) NSString *fullUrl;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Then in your <strong>UrlDetailsViewController.m</strong> file, you will need to synthesize these properties:</p>
+
+<pre class="csharpcode">    @synthesize urlSlug;
+    @synthesize fullUrl;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, open up your <strong>ViewController.m</strong> file and add the following method:</p>
+
+<pre class="csharpcode">    -(<span class="kwrd">void</span>)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This method will be called whenever a segue is about to occur.&#160; So, when a user taps on a cell and the “ViewUrlDetails” segue is called, this method will fire.&#160; Now, what we need to do inside of <strong>prepareForSegue</strong> is check to see what the segue that triggered the method call is.&#160; If it was the one we labeled as “ViewUrlDetails” then we want to set the <strong>urlSlug</strong> and <strong>fullUrl</strong> properties we created above.&#160; So, the method should change to this:</p>
+
+<pre class="csharpcode">    -(<span class="kwrd">void</span>)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        <span class="kwrd">if</span> ([segue.identifier isEqualToString:<span class="str">@&quot;ViewUrlDetails&quot;</span>])
+        {
+            UrlDetailsViewController *urlDetailsViewController = segue.destinationViewController;
+            UITableViewCell *cell = (UITableViewCell *)sender;
+            urlDetailsViewController.urlSlug = cell.textLabel.text;
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] <span class="kwrd">delegate</span>];
+            urlDetailsViewController.fullUrl = [appDelegate.urls objectForKey:cell.textLabel.text];       
+        }
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now we’re finally ready to start putting a UI in place.&#160; For today, our UI will consist of a few labels, text fields, and a button.&#160; Here’s what my UI looks like:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" src="http://chrisrisner.com/upload/shortifier-ios-ui-url-details.jpg" width="225" height="332" /></p>
+
+<p> We’re using text fields for the data here because in the next article, we’ll reuse this view for adding new URLs as well.&#160; For now, the text fields will all be disabled so we can use them to display data but not to edit it.&#160; Once you’ve generated your UI, use the <strong>Assistant Editor</strong> to control drag the controls to your .h file and create outlets and actions.&#160; We’re going to create a few more things than we need so we can use them later when we make things editable.&#160; You’ll need outlets for all of the text fields, the button, and the bottom two labels.&#160; You’ll need an action only for the button.</p>
+
+<pre class="csharpcode">    @property (weak, nonatomic) IBOutlet UITextField *txtUrlSlug;
+    @property (weak, nonatomic) IBOutlet UITextField *txtFullUrl;
+    @property (weak, nonatomic) IBOutlet UITextField *txtShortyUrl;
+    @property (weak, nonatomic) IBOutlet UIButton *btnGoToUrl;
+    @property (weak, nonatomic) IBOutlet UILabel *lblGoToUrl;
+    @property (weak, nonatomic) IBOutlet UILabel *lblShortyUrl;
+    - (IBAction)tapGoToUrl:(id)sender;</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The last thing we need to do is load up the data in the view controllers <strong>viewDidLoad</strong> method and handle button clicks.&#160; Let’s handle <strong>viewDidLoad </strong>first:</p>
+
+<pre class="csharpcode">    - (<span class="kwrd">void</span>)viewDidLoad
+    {
+        [super viewDidLoad];
+        self.txtUrlSlug.text = urlSlug;
+        self.txtFullUrl.text = fullUrl;
+        self.txtShortyUrl.text = [<span class="str">@&quot;http://urlshortener.azurewebsites.net/&quot;</span> stringByAppendingFormat:urlSlug];
+        self.title = <span class="str">@&quot;URL Details&quot;</span>;
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re just setting the text property for the different text fields and then setting the title on the navigation bar.&#160; Lastly, we have our <strong>tapToGoToUrl </strong>method:</p>
+
+<pre class="csharpcode">    - (IBAction)tapGoToUrl:(id)sender {
+        NSURL *url = [ [ NSURL alloc ] initWithString: 
+                      [<span class="str">@&quot;http://urlshortener.azurewebsites.net/&quot;</span> stringByAppendingFormat:urlSlug] ];
+        [[UIApplication sharedApplication] openURL:url];
+    }</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your application and tap on a URL in the table view, you’ll have all of the data loaded into the details controller and when you click on the button, you’ll be taken to the URL Shortening site.</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="URL Shortener Details" alt="URL Shortener Details" src="http://chrisrisner.com/upload/shortifier-ios-view-url.jpg" width="208" height="391" /></p>
+
+<p>&#160;</p>
+
+<p>You can <a title="Shortifier Code Part 2" href="http://chrisrisner.com/upload/ShortifierDemo-Part2.zip">download the code we finished today with from here</a>.&#160; In the next, and final article on the iOS client, we’ll alter the URL Details view controller so that we can add new URLs using our web service end points.</p>
+<p>For a free trial for Windows Azure Websites, <a href="http://aka.ms/UrlShortenerFreeWindowsAzureTrial">sign up here</a>.</p>

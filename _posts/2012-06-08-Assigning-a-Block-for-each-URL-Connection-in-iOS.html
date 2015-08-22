@@ -1,0 +1,395 @@
+---
+layout: post
+title: "Assigning a Block for each URL Connection in iOS"
+date: Thu Jun 07 2012 17:24:00 GMT-0700 (PDT)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Mobile, Objective-C, Phone, Programming, XCode, iOS]
+excerpt: "Today we'll review how to pass a block into a class that performs a NSURLConnection, store that block, and use it as a call back in the NSURLConnectionDelegate methods.  We'll then go over how to create a generic NSURLConnection handler which will store a separate block for each request and use it as the callback when the specific connection is done."
+logoUrl: null
+keywords: NSURLConnection,Blocks,NSURLConnectionDelegate,Blocks with NSURLConnection,XCode,NSMutableDictionary blocks
+filepath: 2012-06-08-Assigning-a-Block-for-each-URL-Connection-in-iOS.html
+disqus_identifier: Assigning-a-Block-for-each-URL-Connection-in-iOS
+---
+<p>I was recently working with <a title="Josh Twist: The Man, the Myth, the Legend" href="http://www.thejoyofcode.com/">Josh Twist</a> on doing some iOS development and we ran into something that neither of us hadn’t done before.&#160; Specifically, we were doing some network requests and wanted to be able to pass in a block to the class doing the NSURLConnection and have that block called when the connection finished.&#160; Josh and I managed to get this to work and <a title="How to use a block for a URL Connection" href="http://www.thejoyofcode.com/iOS_blocks_and_HTTP_requests.aspx">he’s detailed how to do that here</a>.&#160; I won’t cover everything that Josh already has but will go over this briefly so that I can explain how to use separate blocks for each URL Connection.&#160; </p>  <p><strong>What is a block?</strong>    <br />That’s a more complicated question than I’m ready to fully answer so instead, I’ll summarize.&#160; A block is a chunk of code that can be passed around (like a variable).&#160; This code can then be executed later on.&#160; So, what we want to do is pass a block of code to the class doing our URL Connection and have that code called when the connection finishes.&#160; If you want a more detailed explanation of Blocks, read <a title="iOS Block Documentation" href="http://developer.apple.com/library/ios/#documentation/cocoa/Conceptual/Blocks/Articles/00_Introduction.html">Apple’s iOS Blocks documentation</a>.</p>  <p><strong>The Problem</strong>    <br />URL Connection is (primarily) used to make asynchronous requests.&#160; That is to say that when you make a call to initWithRequest on your URLConnection, it kicks off the process.&#160; The method call initWithRequest takes in a delegate which is used to call all of the URLConnection methods to process results of the request.&#160; So, if you want to pass a block in you need to store this somewhere so that when the delegate method (didFinishLoading) is called, you can then access the block.&#160; As I said, Josh and I figured out how to do this and he’s thoroughly <a title="Josh Explains Blocks with URLConnection" href="http://www.thejoyofcode.com/iOS_blocks_and_HTTP_requests.aspx">explained it in his blog</a>.&#160; As Josh mentions he created is not threadsafe and shouldn’t be used for multiple requests.&#160; The reason for this is that if you call the class that does the URL Connection too quickly, the block storage will be overwritten, as will the receivedData object.&#160; What we want to do is store both the block and the receivedData object for each connection we create and then when the connection finishes, pull out the objects specific to that connection.&#160; Thankfully, we can do that.&#160; </p>  <p>We’ll accomplish this in two steps.&#160; First, we’ll look at storing multiple callback blocks instead of just one.&#160; Once we’ve done that, we’ll store a different receivedData object for each connection and use the correct one for the right connection.</p>  <p><strong>Step One:&#160; Storing Multiple Callback Blocks     <br /></strong>The first thing you need to do is add a NSMutableDictionary to your connection class’ @private members.&#160; If you’re going from Josh’s example (http://www.thejoyofcode.com/iOS_blocks_and_HTTP_requests.aspx), the JoshRequest class matches up with my ServiceCaller class:</p>  <pre class="csharpcode">ServiceCaller.h
+@<span class="kwrd">interface</span> ServiceCaller : NSObject &lt;NSURLConnectionDelegate&gt; {
+   @<span class="kwrd">private</span> 
+       NSMutableData* _receivedData;
+       NSMutableDictionary* callbacks;
+}
+-(ServiceCaller*) init;
+-(<span class="kwrd">void</span>) postToUrl: (NSString*) url withBody: (NSData*) body
+    withCallback: (<span class="kwrd">void</span>(^) (NSString* response)) callback;
+@end</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is the dictionary we’ll use to store our callback objects in.&#160; Now the only thing you need to change in the postToUrl method is how you store the callback:</p>
+
+<p>
+  <pre class="csharpcode">ServiceCaller.m
+-(ServiceCaller*) init {
+   callbacks = [[NSMutableDictionary alloc] init];
+   <span class="kwrd">return</span> self;
+}
+...
+-(<span class="kwrd">void</span>) postToUrl:(NSString *)url withBody:(NSData *)body 
+    withCallback: (<span class="kwrd">void</span> (^)(NSString *))callback {
+   NSMutableURLRequest* request = [NSMutableURLRequest 
+                                   requestWithURL: [NSURL URLWithString:url]];
+   [request setHTTPMethod:<span class="str">@&quot;POST&quot;</span>];    
+   NSError *error;
+   <span class="rem">// should check for and handle errors here</span>
+   [request setHTTPBody:body];
+   NSURLConnection *conn = [[NSURLConnection alloc] 
+                            initWithRequest: request <span class="kwrd">delegate</span>:self];
+   _receivedData = [NSMutableData data];
+   [callbacks setValue:callback forKey:[NSString stringWithFormat:<span class="str">@&quot;%i&quot;</span>, conn.hash]];
+}</pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>...
+
+  <br />Note here that for a key, we’re using the hash of the URLConnection object.&#160; The <a title="NSObject Hash Variable" href="https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Protocols/NSObject_Protocol/Reference/NSObject.html#//apple_ref/occ/intf/NSObject">hash variable</a> is on NSObject and is used as a table address in a hash table structure.&#160; I’m no programming language / OS expert, but from my testing so far, I haven’t run into two different URLConnections that have the same value.&#160; It would seem this value should be unique (at least in terms of a client side application that isn’t doing that many posts).&#160; As an alternative, you could always subclass the NSURLConnection class and add some sort of a Tag field where you can store your own key value (based off of a counter perhaps).
+
+  <br />Now in the connectionDidFinishLoading method, you pull the block back out of the dictionary and execute it.</p>
+
+<pre class="csharpcode">ServiceCaller.m (cont.)
+- (<span class="kwrd">void</span>)connectionDidFinishLoading:(NSURLConnection *)connection
+{   
+   NSString *txt = [[NSString alloc] initWithData:_receivedData
+                                         encoding: NSASCIIStringEncoding];
+   NSString* connectionHash = [NSString stringWithFormat:<span class="str">@&quot;%i&quot;</span>, connection.hash];
+   id test = [callbacks valueForKey:connectionHash];
+   <span class="kwrd">void</span> (^ callbackBlock)(NSString *response) = [callbacks valueForKey:[NSString stringWithFormat:<span class="str">@&quot;%i&quot;</span>, connection.hash]];
+   callbackBlock(txt);
+   [callbacks removeObjectForKey:connectionHash];
+}</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Make sure you remove the record from the dictionary after you use it.&#160; Otherwise, you’ll be left with a memory leak.</p>
+
+<p><strong>Step Two:&#160; Storing Received Data Per Connection
+    <br /></strong>What we’ve got is great, but it’s still not thread safe.&#160; The receivedData object is still being instantiated once and could be overwritten if we use the ServiceCaller class several times fast enough or have a slow response (which is entirely possible if the device is getting a poor signal).&#160; To solve this problem, instead of just storing a callback in the dictionary, we’ll make a custom object and store that there.&#160; Go ahead and add a new object that inherits from NSObject:</p>
+
+<p><strong>StateObject.h
+    <br /></strong>
+
+  <pre class="csharpcode">@<span class="kwrd">interface</span> StateObject : NSObject
+   @property (nonatomic, copy) <span class="kwrd">void</span> (^ callbackBlock)(NSString *response);
+   @property (nonatomic, retain) NSMutableData* receivedData;
+@end</pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>Pretty simple, we’re storing the same callback block that we were storing before in ServiceCall in addition to a receivedData object as mentioned before.
+  <br />
+
+  <br /><strong>StateObject.m
+    <br />
+
+    <br /></strong>
+
+  <pre class="csharpcode">@implementation StateObject
+   @synthesize receivedData;
+   @synthesize callbackBlock;
+@end</pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>Very little to this as well.&#160; Now let’s look at the changes to ServiceCaller.m (the .h will stay the same (though you can remove the receivedData private field).</p>
+
+<p><strong>ServiceCaller.m
+    <br /></strong>
+
+  <br />
+
+  <pre class="csharpcode">-(<span class="kwrd">void</span>) postToUrl:(NSString *)url withBody:(NSData *)body 
+    withCallback: (<span class="kwrd">void</span> (^)(NSString *))callback {
+   NSMutableURLRequest* request = [NSMutableURLRequest 
+                                   requestWithURL: [NSURL URLWithString:url]];
+   [request setHTTPMethod:<span class="str">@&quot;POST&quot;</span>];    
+   NSError *error;
+   <span class="rem">// should check for and handle errors here</span>
+   [request setHTTPBody:body];
+   NSURLConnection *conn = [[NSURLConnection alloc] 
+                            initWithRequest: request <span class="kwrd">delegate</span>:self];
+   StateObject* connectionState = [[StateObject alloc] init];
+   connectionState.receivedData = [[NSMutableData alloc] init];
+   [connectionState.receivedData setLength:0];
+   connectionState.callbackBlock = callback;
+   [callbacks setValue:connectionState forKey:[NSString stringWithFormat:<span class="str">@&quot;%i&quot;</span>, conn.hash]];
+}</pre>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></p>
+
+<p>The bulk of this method is the same.&#160; The changes come in after the request connection is initialized.&#160; Now, we’re initializing a new StateObject and setting its properties.&#160; Note that we’re initializing the receivedData here and not in the didReceiveResponse method which now looks like this:</p>
+
+<pre class="csharpcode">-(<span class="kwrd">void</span>)connection:(NSConnection*)conn didReceiveResponse:
+(NSURLResponse *)response 
+{
+}</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The didReceiveData method changes to pull out the receivedData object for the specific connection and append data to it:</p>
+
+<pre class="csharpcode">- (<span class="kwrd">void</span>)connection:(NSURLConnection *)connection didReceiveData:
+(NSData *)data
+{
+   StateObject* connectionState = [callbacks objectForKey:[NSString stringWithFormat:<span class="str">@&quot;%i&quot;</span>, connection.hash]];
+   [connectionState.receivedData appendData:data];
+}</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style><style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Lastly, the changes to connectionDidFinishLoading:</p>
+
+<pre class="csharpcode">- (<span class="kwrd">void</span>)connectionDidFinishLoading:(NSURLConnection *)connection
+{   
+   NSString* connectionHash = [NSString stringWithFormat:<span class="str">@&quot;%i&quot;</span>, connection.hash];    
+   StateObject* connectionState = [callbacks objectForKey:connectionHash];    
+   NSString *txt = [[NSString alloc] initWithData:connectionState.receivedData
+                                         encoding: NSASCIIStringEncoding];    
+   connectionState.callbackBlock(txt);
+   [callbacks removeObjectForKey:connectionHash];
+}</pre>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here again, pulling the StateObject out and using its properties as well as removing it when we’re done.&#160; Now you’ve got a class which, in theory, could be used for doing any of your data connections.&#160; You just pass in the specific block of code for whatever connection you’re making.&#160; One additional thing you could do is specify an error block to be called from the NSURLConnectionDelegate’s didFailWithError method.&#160; This could be stored as an additional property on the StateObject.&#160; </p>
+
+<p>You can <a title="URL Connection Block Source Code" href="http://chrisrisner.com/upload/connectionblockexample.zip">check out the source code from today here</a>.</p>
