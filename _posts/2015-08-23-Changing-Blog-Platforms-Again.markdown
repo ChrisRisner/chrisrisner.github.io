@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Reflections on 2014 and Looking at 2015"
+title: "Changing Blog Platforms Again"
 date: Sun Aug 23 2015 20:16:00 GMT-0800 (PST)
 comments: true
 status: publish
