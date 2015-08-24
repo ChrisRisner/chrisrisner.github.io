@@ -1,0 +1,77 @@
+==================================================================
+https://keybase.io/risner
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://chrisrisner.com
+  * I am risner (https://keybase.io/risner) on keybase.
+  * I have a public key with fingerprint 48D1 BF2E 0905 4113 7C37  90CA 41D2 6986 63AF B5C3
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.7.2"
+        },
+        "key": {
+            "fingerprint": "48d1bf2e090541137c3790ca41d2698663afb5c3",
+            "host": "keybase.io",
+            "key_id": "41D2698663AFB5C3",
+            "uid": "b0d871de257d6eb3f9a819fabbd39a00",
+            "username": "risner"
+        },
+        "merkle_root": {
+            "ctime": 1412867383,
+            "hash": "b311229d01d2ab045500a8362863ab28647660d7fc79b10d412d1d42a188628da323dfc040d59af812589644881e7d39324b39dcdddf1287c3c5dd688b035afd",
+            "seqno": 75954
+        },
+        "service": {
+            "hostname": "chrisrisner.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1412867455,
+    "expire_in": 157680000,
+    "prev": "9bf869ba56bde9ab660bfbdcb33bc4929da62e530fe19ef547863530776f5db9",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - https://gpgtools.org
+
+owFVkm1oHEUcxu9SU2yk+IJWMbbUbSu2jcfMzs7sTKyvPZpCKUStRFR6zOzM5NYk
+u9fdzdm7Eo0vrSnaklaipZAiWKEFAw1aE6WKtX5LUSS+IYVKX2wCQiui5ENBZ+KJ
+dj4MM8xvnv//eWaGFy/IteQvtV4hcy3FofzUrMhtIe8N7XBELGtO+w4n6A1VlNlV
+xPuU0+70qJrgqSqE8fIolqrwXLq8wbQ5VZWkYRwZChT8gusMtFncXtZh1K2SShJa
+LcejEgrtKsAA9iBEfoB8BgLuQekSRglBXAscICNZjtPsmqrOvGYplFYHFhv8Ixse
+xest3z9/IICkPpTKxb4kSiDNOIVMcyEkYhwAC6YqaVhKwjRSie22TyU9vaqUxPG8
+5SALLQA96FLiI4pMPzwt2wIIQtdlEpiOuQAexgBwiojhEBdm9nxCgPR14DMBgTQK
+EkrP5ZBSA0mOXCR1ADwgMeOaQhdTRjyPUqh80yNyPYGYDKSU2hQ3AQVYSkKpAAhz
+LY2BVG2LYqfdxwx7A3abVMNA2bZtZg1rQdmY+8dfIYj7zLVKEmdxEPeaw3KWVdqt
+7axWsfDzSpTGGjolEUbSPNr/XxUa9NpIjO82R22vhIkqhZbAPqHADFtHVY0mE5oS
+JjgmQirGhUlFaCEDgZAIPGYi5MRVGAGtIFMae75J0Gx9n2gsBfvPqKmU8W4jmYbd
+Ec/6E+UM7M7fdV0u35Jb2Nxkv22uZdFN//7lV+X1uZemO4aWnPp45PWxbw5+NVi/
+p3wOvrym9os3uXeu/4pzY+W11sELIyvqAz+gb1ffeaG4Tf483vXQR1uOjfzesW72
+k8XP7tz/9Jr3H5wZ3NSkc7e+s/mzqa+rx754svP2jc3nz9+CPj9wtgo6j385/MDc
+w/dtPbr7hZ2Pb//zxKVTh9u2Lpgdu/n40f1LVl7eN715fNXoTLr0JBw70r1n2YmJ
+9LbWs/6HRyZ+feL+dZ0b+dWfFtGpvy4WJw/vGv/0jg9U+Y3WQq25Y7Tpze/u5vXT
+m5bm3zqz6+3TXZeHJ1euOrnsqXP7ht3eurdw9cTaZ76/t+vM6EXnlZ7f6tPvFh/T
+N6y9+iKvjfy4gs0cWL/30B9/Aw==
+=xEWU
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/risner
+
+==================================================================
