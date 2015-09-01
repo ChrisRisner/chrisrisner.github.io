@@ -5,7 +5,7 @@ date: Sun Aug 30 2015 20:16:00 GMT-0800 (PST)
 comments: true
 status: publish
 type: post
-published: true
+published: false
 categories: [Projects]
 excerpt: "A writeup about the issues I've been having deciding on my next project.  Too much analysis and not enough work."
 logoUrl: null
