@@ -5,7 +5,7 @@ date: Thu Sep 10 2015 20:16:00 GMT-0800 (PST)
 comments: true
 status: publish
 type: post
-published: true
+published: false
 categories: [Projects,Mobile,Xamarin]
 excerpt: "Some of the issues I've had trying to work with Xamarin Forms"
 logoUrl: null
