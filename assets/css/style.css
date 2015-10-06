@@ -358,6 +358,17 @@ ul.dropdown-menu>li>a>i.fa {
 }
 #contact-list .social ul li a.rss:hover { border: 1px solid #cf5d0f }
 
+#sub-nav .social a.keybase {
+    background: url('/images/social/keybase.png?1385702818') center no-repeat;
+    border: 1px solid;
+}
+#sub-nav .social a.keybase:hover { border: 1px solid }
+#contact-list .social ul li a.keybase {
+    background: url('/images/social/keybase.png?1385702818') center no-repeat;
+    border: 1px solid;
+}
+#contact-list .social ul li a.keybase:hover { border: 1px solid }
+
 .not-mobile {
     display:inline-block;
 }
