@@ -8,6 +8,7 @@ markdown: kramdown
 disqus: chrisrisnercom
 disqus_show_comment_count: true
 google_analytics: UA-3295765-1
+application_insights: 537fb79d-ea81-42f5-88e0-442428c3e255
 permalink: /:title
 title: ChrisRisner.com
 
