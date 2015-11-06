@@ -376,3 +376,17 @@ ul.dropdown-menu>li>a>i.fa {
 @media screen and (max-width: 600px) { 
     .not-mobile { display: none }
 }
+
+.centeredInSite {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.centeredInContent {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
