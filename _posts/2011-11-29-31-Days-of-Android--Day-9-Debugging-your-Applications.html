@@ -1,0 +1,53 @@
+---
+layout: post
+title: "31 Days of Android: Day 9–Debugging your Applications"
+date: Tue Nov 29 2011 04:18:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Phone, Mobile, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll cover an important topic: debugging your Android applications.  We'll cover multiple techniques including setting breakpoints, LogCat, logging messages, DDMS, taking screenshots, and more."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Debugging,Debugging Android,Variables,Expressions,LogCat,LogCat Filters,Android Logging,Log methods,DDMS,Delvik Debug Monitor Server,Android Screenshots,Taking screenshots with Android,Tutorial
+filepath: 2011-11-29-31-Days-of-Android--Day-9-Debugging-your-Applications.html
+disqus_identifier: 31-Days-of-Android--Day-9-Debugging-your-Applications
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Day 9" alt="Android Day 9" align="right" src="http://chrisrisner.com/upload/android-200.png" />Inevitably while working on an Android application, you’ll need to debug a problem.&#160; Today we’ll talk about how to handle those problems and debug your code.&#160; We’ll pick up where we left off yesterday in our <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android series</a>.</p>  <p>The first part of debugging we will cover is using breakpoints in your application.&#160; There are a few different ways to place a breakpoint in your application.&#160; First, select the line of code you’d like to put a break in and either:&#160; hit <strong>Ctrl+Shift+B</strong>, or go to <strong>Run—&gt;Toggle Breakpoint</strong>, or double click in the blue column to the left of the line in the Eclipse code editor.&#160; In order to get the code to stop executing at your breakpoints, you need to debug your app instead of running it.&#160; To do so, click <strong>F11</strong> or right click your project and go to <strong>Debug As—&gt;Android Application</strong>.&#160; Now your application will pause whenever it reaches a breakpoint.&#160; Once this happens you can highlight variables to see what their values are or you can use the <strong>Variables</strong> and <strong>Expressions</strong> tabs in Eclipse.</p>  <p>When your breakpoint is reached for the first time, Eclipse will pop up a window confirming that you want to switch <strong>Perspectives </strong>to the Debug perspective.&#160; When this happens, say yes and you’ll be taken to a window which shows the callback stack, console, code view, and a tab (in the top right) with <strong>variables</strong>.&#160; <strong>Variables </strong>will show you the values of all available variables and allow you to expand complex types to see their values. In addition, if you go to <strong>Window—&gt;Show View—&gt;Expressions</strong> you’ll launch the expressions window.&#160; Expressions will allow you to enter variable statements as well as assign values to variables on the fly.&#160; Both of these windows are very useful for figuring out what is happening in your code.</p>  <p>Next we’ll talk about a very useful logging tool, <strong>Logcat</strong>.&#160; In Eclipse, go to <strong>Window—&gt;Show View—&gt;Other</strong> and look for <strong>Logcat.&#160; </strong>This will launch the Logcat window in the bottom of Eclipse:</p>  <p><img title="Logcat" alt="Logcat" src="http://chrisrisner.com/upload/android_day_eight_logcat.png" /></p>  <p>On the right you’ll see all the messages logged by the emulator we’re currently running or the currently connected device.&#160; On the left we can set up filters so that we only see certain messages.&#160; It’s great that we can see the messages, but let’s talk about how to actually log them:</p>  <div class="csharpcode">   <pre class="alt">Log.i(<span class="str">&quot;DaySevenActivity&quot;</span>, <span class="str">&quot;This is an info message&quot;</span>);</pre>
+
+  <pre>Log.e(<span class="str">&quot;DaySevenActivity&quot;</span>, <span class="str">&quot;This is an error message&quot;</span>);</pre>
+</div>
+<style type="text/css">
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here we’re logging an Info message and then an Error message.&#160; These will then show up in Logcat as a green and red message, respectively.&#160; This is a great way to quickly and easily get incite into what’s happening in your app and what code is being reached.&#160; Just a warning, you’ll want to set up a filter because the emulator will log a lot of messages that don’t have to do with your app and an actual device will log many more. </p>
+
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android_day_eight_ddms.png" />The last piece on debugging we’ll go over today is <strong>DDMS</strong>.&#160; In Eclipse go to <strong>Window—&gt;Open Perspective—&gt;Other</strong>.&#160; Chose <strong>DDMS </strong>and open it.&#160; This will open the <strong>DDMS </strong>perspective and in the future, you can switch back and forth between the <strong>Java</strong>, <strong>Debug</strong>, and <strong>DDMS</strong> perspectives in the top right of Eclipse.&#160; DDMS enables you to switch between the emulators you are running and the devices you have connected, trigger incoming phone calls, view Logcat, and more.&#160; In the top left, you can switch between emulators and devices as well as take screenshots of apps running on both the emulators and devices.&#160; </p>
+
+<p>With all of these toosl at your disposal, you should now be capable and prepared to debug your Android applications.&#160; </p>

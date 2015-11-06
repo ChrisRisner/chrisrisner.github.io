@@ -1,0 +1,194 @@
+---
+layout: post
+title: "31 Days of Android: Day 22–Shared Preferences"
+date: Mon Dec 12 2011 04:41:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today will start a 3 day sub-series about persistence in Android applications.  Our first approach will be using SharedPreferences."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Shared Preferences,SharedPreferences,Persistence,Editor,commit,apply,Sharing preferences between apps,clearing shared preferences,Tutorial
+filepath: 2011-12-12-31-Days-of-Android--Day-22-Shared-Preferences.html
+disqus_identifier: 31-Days-of-Android--Day-22-Shared-Preferences
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" /><strong>UPDATE:  It looks like the code for today was accidentally labeled DayTwentyOne instead of DayTwentyTwo.  I'll go back and fix this as soon as I have a chance.</strong><br /><br />Today’s entry in <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> begins a three day sub-series on data storage and persistence.&#160; Today’s topic will focus on Shared Preferences.&#160; Shared Preferences are used for storing key-value pairs of primitive data types.&#160; Included in these primitive types are:&#160; booleans, floats, ints, longs, and strings.&#160; If you want to store any complex types such as your own class objects, you would need to manually do a mapping.&#160; You can <a title="Android Day Twenty One Initial Source Code" href="http://chrisrisner.com/upload/DayTwentyOneInitial.zip">download the source code we’ll start today with here</a>.</p>  <p><strong>Storing Data in Shared Preferences</strong></p>  <p>Let’s try adding the code to your application so that whenever it loads, the <strong>EditText</strong> and <strong>TextView</strong> are filled with whatever the last text was that you had entered when the button was tapped.&#160; Open up the <strong>DayTwentyOneActivity.java</strong> file and find the <strong>onClickListener</strong> for <strong>button1</strong>.&#160; All you’re doing right now is setting <strong>lblTextViewOne</strong>’s text property to match <strong>editText1</strong>’s text property.&#160; Here, you need to get a reference to the <strong>SharedPreferences</strong> <strong>Editor</strong>.&#160; Once you have a reference to that you can put your data into it.&#160; Finally, you need to commit any changes.&#160; Let’s look at what the code looks like:</p>  <div class="csharpcode">   <pre class="alt">button1.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(editText1.getText());    </pre>
+
+  <pre>        SharedPreferences settings = getSharedPreferences(<span class="str">&quot;MyPreferencesFileName&quot;</span>, 0);</pre>
+
+  <pre class="alt">        SharedPreferences.Editor preferencesEditor = settings.edit();</pre>
+
+  <pre>        preferencesEditor.putString(<span class="str">&quot;OurText&quot;</span>, editText1.getText().toString());</pre>
+
+  <pre class="alt">        preferencesEditor.commit();</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>First, you’re getting the reference to <strong>SharedPreferences</strong>.&#160; The <strong>getSharedPreferences</strong> method is available because you’re currently inside of the <strong>Activity </strong>context.&#160; You’re passing in a file name and a mode.&#160; It would be a smart idea to move the file name into a constant so you don’t have to try entering the same text name in multiple places.&#160; The mode you’re passing in above is 0 or <strong>MODE_PRIVATE</strong> which is the default and means the file can only be accessed by your application.&#160; <strong>MODE_WORLD_READABLE</strong> (1) means that all other applications have read access to it and <strong>MODE_WORLD_WRITEABLE </strong>(2) means that all other applications have both read and write access.&#160; Lastly, <strong>MODE_MULTI_PROCESS</strong> (4) can be used if you need multiple processes to have access to the shared preferences file.&#160; <strong>MODE_MULTI_PROCESS</strong> was the default behavior in Android 2.3 and earlier.&#160; In versions newer than 2.3, you need to explicitly set it to be multi process capable.</p>
+
+<p>After you get a reference to <strong>SharedPreferences</strong> you then need to get the <strong>Editor</strong> out of it.&#160; After that, you can call any of the <strong>put*</strong> methods on the <strong>Editor</strong> object to put data into it.&#160; Lastly, you need to call <strong>commit()</strong> to write those changes back to the file.&#160; <strong>commit() </strong>is a synchronous operation so you will be notified if there are any errors.&#160; Alternateively you could call <strong>apply()</strong> on your <strong>Editor </strong>object, however, while this changes the <strong>SharedPreferences</strong> in memory, it makes the changes to the file on disk asynchronously and doesn’t notify you if there are any issues.&#160; </p>
+
+<p><strong>Reading Back from SharedPreferences</strong></p>
+
+<p>Being able to write to the <strong>SharedPreferences </strong>file is great, but equally important is being able to read from those preferences.&#160; Let’s look at checking the preferences file when <strong>DayTwentyOneActivity</strong> is created and setting the <strong>TextView</strong> and <strong>EditText</strong> if it had been previously stored:</p>
+
+<div class="csharpcode">
+  <pre class="alt">...</pre>
+
+  <pre>lblTextViewOne = (TextView) findViewById(R.id.lblTextViewOne);</pre>
+
+  <pre class="alt">lblTextViewOne.setText(R.<span class="kwrd">string</span>.test_one);<span class="rem">//</span></pre>
+
+  <pre>editText1 = (EditText) findViewById(R.id.editText1);</pre>
+
+  <pre class="alt">editText1.setText(R.<span class="kwrd">string</span>.test_one);</pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt">SharedPreferences settings = getSharedPreferences(<span class="str">&quot;MyPreferencesFileName&quot;</span>, 0);</pre>
+
+  <pre>String preferencesString = settings.getString(<span class="str">&quot;OurText&quot;</span>, <span class="kwrd">null</span>);</pre>
+
+  <pre class="alt"><span class="kwrd">if</span> (preferencesString != <span class="kwrd">null</span>) {</pre>
+
+  <pre>    lblTextViewOne.setText(preferencesString);</pre>
+
+  <pre class="alt">    editText1.setText(preferencesString);</pre>
+
+  <pre>}</pre>
+
+  <pre class="alt">...</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>First you’re getting a reference to <strong>lblTextViewOne</strong> and <strong>editText1</strong> which is the same as before.&#160; Then you’re getting a reference to the <strong>SharedPreferences</strong> file (again you’re passing in a name right there when you could / should be using a constant).&#160; Since you aren’t editing any settings here, you don’t need to get an instance of the <strong>Editor</strong>, you can just access the settings.&#160; Each <strong>get*</strong> method takes in the name of the setting to fetch and what the default value returned should be if that setting doesn’t exist.&#160; So the first time your app runs, since you wouldn’t have stored anything for <strong>OurText</strong> yet, it would return null.&#160; Then if the <strong>preferencesString</strong> isn’t null, you can use that value to set the <strong>TextView</strong> and <strong>EditText</strong>.&#160; Running your app again, you should see both <strong>View</strong>s preset to whatever the text was when you last tapped the button;</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Reading from SharedPreferences" alt="Reading from SharedPreferences" src="http://chrisrisner.com/upload/android_day_twentyone_savepreferences.png" /></p>
+
+<p><strong></strong></p>
+
+<p><strong>Clearing SharedPreferences</strong></p>
+
+<p>If you want to give users the ability to clear any preferences you may have saved it’s easy to be done.&#160; Once you get an instance of the <strong>Editor</strong> you just call <strong>clear() </strong>on it:</p>
+
+<div class="csharpcode">
+  <pre class="alt">SharedPreferences settings = getSharedPreferences(<span class="str">&quot;MyPreferencesFileName&quot;</span>, 0);</pre>
+
+  <pre>SharedPreferences.Editor preferencesEditor = settings.edit();</pre>
+
+  <pre class="alt">preferencesEditor.clear();</pre>
+
+  <pre>preferencesEditor.commit();</pre>
+</div>
+
+<p>You still need to call <strong>commit() </strong>after you’ve cleared the preferences.&#160; Also, if you set any preferences after you hit <strong>clear()</strong> but before you hit <strong>commit()</strong>, those will still be stored.&#160; </p>
+
+<p><strong>Removing a Preference</strong></p>
+
+<p>Instead of clearing all preferences, you also have the option to remove an individual one:</p>
+
+<div class="csharpcode">
+  <pre class="alt">SharedPreferences settings = getSharedPreferences(<span class="str">&quot;MyPreferencesFileName&quot;</span>, 0);</pre>
+
+  <pre>SharedPreferences.Editor preferencesEditor = settings.edit();</pre>
+
+  <pre class="alt">preferencesEditor.remove(<span class="str">&quot;OurText&quot;</span>);</pre>
+
+  <pre>preferencesEditor.commit();</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Note that again you need to call <strong>commit() </strong>after you’ve called <strong>remove</strong>.</p>
+
+<p><strong>A Couple Things to Note</strong></p>
+
+<p>There is no reason you can’t use multiple preference files in your application.&#160; In the examples above, you passed in “<strong>MyPreferencesFileName</strong>” whenever getting a reference to <strong>SharedPreferences</strong>.&#160; However, you could just as easily use different file names in different activities or whatever you need.&#160; It might become complicated to use multiple preference file names but it’s at your disposal.</p>
+
+<p>When it comes to reading and writing preference files from other applications, you don’t need to do anything differently.&#160; You just need to know the name of the preferences file that you need (and have) access to.&#160; </p>
+
+<p>One last and very important thing to know is that use’s have access to clear the <strong>SharedPreferences</strong> even if you don’t give them access in your application.&#160; On your device, if you go to <strong>Settings –&gt; Applications –&gt; Manage Applications –&gt; Your App</strong> you’ll see a button to “<strong>Clear Data</strong>”.&#160; Clicking this clears any data your app has saved, including <strong>SharedPreferences</strong>:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="clear data in settings" alt="clear data in settings" src="http://chrisrisner.com/upload/android_day_twentyone_clear_data.png" width="242" height="265" /></p>
+
+<p>You can <a title="Android Day TwentyOne Final Code" href="http://chrisrisner.com/upload/DayTwentyOneFinal.zip">download the code we ended up with after today’s work here</a>.</p>

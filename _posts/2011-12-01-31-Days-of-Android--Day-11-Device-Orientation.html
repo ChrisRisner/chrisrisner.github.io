@@ -1,0 +1,450 @@
+---
+layout: post
+title: "31 Days of Android: Day 11–Device Orientation"
+date: Thu Dec 01 2011 06:06:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Programming, Phone]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Device orientation is a useful topic to cover so today we'll discuss how to detect the current orientation, how to detect a change in the orientation, how to make layouts for specific orientation, and how to lock an activity to a specific orientation."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Device orientation,orientation,landscape,portrait,getRotation,getOrientation,onConfigurationChanged,configChanges,OrientationEventListener,orientation specific layouts,locking orientation,setRequestedOrientatio
+filepath: 2011-12-01-31-Days-of-Android--Day-11-Device-Orientation.html
+disqus_identifier: 31-Days-of-Android--Day-11-Device-Orientation
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android_day_eleven_orientation.png" />For today’s entry in <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> we’re going to talk about device orientation.&#160; In the easiest terms, orientation dictates if the device is horizontal (landscape) or vertical (portrait).&#160; The orientation of a device can affect many different things.&#160; Most commonly, you might have different layouts depending on the orientation.&#160; Less commonly, you might want to prevent a layout from displaying in a specific orientation or show an animation specific to that orientation.&#160; We’re going to start our work using the <a title="Andorid Day 10 Code" href="http://chrisrisner.com/upload/DayTen.zip">code from Day 10</a>.</p>  <p><strong>Detecting the Current Orientation</strong></p>  <p>There are two different ways to detect the current device orientation.&#160; There is a way you can use if you’re programming for devices prior to 2.2 and a way you can use for 2.2 and above.&#160; The former method is now deprecated so if you’re not supporting Android below 2.2, I wouldn’t bother with it.&#160; </p>  <p>Open up your <strong>DayTenActivity</strong> and after setting your <strong>lblTextViewOne</strong> you can get an instance of display and then use the <strong>getOrientation </strong>method.&#160; You can then check it’s orientation against some <strong>Configuration</strong> constants.&#160; Unfortunately this method also requires us to compare the height and the width of the screen.&#160; Even more unfortunate, you’ll see that the orientation reported as <strong>ORIENTATION_PORTRAIT</strong> is actually <strong>landscape:</strong></p>  <div class="csharpcode">   <pre class="alt">lblTextViewOne = (TextView) findViewById(R.id.lblTextViewOne);</pre>
+
+  <pre>lblTextViewOne.setText(R.<span class="kwrd">string</span>.test_one);</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>Display display = ((WindowManager) <span class="kwrd">this</span>.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();</pre>
+
+  <pre class="alt"><span class="kwrd">if</span> (display.getOrientation() == Configuration.ORIENTATION_UNDEFINED) {</pre>
+
+  <pre>    <span class="kwrd">if</span> (display.getWidth() == display.getHeight())</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;Square&quot;</span>);</pre>
+
+  <pre>    <span class="kwrd">else</span> <span class="kwrd">if</span> (display.getHeight() &gt; display.getWidth())</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;Portrait&quot;</span>);</pre>
+
+  <pre>    <span class="kwrd">else</span></pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;Landscape&quot;</span>);                </pre>
+
+  <pre>}</pre>
+
+  <pre class="alt"><span class="kwrd">else</span> <span class="kwrd">if</span> (display.getOrientation() == Configuration.ORIENTATION_PORTRAIT) {</pre>
+
+  <pre>    lblTextViewOne.setText(<span class="str">&quot;Not Portrait, Landscape!&quot;</span>);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>When you first launch your application, the <strong>TextView</strong> at the top will say “<strong>Portrait</strong>” because the orientation matches <strong>Configuration.ORIENTATION_UNDEFINED </strong>and the height is greater than the width.&#160; If you rotate the emulator (<strong>Ctrl+F12)</strong>, the text will change to “<strong>Not Portrait, Landscape!</strong>”.&#160; As you can see from the code, the orientation isn’t matching up with a landscape constant, but <strong>Configuration.ORIENTATION_PORTRAIT </strong>instead.&#160; This doesn’t make a lot of sense though it does work.&#160; The 2.2 and above method makes much more sense.&#160; Again you’ll use the <strong>Display</strong> object but this time you will call <strong>getRotation </strong>on it.&#160; This you can then compare against <strong>Surface.ROTATION_X </strong>constants:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">switch</span> (display.getRotation()) {</pre>
+
+  <pre>    <span class="kwrd">case</span> Surface.ROTATION_0:</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;Rotation 0&quot;</span>);</pre>
+
+  <pre>        <span class="kwrd">break</span>;</pre>
+
+  <pre class="alt">    <span class="kwrd">case</span> Surface.ROTATION_180:</pre>
+
+  <pre>        lblTextViewOne.setText(<span class="str">&quot;Rotation 180&quot;</span>);</pre>
+
+  <pre class="alt">        <span class="kwrd">break</span>;</pre>
+
+  <pre>    <span class="kwrd">case</span> Surface.ROTATION_270:</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;Rotation 270&quot;</span>);</pre>
+
+  <pre>        <span class="kwrd">break</span>;</pre>
+
+  <pre class="alt">    <span class="kwrd">case</span> Surface.ROTATION_90:</pre>
+
+  <pre>        lblTextViewOne.setText(<span class="str">&quot;Rotation 90&quot;</span>);</pre>
+
+  <pre class="alt">        <span class="kwrd">break</span>;</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>When you do this and run the application you’ll see that in portrait, <strong>getRotation </strong>will equal <strong>Surface.ROTATION_0</strong>.&#160; When you rotate the display (<strong>Ctrl+F12</strong>) you’ll see <strong>Surface.ROTATION_90</strong>.&#160; You can <del>safely</del> unwisely (see the comments below) assume that <strong>ROTATION_0</strong> and <strong>ROTATION_180</strong> are <strong>portrait</strong> and <strong>ROTATION_90 </strong>and <strong>ROTATION_270</strong> are <strong>landscape</strong>.&#160; </p>
+
+<p>Before we continue, it’s worth pointing out why the text in our <strong>TextView </strong>changes when you rotate the device.&#160; The code that you added to set the text depending on orientation was in the <strong>onCreate </strong>method.&#160; This means that whenever you rotate the device, your activity’s <strong>onCreate</strong> method will be called.&#160; This may be a little confusing since it may not make sense to recreate the activity when it’s already opened and you’re just rotating.&#160; This has to do with the <strong>Activity LifeCycle</strong> which we’ll get into another day.&#160; For now, just remember that rotating will cause your Activity to be recreated.</p>
+
+<p><strong>Getting Triggers for Device Orientation Change</strong></p>
+
+<p>There are a couple methods to detect an orientation change.&#160; The first method is to override the <strong>onConfigurationChanged</strong> method of the activity.&#160; Go ahead and do that for <strong>DayTenActivity</strong>.&#160; Passed into that method is a new <strong>Configuration</strong> variable which contains an orientation which you can check for being landscape or portrait:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> <span class="kwrd">void</span> onConfigurationChanged(Configuration newConfig) {        </pre>
+
+  <pre class="alt">    super.onConfigurationChanged(newConfig);</pre>
+
+  <pre>    </pre>
+
+  <pre class="alt">    <span class="rem">// Checks the orientation of the screen</span></pre>
+
+  <pre>    <span class="kwrd">if</span> (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;onConfigChanged - Landscape&quot;</span>);</pre>
+
+  <pre>    } <span class="kwrd">else</span> <span class="kwrd">if</span> (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;onConfigChanged - Portrait&quot;</span>);</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you run your app now, this method won’t be called.&#160; In order for Android to know that the <strong>onConfigurationChanged</strong> method should be called you have to specify it in the manifest file.&#160; Open up your manifest and add a <strong>configChanges</strong> attribute to your <strong>DayTenActivity</strong> like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">activity</span></pre>
+
+  <pre>    <span class="attr">android:label</span><span class="kwrd">=&quot;@string/app_name&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:configChanges</span><span class="kwrd">=&quot;orientation|keyboardHidden&quot;</span></pre>
+
+  <pre>    <span class="attr">android:name</span><span class="kwrd">=&quot;.DayTenActivity&quot;</span> <span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your emulator and rotate, the <strong>onConfigurationChanged</strong> method is called.&#160; However, the <strong>onCreate </strong>is no longer called though the view is rotated.&#160; Interestingly, if you remove <strong>|keyboardHidden </strong>from the manifest, then the <strong>onConfigurationChanged </strong>is only fired when you rotate from landscape to portrait, not when you go from portrait to landscape (at least in the default emulator).&#160; </p>
+
+<p>The second way you can listen for orientation changes is by implementing an <a title="Orientation Event Listener" href="http://developer.android.com/reference/android/view/OrientationEventListener.html">OrientationEventListener</a> in your activity.&#160; First you need to add an <strong>OrientationEventListener</strong> as a private member variable of your activity:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">private</span> OrientationEventListener MyOrientationEventListener;</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Then, in your <strong>onCreate </strong>method you need to set up your listener and then make sure it can work:</p>
+
+<div class="csharpcode">
+  <pre class="alt">MyOrientationEventListener = <span class="kwrd">new</span> OrientationEventListener(<span class="kwrd">this</span>,</pre>
+
+  <pre>        SensorManager.SENSOR_DELAY_NORMAL) {</pre>
+
+  <pre class="alt">    @Override</pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onOrientationChanged(<span class="kwrd">int</span> arg0) {</pre>
+
+  <pre class="alt">        lblTextViewOne.setText(<span class="str">&quot;Orientation: &quot;</span> + String.valueOf(arg0));</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">};</pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt"><span class="kwrd">if</span> (MyOrientationEventListener.canDetectOrientation()) {</pre>
+
+  <pre>    MyOrientationEventListener.enable();</pre>
+
+  <pre class="alt">} <span class="kwrd">else</span> {</pre>
+
+  <pre>    lblTextViewOne.setText(<span class="str">&quot;Can't DetectOrientation&quot;</span>);</pre>
+
+  <pre class="alt">    finish();</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>First, you instantiate the listener.&#160; Note that you’re passing in <strong>SENSOR_DELAY_NORMAL</strong> here.&#160; You can set different constant values here which will dictate how often the sensor will detect changes.&#160; If you’re creating a fast action game, you’ll probably want something more intense than the normal setting.&#160; In the listener’s <strong>onOrientationChanged</strong> method, you’re just setting the text to be the degrees of orientation (remember that 0 and 180 are portrait and 90 and 270 are landscape).&#160; This method isn’t only called when the orientation rotates so while you’ll only see the matching orientation numbers with the emulator, if you run this on a real device, you will see it go through the full range of degrees as you rotate the device.&#160; Note that at the bottom you’re starting the listener if you can detect orientation and you’re finishing the activity if you can’t.&#160; You’d probably want to handle things a little more gracefully if for some reason the sensor wouldn’t work.&#160; One example of an app that might use this is the possibly infamous <a title="iBeer App" href="http://www.youtube.com/watch?v=A3MfQIswl3k">iBeer app</a> that graphically shows a beer pouring as you tilt the device.</p>
+
+<p><strong>Specifying Layouts for Orientations</strong></p>
+
+<p>Creating different layouts for an orientation is relatively easy and we already spoke about it a <a title="Multiple Activities and Intents" href="http://chrisrisner.com/31-Days-of-Android--Day-5%E2%80%93Adding-Multiple-Activities-and-using-Intents">little</a> <a title="Android Project Structure" href="http://chrisrisner.com/31-Days-of-Android--Day-8%E2%80%93The-Android-Project-Structure">bit</a>.&#160; To create an orientation for a specific layout, right click on your <strong>res </strong>folder and go to <strong>New –&gt; Other </strong>and then choose <strong>Android XML Layout File</strong>.&#160; Let’s create orientation specific layouts for our <strong>second_layout</strong>.&#160; If you enter “<strong>second_layout</strong>” into the <strong>File </strong>field, the wizard will warn you that the destination file already exists.&#160; You can ignore this for now and click <strong>Next</strong>.&#160; On the next screen you can specify qualifiers to limit when the layout you’re creating is used.&#160; Find <strong>Orientation </strong>in the left list and click the<strong> right arrow.</strong>&#160; A new drop down will appear on the right side.&#160; Choose <strong>landscape</strong> from that menu and you’ll see that the folder at the bottom will change to <strong>/res/layout-land</strong>.&#160; Click <strong>Finish</strong> to create the layout.&#160; Now repeat that but choose <strong>portrait </strong>to create a layout in <strong>/res/layout-port</strong>.&#160; </p>
+
+<p>If you run your app now and tap the second button which fires off the second activity, the app will crash.&#160; The reason it crashes is because in the <strong>ActivityTwo </strong>code sets the text value of <strong>textView1</strong>.&#160; Since you haven’t added the <strong>TextView</strong> to your new layouts, this won’t work.&#160; To fix this, copy the <strong>TextView </strong>from our original <strong>second_layout.xml</strong> to the new ones:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">TextView</span></pre>
+
+  <pre>    <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/textView1&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span></pre>
+
+  <pre>    <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:text</span><span class="kwrd">=&quot;TextView&quot;</span> <span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you can alter the two new <strong>second_layout</strong>’s to make them look better depending on the orientation.&#160; </p>
+
+<p><strong>Preventing a Layout from Rotating</strong></p>
+
+<p>The last orientation specific thing we’ll talk about is how we prevent an activity from rotating.&#160; In order to do so you can set a requested orientation in the <strong>onCreate</strong> method like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Adding this to <strong>DayTenActivity </strong>will prevent it from being shown in portrait.&#160; After adding this and running your app, when you rotate, you’ll always see landscape.&#160; Conversely, if you pass in <strong>SCREEN_ORIENTATION_PORTRAIT</strong> you’ll always get portrait.&#160; Another method of accomplishing the same thing is to specify screenOrientation in your manifest file as an attribute on your activity.&#160; If you wanted to lock <strong>DayTenActivity</strong> to landscape, you would do so like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">activity</span></pre>
+
+  <pre>    <span class="attr">android:label</span><span class="kwrd">=&quot;@string/app_name&quot;</span>   </pre>
+
+  <pre class="alt">    <span class="attr">android:screenOrientation</span><span class="kwrd">=&quot;landscape&quot;</span>     </pre>
+
+  <pre>    <span class="attr">android:name</span><span class="kwrd">=&quot;.DayTenActivity&quot;</span> <span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Remember that while you can lock screen orientation easily now, think about your users and what they would expect your app to do.&#160; Most people expect that when they rotate their device, the view will change to reflect having more room vertically or horizontally.&#160; If you lock the orientation, that expectation is not met.</p>
+
+<p>You can <a title="Andorid Day Eleven Source Code" href="http://chrisrisner.com/upload/DayEleven.zip">download today’s code here</a>.</p>

@@ -1,0 +1,290 @@
+---
+layout: post
+title: "31 Days of Android: Day 17–Animating between Activities"
+date: Wed Dec 07 2011 01:11:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today's topic is animating between animations.  By default the Android OS may specify an animation to run between individual animations.  We'll go over how to create new animations and specify which ones to run as your animations leave and enter the screen."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Animations,Set Animation,slide in,slide out,slide up,slide down,overridePendingTransition,animating depending on orientation,Tutorial
+filepath: 2011-12-07-31-Days-of-Android--Day-17-Animating-between-Activities.html
+disqus_identifier: 31-Days-of-Android--Day-17-Animating-between-Activities
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Day Seventeen" alt="Android Day Seventeen" align="right" src="http://chrisrisner.com/upload/android-200.png">Today as part of the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> series, we’re going to discuss how to use custom animations between activities.&nbsp; This is going to require both new XML and new Java code.&nbsp; Fortunately, none of this will be that different from stuff you’ve done before.&nbsp; To do this there are two parts.&nbsp; One that must occur whenever you launch a new <strong>Activity </strong>and one that must occur whenever you return to a previous <strong>Activity</strong>.&nbsp; We’re going to start using a <a title="Android Day Seventeen Code" href="http://chrisrisner.com/upload/DaySeventeenInitial.zip">some project code you can download here</a>.&nbsp; </p> <p><strong></strong>&nbsp;</p> <p><strong>Creating some New Animations</strong></p> <p>To create new animations, you need to right click on your <strong>res</strong> folder and choose <strong>New—&gt;Other </strong>and then <strong>Android XML File</strong>.&nbsp; From there you’ll need to change the <strong>Resource Type</strong> to <strong>Tween Animation</strong>.&nbsp; In the <strong>Root Element </strong>list, you should choose <strong>set</strong>.&nbsp; Lastly, you’ll need to name the file, for now, let’s do a slide in and slide out animation, so name your file “<strong>slide_in_left</strong>”.&nbsp; Let’s look at the XML for this animation:</p> <div class="csharpcode"><pre class="alt"><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">="1.0"</span> <span class="attr">encoding</span><span class="kwrd">="utf-8"</span>?<span class="kwrd">&gt;</span></pre><pre><span class="kwrd">&lt;</span><span class="html">set</span> <span class="attr">xmlns:android</span><span class="kwrd">="http://schemas.android.com/apk/res/android"</span><span class="kwrd">&gt;</span></pre><pre class="alt">    <span class="kwrd">&lt;</span><span class="html">translate</span> <span class="attr">android:fromXDelta</span><span class="kwrd">="-100%p"</span> <span class="attr">android:toXDelta</span><span class="kwrd">="0"</span> <span class="attr">android:duration</span><span class="kwrd">="400"</span> <span class="kwrd">/&gt;</span></pre><pre>    <span class="kwrd">&lt;</span><span class="html">alpha</span> <span class="attr">android:fromAlpha</span><span class="kwrd">="0.0"</span> <span class="attr">android:toAlpha</span><span class="kwrd">="1.0"</span> <span class="attr">android:duration</span><span class="kwrd">="100"</span> <span class="attr">android:startOffset</span><span class="kwrd">="200"</span> <span class="kwrd">/&gt;</span></pre><pre class="alt"><span class="kwrd">&lt;/</span><span class="html">set</span><span class="kwrd">&gt;</span></pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>What is important here is the two elements:&nbsp; <strong>translate</strong> and <strong>alpha</strong>.&nbsp; The <strong>translate</strong> element is saying to translate from –100% to 0 over a duration of 400 ms.&nbsp; The <strong>alpha</strong> element is saying to go from a 0 alpha to a 1 alpha over a duration of 100 ms with a start offset of 200 ms.&nbsp; Next you need to create a slide out animation, so right click on the new <strong>anim</strong> folder and choose <strong>New—&gt;Other </strong>and then pick <strong>Android XML File </strong>again.<strong>Tween Animation</strong> and <strong>set </strong>should already be selected so you should just need to enter a <strong>File</strong> name.&nbsp; Enter “<strong>slide_out_left</strong>”.&nbsp; Again, let’s look at the XML:</p>
+<div class="csharpcode"><pre class="alt"><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">="1.0"</span> <span class="attr">encoding</span><span class="kwrd">="utf-8"</span>?<span class="kwrd">&gt;</span></pre><pre><span class="kwrd">&lt;</span><span class="html">set</span> <span class="attr">xmlns:android</span><span class="kwrd">="http://schemas.android.com/apk/res/android"</span><span class="kwrd">&gt;</span></pre><pre class="alt">    <span class="kwrd">&lt;</span><span class="html">translate</span> <span class="attr">android:fromXDelta</span><span class="kwrd">="0"</span> <span class="attr">android:toXDelta</span><span class="kwrd">="-100%p"</span> <span class="attr">android:duration</span><span class="kwrd">="400"</span> <span class="kwrd">/&gt;</span></pre><pre>    <span class="kwrd">&lt;</span><span class="html">alpha</span> <span class="attr">android:fromAlpha</span><span class="kwrd">="1.0"</span> <span class="attr">android:toAlpha</span><span class="kwrd">="0.0"</span> <span class="attr">android:duration</span><span class="kwrd">="100"</span> <span class="attr">android:startOffset</span><span class="kwrd">="200"</span> <span class="kwrd">/&gt;</span></pre><pre class="alt"><span class="kwrd">&lt;/</span><span class="html">set</span><span class="kwrd">&gt;</span></pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Where previously the animation went from –100 to 0, now it’s going from 0 to –100.&nbsp; Also, while previously it was going from a 0 alphas to a 1.0 alpha, now it goes from 1.0 to 0.&nbsp; Now that you have two animations, you’re ready to start using them.</p>
+<p><strong></strong>&nbsp;</p>
+<p><strong>Changing the Animation when you Start a New Activity</strong></p>
+<p>Take a look at the <strong>button2</strong> <strong>onClickListener</strong> and you should see the following:</p>
+<div class="csharpcode"><pre class="alt">Button button2 = (Button) findViewById(R.id.button2);</pre><pre>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre><pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre><pre>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>));</pre><pre class="alt"></pre><pre>    }</pre><pre class="alt">});</pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Now this is going to start a new <strong>Activity</strong>.&nbsp; Depending on the version of Android you’re running and what the provider has done to alter it, there may be some default animation between the two <strong>Activities</strong> though the default simulator shouldn’t have anything special.&nbsp; In order to alter this to use a custom animation, you need to make a call to <strong>overridePendingTransition</strong> and specify the incoming animation and the outgoing animation.&nbsp; For this you should use your slide in and slide out animation, respectively.&nbsp; Now your <strong>onClickListener</strong> should look like this:</p>
+<div class="csharpcode"><pre class="alt">Button button2 = (Button) findViewById(R.id.button2);</pre><pre>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre><pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre><pre>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>));</pre><pre class="alt">        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);</pre><pre>    }</pre><pre class="alt">});</pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Now, when you click the second button, you should see the first <strong>Activity </strong>slide out to the left and then the new <strong>Activity</strong> slide in from the left.&nbsp; Depending on your computer hardware, you may or may not be able to visually see this in the emulator.&nbsp; You may need to run it on a device to really see it.&nbsp; Now, if you click the back button, you won’t be treated to a nice animation like you got going to the second <strong>Activity</strong>.</p>
+<p>&nbsp;</p>
+<p><strong>Using an Animation when Tapping Back</strong></p>
+<p>In order to do a proper animation when the user taps the back button, you will need to <a title="Overriding the Android Back Button" href="http://chrisrisner.com/31-Days-of-Android--Day-10%E2%80%93The-Back-Button">override the back button which we did back in Day 10</a>:</p>
+<div class="csharpcode"><pre class="alt">@Override</pre><pre><span class="kwrd">public</span> <span class="kwrd">void</span> onBackPressed() {</pre><pre class="alt">    super.onBackPressed();</pre><pre>    </pre><pre class="alt">}</pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Today you’ll need to do a little bit more than just call the <strong>super</strong> implementation of <strong>onBackPressed</strong>.&nbsp; Thankfully, you just need to call <strong>overridePendingTransition </strong>again.&nbsp; Now your <strong>onBackPressed </strong>will look like this:</p>
+<div class="csharpcode"><pre class="alt">@Override</pre><pre><span class="kwrd">public</span> <span class="kwrd">void</span> onBackPressed() {</pre><pre class="alt">    super.onBackPressed();</pre><pre>    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);</pre><pre class="alt">}</pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Notice that you’re doing the same in and out animations before.&nbsp; This will cause the appearance to be the same.&nbsp; Go ahead and run your app and when you back out of your second <strong>Activity</strong> it should slide out to the left and the first <strong>Activity </strong>will slide in from the left as well.</p>
+<p><strong>Orientation Specific Animations</strong></p>
+<p>Just like creating a <strong>Layout </strong>for a specific orientation, you can create an <strong>Animation</strong> for a specific orientation.&nbsp; If you wanted to slide up and down when the orientation was landscape and left and right when you were in portrait, the naming scheme wouldn’t make much sense.&nbsp; You could create a generic name that would be used for both landscape and portrait orientations.&nbsp; Or, you could put all your animations in the <strong>anim</strong> folder and then choose which to use in the code.&nbsp; Let’s do that to see how it works.&nbsp; First, add two new animations to your <strong>anim</strong> folder.&nbsp; The first should be named <strong>slide_up</strong> and will have this XML:</p>
+<div class="csharpcode"><pre class="alt"><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">="1.0"</span> <span class="attr">encoding</span><span class="kwrd">="utf-8"</span>?<span class="kwrd">&gt;</span></pre><pre><span class="kwrd">&lt;</span><span class="html">set</span> <span class="attr">xmlns:android</span><span class="kwrd">="http://schemas.android.com/apk/res/android"</span></pre><pre class="alt">    <span class="attr">android:interpolator</span><span class="kwrd">="@android:anim/decelerate_interpolator"</span></pre><pre>    <span class="attr">android:shareInterpolator</span><span class="kwrd">="true"</span><span class="kwrd">&gt;</span></pre><pre class="alt">    <span class="kwrd">&lt;</span><span class="html">translate</span> <span class="attr">android:fromYDelta</span><span class="kwrd">="100%p"</span> <span class="attr">android:toYDelta</span><span class="kwrd">="0%p"</span> <span class="attr">android:duration</span><span class="kwrd">="500"</span> <span class="kwrd">/&gt;</span></pre><pre>    <span class="kwrd">&lt;</span><span class="html">alpha</span> <span class="attr">xmlns:android</span><span class="kwrd">="http://schemas.android.com/apk/res/android"</span></pre><pre class="alt">       <span class="attr">android:fromAlpha</span><span class="kwrd">="0.0"</span> <span class="attr">android:toAlpha</span><span class="kwrd">="1.0"</span> <span class="attr">android:duration</span><span class="kwrd">="400"</span><span class="kwrd">/&gt;</span></pre><pre><span class="kwrd">&lt;/</span><span class="html">set</span><span class="kwrd">&gt;</span></pre></div>
+<p>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+Now add another named <strong>slide_down</strong> with the following XML:</p>
+<div class="csharpcode"><pre class="alt"><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">="1.0"</span> <span class="attr">encoding</span><span class="kwrd">="utf-8"</span>?<span class="kwrd">&gt;</span></pre><pre><span class="kwrd">&lt;</span><span class="html">set</span> <span class="attr">xmlns:android</span><span class="kwrd">="http://schemas.android.com/apk/res/android"</span></pre><pre class="alt">    <span class="attr">android:interpolator</span><span class="kwrd">="@android:anim/decelerate_interpolator"</span></pre><pre>    <span class="attr">android:shareInterpolator</span><span class="kwrd">="true"</span><span class="kwrd">&gt;</span></pre><pre class="alt">    <span class="kwrd">&lt;</span><span class="html">translate</span> <span class="attr">android:fromYDelta</span><span class="kwrd">="0%p"</span> <span class="attr">android:toYDelta</span><span class="kwrd">="100%p"</span> <span class="attr">android:duration</span><span class="kwrd">="500"</span> <span class="kwrd">/&gt;</span></pre><pre>    <span class="kwrd">&lt;</span><span class="html">alpha</span> <span class="attr">xmlns:android</span><span class="kwrd">="http://schemas.android.com/apk/res/android"</span></pre><pre class="alt">       <span class="attr">android:fromAlpha</span><span class="kwrd">="1.0"</span> <span class="attr">android:toAlpha</span><span class="kwrd">="0.0"</span> <span class="attr">android:duration</span><span class="kwrd">="500"</span><span class="kwrd">/&gt;</span></pre><pre><span class="kwrd">&lt;/</span><span class="html">set</span><span class="kwrd">&gt;</span></pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Now, you’ve already seen <a title="Android How to Figure Out your Current Orientation" href="http://chrisrisner.com/31-Days-of-Android--Day-11%E2%80%93Device-Orientation">how to figure out what the current orientation is</a>.&nbsp; You need to get an instance of <strong>Display</strong> and use that to check it’s rotation (as noted in the linked article, if you’re using an older version of Android, you’ll have to do something else).&nbsp; Your <strong>Button2</strong> <strong>onClickListener</strong> should be changed to check the rotation and then specify the in and out animations depending on that like so:</p><pre class="csharpcode">Button button2 = (Button) findViewById(R.id.button2);
+button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            
+    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {
+        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>));
+        Display display = ((WindowManager) 
+                getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        <span class="kwrd">if</span> ((display.getRotation() == Surface.ROTATION_0) || 
+            (display.getRotation() == Surface.ROTATION_180)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        } <span class="kwrd">else</span> <span class="kwrd">if</span> ((display.getRotation() == Surface.ROTATION_90) ||
+                   (display.getRotation() == Surface.ROTATION_270)) {
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        }
+                    
+    }
+});</pre>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>So here, you’re saying if the device is in a portrait orientation, slide out to the left and slide the new <strong>Activity</strong> in from the left.&nbsp; If you’re in landscape, slide down and slide up the new <strong>Activity</strong>.&nbsp; In the <strong>onBackPressed</strong> method of the second <strong>Activity</strong> you’ll use the exact same code to override the pending transaction.&nbsp; </p>
+<p>Now that you know how to override the transactions going in and out of activities, provided you can figure out how to create a new animation, you should be able to get (nearly) any effect you want between activities.&nbsp; Sliding in and out, left and right, up and down, are very common and relatively easy to create.&nbsp; In the attached sort you’ll find a few more of the more common animation XMLs.&nbsp; You can <a title="Android Day Seventeen Source Code" href="http://chrisrisner.com/upload/DaySeventeenFinal.zip">download the latest source code here</a>.</p>

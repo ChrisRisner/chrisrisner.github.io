@@ -1,0 +1,358 @@
+---
+layout: post
+title: "31 Days of Android: Day 23–Writing and Reading Files"
+date: Tue Dec 13 2011 01:11:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll continue to discuss persistence by going over how to read and write files store on internal or external storage."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Writing files,reading files,internal storage,external storage,file modes,permissions for write to external storage,fileinputstream,fileoutputstream,reading a file from storage,tutorial
+filepath: 2011-12-13-31-Days-of-Android--Day-23-Writing-and-Reading-Files.html
+disqus_identifier: 31-Days-of-Android--Day-23-Writing-and-Reading-Files
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" /><strong>UPDATE: It looks like the code for today was accidentally labeled DayTwentyTwo instead DayTwentyThree.  I'll go back and fix this as soon I have a chance.</strong><br /><br />It’s time to continue our sub-series on persistence as part of the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; Yesterday we went over <a title="Android SharedPreferences" href="http://chrisrisner.com/31-Days-of-Android--Day-22%E2%80%93Shared-Preferences">Shared Preferences</a> which is a method for persisting key value pairs.&#160; These can be only readable by your application, or you can open them up to reading or writing by other apps.&#160; Today we’re going to cover another method of persisting data, one that anyone that has programmed in the past is probably familiar with:&#160; file storage.&#160; The Java language supports many different methods for file access, and these can be used in Android as well.&#160; There are two methods of file storage we’ll look at:&#160; internal storage and external storage.&#160; You can <a title="Android Day Twenty Two Initial Code" href="http://chrisrisner.com/upload/DayTwentyTwoInitial.zip">access our starter code here</a>.</p>  <p>&#160;</p>  <p><strong>Using Internal Storage</strong></p>  <p>Internal storage refers to the on device hard drive and does not include SD cards.&#160; Internal storage gives you the ability to prevent other applications from accessing the files you save and are tied directly to your app.&#160; Lets look at how to write to a local file.&#160; Open <strong>src/com.daytwentytwo/DayTwentyTwoActivity.java</strong> and find the <strong>onClickListener</strong> for <strong>button1</strong>.&#160; Here you can add the following code:</p>  <div class="csharpcode">   <pre class="alt">lblTextViewOne.setText(editText1.getText());                            </pre>
+
+  <pre><span class="kwrd">try</span> {</pre>
+
+  <pre class="alt">    FileOutputStream fos = openFileOutput(<span class="str">&quot;DayTwentyTwoFile&quot;</span>, Context.MODE_PRIVATE);</pre>
+
+  <pre>    fos.write(editText1.getText().toString().getBytes());</pre>
+
+  <pre class="alt">    fos.close();</pre>
+
+  <pre>} <span class="kwrd">catch</span> (Exception e) {</pre>
+
+  <pre class="alt">    e.printStackTrace();</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re opening a file named “<strong>DayTwentyTwoFile</strong>” in the mode <strong>MODE_PRIVATE</strong>.&#160; <strong>MODE_PRIVATE</strong> will create a new file or overwrite one if it already exists with the same name.&#160; <strong>MODE_APPEND</strong> will create the file if it doesn’t exist and allow you to append to the file if it does exist.&#160; <strong>MODE_WORLD_READABLE</strong> means the file is readable by any other application and <strong>MODE_WORLD_WRITEABLE</strong> means the file is writeable by any other application.&#160; You can open a file for appending and make it world readable / writeable by ORing the two values like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">FileOutputStream fos = openFileOutput(<span class="str">&quot;DayTwentyTwoFile&quot;</span>, </pre>
+
+  <pre>    Context.MODE_APPEND | Context.MODE_WORLD_READABLE);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>When you run your app, you can click on the button which should write to the file, but you don’t have a way in the app to make sure it’s working yet.&#160; To do this, you need to use the <a title="Debugging using DDMS" href="http://chrisrisner.com/31-Days-of-Android--Day-9%E2%80%93Debugging-your-Applications">DDMS perspective in Eclipse</a>.&#160; After you’ve opened DDMS, select the emulator in the Devices view in the top left.&#160; Then in the main content window, at the top, select <strong>File Explorer</strong>.&#160; By default you’ll find all apps under <strong>/data/data/packagename</strong>.&#160; If you navigate to <strong>/data/data/com.daytwentytwo/files</strong> you should see a <strong>DayTwentyTwoFile</strong>.&#160; Using the buttons at the top right of that view, you can choose to move the file off of the phone to your computer, and back from your computer to the phone.</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="DDMS" alt="DDMS" src="http://chrisrisner.com/upload/android_day_twentytwo_ddms.png" /></p>
+
+<p>Once you’ve copied that file to your local computer and open it, you’ll see that whatever you had in the <strong>EditText</strong> when you tapped the button made it into the file. </p>
+
+<p>&#160;</p>
+
+<p><strong>Reading from the Local File</strong></p>
+
+<p>Now that you’ve handled writing to the local file, it’s a small step to reading from that file.&#160; Locate the <strong>button2 onClickListener</strong> and add the following code:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">try</span> {</pre>
+
+  <pre>    BufferedReader inputReader = <span class="kwrd">new</span> BufferedReader(<span class="kwrd">new</span> InputStreamReader(</pre>
+
+  <pre class="alt">            openFileInput(<span class="str">&quot;DayTwentyTwoFile&quot;</span>)));</pre>
+
+  <pre>    String inputString;</pre>
+
+  <pre class="alt">    StringBuffer stringBuffer = <span class="kwrd">new</span> StringBuffer();                </pre>
+
+  <pre>    <span class="kwrd">while</span> ((inputString = inputReader.readLine()) != <span class="kwrd">null</span>) {</pre>
+
+  <pre class="alt">        stringBuffer.append(inputString + <span class="str">&quot;\n&quot;</span>);</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">    lblTextViewOne.setText(stringBuffer.toString());</pre>
+
+  <pre>} <span class="kwrd">catch</span> (IOException e) {</pre>
+
+  <pre class="alt">    e.printStackTrace();</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>It’s slightly more complex than the write was but here you’re opening up the file and reading it into a <strong>StringBuffer</strong>.&#160; Now when you run your app and tap the second button, you should see the text that was previously stored in the file loaded into the <strong>TextView</strong> at the top of the screen.</p>
+
+<p>&#160;</p>
+
+<p><strong>Using External Storage</strong></p>
+
+<p>External storage is typically either a removable storage media (i.e. SD Card) or an internal non-removable storage that is accessed in the same manner.&#160; In either case, anything written to this location can be accessed by other programs, moved to and from the computer, or deleted without any notice to your application.&#160; One factor when considering using external storage vs. internal storage is that older devices have limited onboard storage and using external storage may be necessary.&#160; On newer devices, this is less of a concern.&#160; The first thing you’ll need to do before you can write to external storage is add the permission required to do so to your manifest file:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-permission</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span><span class="kwrd">/&gt;</span> </pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Users will see that you app requires this permission when they go to install it.</p>
+
+<p>Next, prior to trying to access the external storage, you need to check its state using the <strong>Environment.getExternalStorageState</strong> method.&#160; This can return a few different options.&#160; If it equals <strong>Environment.MEDIA_MOUNTED</strong> then you should be safe to read and write.&#160; If you get <strong>Environment.MEDIA_MOUNTED_READ_ONLY</strong> then you can only safely read.&#160; If you get anything else, it isn’t safe to access the external storage.&#160; Once you know you have access, there are two locations it is acceptable to write files to in external storage:&#160; your app’s data directory and special public directories.&#160; Let’s look at your app’s data directory first.&#160; </p>
+
+<p>In API level 8 and greater (Android 2.2 and greater) calling <strong>getExternalFilesDir</strong> will open a file at the root of your apps external storage directory.&#160; This method will take in a type that you can use to specify a sub-directory like <strong>Environment.DIRECTORY_MUSIC</strong> if you want to put files in.&#160; Alternatively if you pass in null you’ll get the root of your app’s data directory.&#160; To write a file to the root of your app’s directory in 2.2 or greater, you’d do the following:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">try</span> {</pre>
+
+  <pre>    FileOutputStream fos = openFileOutput(<span class="str">&quot;DayTwentyTwoFile&quot;</span>,</pre>
+
+  <pre class="alt">            Context.MODE_APPEND | Context.MODE_WORLD_READABLE);</pre>
+
+  <pre>    fos.write(editText1.getText().toString().getBytes());</pre>
+
+  <pre class="alt">    fos.close();</pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt">    String storageState = Environment.getExternalStorageState();</pre>
+
+  <pre>    <span class="kwrd">if</span> (storageState.equals(Environment.MEDIA_MOUNTED)) {</pre>
+
+  <pre class="alt">        File file = <span class="kwrd">new</span> File(getExternalFilesDir(<span class="kwrd">null</span>),</pre>
+
+  <pre>                <span class="str">&quot;DayTwentyTwoFileTwo&quot;</span>);</pre>
+
+  <pre class="alt">        FileOutputStream fos2 = <span class="kwrd">new</span> FileOutputStream(file);</pre>
+
+  <pre>        fos2.write(editText1.getText().toString().getBytes());</pre>
+
+  <pre class="alt">        fos2.close();</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">} <span class="kwrd">catch</span> (Exception e) {</pre>
+
+  <pre>    e.printStackTrace();</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re doing the original write to internal storage and then checking to see if the external storage is mounted.&#160; If it is, you’re creating a new file at the root of your app’s directory and writing out the same data.&#160; Reading the file is the same as before, except you’d pass in a new <strong>FileInputStream</strong> where before you were calling <strong>openFileInput</strong>:&#160; </p>
+
+<div class="csharpcode">
+  <pre class="alt">String storageState = Environment.getExternalStorageState();</pre>
+
+  <pre><span class="kwrd">if</span> (storageState.equals(Environment.MEDIA_MOUNTED)) {</pre>
+
+  <pre class="alt">    File file = <span class="kwrd">new</span> File(getExternalFilesDir(<span class="kwrd">null</span>),</pre>
+
+  <pre>            <span class="str">&quot;DayTwentyTwoFileTwo&quot;</span>);</pre>
+
+  <pre class="alt">    </pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt">    BufferedReader inputReader2 = <span class="kwrd">new</span> BufferedReader(</pre>
+
+  <pre>            <span class="kwrd">new</span> InputStreamReader(<span class="kwrd">new</span> FileInputStream(file)));</pre>
+
+  <pre class="alt">    String inputString2;</pre>
+
+  <pre>    StringBuffer stringBuffer2 = <span class="kwrd">new</span> StringBuffer();</pre>
+
+  <pre class="alt">    <span class="kwrd">while</span> ((inputString2 = inputReader2.readLine()) != <span class="kwrd">null</span>) {</pre>
+
+  <pre>        stringBuffer2.append(inputString2 + <span class="str">&quot;\n&quot;</span>);</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>    lblTextViewOne.setText(stringBuffer2.toString());</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you’re developing for pre 2.2 you won’t have access to the <strong>getExternalFilesDir</strong> method.&#160; Instead you must call <strong>getExternalStorageDirectory</strong> which will return the path to the root of your external storage.&#160; You are then responsible for writing files to your app’s data directory at the following path:&#160; <strong>/Android/data/&lt;package&gt;/files</strong>.&#160; So for the sample code, you’d write files to <strong>/Android/data/com/daytwentytwo/files</strong>.&#160; If and when your application is uninstalled, any files in your app’s data directory will be removed in 2.2 or greater.</p>
+
+<p><strong>Writing Shared Files to External Storage</strong></p>
+
+<p>Much like when you call <strong>getExternalFilesDir</strong> and you can pass in a type, there are public folders on external storage that have specific types.&#160; When you write a file to one of these directories, they are shared among different apps.&#160; For example, if you waned to write music tracks to a shared music folder, you’d get the directory and pass in <strong>Environment.DIRECTORY_MUSIC</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt">File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Similarly to the pre 2.2 issue we faced before, if you are using pre 2.2 and want to write to a public folder, you need to call <strong>getExternalStorageDirectory </strong>and write to one of the shared directories (so “<strong>Music/</strong>” in the previous case).&#160; </p>
+
+<p>&#160;</p>
+
+<p>You should now be capable of writing and reading files on your Android device in your applications.&#160; Remember that users can see how much space your app is taking up in user data.&#160; Furthermore they can clear it freely from the <strong>Manage Applications</strong> area of settings.&#160; Knowing that, and that anything can access and change files on external storage, you should remember that these files could be removed outside of your application.&#160; </p>
+
+<p>You can <a title="Android Day TwentyTwo Final Source Code" href="http://chrisrisner.com/upload/DayTwentyTwoFinal2.zip">download the finished sample code from today here</a>.</p>

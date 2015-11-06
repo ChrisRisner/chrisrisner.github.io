@@ -1,0 +1,160 @@
+---
+layout: post
+title: "31 Days of Android: Day 10–The Back Button"
+date: Wed Nov 30 2011 00:32:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll discuss the Back button.  This button is primarily used as a navigation tool but I'll show you how to override the default functionality and talk about when and why you might want to do this."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Back Button,Back,onBackPressed,onKeyDown,Overriding back functionality,playing animation when back is pressed,Tutorial
+filepath: 2011-11-30-31-Days-of-Android--Day-10-The-Back-Button.html
+disqus_identifier: 31-Days-of-Android--Day-10-The-Back-Button
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Back Button" alt="Android Back Button" align="right" src="http://chrisrisner.com/upload/android_back_logo.png" />One of the differences between Android devices and their biggest competitor, the iPhone, is the presence of several hardware buttons.&#160; Android devices typically have the following hardware buttons: Menu, Home, Search, and Back.&#160; We’ve already made use of the Menu button with the <a title="Options Menu and Button" href="http://chrisrisner.com/31-Days-of-Android--Day-6%E2%80%93Options-Menus-and-Base-Activities">options menu we created on Day 6</a>.&#160; For today’s <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> article, we’ll talk about the Back button and how to override it’s functionality.</p>  <p><strong>Catching the Back Button Press</strong></p>  <p>Intercepting a back button press is actually remarkably easy as of Android 2.0.&#160; The code below is all you need to add to an activity to catch it:</p>  <div class="csharpcode">   <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> <span class="kwrd">void</span> onBackPressed() {</pre>
+
+  <pre class="alt">    <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre>    super.onBackPressed();</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Go ahead and add this to your <strong>ActivityTwo </strong>from the <a title="Day Seven code" href="http://chrisrisner.com/upload/DaySeven.zip">last day’s code</a>.&#160; Now when you press back, you will first go through this method.&#160; As is, nothing different will happen.&#160; If you comment out the <strong>super.onBackPressed()</strong> method and then rerun your application, hitting the back button won’t do anything.&#160; You won’t return to the first activity, you won’t back out of the application.&#160; Nothing.&#160; If you wanted to prevent a user from backing out of your application, this is how you could do it.&#160;&#160; I did say though, that this only works on 2.0 and later.&#160; If you want to catch the back press prior to 2.0, you can use the <strong>onKeyDown</strong> method like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> boolean onKeyDown(<span class="kwrd">int</span> keyCode, KeyEvent <span class="kwrd">event</span>)  {</pre>
+
+  <pre class="alt">    <span class="kwrd">if</span> (keyCode == KeyEvent.KEYCODE_BACK &amp;&amp; <span class="kwrd">event</span>.getRepeatCount() == 0) {</pre>
+
+  <pre>        <span class="rem">//Do something on back press</span></pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>    <span class="kwrd">return</span> super.onKeyDown(keyCode, <span class="kwrd">event</span>);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Interestingly, if you override both the <strong>onBackPressed </strong>and <strong>onKeyDown</strong>, both will catch the back press with <strong>onKeyDown </strong>catching it first.&#160; If you call <strong>super.onKeyDown</strong> in <strong>onKeyDown</strong> like we are above, then the <strong>onBackPressed </strong>method will fire.&#160; If you do not call <strong>super.onKeyDown </strong>then <strong>onBackPressed</strong> will never be called.&#160; Unless you have a specific reason to target below 2.0, there isn’t much of a reason to bother.&#160; <a title="Android Platform Versions" href="http://developer.android.com/resources/dashboard/platform-versions.html">Pre 2.0 now accounts for less than 2.5% of devices connecting to the Android Market</a>.</p>
+
+<p><strong>Can I I Really Stop a User from leaving my App?</strong></p>
+
+<p>Don’t forget that in addition to the <strong>back </strong>button, devices also have a <strong>Home </strong>button.&#160; Furthermore, if you try to change expected behavior, users won’t like your app.&#160; One of the big differences between Android apps and iPhone apps is that iPhone apps have to be reviewed and if things don’t perform like a normal “acceptable” application, it won’t pass review.&#160; The Android Marketplace doesn’t have a review process like this, but users will be happy to tell you when they hate how your application works.&#160; </p>
+
+<p><strong>So Why Use it?</strong></p>
+
+<p>Under most circumstances, the back button should function the same in your application as it does everywhere else.&#160; That said, there are scenarios where it comes in handy.&#160; First, if you want to change the default animation when a user taps back you could do so in the <strong>onBackPressed</strong>.&#160; If you add an animation to the <strong>res/anim</strong> folder, you could change the animation played when going back between activities like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">public</span> <span class="kwrd">void</span> onBackPressed() {</pre>
+
+  <pre class="alt">    super.onBackPressed();</pre>
+
+  <pre>    overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here, we’ve replaced whatever the default back animation is with a zoom out and in.&#160; You won’t be able to put this code into your <strong>onBackPressed </strong>button without creating the <strong>zoom_in </strong>and <strong>zoom_out</strong> animations.&#160; Don’t worry too much about this as we’ll talk more about animations in a future article.&#160; </p>
+
+<p>A second reason for overriding the back button is a little more complicated to explain.&#160; Let’s say your user interface has some element that comes on screen due to some user interaction.&#160; An example of this is the Android camera.&#160; When you load up the Android camera, the right side has a tab that, upon tapping, slides out with different options (<strong>Scenes</strong>, <strong>Effects</strong>, <strong>Flash</strong>, and <strong>Switch To </strong>(video recorder)).&#160; When this tab pops out, it covers the <strong>Take Picture button</strong>:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Ten Camera" alt="Android Day Ten Camera" src="http://chrisrisner.com/upload/android_day_ten_camera.png" /></p>
+
+<p>It’s relatively easy to tap anywhere in the camera frame to dismiss this tab, however, some users might feel that tapping the back button should remove the tab but not close the camera.&#160; It’s quite possible you might have something similar in your application.&#160; Instead of leaving your activity on the back button tap, you could check to see if the tab was visible, and then hide it.&#160; Then on a second tap of the back button, you could back out of the activity as a user would expect.</p>
+
+<p><strong>Can I Assume Android Devices will all have a Back Button?</strong></p>
+
+<p>Starting with the tablet devices that came out with Android 3.0 on them, manufacturers started moving away from hardware buttons and instead had a button / status bar at the bottom of the Android OS screen.&#160; It looks like Android and Google are continuing this with both phones and tablets in Ice Cream Sandwich.&#160; So while future devices may not have a hardware back button like current devices do, they will still feature a software implemented back button.</p>
+
+<p>We didn’t do a lot of coding today but <a title="Android Day Ten Source" href="http://chrisrisner.com/upload/DayTen.zip">you can download the latest source here</a>.</p>

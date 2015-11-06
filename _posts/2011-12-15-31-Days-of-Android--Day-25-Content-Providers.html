@@ -1,0 +1,541 @@
+---
+layout: post
+title: "31 Days of Android: Day 25–Content Providers"
+date: Thu Dec 15 2011 02:29:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we're going to take a look at a topic that is related to the persistence stuff we've been going over the last 3 days:  Content Providers.  Content Providers are the suggested method for sharing data between applications and Android includes some built in ones for contacts, media, photos, and more."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Content Providers,querying contacts,querying music,querying media,querying photos,Android Uri,Uri,Inserting to content provider,updating using content provider,tutorial
+filepath: 2011-12-15-31-Days-of-Android--Day-25-Content-Providers.html
+disqus_identifier: 31-Days-of-Android--Day-25-Content-Providers
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" />Yesterday we wrapped up talking about persistence in the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; Today we’re talking about something that is related to persistence and can actually be used to persist data, sort of:&#160; <strong>Content Providers</strong>.&#160; <strong>Content Providers </strong>are able to store and retrieve data from other applications.&#160; Android comes with a number of built in <strong>Content Providers</strong> for common data types such as audio, video, images, contacts, calendar (as of 4.0), and more.&#160; In addition, you can create your own <strong>Content Providers</strong>.&#160; That’s a bit beyond what we’ll cover today but it is something I may cover in the future.&#160; Today we’ll start by looking at the Contacts Content Provider but we’ll also show some examples of using another provider at the end.&#160; You can <a title="Android Day TwentyFive Initial Source Code" href="http://chrisrisner.com/upload/DayTwentyFiveInitial.zip">download the sample code we’re starting with today here</a>.</p>  <p><strong>Adding Contacts Manually</strong></p>  <p>Since you want to pull contact data, you need to add a few contacts first.&#160; This is actually a bit more involved than you might think because before you can add contacts, you need to have an account set up on the emulator (note that if you’re running on your own device, you probably already have an account and contacts on it, so you might be able to skip this step).&#160; Start by tapping the <strong>Menu</strong> button and go to <strong>Settings</strong> and choose <strong>Accounts &amp; Sync</strong>.&#160; If there aren’t any accounts under <strong>Manage Accounts</strong> tap the <strong>Add Account</strong> button at the bottom.&#160; Follow the steps to add a Google account to your emulator / device and return to the <strong>Home </strong>screen.&#160; This time, tap the <strong>App Tray </strong>button at the bottom center of the emulator and choose the <strong>Contacts</strong> application.&#160; Hitting <strong>Menu </strong>now should allow you to choose <strong>New contact</strong>.&#160; You’ll need to choose the account you added and then you’ll be at the contact entry screen.&#160; Go ahead and fill this out and create a contact:</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android New Contact" alt="Android New Contact" src="http://chrisrisner.com/upload/android_day_twentyfive_new_contact.png" width="235" height="346" /></p>  <p>When you’re done, tap <strong>Done</strong> to save the contact.&#160; Create at least two contacts before proceeding.&#160; Note that after you hit <strong>Done</strong>, you may not see your contacts on the emulator.&#160; If you’re not, tap <strong>Menu</strong> and choose <strong>Display Options</strong>.&#160; Then at the bottom under <strong>Choose contacts to display</strong>, expand your account and ensure <strong>All Accounts </strong>is checked.</p>  <p><strong>Getting at the Data</strong></p>  <p>If you’re experienced with using a SQL database (<a title="SQLite for Android" href="http://chrisrisner.com/31-Days-of-Android--Day-24%E2%80%93Using-SQLite-Databases">like SQLite for Android</a>) then accessing the data through a <strong>Content Provider</strong> shouldn’t seem that weird.&#160; You have to execute a query against a specific table, can specify which columns you want returned, which selection criteria (WHERE clause) you want to use, and how you want the results ordered.&#160; In this case, instead of listing a table name, you instead pass a <strong>URI</strong>.&#160; The built in providers define constants that you can use to specify these URIs.&#160; These are some examples of the predefined constants:</p>  <ul>   <li>android.provider.ContactsContract.Contacts.ContentURI </li>    <li>android.provider.MediaStore.Audio.EXTERNAL_CONTENT_URI </li>    <li>android.provider.CalendarContract.Events.CONTENT_URI </li> </ul>  <p>The first provider is for Contacts.&#160; The second to last is the URI for externally stored audio media.&#160; The last one is new from Android 4.0 and is the URI for calendar events.&#160; Again, the URI specifies the source of the information you’re accessing.&#160; Let’s take a look at how to pull out all of the contacts you’ve saved in your app.&#160; Open the <strong>src/com.daytwentyfive/DayTwentyFiveActivity.java</strong> class and find <strong>button1</strong>’s <strong>onClickListener</strong>.&#160; Here you can add the code to query the contacts.&#160; For now you can just pull all rows back and not pass any selection criteria.&#160; We’ll deal with those later.&#160; After you pull the data, you should loop through it and join the names together:&#160; </p>  <div class="csharpcode">   <pre class="alt">button1.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt">        Uri contactsUri =  ContactsContract.Contacts.CONTENT_URI;</pre>
+
+  <pre>        Cursor cursor = managedQuery(contactsUri,</pre>
+
+  <pre class="alt">                                 <span class="kwrd">null</span>,  </pre>
+
+  <pre>                                 <span class="kwrd">null</span>,</pre>
+
+  <pre class="alt">                                 <span class="kwrd">null</span>,</pre>
+
+  <pre>                                 <span class="kwrd">null</span>);</pre>
+
+  <pre class="alt">        <span class="kwrd">if</span> (cursor != <span class="kwrd">null</span> &amp;&amp; cursor.getCount() &gt; 0) {</pre>
+
+  <pre>            StringBuilder sb = <span class="kwrd">new</span> StringBuilder();</pre>
+
+  <pre class="alt">            <span class="kwrd">while</span> (cursor.moveToNext()) {</pre>
+
+  <pre>                sb.append(<span class="str">&quot;Name-&quot;</span>);</pre>
+
+  <pre class="alt">                sb.append(cursor.getString(cursor.getColumnIndex(</pre>
+
+  <pre>                        ContactsContract.Contacts.DISPLAY_NAME)));</pre>
+
+  <pre class="alt">                sb.append(<span class="str">&quot;\n&quot;</span>);</pre>
+
+  <pre>            }</pre>
+
+  <pre class="alt">            lblTextViewOne.setText(sb.toString());</pre>
+
+  <pre>        }</pre>
+
+  <pre class="alt">        <span class="kwrd">else</span> {</pre>
+
+  <pre>            lblTextViewOne.setText(<span class="str">&quot;Couldn't find any contacts&quot;</span>);</pre>
+
+  <pre class="alt">        }</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>First you’re getting a reference the Contacts URI.&#160; Then you’re doing a managed query which just passes in the URI.&#160; Since nothing else is specified, it will pull back all of the contacts and will use whatever default order there is.&#160; After that, provided some contacts are found, you’re looping through them and pulling out the <strong>DISPLAY_NAME </strong>for each.&#160; The <strong>managedQuery </strong>method you are using is specific to the <strong>Activity</strong> class.&#160; Calling it means that the <strong>Activity</strong> that it is called from will handle the life cycle of the <strong>Cursor</strong> (unloading and reloading when necessary).&#160; Now when you run your app and tap the button, your app will <strong>crash</strong>.&#160; If you look in LogCat, you’ll see the following error:</p>
+
+<blockquote>
+  <p align="left">java.lang.SecurityException: Permission Denial: reading com.android. 
+    <br />providers.contacts.ContactsProvider2 uri 
+
+    <br />content://com.android.contacts/contacts from pid=5529, uid=10055 
+
+    <br />requires android.permission.READ_CONTACTS</p>
+</blockquote>
+
+<p>Getting access to contacts <strong>REQUIRES</strong> you to get permission.&#160; Open your app’s <strong>AndroidManifest.xml</strong> file and add the <strong>READ_CONTACTS</strong> permission to it:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-permission</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.permission.READ_CONTACTS&quot;</span><span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your app and tap the button you should see the names of the contacts put into the <strong>TextView</strong> at the top of the screen:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Listing Contacts" alt="Listing Contacts" src="http://chrisrisner.com/upload/android_day_twentyfive_listing_contacts.png" width="262" height="232" /></p>
+
+<p>&#160;</p>
+
+<p><strong>Limiting the Columns Selected</strong></p>
+
+<p>Previously you were pulling back every column of data that is available in the <strong>Contacts.CONTENT_URI</strong>.&#160; This was happening because the second parameter to <strong>managedQuery</strong> was null.&#160; This parameter takes in a String array of column names that either limits the data returned, if passed, or means all data will be returned if null.&#160; Let’s say you only wanted to pull back the display name, number of times contacted, the last time contacted, and whether or not each contact was a favorite.&#160; Your code would then look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">String[] projection = <span class="kwrd">new</span> String[] {</pre>
+
+  <pre>        ContactsContract.Contacts.DISPLAY_NAME,</pre>
+
+  <pre class="alt">        ContactsContract.Contacts.TIMES_CONTACTED,</pre>
+
+  <pre>        ContactsContract.Contacts.LAST_TIME_CONTACTED,</pre>
+
+  <pre class="alt">        ContactsContract.Contacts.STARRED</pre>
+
+  <pre>     };</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>Cursor cursor = managedQuery(contactsUri,</pre>
+
+  <pre class="alt">                         projection,  </pre>
+
+  <pre>                         <span class="kwrd">null</span>,</pre>
+
+  <pre class="alt">                         <span class="kwrd">null</span>,</pre>
+
+  <pre>                         <span class="kwrd">null</span>);</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Your projection array is created using constants also exposed by the <strong>ContactsContract</strong> provider like the <strong>CONTENT_URI</strong>.&#160; </p>
+
+<p><strong></strong></p>
+
+<p><strong>Using a Sort Order</strong></p>
+
+<p>Using a sort order is very simple and is handled by passing something into the last parameter for <strong>managedQuery</strong>.&#160; Let’s say you want to fetch the contacts ordered by the time they were most recently contacted with the most recently contacted being first.&#160; Your <strong>managedQuery</strong> call would look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Cursor cursor = managedQuery(contactsUri,</pre>
+
+  <pre>     <span class="kwrd">null</span>,  </pre>
+
+  <pre class="alt">     <span class="kwrd">null</span>,</pre>
+
+  <pre>     <span class="kwrd">null</span>,</pre>
+
+  <pre class="alt">     ContactsContract.Contacts.LAST_TIME_CONTACTED + <span class="str">&quot; DESC&quot;</span>);</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Conversely if you wanted them in reverse order, so the contact that hasn’t been contacted in the longest time was first, you would change <strong>DESC </strong>to <strong>ASC</strong>.</p>
+
+<p>&#160;</p>
+
+<p><strong>Inserting to a Content Provider</strong></p>
+
+<p>Being able to pull data from a provider is great.&#160; However, many content providers will also give you the ability to add, update, and delete data.&#160; Prior to getting into the code, let’s cover the permission required first.&#160; Much like reading contacts, making changes to contacts requires a new permission be added to the manifest file.&#160; Open your manifest and add:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-permission</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.permission.WRITE_CONTACTS&quot;</span><span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now, go back to your <strong>src/com.daytwentyfive/DayTwentyFiveActivity.java</strong> class and locate the <strong>button2 onClickListener</strong>.&#160; Here you’ll add the code to save a new contact.&#160; Prior to Android 2.0, inserting was pretty simple.&#160; As of 2.0 though, the Contacts stuff was reworked a little bit and inserting a new contact via code is slightly more complicated.&#160; Here’s the code you’ll want to add to your listener to insert a new contact:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Uri newContactUri;</pre>
+
+  <pre>&#160;</pre>
+
+  <pre class="alt">ArrayList&lt;ContentProviderOperation&gt; ops = <span class="kwrd">new</span> ArrayList&lt;ContentProviderOperation&gt;();</pre>
+
+  <pre><span class="kwrd">int</span> rawContactInsertIndex = ops.size();</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre> ops.add(ContentProviderOperation</pre>
+
+  <pre class="alt"> .newInsert(RawContacts.CONTENT_URI)</pre>
+
+  <pre> .withValue(RawContacts.ACCOUNT_TYPE, <span class="kwrd">null</span>)</pre>
+
+  <pre class="alt"> .withValue(RawContacts.ACCOUNT_NAME, <span class="kwrd">null</span>).build());</pre>
+
+  <pre>ops.add(ContentProviderOperation</pre>
+
+  <pre class="alt">        .newInsert(ContactsContract.Data.CONTENT_URI)</pre>
+
+  <pre>        .withValueBackReference(Data.RAW_CONTACT_ID,</pre>
+
+  <pre class="alt">                rawContactInsertIndex)</pre>
+
+  <pre>        .withValue(Data.MIMETYPE,</pre>
+
+  <pre class="alt">                StructuredName.CONTENT_ITEM_TYPE)</pre>
+
+  <pre>        .withValue(StructuredName.DISPLAY_NAME,</pre>
+
+  <pre class="alt">                <span class="str">&quot;New Contact Name&quot;</span>).build());</pre>
+
+  <pre>ContentProviderResult[] res = getContentResolver()</pre>
+
+  <pre class="alt">        .applyBatch(ContactsContract.AUTHORITY, ops);</pre>
+
+  <pre>newContactUri = res[0].uri;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This is actually relatively complicated and I won’t go through each line.&#160; The important part though is that you’re calling <strong>newInsert</strong> and you’re setting the display name to “<strong>New Contact Name</strong>”.&#160; Then you’re calling <strong>applyBatch </strong>to execute all of the operations you’ve added to the <strong>ContentProviderOperation.</strong></p>
+
+<p>The result of <strong>applyBatch </strong>is an array of <strong>ContentProviderResult</strong>.&#160; In the scenario above, you’re interested in the first result.&#160; The result property you’re interested in is <strong>uri</strong>.&#160; If you were to print out the <strong>uri</strong> property you’d get something like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">content://com.android.contacts/raw_contacts/6</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Note the <strong>6</strong> at the end which is the ID of your new contact (in your case it might not be 6 but a different integer).&#160; If you hit the first button again, you should see your new contact’s name added to the list of contacts.&#160; If you hit the second button again you’d get a different ID returned.&#160; I believe that Android is inserting multiple contacts but treats them as the same person since they all have the same name and no differentiating details (i.e. different phone numbers, addresses, etc).</p>
+
+<p>&#160;</p>
+
+<p><strong>Updating Records in a Content Provider</strong></p>
+
+<p>Updating is going to be pretty similar (and messy) to the insert:</p>
+
+<div class="csharpcode">
+  <pre class="alt">ops.clear();</pre>
+
+  <pre>ops.add(ContentProviderOperation</pre>
+
+  <pre class="alt">     .newUpdate(RawContacts.CONTENT_URI)</pre>
+
+  <pre>     .withValue(RawContacts.ACCOUNT_TYPE, <span class="kwrd">null</span>)</pre>
+
+  <pre class="alt">     .withValue(RawContacts.ACCOUNT_NAME, <span class="kwrd">null</span>).build());</pre>
+
+  <pre>ops.add(ContentProviderOperation.newUpdate(ContactsContract.Data.CONTENT_URI)</pre>
+
+  <pre class="alt">     .withValue(StructuredName.DISPLAY_NAME, <span class="str">&quot;Updated contact name&quot;</span>)</pre>
+
+  <pre>     .withSelection(Data.RAW_CONTACT_ID + <span class="str">&quot;=?&quot;</span>, <span class="kwrd">new</span> String[] {newContactId})</pre>
+
+  <pre class="alt">     .build());</pre>
+
+  <pre>res = getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re doing the same thing with the ACCOUNT except it’s a call to <strong>newUpdate</strong> and then calling <strong>newUpdate</strong> on your contact.&#160; New this time those is the call to <strong>withSelection</strong>.&#160; This call specifies what the update selection criteria is.&#160; Notice that you’re using the <strong>newContactId</strong> that you retrieved earlier after the insert.</p>
+
+<p>&#160;</p>
+
+<p><strong>Deleting Records in a Content Provider</strong></p>
+
+<p>Deleting raw contacts seems to be a bit more difficult (as I haven’t figured it out yet).&#160; If I do get it figured out I’ll update it here.&#160; If you happen to read this and know the correct way to delete a raw contact, let me know and I’ll add it and credit you with figuring it out.</p>
+
+<p><strong></strong></p>
+
+<p><strong>Querying the Media Store</strong></p>
+
+<p>So far we’ve just looked at querying contacts.&#160; As pointed out earlier in the article, there are other <strong>ContentProviders</strong> already built into Android, including ones to check for media.&#160; The following will query the external storage media directory for audio files:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Cursor musiccursor = managedQuery(</pre>
+
+  <pre>            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,</pre>
+
+  <pre class="alt">            <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>, <span class="kwrd">null</span>);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>This will retrieve all of the track s on external storage.&#160; If you wanted all of the ones on internal storage, you could change <strong>EXTERNAL_CONTENT_URI </strong>to <strong>INTERNAL_CONTENT_URI</strong>.&#160; Once you execute this query, you can then loop through the <strong>Cursor</strong> and pull out information on each track like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">while</span> (musiccursor.isAfterLast() == <span class="kwrd">false</span>) {</pre>
+
+  <pre>  <span class="kwrd">int</span> music_column_index = musiccursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST);</pre>
+
+  <pre class="alt">  String artist = musiccursor.getString(music_column_index);</pre>
+
+  <pre>  music_column_index = musiccursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK);</pre>
+
+  <pre class="alt">  <span class="kwrd">int</span> trackNumber = musiccursor.getInt(music_column_index);</pre>
+
+  <pre>  music_column_index = musiccursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM);</pre>
+
+  <pre class="alt">  String album = musiccursor.getString(music_column_index);</pre>
+
+  <pre>  music_column_index = musiccursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);</pre>
+
+  <pre class="alt">  String filepath = musiccursor.getString(music_column_index);</pre>
+
+  <pre>  music_column_index = musiccursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE);</pre>
+
+  <pre class="alt">  String title = musiccursor.getString(music_column_index);</pre>
+
+  <pre>  music_column_index = musiccursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);</pre>
+
+  <pre class="alt">  String duration = musiccursor.getString(music_column_index);</pre>
+
+  <pre>  musiccursor.moveToNext();      </pre>
+
+  <pre class="alt">}                     </pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You can <a title="Android Day TwentyFive Final Source Code" href="http://chrisrisner.com/upload/DayTwentyFiveFinal.zip">download the final code from today here</a>.</p>

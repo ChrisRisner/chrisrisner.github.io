@@ -1,0 +1,487 @@
+---
+layout: post
+title: "31 Days of Android: Day 16–Notifications"
+date: Tue Dec 06 2011 02:06:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll talk about how to create Notifications from your application that will show up in the Android Notifications bar.  In addition, we'll cover special options available for Notifications such as sounds, vibration, and lights."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,notifications,notifications bar,notificationmanager,pending intent,clearing notification,notification sound,notification vibrate,Tutorial
+filepath: 2011-12-06-31-Days-of-Android--Day-16-Notifications.html
+disqus_identifier: 31-Days-of-Android--Day-16-Notifications
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Day Sixteen" alt="Android Day Sixteen" align="right" src="http://chrisrisner.com/upload/android-200.png" />As we continue the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>, we’ll talk about how you can add things to the Notification bar.&#160; The notification bar is at the top of phone devices and at the bottom for tablet devices and normally shows the time, battery meter, WIFI / wireless signal strength indicator, and an alarm indicator.&#160; These are all at the top right on a phone device and on the bottom left on tablets.&#160; Individual applications can add notifications to this bar which show up at the top left on phones and the bottom right on tablets.&#160; When you receive emails or a calendar appointment shows up in the top left, these are examples of notifications.&#160; Thankfully, your applications can easily add notifications to this bar.&#160; Today we’ll go through how to do this.&#160; We’ll start with some sample code that already has a few <strong>Views</strong> added and you can <a title="Android Day Sixteen Initial Source" href="http://chrisrisner.com/upload/DaySixteenInitial.zip">grab that source code here</a>.</p>  <p><strong>Creating your first Notification</strong></p>  <p>Just creating a notification isn’t very complicated.&#160; Let’s go ahead and create one now.&#160; Open up the <strong>DaySixteenActivity</strong> and locate the <strong>onClickListener</strong> for <strong>button1</strong>.&#160; For now, you’ll just add code to create the notification in this listener.&#160; Step one is to get an instance of <strong>NotificationManager</strong>:</p>  <div class="csharpcode">   <pre class="alt">String notificationService = Context.NOTIFICATION_SERVICE;</pre>
+
+  <pre>NotificationManager notificationManager = </pre>
+
+  <pre class="alt">                    (NotificationManager) getSystemService(notificationService);</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Similar to when you <a title="Android Detecting Device Orientation" href="http://chrisrisner.com/31-Days-of-Android--Day-11%E2%80%93Device-Orientation">got a WindowManager instance so you could detect the display orientation</a>, here you’re getting an instance of the <strong>NotificationManager</strong>. This isn’t something that you have to create or set up in your applications but something that Android handles and you only need to reference.&#160; Next you need to create a new instance of <strong>Notification</strong> and specify an icon, text, and the time to show in the notification:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Notification notification = <span class="kwrd">new</span> Notification(R.drawable.ic_launcher, </pre>
+
+  <pre>            <span class="str">&quot;Hello Notification!&quot;</span>, System.currentTimeMillis());</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’ve passed in the <strong>ic_launcher</strong> icon ID to use as the icon of the <strong>Notification</strong>.&#160; If you try to pass in zero, your <strong>Notification</strong> won’t show up.&#160; Next you are passing in a String that will show up <strong>ONLY</strong> in the Notification bar.&#160; You could pass in any String you want but here you’re just doing “Hello Notification!”.&#160; If you were to pass in a String that is too long and won’t fit, it will be broken into several lines which will show up sequentially (hence the variable is named <strong>tickerText</strong>).&#160; Lastly you’ve specified the current time.&#160; This means when the <strong>Notification</strong> shows up, it will have a timestamp of right now.&#160; The reason you send a timestamp is so that if the user’s device isn’t active when the <strong>Notification</strong> is sent, it will still show the time when you wanted it to.&#160; This means that you can set your <strong>Notification</strong> for the past or the future.&#160; The past makes sense because your app could only be triggered to send a <strong>Notification</strong> after the phone has been asleep, so it might want to notify the user that a message was received in the past.&#160; Why you might want to specify a future time (knowing that the <strong>Notification</strong> will still show up now) I’m not sure.&#160; Next you need to create an <strong>Intent </strong>for the activity that will be called when the notification is tapped and use it to create a <strong>PendingIntent</strong>.&#160; </p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent notificationIntent = <span class="kwrd">new</span> Intent(getApplicationContext(), DaySixteenActivity.<span class="kwrd">class</span>);</pre>
+
+  <pre>PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0,</pre>
+
+  <pre class="alt">                                notificationIntent, 0);</pre>
+
+  <pre>notification.setLatestEventInfo(getApplicationContext(), <span class="str">&quot;Notification Title&quot;</span>, </pre>
+
+  <pre class="alt">                                <span class="str">&quot;Notification Text&quot;</span>, contentIntent);</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>PendingIntents are used to specify an action that can be performed later on your application’s behalf by another application.&#160; You can <a title="Pending Intents" href="http://developer.android.com/reference/android/app/PendingIntent.html">read more about Pending Intents here</a>.&#160; Here you’re creating an Intent for the current <strong>Application</strong> and <strong>Activity</strong>.&#160; Then the <strong>Notification</strong>&#160; you previously created has it’s latest info set.&#160; Here you’ve passed in a title and text which is used when you the user pulls down on the <strong>Notification</strong> bar.&#160; Last, you pass in the <strong>PendingIntent</strong>.&#160; Last you tell the <strong>NotificationManager</strong> to show the <strong>Notification</strong>:</p>
+
+<pre class="csharpcode">notificationManager.notify(1, notification);</pre>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you fire your application up and click the button in the middle of the screen, a moment later your <strong>Notification</strong> will show up in the <strong>Notification </strong>bar:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Notification" alt="Android Notification" src="http://chrisrisner.com/upload/android_day_sixteen_one.png" /></p>
+
+<p>A moment later the text will disappear and the time will come back to the top right corner.&#160; The icon will stay behind.&#160; If you click the button again, you won’t see another notification right now.&#160; The reason for this is the <strong>1</strong> you passed in to the <strong>notify </strong>method above.&#160; This is an identifier that ensures you don’t show the same notification twice.&#160; If you were to change the ID and send the same notification again, it would also show up and you would have two icons at the top left.&#160; Very important to note is that if you changed the text values of the notification, then it would show up and replace the one you had previously sent.&#160; Since you’re not changing any values here, nothing new shows up.&#160; This is how the <strong>Gmail</strong> program’s notification always has the latest number of new emails you have but there is only one visible <strong>Notification</strong>.&#160; The program keeps sending a <strong>Notification</strong> with same ID.&#160; Go ahead and drag down on your <strong>Notification</strong> bar and you’ll see the title and text you used in the <strong>setLatestEventInfo</strong> method:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Notifications" alt="Android Notifications" src="http://chrisrisner.com/upload/android_day_sixteen_two.png" /></p>
+
+<p>If you click the <strong>Notification</strong> the <strong>Notification </strong>bar will roll back up and it won’t look like anything is happening.&#160; This isn’t true though.&#160; When you click the <strong>Notification</strong> the <strong>PendingIntent</strong> is used to call the <strong>notificationIntent</strong> you created before.&#160; Since you passed in <strong>DaySixteenActivity.class</strong>, it’s firing a new instance of <strong>DaySixteenActivity</strong>.&#160; You can test this by entering text into the <strong>EditText</strong> near the top and then clicking the <strong>Notification </strong>again.&#160; The <strong>EditText</strong> will be restored to what was showing initially (“<strong>This was our DaySixteen test.</strong>” if you’re following along).&#160; If you hit back, that <strong>Activity</strong> will dismiss and you’ll be back at the one where you edited the text.&#160; Also, the <strong>Notification</strong> never went away like you think it would.&#160;&#160; </p>
+
+<p><strong></strong></p>
+
+<p><strong>Clearing the Notification</strong></p>
+
+<p>For now, you could tap “<strong>clear</strong>” in the <strong>Notification </strong>pull down to remove notifications.&#160; However, you’re probably use to having <strong>Notification</strong>s going away when you tap on them.&#160; Let’s look at how to accomplish that.&#160; The easiest way to dismiss the <strong>Notification</strong> when the user taps them is to set a property on the <strong>Notification </strong>object before you pass it to the <strong>notify </strong>method.&#160; The <strong>flags</strong> field is a bit field that allows you to set several options.&#160; In this case, you just want to add <strong>FLAG_AUTO_CANCEL</strong> to it like so:</p>
+
+<pre class="csharpcode">notification.flags |= Notification.FLAG_AUTO_CANCEL;</pre>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you call <strong>notify</strong> and then tap on your <strong>Notification</strong>, it will go away.&#160; There are a few other flags you can use but we will discuss them later.&#160; Another way you can clear <strong>Notification</strong>s is by calling the <strong>NotificationManager</strong>’s <strong>cancel </strong>and <strong>cancelAll</strong> methods.&#160; <strong>cancelAll </strong>will clear all notifications from your app.&#160; <strong>cancel</strong> on the other hand, takes in an ID and will only remove the <strong>Notification</strong> from your app that matches the ID.&#160; So if you add this code to your <strong>DaySixteenActivity</strong>’s <strong>onCreate</strong> method, it will handle clearing the <strong>Notification</strong> without having to set the <strong>flags</strong> as described above:</p>
+
+<div class="csharpcode">
+  <pre class="alt">String notificationService = Context.NOTIFICATION_SERVICE;</pre>
+
+  <pre>NotificationManager notificationManager = (NotificationManager) getSystemService(notificationService);            </pre>
+
+  <pre class="alt">notificationManager.cancel(1);</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You’re calling the ID specific method here but you could always change this to <strong>cancelAll</strong>.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>Getting Fancy with Lights and Sounds</strong></p>
+
+<p>In addition to showing an icon in the notification bar, you can also trigger sounds, vibrations, and lights.&#160; I’ll explain how to do it but I would be wary of assuming user’s want to have a sound or a vibration played.&#160; If you use any of these options, I highly suggest giving the user the ability to turn them off.&#160; </p>
+
+<p>To play the device’s default sound, you add a constant to the <strong>Notification</strong>’s <strong>defaults</strong> property just like you did with <strong>flags</strong>:</p>
+
+<pre class="csharpcode">notification.defaults |= Notification.DEFAULT_SOUND;</pre>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You could also specify a sound to play by setting the <strong>Notification</strong>’s <strong>sound </strong>property like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">notification.sound = Uri.parse(<span class="str">&quot;file:///myfilepath/mysound.mp3&quot;</span>);</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you’ve added the <strong>DEFAULT_SOUND</strong> to the <strong>defaults</strong> property then it will override any <strong>sound</strong> you set.&#160; To make the notification cause a vibrate you add a different constant to the <strong>defaults</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt">notification.defaults |= Notification.DEFAULT_VIBRATE;</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Alternatively, just like sound, you can do a custom vibration by setting the <strong>Notification</strong>’s <strong>vibrate </strong>property:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">long</span>[] vibration = {0,100,100,100};</pre>
+
+  <pre>notification.vibrate = vibration;</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The array you pass in can be as long as you want it to be and is in the format of {delay, length of vibration, delay, length of vibration, …}.&#160; So in the case above, you’re saying to not delay, vibrate for 100 ms, delay for 100 ms, and then vibrate for 100ms.&#160; Again, if you’ve set the default vibration, it will override any custom vibration.</p>
+
+<p>If you want to add flashing lights you can make use of another defaults value:</p>
+
+<div class="csharpcode">
+  <pre class="alt">notification.defaults |= Notification.DEFAULT_LIGHTS;</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re telling the <strong>Notification</strong> to play the default lights configuration.&#160; Again, you can override this to show a custom light show, if it’s available.&#160; This is done by specifying a <strong>ledARGB</strong>, <strong>ledOnMS</strong>, and <strong>ledOffMS</strong>.&#160; Then you need to set a property on <strong>flags</strong> like we did above for clearing the <strong>Notification</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt">notification.ledARGB = 0xffff0000;</pre>
+
+  <pre>notification.ledOnMS = 1000;</pre>
+
+  <pre class="alt">notification.ledOffMS = 1000;</pre>
+
+  <pre>notification.flags |= Notification.FLAG_SHOW_LIGHTS;</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re specifying that the light should be red and it should be on for 1 second and then off for 1 second.&#160; Just like the sound and vibration, if you’ve set the default lights, it overrides the custom lights.</p>
+
+<p><strong></strong></p>
+
+<p><strong>A few other flags</strong></p>
+
+<p>There are a few other flags you can set in addition to <strong>FLAG_AUTO_CANCEL</strong>.&#160; </p>
+
+<ul>
+  <li><strong>FLAG_INSISTENT</strong> - This will repeat the audio until the user takes action. </li>
+
+  <li><strong>FLAG_ONGOING_EVENT</strong> - This means the application is still running even if it's in the background (think the music player or call indicator). </li>
+
+  <li><strong>FLAG_NO_CLEAR</strong> - Indicates the notification shouldn't be cleared when the user taps &quot;clear&quot; in the Notification bar. </li>
+</ul>
+
+<p>&#160;</p>
+
+<p><strong>A Final Word about Notifications</strong></p>
+
+<p>Much like using a <a title="Creating Toasts for Android" href="http://chrisrisner.com/31-Days-of-Android--Day-15%E2%80%93Toasts">custom Layout for a Toast that we discussed yesterday</a>, you can use a custom <strong>Layout</strong> for a <strong>Notification</strong> as well. You can <a title="Custom Notification Views" href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html#CustomExpandedView">read more about providing a custom UI for your Notifications here</a>.</p>
+
+<p>Here we’ve created a <strong>Notification</strong> as the result of a button click.&#160; This would be very unusual behavior for an application.&#160; Typically they are generated via a background service, something that is running but not directly touched by the user.&#160; Most commonly you see this with applications that receive messages from “the cloud”.&#160; As an example, when the <strong>Gmail</strong> app receives a notification that you have an email, it creates a <strong>Notification</strong>.&#160; Another example is the <strong>Calendar</strong>.&#160; Even if you’re not connected to the Internet (which you’d have to be to get new email notifications) the <strong>Calendar </strong>service will create <strong>Notification</strong>s when you need to be reminded of an event.</p>
+
+<p>You can <a title="Android Day Sixteen Final Code" href="http://chrisrisner.com/upload/DaySixteenFinalTwo.zip">download the latest example code from today here</a>.</p>
+
+<p>&#160;</p>
+
+<p>&#160;</p>
+
+<p>&#160;</p>
+
+<p>&#160;</p>
+
+<p>Talk about how you probably only want to use from a background service like C2DM.&#160; </p>

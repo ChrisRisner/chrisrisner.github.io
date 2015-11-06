@@ -1,0 +1,166 @@
+---
+layout: post
+title: "31 Days of Android: Day 27–Intents Part 2"
+date: Sat Dec 17 2011 13:19:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll continue our talk about inetnts by starting to talk about services and intent responders."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Intent service,Intent Responder,Package Manager,tutorial
+filepath: 2011-12-17-31-Days-of-Android--Day-27-Intents-Part-2.html
+disqus_identifier: 31-Days-of-Android--Day-27-Intents-Part-2
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" />Yesterday I covered a lot of <a title="Using Intents Part One" href="http://chrisrisner.com/31-Days-of-Android--Day-26%E2%80%93Intents">information about Intents and showed you a lot of different things you can do with intents</a>.&#160; Today as we continue the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>, we’re going to talk about a few more ways that <strong>Intents </strong>can be used.&#160; As a reminder, <strong>Intents</strong> are messages that you can use to communicate between parts of your application or with the Android operating system itself, and there by other applications.&#160; You can <a title="Android Day Twenty Seven Initial Source Code" href="http://chrisrisner.com/upload/DayTwentySevenInitial.zip">download the starter code we’ll be using today here</a>.</p>  <p>&#160;</p>  <p><strong>Checking for Intent Responders</strong></p>  <p>Yesterday I demonstrated how to do a number of different things via <strong>Intent</strong>.&#160; I also specified that for many of them, you’d want to test on an actual device and not the emulator because the emulator doesn’t have the necessary components installed.&#160; For example, the emulator doesn’t have the <strong>Android Marketplace.&#160; </strong>Sicne the market isn’t installed, there isn’t any (easy) way to install applications to the emulator.&#160; Open up your <strong>src/com.daytwentyseven/DayTwentySevenActivity.java </strong>class and locate <strong>button2</strong>’s <strong>onClickListener</strong>.&#160; Let’s add the code back in that will launch the <strong>Android Marketplace</strong> application and search for an app:</p>  <div class="csharpcode">   <pre class="alt">button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt">        Uri marketUri = Uri.parse(<span class="str">&quot;market://search?q=com.google.android.apps.plus&quot;</span>);</pre>
+
+  <pre>        Intent marketIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW).setData(marketUri);</pre>
+
+  <pre class="alt">        startActivity(marketIntent);</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now if you run this on a device with <strong>Marketplace </strong>installed, it will come up and search for Google Plus.&#160; If you run this on an emulator though, your app will crash and in <strong>LogCat</strong> you’ll see this error:</p>
+
+<div class="csharpcode">
+  <pre class="alt">android.content.ActivityNotFoundException: </pre>
+
+  <pre>No Activity found to handle Intent </pre>
+
+  <pre class="alt">{ act=android.intent.action.VIEW dat=</pre>
+
+  <pre>market://search?q=com.google.android.apps.plus }</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Android doesn’t handle not having any thing to process an <strong>Intent</strong> very well.&#160; Thankfully, they’ve given us a way to check to see if an <strong>Intent </strong>has a handler before calling it.&#160; To do this, you need to get a reference to the <strong><a title="Android Package manager" href="http://developer.android.com/reference/android/content/pm/PackageManager.html">PackageManager</a></strong> class.&#160; The <strong>PackageManager</strong> can be used to retrieve information on things isntalled on the device.&#160; In this case, you want to get info on applications that can respond to your <strong>Intent</strong>.&#160; To do this you use the <strong>queryIntentActivities </strong>method and pass in the <strong>Intent </strong>you’ve created.&#160; This will return a list of <strong>ResolveInfo</strong>s with information about the <strong>Activities</strong> that will respond:</p>
+
+<div class="csharpcode">
+  <pre class="alt">button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt">        Uri marketUri = Uri</pre>
+
+  <pre>                .parse(<span class="str">&quot;market://search?q=com.google.android.apps.plus&quot;</span>);</pre>
+
+  <pre class="alt">        Intent marketIntent = <span class="kwrd">new</span> Intent(Intent.ACTION_VIEW)</pre>
+
+  <pre>                .setData(marketUri);</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>        PackageManager pm = getPackageManager();</pre>
+
+  <pre class="alt">        List&lt;ResolveInfo&gt; list = pm.queryIntentActivities(marketIntent,</pre>
+
+  <pre>                PackageManager.MATCH_DEFAULT_ONLY);</pre>
+
+  <pre class="alt">        <span class="kwrd">if</span> (list.size() &gt; 0)</pre>
+
+  <pre>            startActivity(marketIntent);</pre>
+
+  <pre class="alt">        <span class="kwrd">else</span> {</pre>
+
+  <pre>            Toast.makeText(getApplicationContext(),</pre>
+
+  <pre class="alt">                    <span class="str">&quot;Sorry the market is not installed&quot;</span>,</pre>
+
+  <pre>                    Toast.LENGTH_LONG).show();</pre>
+
+  <pre class="alt">        }</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your app on a device (with the <strong>Marketplace</strong>) it will still load the market like you want (you’re still calling <strong>startActivity</strong>) but if you run it on an emulator, it will show a toast instead:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Showing toast if market isn&#39;t installed" alt="Showing toast if market isn&#39;t installed" src="http://chrisrisner.com/upload/android_day_twentyseven_one.png" width="204" height="265" /></p>
+
+<p>Now you should be able to use this to gracefully handle any app’s not being installed that you want to launch from an <strong>Intent</strong>.&#160; Remember that you’ll never know for sure if the device running your application is capable of handling an <strong>Intent</strong> so it’s always better to check than to assume.</p>
+
+<p>I'm a little short for time today so we'll continue with, and wrap up, our talk about Intents, tomorrow.</p>

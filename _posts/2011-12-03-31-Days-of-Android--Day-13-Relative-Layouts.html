@@ -1,0 +1,446 @@
+---
+layout: post
+title: "31 Days of Android: Day 13–Relative Layouts"
+date: Sat Dec 03 2011 06:06:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Mobile, Phone]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today's topic is the RelativeLayout.  Where the LinearLayout auto stacked each element within it either vertically or horizontally, the RelativeLayout allows you to specify each child's place in relation to each other and the parent RelativeLayout."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,relativelayout,relative,align view with parent,align view on right side of screen, align view at bottom, align view in center of screen,Tutorial
+filepath: 2011-12-03-31-Days-of-Android--Day-13-Relative-Layouts.html
+disqus_identifier: 31-Days-of-Android--Day-13-Relative-Layouts
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Day Thirteen" alt="Android Day Thirteen" align="right" src="http://chrisrisner.com/upload/android-200.png" />The <strong>RelativeLayout </strong>is the second most common layout I’ve used after the <strong><a title="Linear Layout" href="http://chrisrisner.com/31-Days-of-Android--Day-12%E2%80%93Linear-Layouts">LinearLayout</a></strong>.&#160; Today as we continue our <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>, we’ll be focusing on the <strong>RelativeLayout</strong>.&#160; Remember that all of our layouts are descendants of <strong>ViewGroups</strong> which descend from <strong>Views</strong>.&#160; Furthermore, <strong>ViewGroups</strong> contain <strong>Views</strong>.&#160; Recalling all of that, we’re ready to dig deeper into the <strong>RelativeLayout</strong>. We’re going to start with a stripped down version of <a title="Day Thirteen Initial Code" href="http://chrisrisner.com/upload/DayThirteenInitial.zip">yesterday’s code which you can grab here</a>.</p>  <p>Where as the <strong>LinearLayout</strong> stacks it’s elements one after another vertically or horizontally, the <strong>RelativeLayout</strong> <em>requires</em> each of it’s elements to specify it’s own position in regards to it’s fellow elements and it’s parent.&#160; I say <em>requires </em>because technically you don’t actually have to specify the position.&#160; We’ll get this set up so you’ll see what I’m talking about.&#160; Today you’re going to make all of our changes to <strong>main.xml</strong>.&#160; The <strong>main.xml </strong>layout already has a few different <strong>Views</strong> including some <strong>TextViews</strong>, an <strong>EditText</strong>, and a couple <strong>buttons </strong>and will look like this:</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Thirteen Initial Layout" alt="Android Day Thirteen Initial Layout" src="http://chrisrisner.com/upload/android_day_thirteen_initial_layout.png" /></p>  <p>The xml for this layout is as follows:</p>  <div class="csharpcode">   <pre class="alt">&lt;?xml version=<span class="str">&quot;1.0&quot;</span> encoding=<span class="str">&quot;utf-8&quot;</span>?&gt;</pre>
+
+  <pre>&lt;LinearLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    android:orientation=<span class="str">&quot;vertical&quot;</span>&gt;</pre>
+
+  <pre>    &lt;TextView</pre>
+
+  <pre class="alt">        android:id=<span class="str">&quot;@+id/lblTextViewOne&quot;</span></pre>
+
+  <pre>        android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">        android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>        android:text=<span class="str">&quot;@string/hello&quot;</span>/&gt;</pre>
+
+  <pre class="alt">    &lt;EditText</pre>
+
+  <pre>        android:id=<span class="str">&quot;@+id/editText1&quot;</span></pre>
+
+  <pre class="alt">        android:layout_width=<span class="str">&quot;match_parent&quot;</span></pre>
+
+  <pre>        android:layout_height=<span class="str">&quot;wrap_content&quot;</span> &gt;</pre>
+
+  <pre class="alt">        &lt;requestFocus /&gt;</pre>
+
+  <pre>    &lt;/EditText&gt;</pre>
+
+  <pre class="alt">    &lt;Button</pre>
+
+  <pre>        android:id=<span class="str">&quot;@+id/button1&quot;</span></pre>
+
+  <pre class="alt">        android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>        android:layout_height=<span class="str">&quot;wrap_content&quot;</span>             </pre>
+
+  <pre class="alt">        android:text=<span class="str">&quot;@string/click_me&quot;</span> /&gt;</pre>
+
+  <pre>    &lt;LinearLayout</pre>
+
+  <pre class="alt">        android:id=<span class="str">&quot;@+id/linearLayour2&quot;</span></pre>
+
+  <pre>        android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">        android:layout_height=<span class="str">&quot;wrap_content&quot;</span>&gt;</pre>
+
+  <pre>        &lt;TextView </pre>
+
+  <pre class="alt">            android:id=<span class="str">&quot;@+id/textView2&quot;</span></pre>
+
+  <pre>            android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">            android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>            android:text=<span class="str">&quot;@string/app_name&quot;</span>/&gt;<span class="str">&quot;</pre>
+
+  <pre class="alt">        &lt;Button</pre>
+
+  <pre>            android:id=&quot;</span>@+id/button2<span class="str">&quot;</pre>
+
+  <pre class="alt">            android:layout_width=&quot;</span>wrap_content<span class="str">&quot;</pre>
+
+  <pre>            android:layout_height=&quot;</span>wrap_content<span class="str">&quot;</pre>
+
+  <pre class="alt">            android:text=&quot;</span>Button&quot; /&gt;</pre>
+
+  <pre>    &lt;/LinearLayout&gt;</pre>
+
+  <pre class="alt">&lt;/LinearLayout&gt;</pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>So let’s start by changing the root layout from a <strong>LinearLayout</strong> to a <strong>RelativeLayout</strong>.&#160; All you need to do is change the <strong>Linear</strong> to <strong>Relative</strong> and your xml should look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;?xml version=<span class="str">&quot;1.0&quot;</span> encoding=<span class="str">&quot;utf-8&quot;</span>?&gt;</pre>
+
+  <pre>&lt;RelativeLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    android:orientation=<span class="str">&quot;vertical&quot;</span>&gt;</pre>
+
+  <pre>    ...</pre>
+
+  <pre class="alt">&lt;/RelativeLayout&gt;</pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Run your project and you should be greeted by this crowded looking screen:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Thirteen New Relative Layout" alt="Android Day Thirteen New Relative Layout" src="http://chrisrisner.com/upload/android_day_thirteen_new_relative.png" /></p>
+
+<p>As I said before, the <strong>RelativeLayout </strong><em>requires<strong> </strong></em>you to specify each child’s position in relation to it’s parent and siblings.&#160; Since we didn’t specify anything for the <strong>RelativeLayout</strong>’s children, they all defaulted to the top left of the parent.&#160; There are going to be some circumstances where it might make sense to have things overlap, but in this case, we don’t want that.&#160; Let’s say we want to make the view do the following:</p>
+
+<ul>
+  <li>Show the <strong>TextView</strong> that was at the top at the top right of the screen. </li>
+
+  <li>Show the <strong>EditText</strong> beneath that aligned on the left side of the screen. </li>
+
+  <li>Show the first <strong>Button</strong> in the middle of the screen. </li>
+
+  <li>Show the <strong>TextView </strong>and second <strong>Button</strong> at the bottom right of the screen </li>
+</ul>
+
+<p>The <strong>RelativeLayout</strong> gives us several new attributes that we can set on each of it’s children.&#160; The first thing you want to adjust is the <strong>layout_height</strong> of the <strong>RelativeLayout</strong> from <strong>wrap_content</strong> to <strong>fill_parent</strong>.&#160; If you don’t <strong>layout</strong> will stay squished even when you say to put the elements at the bottom of the screen.&#160; Your altered layout XML should look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;RelativeLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre>    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre class="alt">    android:layout_height=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:orientation=<span class="str">&quot;vertical&quot;</span>&gt;</pre>
+</div>
+<style type="text/css">
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you’re ready to start making the above changes.&#160; Let’s start at the top with the first <strong>TextView</strong>.&#160; It’s already going to be at the top of the <strong>RelativeLayout</strong> by default so you just need to specify that it’s on the right.&#160; This is done using the <strong>layout_alignParentRight </strong>attribute:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;TextView</pre>
+
+  <pre>    android:id=<span class="str">&quot;@+id/lblTextViewOne&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    android:text=<span class="str">&quot;@string/hello&quot;</span></pre>
+
+  <pre>    android:layout_alignParentRight=<span class="str">&quot;true&quot;</span>/&gt;</pre>
+</div>
+
+<p><style type="text/css">
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Interestingly, if you rerun your application now, you won’t see any difference.&#160; The reason for that is that elements are drawn from top to bottom from the layout xml.&#160; Since the <strong>lblTextViewOne</strong> is at the top of the XML it get’s drawn first and is overlapped by the other <strong>Views</strong>.&#160; Once you’ve finished moving some more elements, you’ll see the <strong>TextView</strong> in it’s new position.&#160; Since you want the <strong>EditText</strong> below the first <strong>TextView</strong> you’ll want to use the <strong>layout_below</strong> attribute.&#160; This takes in an ID for the element you want it to be below so we’ll use <strong>lblTextViewOne</strong>.&#160; The changed <strong>EditText</strong> will look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;EditText</pre>
+
+  <pre>    android:id=<span class="str">&quot;@+id/editText1&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;match_parent&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    android:layout_below=<span class="str">&quot;@id/lblTextViewOne&quot;</span>&gt;</pre>
+
+  <pre>    &lt;requestFocus /&gt;</pre>
+
+  <pre class="alt">&lt;/EditText&gt;</pre>
+</div>
+<style type="text/css">
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your app, you’ll start to see something better:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Thirteen Two" alt="Android Day Thirteen Two" src="http://chrisrisner.com/upload/android_day_thirteen_relative_layout_one.png" /></p>
+
+<p>Now you can see that your <strong>TextView</strong> is indeed at the top right of the layout and the <strong>EditText</strong> is right beneath that.&#160; You’re half way done with the changes.&#160; Next, let’s put the first button in the middle of the screen.&#160; To do this, you want to use the <strong>layout_centerInParent</strong> which will center our element both vertically and horizontally in it’s parent.&#160; Now your <strong>Button </strong>xml will look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;Button</pre>
+
+  <pre>    android:id=<span class="str">&quot;@+id/button1&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;wrap_content&quot;</span>   </pre>
+
+  <pre class="alt">    android:text=<span class="str">&quot;@string/click_me&quot;</span> </pre>
+
+  <pre>    android:layout_centerInParent=<span class="str">&quot;true&quot;</span>/&gt;</pre>
+</div>
+<style type="text/css">
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now run your app and feast your eyes upon a centered button:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day thirteen two" alt="android day thirteen two" src="http://chrisrisner.com/upload/android_day_thirteen_relative_layout_two.png" /></p>
+
+<p>Now you’re ready for your last change.&#160; The <strong>LinearLayout</strong> need to be at the bottom right of the screen.&#160; To do so, you’ll need to use the <strong>layout_alignParentRight</strong> attribute again as well as <strong>layout_alignParentBottom</strong>.&#160; I’m sure you can guess what setting the layout to align to the parent’s bottom.&#160; Here’s your altered XML:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;LinearLayout</pre>
+
+  <pre>        android:id=<span class="str">&quot;@+id/linearLayour2&quot;</span></pre>
+
+  <pre class="alt">        android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>        android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">        android:layout_alignParentBottom=<span class="str">&quot;true&quot;</span></pre>
+
+  <pre>        android:layout_alignParentRight=<span class="str">&quot;true&quot;</span>&gt;</pre>
+</div>
+<style type="text/css">
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>And your screen finally looks the way you want it to:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day thirteen three" alt="android day thirteen three" src="http://chrisrisner.com/upload/android_day_thirteen_relative_layout_three.png" /></p>
+
+<p>You could make something that would look similar using a <strong>LinearLayout</strong> if you tried but it wouldn’t be nearly as efficient as what you’ve done here.&#160; There are a few <strong>RelativeLayout</strong> specific attributes that we didn’t use today so I’ll cover them quickly:</p>
+
+<ul>
+  <li><strong>layout_toLeftOf</strong> - Aligns the element to the left of whatever element you pass in. </li>
+
+  <li><strong>layout_toRightOf </strong>- Aligns the element to the right of whatever element you pass in. </li>
+
+  <li><strong>layout_above</strong> - Aligns the element above of whatever element you pass in. </li>
+
+  <li><strong>layout_below </strong>- Aligns the element below of whatever element you pass in. </li>
+
+  <li><strong>layout_alignBaseline </strong>- Aligns the element with the middle of whatever element you pass in. </li>
+
+  <li><strong>layout_alignLeft </strong>- Aligns the element with the left edge of whatever element you pass in. </li>
+
+  <li><strong>layout_alignRight </strong>- Aligns the element with the right edge of whatever element you pass in. </li>
+
+  <li><strong>layout_alignBottom </strong>- Aligns the element with the bottom edge of whatever element you pass in. </li>
+
+  <li><strong>layout_alignParentLeft </strong>- Aligns the element with the left edge of it's parent. </li>
+
+  <li><strong>layout_alignParentTop </strong>- Aligns the element with the top edge of it's parent. </li>
+
+  <li><strong>layout_centerHorizontal</strong> - Horizontally centers the element in it's parent. </li>
+
+  <li><strong>layout_centerVertical </strong>- Vertically centers the element in it's parent. </li>
+</ul>
+
+<p>The last <strong>RelativeLayout </strong>attribute to talk about is <strong>layout_alignWithParentIfMissing</strong>.&#160; If this attribute is set to <strong>true</strong>, then it will treat the element’s parent as it’s anchor if the element specified in <strong>layout_toLeftOf</strong>, <strong>layout_toRightOf</strong>, <strong>layout_above</strong>, etc can’t be found.&#160; So for example, if you set an element’s visibility to <strong>GONE</strong> but another element referred to it in one of the <strong>RelativeLayout </strong>specific layout attributes, it will use the parent instead.</p>
+
+<p>You’ve already got a <strong>LinearLayout</strong> inside of a <strong>RelativeLayout </strong>in this example.&#160; You could reverse this and have a <strong>RelativeLayout </strong>inside of a <strong>LinearLayout</strong> or have several nested layouts.&#160; The point is that with just these two different <strong>ViewGroups</strong> you can create some very complex views.&#160; There are some other important common layout types that we’ll go over but understanding these two types will get you far with developing your Android apps.</p>
+
+<p>You can <a title="Android Day Thirteen Final Code" href="http://chrisrisner.com/upload/DayThirteenFinal.zip">grab today’s final code here</a>.</p>

@@ -1,0 +1,304 @@
+---
+layout: post
+title: "31 Days of Android: Day 6–Options Menus and Base Activities"
+date: Sat Nov 26 2011 15:27:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll look at creating an options menu and then implementing a base activity so that our menu code will be shared across several activities."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Options Menus,Base Activities,Extending from a Base Activity,Implementing a Shared Menu Across Activities,Tutorial
+filepath: 2011-11-26-31-Days-of-Android--Day-6-Options-Menus-and-Base-Activities.html
+disqus_identifier: 31-Days-of-Android--Day-6-Options-Menus-and-Base-Activities
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" src="http://chrisrisner.com/upload/android_six_options_menu.png" />Time for more of the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>!&#160; Today we’re going to pick up where we left off with <a title="Android Day 5 Multiple Activity Application" href="http://chrisrisner.com/31-Days-of-Android--Day-5%E2%80%93Adding-Multiple-Activities-and-using-Intents">Day 5 and our multiple activity application</a>.&#160; Today we’re going to cover a couple things including one of the features that differentiates Android from it’s biggest competitor, iOS.&#160; This feature is the <strong>Menu</strong> button. The <strong>Menu</strong> button enables you to load an<strong> </strong>Options Menu which allows users to access basic activity actions and navigation options.&#160; Let’s take a look at how you accomplish this functionality.&#160; Just like last time we’re going to be working off of the code from yesterday’s example.&#160; Everything that was <strong>DayFive </strong>will now be <strong>DaySix </strong>and that should be the only change.</p>  <p>The first thing you have to do to add your <strong>Options Menu</strong> is create a new XML resource.&#160; This resource will contain the content of our actual menu.&#160; To do this, expand the <strong>res</strong> folder of your project in Eclipse.&#160; Then, right click the <strong>res</strong> folder and go to <strong>New –&gt; Folder</strong>.&#160; Name the folder <strong>menu</strong> and click <strong>Finish</strong>.&#160; Once that is done, right click on the new <strong>menu </strong>folder and go to <strong>New –&gt; Other</strong>.&#160; Choose <strong>Android XML File</strong> and click <strong>Next</strong>.&#160; <strong>Menu</strong> should be preselected as the <strong>Resource Type</strong> which means you just need to put in a <strong>File</strong> name.&#160; For today name the file &quot;<strong>options_menu</strong>”.&#160; You’ll be taken to the graphic menu editor.&#160; Click <strong>Add</strong> and pick <strong>Item</strong>.&#160; This will create a new menu item.&#160; We’re fine with the default id but we need to set the <strong>Title</strong>.&#160; To do so, click the <strong>Browse</strong> button to the right of the <strong>Title</strong> textbox.&#160; We’re going to need new String resources so click <strong>New String.&#160; </strong>In the <strong>String</strong> textbox, enter <strong>“Activity One”</strong> and in the <strong>New R.string</strong> textbox enter <strong>“menu_one”</strong>.&#160; When that is done, click <strong>Ok </strong>and then <strong>Ok </strong>again.&#160; You need to add one more item so repeat that procedure and name the second item “<strong>Activity Two” </strong>and <strong>“menu_two”</strong>.&#160; Now we’re ready to put that menu into an <strong>Activity</strong>.&#160; Open up your <strong>DaySixActivity </strong>(or <strong>DayFiveActivity</strong> if you’re working off yesterday’s code) from the <strong>src/com.DaySix </strong>folder.&#160; </p>  <p>Here, you need to override the <strong>onCreateOptoinsMenu</strong> method from the <strong>Activity </strong>class.&#160; To do this easily, place your cursor at the closing curly brace at the end of the <strong>onCreate </strong>method.&#160; Hit <strong>Enter </strong>to get to a new line and hit <strong>Ctrl+Space.&#160; </strong>This should bring up intellisense and enable us to pick a method to override.&#160; Choose <strong>onCreateOptionsMenu</strong> and tap enter.&#160; You should now have the following code in our class:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span>@Override</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> boolean onCreateOptionsMenu(Menu menu) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">return</span> super.onCreateOptionsMenu(menu);</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re going to get rid of the call to <strong>super.onCreateOptionsMenu</strong> and inflate the <strong>options_menu </strong>we just created.&#160; This is done by getting an instance of <strong>MenuInflacter</strong> from our <strong>Activity </strong>and passing in the id of the menu like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>@Override</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> boolean onCreateOptionsMenu(Menu menu) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    MenuInflater inflater = getMenuInflater();</pre>
+
+  <pre><span class="lnum">   4:  </span>    inflater.inflate(R.menu.options_menu, menu);</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    <span class="kwrd">return</span> <span class="kwrd">true</span>;</pre>
+
+  <pre><span class="lnum">   6:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now if you load your application (hit <strong>Ctrl+F11</strong>) and click the <strong>Menu </strong>button on the emulator (or a device) you should see your options menu appear:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android_day_six_options_menu" alt="Android_day_six_options_menu" src="http://chrisrisner.com/upload/andorid_day_six_menu.png" /></p>
+
+<p>This is great but now you need to actually handle clicking these menu buttons.&#160; To do so, you need to override another method in our <strong>DaySixActivity.&#160; </strong>This time you’ll add <strong>onOptionsItemSelected</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>@Override</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> boolean onOptionsItemSelected(MenuItem item) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">return</span> super.onOptionsItemSelected(item);</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The <strong>MenuItem</strong> that is sent into this method has an <strong>ItemId</strong> that will match one of your two menu options so we’ll check to see if they are equal and do something different depending on which one it is.&#160; In the example below, you’ll send an <strong>Intent </strong>if the user clicks &quot;<strong>Activity Two</strong>” and do nothing if they click “<strong>Activity One</strong>”:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>@Override</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">public</span> boolean onOptionsItemSelected(MenuItem item) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">switch</span> (item.getItemId()) {</pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">case</span> R.id.item1:</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        <span class="kwrd">return</span> <span class="kwrd">true</span>;</pre>
+
+  <pre><span class="lnum">   6:  </span>    <span class="kwrd">case</span> R.id.item2:</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(),</pre>
+
+  <pre><span class="lnum">   8:  </span>                ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        <span class="kwrd">return</span> <span class="kwrd">true</span>;</pre>
+
+  <pre><span class="lnum">  10:  </span>    <span class="kwrd">default</span>:</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        <span class="kwrd">return</span> super.onContextItemSelected(item);</pre>
+
+  <pre><span class="lnum">  12:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>}</pre>
+</div>
+
+<p>This is a very simple options menu but should give you an example of the sort of things you can do.&#160; Before I move on, I’d like to point out how to add icon’s to your options menu items.&#160; If you go back to the <strong>options_menu </strong>file and select either <strong>item1</strong> or <strong>item2</strong>, you should see a textbox for <strong>Icon</strong> 2 rows beneath the <strong>title</strong>.&#160; Oddly, there is no <strong>Browse </strong>lookup for icons though it isn’t hard for you to specify the icon.&#160; To do so, you need to know the name of an image file you have in one of our <strong>drawable </strong>folders.&#160; You know that by default there is an image named <strong>ic_launcher.png </strong>in your <strong>drawable </strong>folders so you’ll use that.&#160; In the <strong>Icon </strong>textbox enter <a href="mailto:&ldquo;@drawable/ic_launcher">“<strong>@drawable/ic_launcher</strong></a>” then save your changes and rerun the application.&#160; Now when you tap <strong>Menu</strong> you should see (depending on where you put the icon):</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day six menu with icons" alt="android day six menu with icons" src="http://chrisrisner.com/upload/andorid_day_six_menu_two.png" /></p>
+
+<p>The problem you have here is that when we go from the first activity to <strong>Activity_Two</strong> and click the <strong>Menu</strong> button, nothing appears.&#160; The code you added to show the <strong>options_menu</strong> was only in <strong>DaySixActivity</strong> and not in <strong>ActivityTwo</strong>.&#160; You could take the same code and put it into <strong>ActivityTwo</strong> but what happens when you need to make a change or when you want to add a third activity?&#160; Putting this code into several places isn’t very maintainable and isn’t a good idea in general.&#160; What you can do to solve this is override the <strong>android.app.Activity</strong> class, put your menu code in that, and then extend your current activities from this base class.&#160; We’ll do that now. In Eclipse right click on the <strong>com.DaySix </strong>package under the <strong>src </strong>folder and choose <strong>class</strong>.&#160; Just like when you created <strong>ActivityTwo</strong>, you’ll enter <strong>android.app.Activity</strong> as our <strong>Superclass</strong> and you’ll <strong>Name </strong>our new activity “<strong>BaseActivity</strong>”.&#160; Lastly, check the box for <strong>abstract</strong> and click <strong>Finish</strong>:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Six Base Activity" alt="Android Day Six Base Activity" src="http://chrisrisner.com/upload/andorid_day_six_new_base_activity.png" /></p>
+
+<p>We’re making this class <strong>abstract</strong> because we’re not going to allow anyone to instantiate it, but will use it as a base class.&#160; Now, you can go back to <strong>DaySixActivity</strong> and <strong>ActivityTwo</strong> and change the type they extend from <strong>Activity</strong> to <strong>BaseActivity</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> DaySixActivity extends BaseActivity {</pre>
+
+  <pre><span class="lnum">   2:  </span>...</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> ActivityTwo extends BaseActivity {</pre>
+
+  <pre><span class="lnum">   4:  </span>...</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you can move all of your menu code out of <strong>DaySixActivity </strong>and into <strong>BaseActivity</strong>.&#160; I’ve added code to the onClick for men <strong>item1</strong> so that it will load <strong>DaySixActivity</strong>.&#160; I’ve also made the current activity <strong>finish</strong> after triggering the load of a new activity: </p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">abstract</span> <span class="kwrd">class</span> BaseActivity extends Activity {</pre>
+
+  <pre><span class="lnum">   2:  </span>    @Override</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">public</span> boolean onCreateOptionsMenu(Menu menu) {</pre>
+
+  <pre><span class="lnum">   4:  </span>        MenuInflater inflater = getMenuInflater();</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        inflater.inflate(R.menu.options_menu, menu);</pre>
+
+  <pre><span class="lnum">   6:  </span>        <span class="kwrd">return</span> <span class="kwrd">true</span>;</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    }</pre>
+
+  <pre><span class="lnum">   8:  </span>    @Override</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>    <span class="kwrd">public</span> boolean onOptionsItemSelected(MenuItem item) {</pre>
+
+  <pre><span class="lnum">  10:  </span>        <span class="kwrd">switch</span> (item.getItemId()) {</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        <span class="kwrd">case</span> R.id.item1:</pre>
+
+  <pre><span class="lnum">  12:  </span>            startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(),</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>                    DaySixActivity.<span class="kwrd">class</span>));</pre>
+
+  <pre><span class="lnum">  14:  </span>            <span class="rem">//End the current activity</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>            finish();</pre>
+
+  <pre><span class="lnum">  16:  </span>            <span class="kwrd">return</span> <span class="kwrd">true</span>;</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>        <span class="kwrd">case</span> R.id.item2:</pre>
+
+  <pre><span class="lnum">  18:  </span>            startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(),</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>                    ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre><span class="lnum">  20:  </span>            <span class="rem">//End the current activity</span></pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>            finish();</pre>
+
+  <pre><span class="lnum">  22:  </span>            <span class="kwrd">return</span> <span class="kwrd">true</span>;</pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>        <span class="kwrd">default</span>:</pre>
+
+  <pre><span class="lnum">  24:  </span>            <span class="kwrd">return</span> super.onContextItemSelected(item);</pre>
+
+  <pre class="alt"><span class="lnum">  25:  </span>        }</pre>
+
+  <pre><span class="lnum">  26:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">  27:  </span>}</pre>
+</div>
+<style type="text/css">
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+
+
+<p>Now when you run your application (<strong>Ctrl + F11</strong>) you can see the menu on both of your activities and you can go back and forth between them.&#160; Note though that the back button will <strong>not </strong>take you between the activities because you’re calling <strong>finish </strong>whenever you start a new activity.&#160; If you remove the calls to <strong>finish</strong> then you could <strong>back</strong> your way between the activities.&#160; Implementing a base activity of your own can help when you want to set a <strong>custom title</strong>, implement a shared menu, and many more things.&#160; You can <a title="Android Day Six Source Code" href="http://chrisrisner.com/upload/DaySix.zip">download the sample code from today’s application here</a>.</p>

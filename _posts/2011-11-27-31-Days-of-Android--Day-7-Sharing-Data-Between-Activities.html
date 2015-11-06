@@ -1,0 +1,771 @@
+---
+layout: post
+title: "31 Days of Android: Day 7–Sharing Data Between Activities"
+date: Sun Nov 27 2011 13:08:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Now that we've learned how to use multiple activities in our Android Application, let's look at how to pass data between the activities.  We'll talk about static objects on activities, using the Application class like a singleton, adding extra data to intents, as well as how to pass complex classes using parcelable."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Activities,Intents,Passing Data to Activities,Parcelable,putExtra,getExtra,Android Application class,Overriding Application,tutorial
+filepath: 2011-11-27-31-Days-of-Android--Day-7-Sharing-Data-Between-Activities.html
+disqus_identifier: 31-Days-of-Android--Day-7-Sharing-Data-Between-Activities
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="31 Days of Android" alt="31 Days of Android" align="right" src="http://chrisrisner.com/upload/android-200.png" />We left off in our <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android series</a> with <a title="Day 6 of Android - Options Menus and Base Activities" href="http://chrisrisner.com/31-Days-of-Android--Day-6%E2%80%93Options-Menus-and-Base-Activities">implementing a base activity that our other activities extend and adding an options menu</a>.&#160; At this point we also know how to load different activities within our application using <strong>Intents</strong>.&#160; One important topic we haven’t covered, is how to pass data between our activities.&#160; Today we’ll look at the pros and cons of several different ways of doing just that.</p>  <p><strong>Static Public Objects in Activities</strong></p>  <p>The first approach we’re going to look at is adding <strong>public static</strong> objects to our <strong>Activities</strong>.&#160; Open up your <strong>DaySevenActivity </strong>class and add a new static variable like so:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> DaySevenActivity extends BaseActivity {</pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">private</span> TextView lblTextViewOne;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="kwrd">private</span> EditText editText1;</pre>
+
+  <pre><span class="lnum">   4:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">public</span> <span class="kwrd">static</span> String MyStaticString;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now we can access <strong>DaySevenActivity.MyStaticString </strong>anywhere.&#160; Here I will set the variable to whatever is in our <strong>EditText</strong> when the user taps our second button:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre><span class="lnum">   2:  </span>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre><span class="lnum">   4:  </span>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(),</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>                ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre><span class="lnum">   6:  </span>        <span class="rem">//Sets the Static String on the DaySevenActvity</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        MyStaticString = editText1.getText().toString();</pre>
+
+  <pre><span class="lnum">   8:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>&#160;</p>
+
+<p>And now I can check if <strong>MyStaticString </strong>is empty, and if it isn’t, using it to set the text property of a <strong>TextView </strong>in our second activity:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> ActivityTwo extends BaseActivity {</pre>
+
+  <pre><span class="lnum">   2:  </span>    @Override</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">protected</span> <span class="kwrd">void</span> onCreate(Bundle savedInstanceState) {</pre>
+
+  <pre><span class="lnum">   4:  </span>        <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        super.onCreate(savedInstanceState);    </pre>
+
+  <pre><span class="lnum">   6:  </span>        setContentView(R.layout.second_layout);</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        </pre>
+
+  <pre><span class="lnum">   8:  </span>        TextView textView1 = (TextView) findViewById(R.id.textView1);</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        <span class="kwrd">if</span> (!DaySevenActivity.MyStaticString.equals(<span class="str">&quot;&quot;</span>))</pre>
+
+  <pre><span class="lnum">  10:  </span>            textView1.setText(DaySevenActivity.MyStaticString);</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        <span class="kwrd">else</span></pre>
+
+  <pre><span class="lnum">  12:  </span>            textView1.setText(<span class="str">&quot;MyStaticString is empty&quot;</span>);</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>    }</pre>
+
+  <pre><span class="lnum">  14:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now this is pretty poor object oriented design.&#160; Anything has access to change the <strong>MyStaticString </strong>object.&#160; We could make a <strong>private static </strong>variable with a <strong>public static </strong>accessor method, but we’re still not doing things the right way.&#160; <strong>ActivityTwo</strong> has no way of knowing that the <strong>MyStaticString</strong> has been set or that <strong>DaySevenActivity</strong> was used before.&#160; So while possible, this isn’t the best way to share data between activities.</p>
+
+<p><strong>Extending the Application Class like a Singleton</strong></p>
+
+<p>The next technique we’ll look at is extending the <strong>android.app.Application </strong>class for your project and treating it like a <a title="Singleton Pattern" href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>.&#160; In order to do this, you expand your <strong>src </strong>folder, right click on your package (<strong>com.dayseven </strong>in this case) and go to <strong>New –&gt; Class</strong>.&#160; Name your new class <strong>MyApplication</strong> and select <strong>android.app.Application </strong>for it’s <strong>Superclass</strong>.&#160; For today’s purpose, we’ll just add a String to our class along with getters and setters:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> MyApplication extends Application {</pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">private</span> String myApplicationString;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>&#160;</pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">public</span> String getMyApplicationString() {</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        <span class="kwrd">return</span> myApplicationString;</pre>
+
+  <pre><span class="lnum">   6:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    </pre>
+
+  <pre><span class="lnum">   8:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> setMyApplicationString(String myApplicationString) {</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        <span class="kwrd">this</span>.myApplicationString = myApplicationString;</pre>
+
+  <pre><span class="lnum">  10:  </span>    }        </pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when the user taps the second button, you can get the application context and cast it back to <strong>MyApplication</strong> and access our new methods:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre><span class="lnum">   2:  </span>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre><span class="lnum">   4:  </span>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(),</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>                ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre><span class="lnum">   6:  </span>        <span class="rem">//Sets the Static String on the DaySevenActvity</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        MyStaticString = editText1.getText().toString();</pre>
+
+  <pre><span class="lnum">   8:  </span>        <span class="rem">//Get our Application Instance</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        MyApplication myApp = (MyApplication) getApplication();</pre>
+
+  <pre><span class="lnum">  10:  </span>        <span class="rem">//Set the app string on our app instance</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        myApp.setMyApplicationString(editText1.getText().toString());</pre>
+
+  <pre><span class="lnum">  12:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now in the onCreate method of <strong>ActivityTwo</strong> you can get access in a similar manner:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="rem">//Get our Application Instance</span></pre>
+
+  <pre><span class="lnum">   2:  </span>MyApplication myApp = (MyApplication) getApplication();</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span><span class="rem">//Set the textview's text using the app's string</span></pre>
+
+  <pre><span class="lnum">   4:  </span>textView1.setText(myApp.getMyApplicationString());</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Lastly, in order to run this and make it work, you have to tell Android that you’re overriding the <strong>Application </strong>class.&#160; This is specified in your <strong>AndroidManifest.xml </strong>file. Open that up and add a new attribute to the <strong>application</strong> node specifying the name of your application class:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">application</span></pre>
+
+  <pre>    <span class="attr">android:icon</span><span class="kwrd">=&quot;@drawable/ic_launcher&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:label</span><span class="kwrd">=&quot;@string/app_name&quot;</span></pre>
+
+  <pre>    <span class="attr">android:name</span><span class="kwrd">=&quot;MyApplication&quot;</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now when you run your application, it will use your new <strong>MyApplication </strong>class.&#160; It’s important to note that this isn’t strictly a singleton object as you could always create more instances of <strong>MyApplication</strong> instead of casting the <strong>Application Context</strong> into your MyApp class.&#160; The Android OS will only create one instance for the lifetime of your project though.&#160; In other words Android won’t screw up your singleton application class, but you could.&#160; Also important is that if we were just storing a single String and passing between two activities in a bigger application, storing the String in an application class like this might be a little bit overkill.&#160; However, if down the road we had a <strong>User </strong>object that stored a lot of information on the current application user and we used that object in all of our activities, using this singleton application class technique makes sense.</p>
+
+<p><strong>Adding Extras to New Activity Intents</strong></p>
+
+<p>The most standard and “correct” way of sharing data between activities is to pass that data into the new activity via the intent that is fired to open that activity.&#160; Let’s look at how we’re currently starting our <strong>ActivityTwo </strong>when the user taps the second button on <strong>DaySevenActivity</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre>        startActivity(<span class="kwrd">new</span> Intent(getApplicationContext(),</pre>
+
+  <pre class="alt">                ActivityTwo.<span class="kwrd">class</span>));</pre>
+
+  <pre>        ...</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If we wanted to pass a String into the second activity via the intent we need to change how we’re doing this a little bit.&#160; Since we’re currently instantiating the new <strong>Intent</strong> in our call to <strong>startActivity</strong>, we don’t have the opportunity to add any information to it.&#160; To start, you should change the code to the following:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre>        Intent myIntent = <span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>);</pre>
+
+  <pre class="alt">        startActivity(myIntent);</pre>
+
+  <pre>        ...</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now prior to calling <strong>startActivity</strong> you have access to the <strong>myIntent </strong>object.&#160; If you look at the available methods on the <strong>Intent</strong> class, you’ll see one method, <strong>putExtra</strong>, that has been overridden to accept a plethora of different second parameter types.&#160; This allows you to attach extended data to the intent.&#160; So if you want to add your string data to the intent you could do that like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre>        Intent myIntent = <span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>);</pre>
+
+  <pre class="alt">        myIntent.putExtra(<span class="str">&quot;MyString&quot;</span>, editText1.getText().toString()); </pre>
+
+  <pre>        startActivity(myIntent);</pre>
+
+  <pre class="alt">        ...</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">});</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now in the <strong>onCreate </strong>method of <strong>ActivityTwo</strong>, you can get the intent that started the activity and pull out the String extra:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent myIntent = getIntent();</pre>
+
+  <pre>textView1.setText(myIntent.getStringExtra(<span class="str">&quot;MyString&quot;</span>));</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you recall, we had set up our application to fire <strong>ActivityTwo </strong>from the options menu as well.&#160; If you now go into the options menu to fire the second activity, it will load fine but there won’t be any text.&#160; The reason for that is the intent that starts <strong>ActivityTwo </strong>from the options menu never adds a String extra named “<strong>MyString</strong>”.&#160; This doesn’t cause the application to crash, it just returns null from <strong>getStringExtra(“MyString”) </strong>which means your <strong>TextView</strong>’s text property is set to nothing, hence the empty screen.&#160; One important thing to note is that you probably don’t want to use <strong>“MyString”</strong>in the code like this but may want to define a <strong>public static final</strong> String somewhere that can be shared by both your activities.&#160; </p>
+
+<p>You can use <strong>putExtra</strong> and <strong>getTYPEExtra </strong>for all manner of simple variable types (Strings, ints, boolean, byte, double, etc).&#160; However, what if you want to pass a complex type via an intent?&#160; Android handles this by using <strong><a title="Android - Parcelable" href="http://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a></strong>.&#160; <strong>Parcelable</strong> is an interface that can be thought of as similar to serializable.&#160; However, Parcelable has been optimized for Android which is why it is used instead of the standard java serialization.&#160; To see this in action, add a new <strong>class</strong> to your project named “<strong>PassableObject</strong>” and use the <strong>new class wizard</strong> to set the class to implement <strong>Parcelable</strong>.&#160; You should end up with a class like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> <span class="kwrd">class</span> PassableObject implements Parcelable {</pre>
+
+  <pre>    @Override</pre>
+
+  <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">int</span> describeContents() {</pre>
+
+  <pre>        <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre class="alt">        <span class="kwrd">return</span> 0;</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>    @Override</pre>
+
+  <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> writeToParcel(Parcel arg0, <span class="kwrd">int</span> arg1) {</pre>
+
+  <pre>        <span class="rem">// TODO Auto-generated method stub</span></pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you’ll add a String to your class and implement the necessary methods to handle the parcel.&#160; Specifically, you need to make a constructor that will generate our object with a parcel as the input parameter and you’ll need to write what needs to be saved in the parcel.&#160; Once done your PassableObject should look like this:</p>
+
+<div class="csharpcode">
+  <div class="csharpcode">
+    <pre class="alt"><span class="kwrd">public</span> <span class="kwrd">class</span> PassableObject implements Parcelable {</pre>
+
+    <pre>    <span class="kwrd">private</span> String myStringValue;</pre>
+
+    <pre class="alt">&#160;</pre>
+
+    <pre>    <span class="kwrd">public</span> PassableObject() {}</pre>
+
+    <pre class="alt">    </pre>
+
+    <pre>    <span class="kwrd">public</span> PassableObject(Parcel inParcel) {</pre>
+
+    <pre class="alt">        myStringValue = inParcel.readString();</pre>
+
+    <pre>    }</pre>
+
+    <pre class="alt">&#160;</pre>
+
+    <pre>    @Override</pre>
+
+    <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">int</span> describeContents() {</pre>
+
+    <pre>        <span class="kwrd">return</span> 0;</pre>
+
+    <pre class="alt">    }</pre>
+
+    <pre>&#160;</pre>
+
+    <pre class="alt">    @Override</pre>
+
+    <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> writeToParcel(Parcel outParcel, <span class="kwrd">int</span> flags) {</pre>
+
+    <pre class="alt">        outParcel.writeString(myStringValue);</pre>
+
+    <pre>    }</pre>
+
+    <pre class="alt">&#160;</pre>
+
+    <pre>    <span class="kwrd">public</span> String getMyStringValue() {</pre>
+
+    <pre class="alt">        <span class="kwrd">return</span> myStringValue;</pre>
+
+    <pre>    }</pre>
+
+    <pre class="alt">&#160;</pre>
+
+    <pre>    <span class="kwrd">public</span> <span class="kwrd">void</span> setMyStringValue(String myStringValue) {</pre>
+
+    <pre class="alt">        <span class="kwrd">this</span>.myStringValue = myStringValue;</pre>
+
+    <pre>    }</pre>
+
+    <pre class="alt">&#160;</pre>
+
+    <pre>    <span class="kwrd">public</span> <span class="kwrd">static</span> final Parcelable.Creator&lt;PassableObject&gt; CREATOR </pre>
+
+    <pre class="alt">    = <span class="kwrd">new</span> Parcelable.Creator&lt;PassableObject&gt;() {</pre>
+
+    <pre>        <span class="kwrd">public</span> PassableObject createFromParcel(Parcel <span class="kwrd">in</span>) {</pre>
+
+    <pre class="alt">            <span class="kwrd">return</span> <span class="kwrd">new</span> PassableObject(<span class="kwrd">in</span>);</pre>
+
+    <pre>        }</pre>
+
+    <pre class="alt">&#160;</pre>
+
+    <pre>        <span class="kwrd">public</span> PassableObject[] newArray(<span class="kwrd">int</span> size) {</pre>
+
+    <pre class="alt">            <span class="kwrd">return</span> <span class="kwrd">new</span> PassableObject[size];</pre>
+
+    <pre>        }</pre>
+
+    <pre class="alt">    };</pre>
+
+    <pre>}</pre>
+  </div>
+  <style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>One important thing to point out is the <strong>CREATOR</strong> seen at the bottom.&#160; This is needed by any class that is going to implement Parcelable and is pretty boiler plate.&#160; Essentially it tells Android how to handle creating new instances of our object.&#160; Now you can create an instance of <strong>PassableObject</strong> when the user taps the button and put it in as an extra on the intent like so:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Button button2 = (Button) findViewById(R.id.button2);</pre>
+
+  <pre>button2.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {</pre>
+
+  <pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre>        Intent myIntent = <span class="kwrd">new</span> Intent(getApplicationContext(), ActivityTwo.<span class="kwrd">class</span>);</pre>
+
+  <pre class="alt">        myIntent.putExtra(<span class="str">&quot;MyString&quot;</span>, editText1.getText().toString());</pre>
+
+  <pre>        PassableObject passableObject = <span class="kwrd">new</span> PassableObject();</pre>
+
+  <pre class="alt">        passableObject.setMyStringValue(editText1.getText().toString());</pre>
+
+  <pre>        myIntent.putExtra(<span class="str">&quot;MyPassableObject&quot;</span>, passableObject);</pre>
+
+  <pre class="alt">        startActivity(myIntent);</pre>
+
+  <pre>        ...</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>&#160;</p>
+
+<p>Now in your <strong>onCreate </strong>method in <strong>ActivityTwo</strong> you can get the parcelable object and cast it back to your <strong>PassableObject</strong> class:</p>
+
+<div class="csharpcode">
+  <pre class="alt">PassableObject passableObject = (PassableObject)</pre>
+
+  <pre>        myIntent.getParcelableExtra(<span class="str">&quot;MyPassableObject&quot;</span>);</pre>
+
+  <pre class="alt">textView1.setText(passableObject.getMyStringValue());</pre>
+</div>
+
+<p>So now we have a way to pass simple variable types and complex objects to new activities using <strong>Intents</strong>.&#160; This is going come in handy even more when we start using <strong>Intents </strong>to talk to other applications.</p>
+
+<p><strong>Other Methods</strong></p>
+
+<p>There are certainly other methods that could be explored such as writing data to files in one activity and reading those files in other activities.&#160; Outside of special circumstances, most of these methods won’t deliver optimum results.&#160; Unless you find yourself in doing some very tricky stuff, your best bet will be to use the <strong>putExtra</strong> and <strong>getExtra </strong>methods to pass data between activities.</p>
+
+<p>You can <a title="Android Day Seven source code" href="http://chrisrisner.com/upload/DaySeven.zip">download the source from today here</a>.</p>

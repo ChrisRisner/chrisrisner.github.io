@@ -1,0 +1,104 @@
+---
+layout: post
+title: "Veritas – Incorporating MetaWeblog API – Part 9"
+date: Thu Jan 06 2011 20:01:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [.Net, MVC, Programming, Web, Veritas]
+excerpt: "Veritas,Blog,Weblog,Metaweblog,Metaweblog api,blog interface"
+logoUrl: null
+keywords: Veritas,Blog,Weblog,Metaweblog,Metaweblog api,blog interface
+filepath: 2011-01-07-Veritas---Incorporating-MetaWeblog-API---Part-9.html
+disqus_identifier: Veritas---Incorporating-MetaWeblog-API---Part-9
+---
+<p>It’s been quite a while since I’ve done any work on the blog.&#160; However, with the recent switch over to <a title="Working on iPhone Development" href="http://chrisrisner.com/Committing-Treason-against-Microsoft">working on iPhone development</a> at work, I have to get my .Net in somewhere.&#160; Trying to keep in line with the <a title="Veritas Blog Agenda" href="http://chrisrisner.com/Veritas--Creating-a-Blog-Engine-with-MVC-2-and--Net-4-0-%E2%80%93-Part-1">agenda I had originally set</a>, I’m going to cover adding a MetaWeblog API to the blog.&#160; <a title="MetaWeblogAPI" href="http://www.xmlrpc.com/metaWeblogApi">MetaWeblog API</a> is an interface for allowing external programs to get and set posts for a web site.&#160; Basically it allows an easy way to post content to a blog.&#160; In addition, there are blog editors (like <a title="Windows Live Writer" href="http://explore.live.com/windows-live-writer">Windows Live Writer</a>) that can easily interface using this API.&#160; This just saves us from having to make a fancy pants post creator in the admin section of the web site until much later.&#160; We’re going to be using the CookComputing XmlRpc V2 dll for this.&#160; You can get the latest version of it by going <a title="CookComputing XmlRpcV2" href="http://code.google.com/p/xmlrpcnet/downloads/list">here</a>.&#160; We’ll add this in to our references.&#160; In order to use the MetaWeblog API, we have to put all the methods into an endpoint or somewhere they can receive communication.&#160; We’re going to put everything into a Generic Handler:</p>  <p><img src="http://chrisrisner.com/upload/GenericHandler.jpg" /></p>  <p>After we create this, we have a mess of methods to add to fit the MetaWeblog spec:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">string</span> IMetaWeblog.AddPost(<span class="kwrd">string</span> blogid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password,</pre>
+
+  <pre><span class="lnum">   2:  </span>    Post post, <span class="kwrd">bool</span> publish)</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>{}</pre>
+
+  <pre><span class="lnum">   4:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">bool</span> IMetaWeblog.UpdatePost(<span class="kwrd">string</span> postid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password,</pre>
+
+  <pre><span class="lnum">   6:  </span>    Post post, <span class="kwrd">bool</span> publish)</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>{}</pre>
+
+  <pre><span class="lnum">   8:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>Post IMetaWeblog.GetPost(<span class="kwrd">string</span> postid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password)</pre>
+
+  <pre><span class="lnum">  10:  </span>{}</pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>&#160;</pre>
+
+  <pre><span class="lnum">  12:  </span>CategoryInfo[] IMetaWeblog.GetCategories(<span class="kwrd">string</span> blogid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password)</pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>{}</pre>
+
+  <pre><span class="lnum">  14:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>Post[] IMetaWeblog.GetRecentPosts(<span class="kwrd">string</span> blogid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password,</pre>
+
+  <pre><span class="lnum">  16:  </span>    <span class="kwrd">int</span> numberOfPosts)</pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>{}</pre>
+
+  <pre><span class="lnum">  18:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>MediaObjectInfo IMetaWeblog.NewMediaObject(<span class="kwrd">string</span> blogid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password,</pre>
+
+  <pre><span class="lnum">  20:  </span>    MediaObject mediaObject)</pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>{}</pre>
+
+  <pre><span class="lnum">  22:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span><span class="kwrd">bool</span> IMetaWeblog.DeletePost(<span class="kwrd">string</span> key, <span class="kwrd">string</span> postid, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password, <span class="kwrd">bool</span> publish)</pre>
+
+  <pre><span class="lnum">  24:  </span>{}</pre>
+
+  <pre class="alt"><span class="lnum">  25:  </span>&#160;</pre>
+
+  <pre><span class="lnum">  26:  </span>BlogInfo[] IMetaWeblog.GetUsersBlogs(<span class="kwrd">string</span> key, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password)</pre>
+
+  <pre class="alt"><span class="lnum">  27:  </span>{}</pre>
+
+  <pre><span class="lnum">  28:  </span>&#160;</pre>
+
+  <pre class="alt"><span class="lnum">  29:  </span>UserInfo IMetaWeblog.GetUserInfo(<span class="kwrd">string</span> key, <span class="kwrd">string</span> username, <span class="kwrd">string</span> password)</pre>
+
+  <pre><span class="lnum">  30:  </span>{}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+
+
+<p>I won’t bother explaining what all of these methods do.&#160; The names should mostly explain it (and if not you can go through the code).&#160; Here we have methods for adding, updating, deleting, and getting posts, getting user info, and uploading media items.&#160; Basically, when you use an editor like Live Writer that works with MetaWeblog, you can add posts, images, videos, etc to your blog using just these methods.&#160; With this done, we can actually add content to our web site.&#160; Down the road, we’ll add the ability to do this from an admin portal, but initially we’ll just use this.&#160; As always, you can download the latest code <a title="Veritas Part 9" href="http://chrisrisner.com/upload/Veritas Part 9.zip">here</a>.</p>

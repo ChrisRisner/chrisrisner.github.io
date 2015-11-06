@@ -1,0 +1,375 @@
+---
+layout: post
+title: "31 Days of Android: Day 14–Table Layout and Frame Layout"
+date: Sun Dec 04 2011 06:09:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Mobile, Phone]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll cover the last two common layouts:  the TableLayout and the FrameLayout.  TableLayout is similar to HTML tables and the FrameLayout is generally used to reserve space for a single child which can be swapped in and out.  We'll also look at using the FrameLayout to overlay text on top of an image."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,tablelayout,framelayout,table,tablerow,shrinkcolumns,stretchcolumns,frame,overlaying elements,text on top of image,Tutorial
+filepath: 2011-12-04-31-Days-of-Android--Day-14-Table-Layout-and-Frame-Layout.html
+disqus_identifier: 31-Days-of-Android--Day-14-Table-Layout-and-Frame-Layout
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Day Fourteen" alt="Android Day Fourteen" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to continue the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> by talking about the last two common layouts, the <strong>TableLayout</strong> and the <strong>FrameLayout</strong>.&#160; These may not be as common at the <strong><a title="Android Day 12 Linear Layout" href="http://chrisrisner.com/31-Days-of-Android--Day-12%E2%80%93Linear-Layouts">LinearLayout</a></strong> or the <strong><a title="Day 13 - Relative Layouts" href="http://chrisrisner.com/31-Days-of-Android--Day-13%E2%80%93Relative-Layouts">RelativeLayout</a></strong> but certainly serve their purpose.&#160; You can <a title="Android Day 14 Initial Code" href="http://chrisrisner.com/upload/DayFourteenInitial.zip">download the code we’re going to start with here</a>.</p>  <p><strong>TableLayout</strong>s are exactly what you’d expect from the name.&#160; You can use them to position child <strong>View</strong>s into rows and columns.&#160; If you’ve used HTML tables before, you should be able to pick this up very easily.&#160; The exception to them being like HTML tables is that you cannot span columns.&#160; To see the <strong>TableLayout</strong> in action, let’s look at the <strong>main.xml</strong> file in <strong>res/layout</strong>.&#160; Right now it’s root is a <strong>LinearLayout</strong>.&#160; You will need to change that to a <strong>TableLayout</strong>.&#160; Once you’ve done that, the xml should look like this:</p>  <div class="csharpcode">   <pre class="alt">&lt;?xml version=<span class="str">&quot;1.0&quot;</span> encoding=<span class="str">&quot;utf-8&quot;</span>?&gt;</pre>
+
+  <pre>&lt;TableLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;fill_parent&quot;</span>&gt;</pre>
+
+  <pre class="alt">    ...</pre>
+
+  <pre>&lt;/TableLayout&gt;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>When you run your app, it will look like this:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Fourteen One" alt="Android Day Fourteen One" src="http://chrisrisner.com/upload/android_day_fourteen_one.png" /></p>
+
+<p>&#160;</p>
+
+<p>There are a few things worth pointing out here.&#160; First, this doesn’t look that much different from <a title="TableLayout when it was a LinearLayout" href="http://chrisrisner.com/upload/android_day_twelve_initial_layout.png">when the root was a LinearLayout</a><strong></strong>.&#160; The one thing that really does look different is the <strong>Click Me</strong> button.&#160; Where as before the button was only slightly larger than “Click Me” text, now it spans the whole screen.&#160; Even though the <strong>layout_width </strong>of the button is still set to <strong>wrap_content</strong>.&#160; This is a weird side effect of using a <strong>TableLayout</strong>.&#160; If you’re creating a <strong>TableLayout, </strong>you’re usually also going to wrap it’s children in <strong>TableRow</strong>s.&#160; Go ahead and wrap all of the children of the <strong>TableLayout</strong> in those <strong>TableRow</strong>s.&#160; When you’re done, your xml will look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;?xml version=<span class="str">&quot;1.0&quot;</span> encoding=<span class="str">&quot;utf-8&quot;</span>?&gt;</pre>
+
+  <pre>&lt;TableLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;fill_parent&quot;</span>&gt;</pre>
+
+  <pre class="alt">    &lt;TableRow &gt;</pre>
+
+  <pre>        &lt;TextView</pre>
+
+  <pre class="alt">            android:id=<span class="str">&quot;@+id/lblTextViewOne&quot;</span></pre>
+
+  <pre>            android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">            android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>            android:text=<span class="str">&quot;@string/hello&quot;</span> /&gt;</pre>
+
+  <pre class="alt">    &lt;/TableRow&gt;</pre>
+
+  <pre>    &lt;TableRow &gt;</pre>
+
+  <pre class="alt">        &lt;EditText</pre>
+
+  <pre>            android:id=<span class="str">&quot;@+id/editText1&quot;</span></pre>
+
+  <pre class="alt">            android:layout_width=<span class="str">&quot;match_parent&quot;</span></pre>
+
+  <pre>            android:layout_height=<span class="str">&quot;wrap_content&quot;</span> &gt;</pre>
+
+  <pre class="alt">            &lt;requestFocus /&gt;</pre>
+
+  <pre>        &lt;/EditText&gt;</pre>
+
+  <pre class="alt">    &lt;/TableRow&gt;</pre>
+
+  <pre>    &lt;TableRow &gt;</pre>
+
+  <pre class="alt">        &lt;Button</pre>
+
+  <pre>            android:id=<span class="str">&quot;@+id/button1&quot;</span></pre>
+
+  <pre class="alt">            android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>            android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">            android:text=<span class="str">&quot;@string/click_me&quot;</span> /&gt;</pre>
+
+  <pre>    &lt;/TableRow&gt;</pre>
+
+  <pre class="alt">    &lt;TableRow &gt;</pre>
+
+  <pre>        &lt;LinearLayout</pre>
+
+  <pre class="alt">            android:id=<span class="str">&quot;@+id/linearLayour2&quot;</span></pre>
+
+  <pre>            android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">            android:layout_height=<span class="str">&quot;wrap_content&quot;</span> &gt;</pre>
+
+  <pre>            &lt;TextView</pre>
+
+  <pre class="alt">                android:id=<span class="str">&quot;@+id/textView2&quot;</span></pre>
+
+  <pre>                android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">                android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>                android:text=<span class="str">&quot;@string/app_name&quot;</span> /&gt;</pre>
+
+  <pre class="alt">            &lt;Button</pre>
+
+  <pre>                android:id=<span class="str">&quot;@+id/button2&quot;</span></pre>
+
+  <pre class="alt">                android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>                android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">                android:text=<span class="str">&quot;Button&quot;</span> /&gt;</pre>
+
+  <pre>        &lt;/LinearLayout&gt;</pre>
+
+  <pre class="alt">    &lt;/TableRow&gt;</pre>
+
+  <pre>&lt;/TableLayout&gt;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>When you run your app, it won’t look very much different (the <strong>EditText</strong> and first <strong>TextView</strong> won’t go all the way to the end of the screen).&#160; For the sake of really understanding what’s going on, remove the <strong>LinearLayout </strong>from the last <strong>TableRow</strong> so that it just contains a <strong>TextView</strong> and a <strong>Button</strong>.&#160; Now your view will look like this:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Fourteen Two" alt="Android Day Fourteen Two" src="http://chrisrisner.com/upload/android_day_fourteen_two.png" /></p>
+
+<p>What’s happened is that each element in a <strong>TableRow</strong> belongs to a separate column.&#160; Outside of the last, each <strong>TableRow</strong> only has one element.&#160; The first column ends up being the width of the largest element (in this case the <strong>EditText</strong> and still oddly the first <strong>Button</strong>) and the second column ends up comprising the only send element any of the rows have, the second <strong>Button.&#160; </strong>The last important thing to talk about when it comes to <strong>TableLayout</strong>s is an attribute you put on the root layout element:&#160; <strong>stretchColumns</strong> and <strong>shrinkColumns</strong>.&#160; These two attributes can be used to stretch or shrink all or certain columns at run time.&#160; Since you may not know the width of certain elements at design time, you may end up needing to use these attributes.&#160; The syntax of the value that you set these attributes to is either a single column number, a comma separated list of column numbers, or an asterisk to signify all columns.&#160; In your view currently, the “<strong>Button</strong>” text is being cut off on the right side.&#160; Let’s look at some options we can use to fix this using <strong>stretchColumns</strong> and <strong>shrinkColumns</strong>.&#160; The first thing you might think to try is to say stretch column 1.&#160; Go ahead and do that and your xml should look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;TableLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre>    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre class="alt">    android:layout_height=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:stretchColumns=<span class="str">&quot;1&quot;</span>&gt;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now run your app and you won’t get quite what you were probably hoping for.&#160; In fact, things won’t look different at all.&#160; Column one is being told to stretch, but there isn’t any room for it to stretch.&#160; If you change the stretch to a shrink and specify column zero, things will start looking better:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;TableLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre>    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre class="alt">    android:layout_height=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:shrinkColumns=<span class="str">&quot;0&quot;</span>&gt;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now run your app and you should see the button now fitting on the screen:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Fourteen Shink Column 1" alt="Android Day Fourteen Shink Column 1" src="http://chrisrisner.com/upload/android_day_fourteen_three.png" /></p>
+
+<p>So here, you’ve told column one that it should shrink to allocate room for other columns.&#160; This gives column one the room it needs to expand.&#160; It’s important to remember that you can stretch and shrink columns as needed when you use a <strong>TableLayout</strong> though you may need to play around to get your desired result.</p>
+
+<p><strong>The FrameLayou</strong></p>
+
+<p>The last layout we’ll take a very quick look at is the <strong>FrameLayout</strong>.&#160; The <strong>FrameLayout</strong> is probably the simplest, and possibly least used, layout element you’ll run into.&#160; It’s intent is to be filled with a single child element that you can swap in and out.&#160; You&#160; can have multiple elements in a FrameLayout and the “later” children will be drawn over the “earlier” children.&#160; The most common example of this I’ve seen is <a title="Frame Layout Tricks" href="http://developer.android.com/resources/articles/layout-tricks-merge.html">putting an ImageView in as the first element and then adding TextViews or Buttons after</a>.&#160; Let’s open up <strong>res/layout/second_layout.xml</strong> and change it to a <strong>FrameLayout</strong>.&#160; After you’ve changed the layout, you can also get rid of the <strong>orientation </strong>attribute that your <strong>LinearLayout</strong> had since the <strong>FrameLayout</strong> doesn’t use it.&#160; Now you should be left with this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;?xml version=<span class="str">&quot;1.0&quot;</span> encoding=<span class="str">&quot;utf-8&quot;</span>?&gt;</pre>
+
+  <pre>&lt;FrameLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt">    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre>    android:layout_height=<span class="str">&quot;fill_parent&quot;</span>&gt;</pre>
+
+  <pre class="alt">    &lt;TextView</pre>
+
+  <pre>        android:id=<span class="str">&quot;@+id/textView1&quot;</span></pre>
+
+  <pre class="alt">        android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>        android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">        android:text=<span class="str">&quot;TextView&quot;</span> /&gt;</pre>
+
+  <pre>&lt;/FrameLayout&gt;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>When you run your application, you should see your <strong>TextView</strong> in the top left corner of the screen.&#160; To really see the <strong>FrameLayout</strong> in action, you need to add an <strong>ImageView</strong> as the first child of your layout.&#160; Go ahead and add an <strong>ImageView</strong> and set it to the only drawable we have in our project, <strong>ic_launcher</strong>.&#160; As a side note, the <strong>ic_launcher </strong>file is used as the app icon and is specified as an attribute of the&#160; <strong>application</strong> in the <strong>manifest</strong> file.&#160; When you’re&#160; done, your XML should look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">&lt;FrameLayout xmlns:android=<span class="str">&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre>    android:layout_width=<span class="str">&quot;fill_parent&quot;</span></pre>
+
+  <pre class="alt">    android:layout_height=<span class="str">&quot;fill_parent&quot;</span>&gt;</pre>
+
+  <pre>    &lt;ImageView</pre>
+
+  <pre class="alt">        android:id=<span class="str">&quot;@+id/imageView1&quot;</span></pre>
+
+  <pre>        android:layout_width=<span class="str">&quot;match_parent&quot;</span></pre>
+
+  <pre class="alt">        android:layout_height=<span class="str">&quot;match_parent&quot;</span></pre>
+
+  <pre>        android:src=<span class="str">&quot;@drawable/ic_launcher&quot;</span> /&gt;</pre>
+
+  <pre class="alt">    &lt;TextView</pre>
+
+  <pre>        android:id=<span class="str">&quot;@+id/textView1&quot;</span></pre>
+
+  <pre class="alt">        android:layout_width=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre>        android:layout_height=<span class="str">&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">        android:text=<span class="str">&quot;TextView&quot;</span> /&gt;</pre>
+
+  <pre>&lt;/FrameLayout&gt;</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If you run now, you’ll see the image but the text will still be at the top left.&#160; To fix this, add a <strong>layout_gravity</strong> attribute to the <strong>TextView</strong> and set it to <strong>center</strong>.&#160; Now when you run your app, you’ll have the text in the center of the image:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android Day Fourteen Frame Layout" alt="Android Day Fourteen Frame Layout" src="http://chrisrisner.com/upload/android_day_fourteen_four.png" /></p>
+
+<p>So by now you’ve played with the four big layout types:&#160; <a title="LinearLayout" href="http://chrisrisner.com/31-Days-of-Android--Day-12%E2%80%93Linear-Layouts">LinearLayout</a>, <a title="Relative Layout" href="http://chrisrisner.com/31-Days-of-Android--Day-13%E2%80%93Relative-Layouts">RelativeLayout</a>, TableLayout, and FrameLayout. New in Android 4.0 is the <strong>GridLayout</strong> which may be a simpler option than using some of the previously discussed layouts so if you’re going to develop for Ice Cream Sandwich, it’s <a title="Grid Layout" href="http://android-developers.blogspot.com/2011/11/new-layout-widgets-space-and-gridlayout.html">worth reading about GridLayout</a>.</p>
+
+<p>You can <a title="Android Day Fourteen Final Code" href="http://chrisrisner.com/upload/DayFourteenFinal.zip">download the final code from today here</a>.</p>
