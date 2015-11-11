@@ -1,0 +1,526 @@
+---
+layout: post
+title: "31 Days of Android: Day 29–Using the Camera"
+date: Mon Dec 19 2011 02:34:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Phone, Programming]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we're going to talk about making use of the camera in your applications."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Camera,Camera Permissions,Camera Intent,Requiring Camera feature,storing camera pictures to external storage,tutorial
+filepath: 2011-12-19-31-Days-of-Android--Day-29–Using-the-Camera.html
+disqus_identifier: 31-Days-of-Android--Day-29–Using-the-Camera
+redirect_from:
+  - /2011-12-19-31-Days-of-Android--Day-29%E2%80%93Using-the-Camera/
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Using the Android Camera" alt="Using the Android Camera" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to talk about using the camera in your applications as we get close to wrapping up the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; There are two different ways you can use the camera in your applications:&#160; via an <strong>Intent</strong> or directly using the camera hardware.&#160; If you use an <strong>Intent</strong>, you’re relying on a different application to handle taking the picture or video and “handing it back” to your app.&#160; Today we’ll look at how you can get pictures from the camera with an <strong>Intent</strong> as well as how to get some more information from the camera.&#160; You can <a title="Android Day TwentyNine Inital Code" href="http://chrisrisner.com/upload/DayTwentyNineInitial.zip">download the starter code we’ll use today here</a>.</p>  <p>&#160;</p>  <p><strong>Manifest Changes</strong></p>  <p>Before you can use the camera, you need to add a permission to the manifest file.&#160; This will be listed when users go to install your application so that they will know your app will use their camera.</p>  <div class="csharpcode">   <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-permission</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.permission.CAMERA&quot;</span> <span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Technically this is the only change you need to make to your manifest.&#160; However, you can also specify that the camera is a feature of your app by adding this to your manifest file:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-feature</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.hardware.camera&quot;</span> <span class="attr">android:required</span><span class="kwrd">=&quot;false&quot;</span> <span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Note that at the end you’re saying that the camera isn’t required to install your app.&#160; If you set this to true or remove it, then users wont’ be able to install your app if they don’t have a camera.&#160; Today I think all phone and tablets that come out come with cameras though it’s entirely possible devices without cameras could access the <strong>Android Marketplace</strong> (i.e. Google TV boxes) so if you’re building an application that completely depends on having a camera, you may want to require it in your manifest file.&#160; If you aren’t going to require a camera but want to check to see if a camera is available you can use the <strong>PackageManager</strong> to find out:</p>
+
+<div class="csharpcode">
+  <pre class="alt">PackageManager packageManager = getPackageManager();</pre>
+
+  <pre>boolean doesHaveCamera = </pre>
+
+  <pre class="alt">        packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>If <strong>hasSystemFeature</strong> returns false than you know the device doesn’t have a camera available.&#160; While not necessary for camera usage, you should also add the permission for external storage to your manifest file:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">uses-permission</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> <span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Later on you’ll write your images to external storage so it’s easier to take care of this now.</p>
+
+<p>&#160;</p>
+
+<p><strong>Using the Camera with Intents</strong></p>
+
+<p>Just starting the camera is actually remarkably easy.&#160; If you’ve used <a title="Using Intents to Launch Applications" href="http://chrisrisner.com/31-Days-of-Android--Day-26%E2%80%93Intents">intents before to launch other applications</a>, this will look very familiar:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent intent = <span class="kwrd">new</span> Intent(MediaStore.ACTION_IMAGE_CAPTURE);</pre>
+
+  <pre>startActivityForResult(intent, 100);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Running this code will launch the camera app.&#160; The default camera app will allow you to take a picture and then either approve it, retake it, or cancel.&#160; Once you’ve said you’re done or cancelled, you’ll return to your application.&#160; At this point, nothing else is happening.&#160; When the camera app returns to your application, it sends an <strong>Intent </strong>over which you can get at in the <strong>onActivtiyResult</strong> method.&#160; Let’s say you want to take the image that was taken and display it back to the user.&#160; First you’ll need to open the <strong>res/layout/main.xml</strong> and add an <strong>ImageView</strong> under the last button:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">&lt;</span><span class="html">Button</span></pre>
+
+  <pre>    <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/button2&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span></pre>
+
+  <pre>    <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:text</span><span class="kwrd">=&quot;Button&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="kwrd">&lt;</span><span class="html">ImageView</span></pre>
+
+  <pre class="alt">    <span class="attr">android:id</span><span class="kwrd">=&quot;@+id/imageView1&quot;</span></pre>
+
+  <pre>    <span class="attr">android:layout_width</span><span class="kwrd">=&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt">    <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span><span class="kwrd">/&gt;</span></pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now in your <strong>onActvitiyResult </strong>method, you can put the image that was taken in as the <strong>ImageView</strong>:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">protected</span> <span class="kwrd">void</span> onActivityResult(<span class="kwrd">int</span> requestCode, <span class="kwrd">int</span> resultCode, Intent intent) {</pre>
+
+  <pre class="alt">    Bundle extras = intent.getExtras();</pre>
+
+  <pre>    ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);</pre>
+
+  <pre class="alt">    imageView1.setImageBitmap((Bitmap) extras.get(<span class="str">&quot;data&quot;</span>));</pre>
+
+  <pre>}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The camera returns the image data as an extra named “<strong>data</strong>” and once you get it you can cast it to a <strong>Bitmap</strong> to use it as an image.&#160; From there it’s easy to just set the <strong>ImageView</strong>’s <strong>ImageBitmap</strong> property.&#160; Now when you run your app and take a picture, you should see the picture show up on beneath the button:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="setting imageview to picture" alt="setting imageview to picture" src="http://chrisrisner.com/upload/android_day_twentynine_setting_imageview.png" width="206" height="264" /></p>
+
+<p>If you close down your application and run the gallery application, you’ll see that the images you took for your app are there.&#160; This means that it’s storing images in the default location.&#160; If you want to, you can specify a place to put the images you capture.&#160; This is done by putting an extra on your image capture <strong>Intent </strong>before you send it:</p>
+
+<div class="csharpcode">
+  <pre class="alt">Intent intent = <span class="kwrd">new</span> Intent(</pre>
+
+  <pre>        MediaStore.ACTION_IMAGE_CAPTURE);</pre>
+
+  <pre class="alt"><span class="rem">// Get our fileURI</span></pre>
+
+  <pre>Uri fileUri = getOutputMediaFile();</pre>
+
+  <pre class="alt">intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); </pre>
+
+  <pre>startActivityForResult(intent, 100);</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>The fileURI you are passing in is created from a File you create on the disk.&#160; You could write these files to any location that you have access to.&#160; If you wanted to keep them private to your application, you could pass in a URI for your app’s data directory.&#160; If you wanted to store them externally on the SD card, you could do something like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">private</span> Uri getOutputMediaFile() throws IOException {</pre>
+
+  <pre>    File mediaStorageDir = <span class="kwrd">new</span> File(</pre>
+
+  <pre class="alt">            Environment.getExternalStoragePublicDirectory(</pre>
+
+  <pre>                    Environment.DIRECTORY_PICTURES),<span class="str">&quot;DayTwentyNine&quot;</span>);</pre>
+
+  <pre class="alt">    <span class="rem">// Create a media file name</span></pre>
+
+  <pre>    String timeStamp = <span class="kwrd">new</span> SimpleDateFormat(<span class="str">&quot;yyyyMMdd_HHmmss&quot;</span>)</pre>
+
+  <pre class="alt">            .format(<span class="kwrd">new</span> Date());</pre>
+
+  <pre>    File mediaFile;</pre>
+
+  <pre class="alt">    mediaFile = <span class="kwrd">new</span> File(mediaStorageDir.getPath() + File.separator</pre>
+
+  <pre>            + <span class="str">&quot;IMG_&quot;</span> + timeStamp + <span class="str">&quot;.jpg&quot;</span>);</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>    <span class="kwrd">if</span> (mediaFile.exists() == <span class="kwrd">false</span>) {</pre>
+
+  <pre class="alt">        mediaFile.getParentFile().mkdirs();</pre>
+
+  <pre>        mediaFile.createNewFile();</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>    <span class="kwrd">return</span> Uri.fromFile(mediaFile);</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re creating a file in the SD card’s pictures directory, under a subfolder named “<strong>DayTwentyNine</strong>”.&#160; The name of the file is “<strong>IMG_</strong>” followed by the timestamp.&#160; Now if you run your app, it’s going to crash when it returns from taking the picture.&#160; The reason is that when you pass in the <strong>EXTRA_OUTPUT</strong> extra, the camera doesn’t return the image data because it knows you know where it’s going to write the file to.&#160; Once the camera returns, in <strong>onActivityResult</strong> you can check to make sure it was a success and then do whatever you need with the picture.&#160; If you wanted to be able to handle the picture being returned or not being returned, your <strong>onActivityResult</strong>method might look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt">@Override</pre>
+
+  <pre><span class="kwrd">protected</span> <span class="kwrd">void</span> onActivityResult(<span class="kwrd">int</span> requestCode, <span class="kwrd">int</span> resultCode,</pre>
+
+  <pre class="alt">        Intent intent) {</pre>
+
+  <pre>    <span class="kwrd">if</span> (requestCode == 100) {</pre>
+
+  <pre class="alt">        <span class="kwrd">if</span> (resultCode == RESULT_OK) {</pre>
+
+  <pre>            <span class="kwrd">if</span> (intent == <span class="kwrd">null</span>) {</pre>
+
+  <pre class="alt">                <span class="rem">// The picture was taken but not returned</span></pre>
+
+  <pre>                Toast.makeText(</pre>
+
+  <pre class="alt">                        getApplicationContext(),</pre>
+
+  <pre>                        <span class="str">&quot;The picture was taken and is located here: &quot;</span></pre>
+
+  <pre class="alt">                                + fileUri.toString(), Toast.LENGTH_LONG)</pre>
+
+  <pre>                        .show();</pre>
+
+  <pre class="alt">            } <span class="kwrd">else</span> {</pre>
+
+  <pre>                <span class="rem">// The picture was returned</span></pre>
+
+  <pre class="alt">                Bundle extras = intent.getExtras();</pre>
+
+  <pre>                ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);</pre>
+
+  <pre class="alt">                imageView1.setImageBitmap((Bitmap) extras.get(<span class="str">&quot;data&quot;</span>));</pre>
+
+  <pre>            }</pre>
+
+  <pre class="alt">        }</pre>
+
+  <pre>    }</pre>
+
+  <pre class="alt">}</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re still setting the <strong>ImageView</strong> if the data is returned, otherwise you’re just showing a <strong>Toast</strong> with the file location.&#160; You could alternatively open that file and display it in the <strong>ImageView</strong> if you wanted.&#160; </p>
+
+<p>&#160;</p>
+
+<p><strong>Checking Megapixels</strong></p>
+
+<p>One scenario I’ve found myself in at work that took some research to figure out was knowing how many megapixels the camera was.&#160; It seems like there should be an easy to use built-in way to get a rating on the camera on the device but, as of yet, I haven’t found anything.&#160; Thankfully it’s not very difficult to calculate how many megapixels the camera supports.&#160; First you need to make a connection to the camera hardware, and then you can use the <strong>getSupportedPictureSizes</strong> method to get a list of supported picture sizes.&#160; This gives you a list of heights and widths which you can multiply to get picture resolutions in pixels.&#160; You can use this number to find megapixels.&#160; This code will go through these lists and round up or down appropriately to get megapixels:</p>
+
+<div class="csharpcode">
+  <pre class="alt">ArrayList&lt;Integer&gt; supportedMegaPixels;</pre>
+
+  <pre>Camera cam = Camera.open();</pre>
+
+  <pre class="alt">camParameters = cam.getParameters();</pre>
+
+  <pre>pictureSizes = camParameters.getSupportedPictureSizes();</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre><span class="kwrd">if</span> (pictureSizes.size() &gt; 0) {</pre>
+
+  <pre class="alt">    supportedMegaPixels = <span class="kwrd">new</span> ArrayList&lt;Integer&gt;();</pre>
+
+  <pre>    <span class="kwrd">for</span> (<span class="kwrd">int</span> i = 0; i &lt; pictureSizes.size(); i++) {</pre>
+
+  <pre class="alt">        supportedMegaPixels.add(((pictureSizes.get(i).height * </pre>
+
+  <pre>            pictureSizes.get(i).width) + 1000000 / 2) / 1000000);</pre>
+
+  <pre class="alt">    }</pre>
+
+  <pre>}</pre>
+
+  <pre class="alt">&#160;</pre>
+
+  <pre>cam.release();</pre>
+</div>
+<style type="text/css">
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You can then check the <strong>supportedMegaPixels</strong> ArrayList to see the maximum number of megapixels as well as to see if a specific resolution was supported.&#160; For example, here’s a method that will check to see if the camera supports 5 megapixels:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="kwrd">public</span> <span class="kwrd">static</span> boolean doesSupport5MP() {</pre>
+
+  <pre>    <span class="kwrd">return</span> (supportedMegaPixels.contains(5));        </pre>
+
+  <pre class="alt">}</pre>
+</div>
+
+<p>I do have a few words of caution.&#160; First, if your device has a front facing camera as well, it will return the supported picture sizes of that camera along with the picture sizes for the (typically) higher quality rear camera.&#160; Secondly, if you’re using the camera and calling <strong>Camera.open()</strong> make sure you call <strong>release</strong> on the camera object when you’re done.&#160; If you open the camera and then try to fire the <strong>ACTION_IMAGE_CAPTURE</strong> intent, the camera won’t work.&#160; </p>
+
+<p>If you need more control over the camera or want to make your own image capture program, you’ll want to directly connect with the camera hardware.&#160; We won’t go over that today but you can <a title="Direct Interaction With Android Camera" href="http://developer.android.com/training/camera/cameradirect.html">read more about it on the Android site</a> (and maybe I’ll go over it in the future).</p>
+
+<p>You can <a title="Android Day TwentyNine Final Source Code" href="http://chrisrisner.com/upload/DayTwentyNineFinal.zip">download the code we ended up with today here</a>.</p>

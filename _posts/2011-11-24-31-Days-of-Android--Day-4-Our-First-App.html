@@ -1,0 +1,615 @@
+---
+layout: post
+title: "31 Days of Android: Day 4–Our First App"
+date: Thu Nov 24 2011 15:07:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Android, Google, Java, Mobile, Programming, Phone]
+excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll create our first Android Application and take a look at the folder structure of a new Android project in Eclipse."
+logoUrl: null
+keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,First Android Application,First Android App,Starting out with Android,Android Manifest,Eclipse Android,Eclipse,Tutorial
+filepath: 2011-11-24-31-Days-of-Android--Day-4–Our-First-App.html
+disqus_identifier: 31-Days-of-Android--Day-4–Our-First-App
+redirect_from:
+  - /2011-11-24-31-Days-of-Android--Day-4%E2%80%93Our-First-App/
+---
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android" alt="Android" align="right" src="http://chrisrisner.com/upload/android-200.png" />Now that you’ve installed our IDE and the Android SDK as well as created an AVD, you’re ready to continue our <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> by creating our first Android application!&#160; In this application we’ll go through the boiler plate project template in Eclipse and enhance <del>it’s</del> its functionality a little bit.&#160; </p>  <p>If you haven’t done so already, start Eclipse.&#160; Once it has started, go to <strong>File –&gt; New –&gt; Other </strong>(or type <strong>Ctrl + N</strong> / <strong>Command + N</strong>).&#160; From there you can either find <strong>Android</strong> or type it in the filter text box at the top.&#160; You should see a slew of different Android options.&#160; Choose <strong>Android Project</strong> and click <strong>Next</strong>.&#160; Next, you’ll come to a <strong>Create Android Project</strong> window.&#160; The only thing you need to specify here is the <strong>Project Name</strong>.&#160; For this, name it <strong>DayFour</strong>.&#160; </p>  <p>You will then be asked to select a <strong>Build Target</strong>.&#160; If you installed all of the Android SDK versions as detailed in our first post, you should see quite a few.&#160; If not, you should at least see the most recent, 4.0.&#160; Go ahead and choose <strong>API Level</strong> 14 for <strong>Platform </strong>4.0 with target name <strong>Google APIs</strong>.&#160; We’re not going to do anything 4.0 specific; however, it’s a good idea to make your applications able to run on the latest version of Android (we’ll get into this a bit more in a moment).&#160; Once selected, click <strong>Next</strong>.&#160; </p>  <p>Our last window for now is the <strong>Application Info</strong> wizard.Here you specify the <strong>Application Name</strong> again, the <strong>Package Name</strong>, if we want an initial Activity, and a <strong>Minimum SDK</strong>.&#160; Your package name has to be unique from all other applications available on the <strong>Android Marketplace</strong> as well as unique on the device the app is installed to.&#160; For now, name it <strong>com.dayfour</strong>.&#160; The Activity name should already be prefilled with <strong>DayFourActivity</strong>.&#160; Lastly you have the <strong>Minimum SDK</strong>.&#160; This value is going to be different from your <strong>Build Target</strong> in that it specifies the oldest version of the operating system your app can be installed on.&#160; You don’t want to limit yourself to only devices running 4.0 so instead your select the Google APIs version of 2.2 which means your <a title="Platform Versions" href="http://developer.android.com/resources/dashboard/platform-versions.html">app will be available to the majority of devices</a>.&#160; Setting your <strong>Minimum SDK</strong> low and your <strong>Build Target</strong> high means that you can make use of features specific to higher versions of the OS but should make your app work with all the versions in between.&#160; While we won’t do so now, <a title="Using Advanced Android features when your minimum SDK doesn&#39;t support them" href="http://android-developers.blogspot.com/2010/07/how-to-have-your-cupcake-and-eat-it-too.html">if you want to make an application that is capable of using advanced features but handling lack of access to those features, I would recommend reading up on it</a>.&#160; When all is done your window should look just like this:     <br /><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="New Android Project" alt="New Android Project" src="http://chrisrisner.com/upload/android-project-application-info.png" /></p>  <p>The last part deals with creating a <strong>Test Project</strong>.&#160; Down the road you should (maybe we will) look at adding tests to your Android project with a Test Project.&#160; For now we’ll skip it.&#160; Go ahead and click <strong>Finish</strong>.&#160; Your application should now be created.&#160; Before we run the project, let’s start the emulator.&#160; Go to <strong>Window –&gt; AVD Manager</strong>.&#160; Pick the <strong>hvga</strong> emulator you created earlier and click <strong>Start</strong>.&#160; From there you should just be able to click <strong>Launch</strong>.&#160; If this is the first time you’ve started the emulator, it’s going to take a little while.&#160; Once the emulator is running, go back into Eclipse.&#160; Right click on your project <strong>DayFour </strong>in the <strong>Package Explorer</strong> (it should be on the left side in the default Eclipse orientation) and go to <strong>Run As</strong>&#160;<strong>–&gt; Android Application</strong>.&#160; You should see some messages coming up in the Console about uploading and installing DayFour and then starting an activity.&#160; If you go back to your emulator you should now see the boiler plate app in action:</p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Day Four Initial Run" alt="Day Four Initial Run" src="http://chrisrisner.com/upload/android-day-four-initial.png" /></p>  <p>Let’s go back to Eclipse and take a look at some of the files that made this happen.&#160; First open up the <strong>AndroidManifest.xml</strong> file in the root directory.&#160; The manifest file contains app specific settings such as app version and minimum SDK version, the different permissions required, activities that can be run, services, broadcast receivers and more.&#160; Upon opening you’ll be taken to a graphic editor for the manifest.&#160; While it’s possible to do everything in the graphical view, click the <strong>AndroidManifest.xml</strong> tab on the bottom right of our view of the manifest.&#160; This will bring up an XML view of the file:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">=&quot;1.0&quot;</span> <span class="attr">encoding</span><span class="kwrd">=&quot;utf-8&quot;</span>?<span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">manifest</span> <span class="attr">xmlns:android</span><span class="kwrd">=&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="attr">package</span><span class="kwrd">=&quot;com.dayfour&quot;</span></pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="attr">android:versionCode</span><span class="kwrd">=&quot;1&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    <span class="attr">android:versionName</span><span class="kwrd">=&quot;1.0&quot;</span> <span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span>    <span class="kwrd">&lt;</span><span class="html">uses-sdk</span> <span class="attr">android:minSdkVersion</span><span class="kwrd">=&quot;8&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    <span class="kwrd">&lt;</span><span class="html">application</span></pre>
+
+  <pre><span class="lnum">   8:  </span>        <span class="attr">android:icon</span><span class="kwrd">=&quot;@drawable/ic_launcher&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        <span class="attr">android:label</span><span class="kwrd">=&quot;@string/app_name&quot;</span> <span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  10:  </span>        <span class="kwrd">&lt;</span><span class="html">activity</span></pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>            <span class="attr">android:label</span><span class="kwrd">=&quot;@string/app_name&quot;</span></pre>
+
+  <pre><span class="lnum">  12:  </span>            <span class="attr">android:name</span><span class="kwrd">=&quot;.DayFourActivity&quot;</span> <span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>            <span class="kwrd">&lt;</span><span class="html">intent-filter</span> <span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  14:  </span>                <span class="kwrd">&lt;</span><span class="html">action</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.intent.action.MAIN&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>                <span class="kwrd">&lt;</span><span class="html">category</span> <span class="attr">android:name</span><span class="kwrd">=&quot;android.intent.category.LAUNCHER&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">  16:  </span>            <span class="kwrd">&lt;/</span><span class="html">intent-filter</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>        <span class="kwrd">&lt;/</span><span class="html">activity</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">  18:  </span>    <span class="kwrd">&lt;/</span><span class="html">application</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span><span class="kwrd">&lt;/</span><span class="html">manifest</span><span class="kwrd">&gt;</span></pre>
+</div>
+
+<p>At the top of our manifest you’re specifying your unique package name (com.dayfour), your app version code and version name, and the minimum SDK Version.&#160; After that, you have your application settings.&#160; At the top level you’re specifying our icon and label (don’t worry we’ll look at drawables and strings soon).&#160; Then, you have your activity.&#160; As you may recall from above, when you created the project, you told it to create an Activity as well and that is our <strong>DayFourActivity</strong>.&#160; The intent-filter stuff essentially specifies that this activity is what should launch when the app runs.&#160; </p>
+
+<p>Now let’s look at those <strong>@string</strong> things.&#160; Back in Package Explorer, expand the <strong>res</strong> folder and then the <strong>values</strong> folder.&#160; You should see a <strong>strings.xml</strong> file.&#160; Go ahead and open that.&#160; Again you’ll get a graphical interface for editing the file.&#160; Go ahead and click the <strong>stings.xml</strong> tab in the bottom of the editor.&#160; </p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">=&quot;1.0&quot;</span> <span class="attr">encoding</span><span class="kwrd">=&quot;utf-8&quot;</span>?<span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">resources</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">&lt;</span><span class="html">string</span> <span class="attr">name</span><span class="kwrd">=&quot;hello&quot;</span><span class="kwrd">&gt;</span>Hello World, DayFourActivity!<span class="kwrd">&lt;/</span><span class="html">string</span><span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">&lt;</span><span class="html">string</span> <span class="attr">name</span><span class="kwrd">=&quot;app_name&quot;</span><span class="kwrd">&gt;</span>DayFour<span class="kwrd">&lt;/</span><span class="html">string</span><span class="kwrd">&gt;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span><span class="kwrd">&lt;/</span><span class="html">resources</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style><style type="text/css">
+
+
+
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You should see two strings that were already created.&#160; If you look up above at the manifest where it shows <strong>@string/app_name</strong>, it’s referring to the <strong>app_name</strong> string seen here.&#160; This <strong>strings.xml</strong> file is basically a resource file.&#160; These are heavily used in Android to make it easier to localize your applications (and for other reasons you’ll see later).&#160; As an example, if you wanted to release your app in the US and in France.&#160; The default strings.xml file would contain English text.&#160; Inside of a <strong>res/values-fr/</strong> folder we would have another <strong>strings.xml</strong> that would contain the French equivalent text.&#160; So going forward, if you want to add text to your UI or use it in your code behind, make sure you’re making use of these files.&#160; </p>
+
+<p>Next expand the <strong>res/layout</strong> folder and open <strong>main.xml</strong>.&#160; Once again, you get a graphical view.&#160; I usually flip between the graphical interface and the xml one, but for now, click on the <strong>main.xml</strong> tab in the bottom of the editor.&#160; </p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">&lt;?</span><span class="html">xml</span> <span class="attr">version</span><span class="kwrd">=&quot;1.0&quot;</span> <span class="attr">encoding</span><span class="kwrd">=&quot;utf-8&quot;</span>?<span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   2:  </span><span class="kwrd">&lt;</span><span class="html">LinearLayout</span> <span class="attr">xmlns:android</span><span class="kwrd">=&quot;http://schemas.android.com/apk/res/android&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="attr">android:layout_width</span><span class="kwrd">=&quot;fill_parent&quot;</span></pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="attr">android:layout_height</span><span class="kwrd">=&quot;fill_parent&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    <span class="attr">android:orientation</span><span class="kwrd">=&quot;vertical&quot;</span> <span class="kwrd">&gt;</span></pre>
+
+  <pre><span class="lnum">   6:  </span>    <span class="kwrd">&lt;</span><span class="html">TextView</span></pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>        <span class="attr">android:layout_width</span><span class="kwrd">=&quot;fill_parent&quot;</span></pre>
+
+  <pre><span class="lnum">   8:  </span>        <span class="attr">android:layout_height</span><span class="kwrd">=&quot;wrap_content&quot;</span></pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        <span class="attr">android:text</span><span class="kwrd">=&quot;@string/hello&quot;</span> <span class="kwrd">/&gt;</span></pre>
+
+  <pre><span class="lnum">  10:  </span><span class="kwrd">&lt;/</span><span class="html">LinearLayout</span><span class="kwrd">&gt;</span></pre>
+</div>
+<style type="text/css">
+
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>We won’t really dig into this very much today.&#160; Suffice to say, the <strong>LinearLayout </strong>is a way of containing and organizing elements inside of it.&#160; The <strong>TextView</strong> is used to display a block of text.&#160; You’ll see again that we’re using a string resource to set our <strong>TextView</strong>’s text property.&#160; </p>
+
+<p>Return to the package explorer and expand <strong>src –&gt; com.dayfour</strong> and open the <strong>DayFourActivity.java</strong> file.&#160; Once there you should see this Java code:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> DayFourActivity extends Activity {</pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="rem">/** Called when the activity is first created. */</span></pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    @Override</pre>
+
+  <pre><span class="lnum">   4:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onCreate(Bundle savedInstanceState) {</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>        super.onCreate(savedInstanceState);</pre>
+
+  <pre><span class="lnum">   6:  </span>        setContentView(R.layout.main);</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    }</pre>
+
+  <pre><span class="lnum">   8:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You can see here that the <strong>DayFourActivity</strong> class is extending the <strong>Activity </strong>class (which is part of the Android SDK).&#160; We’re only overriding one method from the <strong>Activity</strong> subclass, the <strong>onCreate</strong> method.&#160; This method is called when the activity is created and also when the screen is rotated.&#160; We call the <strong>super.onCreate</strong> method so the <strong>Activity </strong>subclass can handle it’s plumbing and then we call <strong>setContentView</strong>.&#160; This method is passed <strong>R.layout.main</strong>.&#160; <strong>R</strong> is a way to refer to the <strong>res</strong> folder and is how we programmatically access the items in that folder (and it’s sub folders).&#160; Here we’re pulling the id for the main layout we looked at earlier.&#160; </p>
+
+<p>The first change you’re going to make is to add a new string to our <strong>strings</strong> file and then set your <strong>TextView</strong> to use that string in the <strong>onCreate </strong>method.&#160; Let’s first add a string to <strong>strings.xml</strong> named <strong>test_one</strong>:</p>
+
+<pre class="csharpcode"><span class="kwrd">&lt;</span><span class="html">string</span> <span class="attr">name</span><span class="kwrd">=&quot;test_one&quot;</span><span class="kwrd">&gt;</span>This was our DayFour test.<span class="kwrd">&lt;/</span><span class="html">string</span><span class="kwrd">&gt;</span></pre>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now let’s go back to our <strong>main.xml</strong> layout file.&#160; The problem with the layout as it is, is that there are no ids in our views.&#160; Add an id to the <strong>TextView</strong> like so:</p>
+
+<pre class="csharpcode">android:id=<span class="str">&quot;@+id/lblTextViewOne&quot;</span></pre>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now that your <strong>TextView</strong> has an id, we can now access it from the back end.&#160; Make sure you’ve saved the file (<strong>Ctrl + S</strong> or <strong>Command + S</strong>).&#160; Go back to the <strong>DayFourActivity</strong> file.&#160; The first thing you need to do is get a reference to the <strong>TextView</strong>.&#160; This is done by calling the base <strong>Activity</strong>’s <strong>findViewById</strong> method.&#160; This method takes in an int which is the id of your layout element, <strong>R.id.lblTextViewOne</strong>.&#160; This method returns a generic <strong>view</strong> so you need to cast it to a <strong>TextView</strong>.&#160; When you’re done you should have something like this:</p>
+
+<pre class="csharpcode">TextView lblTextViewOne = (TextView) findViewById(R.id.lblTextViewOne);</pre>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You’ll likely see a red squiggly line under the <strong>TextView</strong> lines.&#160; If you hover over any of them, you’ll see a popup that says “TextView cannot be resolved to a type”.&#160; The reason for this is that you need to import the library that contains <strong>TextView</strong>.&#160; While hovering over with the popup, you should see a link that says <strong>Import ‘TextView’ (android.widget)</strong>.&#160; You can click that or conversely you can hit <strong>Ctrl+Shift+O</strong> which will attempt to resolve all missing imports.&#160; Next we need to set our <strong>TextView</strong>’s text property to be your new string.&#160; </p>
+
+<pre class="csharpcode">lblTextViewOne.setText(R.<span class="kwrd">string</span>.test_one);</pre>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>You should be ready to run the app again.&#160; Right click on <strong>DayFour</strong> and choose <strong>Run As –&gt; Android Application</strong> or click <strong>Ctrl + F11</strong>.&#160; We should now see our updated text:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Andorid Day Four - Second" alt="Andorid Day Four - Second" src="http://chrisrisner.com/upload/android-day-four-second.png" /></p>
+
+<p>Next you’ll add an <strong>EditText</strong> control to our view.&#160; You might also think of <strong>EditText</strong> as a textbox.&#160; Go back to the <strong>main.xml</strong> and, if you’re still in XML view, click the <strong>Graphical Layout</strong> tab.&#160; On the left side of the view is a folder structure for all the different View controls.&#160; You want to expand the <strong>Text Fields </strong>folder.&#160; This contains an assortment of differently configured <strong>EditText</strong> controls.&#160; You’ll use the top one with “abc” in it.&#160; Click on that and drag it over to the view and drop it underneath the text that says “Hello World.&#160; DayFourActivity”:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day four edittext" alt="android day four edittext" src="http://chrisrisner.com/upload/android-day-four-three.png" /></p>
+
+<p>Once you’ve done that, it should look like this:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day four edittext two" alt="android day four edittext two" src="http://chrisrisner.com/upload/android-day-four-four.png" /></p>
+
+<p>&#160;</p>
+
+<p>If you wanted to, you could go in and change properties on the field but we’ll leave the defaults for now.&#160; Let’s go back to your <strong>DayFourActivity.java</strong>.&#160; Below where you set the text for <strong>lblTextViewOne</strong> let’s get the <strong>EditText</strong> and set it to the same string value:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>EditText editText1 = (EditText) findViewById(R.id.editText1);</pre>
+
+  <pre><span class="lnum">   2:  </span>editText1.setText(R.<span class="kwrd">string</span>.test_one);</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Here you’re getting and casting your view and then setting <del>it’s</del> its text property.&#160; Let’s go ahead and run the application again (<strong>Ctrl + F11</strong>) and see what we get:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day four with edittext" alt="android day four with edittext" src="http://chrisrisner.com/upload/android-day-four-five.png" /></p>
+
+<p>&#160;</p>
+
+<p>Now, let’s add another string, add a button, and set the text of that button in the layout.&#160; Go to the <strong>strings.xml</strong> and add a new string named “click_me”:</p>
+
+<pre class="csharpcode"><span class="kwrd">&lt;</span><span class="html">string</span> <span class="attr">name</span><span class="kwrd">=&quot;click_me&quot;</span><span class="kwrd">&gt;</span>Click Me<span class="kwrd">&lt;/</span><span class="html">string</span><span class="kwrd">&gt;</span></pre>
+
+<p>Go back to our <strong>main.xml</strong>.&#160; Expand the <strong>Form Widgets</strong> folder on the left side so you can see the buttons.&#160; Click the <strong>Button</strong> with the “Button” text and drag it below our <strong>EditText</strong>.&#160; Once you’ve done that, the view should look like this:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day four added button" alt="android day four added button" src="http://chrisrisner.com/upload/android-day-four-six.png" /></p>
+
+<p>Now, we want to change the text on the button from “Button” to our new string “click_me”.&#160; We can do that in one of two ways.&#160; We could go to the xml view and change the <strong>text</strong> property from “Button” to <strong>“@string/click_me&quot;</strong> or you can right click on the button in the graphical interface and go to <strong>Edit Text</strong>.&#160; This will allow you to choose between the available strings and you can select <strong>click_me</strong>.&#160; </p>
+
+<p>The last thing we’re going to do today is add a click handler to our button which will set the <strong>TextView</strong> that came with the project to whatever is in the <strong>EditText.&#160; </strong>To do this, go back to the <strong>DayFourActivity.java</strong>.&#160; Below where you pulled out your <strong>EditText </strong>and set it’s text, you’ll do the same thing with the button and then you’ll assign it an anonymous click listener (i.e. one defined on the fly in our method).&#160; When done you should have something like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>Button button1 = (Button) findViewById(R.id.button1);</pre>
+
+  <pre><span class="lnum">   2:  </span>button1.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre><span class="lnum">   4:  </span>        <span class="rem">// TODO Auto-generated method stub                </span></pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    }</pre>
+
+  <pre><span class="lnum">   6:  </span>});</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now since you’re defining this <strong>OnClickListener</strong> inside of your <strong>DayFourActivity</strong>’s onCreate method you can access any member variables of <strong>DayFourActivity</strong>.&#160; Unfortunately you declared your <strong>TextView </strong>and <strong>EditText</strong> inside the <strong>onCreate</strong> method.&#160; In order to fix this, you need to move the declaration of <strong>editText1</strong> and <strong>lblTextViewOne</strong> to up above the method.&#160; Your code should now look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span><span class="kwrd">public</span> <span class="kwrd">class</span> DayFourActivity extends Activity {</pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">private</span> TextView lblTextViewOne;</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>    <span class="kwrd">private</span> EditText editText1;</pre>
+
+  <pre><span class="lnum">   4:  </span>    </pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>    <span class="rem">/** Called when the activity is first created. */</span></pre>
+
+  <pre><span class="lnum">   6:  </span>    @Override</pre>
+
+  <pre class="alt"><span class="lnum">   7:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onCreate(Bundle savedInstanceState) {</pre>
+
+  <pre><span class="lnum">   8:  </span>        super.onCreate(savedInstanceState);</pre>
+
+  <pre class="alt"><span class="lnum">   9:  </span>        setContentView(R.layout.main);</pre>
+
+  <pre><span class="lnum">  10:  </span>        </pre>
+
+  <pre class="alt"><span class="lnum">  11:  </span>        lblTextViewOne = (TextView) findViewById(R.id.lblTextViewOne);</pre>
+
+  <pre><span class="lnum">  12:  </span>        lblTextViewOne.setText(R.<span class="kwrd">string</span>.test_one);<span class="rem">//</span></pre>
+
+  <pre class="alt"><span class="lnum">  13:  </span>        </pre>
+
+  <pre><span class="lnum">  14:  </span>        editText1 = (EditText) findViewById(R.id.editText1);</pre>
+
+  <pre class="alt"><span class="lnum">  15:  </span>        editText1.setText(R.<span class="kwrd">string</span>.test_one);</pre>
+
+  <pre><span class="lnum">  16:  </span>        </pre>
+
+  <pre class="alt"><span class="lnum">  17:  </span>        Button button1 = (Button) findViewById(R.id.button1);</pre>
+
+  <pre><span class="lnum">  18:  </span>        button1.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre class="alt"><span class="lnum">  19:  </span>            <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre><span class="lnum">  20:  </span>                <span class="rem">// TODO Auto-generated method stub                </span></pre>
+
+  <pre class="alt"><span class="lnum">  21:  </span>            }</pre>
+
+  <pre><span class="lnum">  22:  </span>        });</pre>
+
+  <pre class="alt"><span class="lnum">  23:  </span>    }</pre>
+
+  <pre><span class="lnum">  24:  </span>}</pre>
+</div>
+<style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>
+
+<p>Now you can access <strong>lblTextViewOne</strong> and <strong>editText1</strong> inside your <strong>OnClickListener</strong>.&#160; Your last bit of code will be to set your <strong>TextView</strong>’s text property to the <strong>EditText’s</strong> text property.&#160; Now your <strong>OnClickListener </strong>will look like this:</p>
+
+<div class="csharpcode">
+  <pre class="alt"><span class="lnum">   1:  </span>button1.setOnClickListener(<span class="kwrd">new</span> OnClickListener() {            </pre>
+
+  <pre><span class="lnum">   2:  </span>    <span class="kwrd">public</span> <span class="kwrd">void</span> onClick(View v) {</pre>
+
+  <pre class="alt"><span class="lnum">   3:  </span>        lblTextViewOne.setText(editText1.getText());                </pre>
+
+  <pre><span class="lnum">   4:  </span>    }</pre>
+
+  <pre class="alt"><span class="lnum">   5:  </span>});</pre>
+</div>
+
+<p><style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style>Now when we run our app and enter text into our <strong>EditText</strong> and then click our button, it should alter the <strong>TextView</strong> at the top of the view:</p>
+
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="android day four - finished" alt="android day four - finished" src="http://chrisrisner.com/upload/android-day-four-seven.png" /></p>
+
+<p>Congratulations, you just finished your first event driven application.&#160; Plus you have a basic understanding of what files are present in an Android application and how things are structured.&#160; From here we’ll grow and expand this application when convenient and create new projects when necessary.&#160; If you’d like to download the final code for this example, <a title="DayFour Demo" href="http://chrisrisner.com/upload/DayFour.zip">you can grab it here</a>.</p>
