@@ -33,11 +33,12 @@ If that comes back with *command not found* you'll probably need to install Node
 
 It's probably a good idea to update your version of Node if you're running an older version.  The following commands will perform that update, however, it should be **NOTED** that this can mess things up on complicated Node installs.  If you're at the point where you have a complicated Node set up, hopefully you've skipped on to <a href="#creatingYourFirstNodeApp">creating your first Node App</a> anyway.
 
-```
+{% highlight console %}
 sudo npm cache clean -f
 sudo npm intall -g n
 sudo n stable
-```
+{% endhighlight %}
+
 
 ### Installing Git
 Next you'll want to make sure you have Git installed.  You can do so by running the following command:
@@ -91,7 +92,7 @@ That should pull all of the code down locally.  Let's look at the file structure
 
 Let's take a quick look at the **web.config** file so we understand what's going on:
 
-```xml
+{% highlight xml %}
 <!-- 
      This configuration file is required if iisnode is used to run node processes behind
      IIS or IIS Express.  For more information, visit:
@@ -158,7 +159,7 @@ Let's take a quick look at the **web.config** file so we understand what's going
         <iisnode watchedFiles="*.js;node_modules\*;routes\*.js;views\*.jade"/>
      </system.webServer>
 </configuration>
-```
+{% endhighlight %}
 
 You can read through the invidual lines to understand what's going on specifically but concisely, we're telling IIS (which is what is running our web app) to run Node and run the **server.js** file.  
 
@@ -172,7 +173,7 @@ That should start your application listening on port **3000**.  So go to the bro
 ## A Small Change
 Now, open the site in whatever editor you prefer and open the *routes/index.js* file and make a change to the title (here I've changed it to **AzureExpress**):
 
-```js
+{% highlight javascript %}
 /*
  * GET home page.
  */
@@ -180,25 +181,25 @@ Now, open the site in whatever editor you prefer and open the *routes/index.js* 
 exports.index = function(req, res){
   res.render('index', { title: 'AzureExpress' });
 };
-```
+{% endhighlight %}
 
 Now open up *views/index.jade* and modify the text (here I've added *on Azure* to the end):
 
-```jade
+{% highlight jade %}
 extends layout
 
 block content
   h1= title
   p Welcome to #{title} on Azure
-```
+{% endhighlight %}
 
 Now we can use Git in the terminal to commit our changes like so:
 
-```
+{% highlight console %}
 git add .
 git commit -m "Modifying the index"
 git push origin master
-```
+{% endhighlight %}
 
 If you stay in the terminal now, you'll see a number of *remote* updates that indicate that Azure is doing a redeploy of your site.  After a few moments you should messages that say *Finished successfully* and *Deployment successful*.  If you return to your site in the browser, you should now see it is updated.  If you go back into Settings and Continuous Deployment in the portal, you should also now see that a new deployment has shown up:
 

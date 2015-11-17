@@ -61,18 +61,18 @@ The screenshot above is from an earlier build I'd done on my project.  At that p
 ##Setting up HockeyApp
 The next step is to connect our build so when it's done, it sends something over to HockeyApp.  If you don't already have an account, you can sign up for a [free trial at HockeyApp.net](http://hockeyapp.net).  Once that is done, you should [create a new app](http://support.hockeyapp.net/kb/app-management-2/how-to-create-a-new-app) (unless you already have an app setup).  After that we're going to do some work on the command line to add the HockeyApp task to VSO.  Go to the Terminal and enter the following:
 
-```
+{% highlight console %}
 sudo npm install -g tfx-cli
 tfx login
-```
+{% endhighlight %}
 
 When you log in, the first prompt will be for your *Collection URL*.  You can get this from the URL of your VSO project.  Unless you've set up custom collections, you're probably looking at a URL like this: https://<YourOrgName>.visualstudio.com/DefaultCollection.  The second prompt is for your *Personal Access Token*.  In order to generate an Access Token, you should go to VSO, click on your name in the top right, and click on **My profile**.  From there [follow these steps to create an Access Token](http://roadtoalm.com/2015/07/22/using-personal-access-tokens-to-access-visual-studio-online/).  Afterwards, enter your token in the Terminal and proceed and you should recieve a *logged in successfully* message.  Next we install another node module and upload it:
 
-```
+{% highlight console %}
 sudo npm install -g http://aka.ms/vsohockeytask
 cd /usr/local/lib/node_modules/
 tfx build tasks upload ./ --overwrite
-```
+{% endhighlight %}
 
 You should then see a message that the task was uploaded successfully.
 
