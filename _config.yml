@@ -11,6 +11,7 @@ google_analytics: UA-3295765-1
 application_insights: 537fb79d-ea81-42f5-88e0-442428c3e255
 permalink: /:title
 title: ChrisRisner.com
+description: "The home for Chris Risner's thoughts on the internet."
 
 defaults:
   -
@@ -18,8 +19,7 @@ defaults:
       path: "" # empty string for all files
     values:
       title: ChrisRisner.com
-
-description: 
+ 
 author:
   name: Chris Risner
   email: chris@chrisrisner.com

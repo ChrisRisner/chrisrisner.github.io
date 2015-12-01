@@ -1,0 +1,21 @@
+<meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="{{ site.author.name }}">
+        <meta name="twitter:creator" content="{{ site.author.name }}">
+{% if page.title %}
+        <meta name="twitter:title" content="{{ page.title }}">
+{% else %}
+        <meta name="twitter:title" content="{{ site.title }}">
+{% endif %}
+{% if post.url %}
+        <meta name="twitter:url" content="{{ post.url }}">
+{% endif %}
+{% if page.excerpt %}
+        <meta name="twitter:description" content="{{ page.excerpt }}">
+{% else %}
+        <meta name="twitter:description" content="{{ site.description }}">
+{% endif %}
+{% if page.logoUrl %}
+        <meta name="twitter:image:src" content="{{ page.logoUrl }}">
+{% else %}
+        <meta name="twitter:image:src" content="http://www.gravatar.com/avatar/{{site.author.email_md5}}">
+{% endif %}
