@@ -13,7 +13,7 @@ keywords: azure,node.js,web,javascript,getting started
 filepath: 2015-11-17-Getting-Started-With-Node-js-on-Azure.markdown
 disqus_identifier: 2015-11-17-Getting-Started-With-Node-js-on-Azure
 redirect_from: 
-  - /getting-started-With-node-js-on-azure/
+  - /getting-started-with-node-js-on-azure/
 ---
 
 
