@@ -10,8 +10,10 @@ categories: [Android,Azure,Visual Studio Team Services,CI]
 excerpt: "This post walks through how you can update your Android APK's version code for each build."
 logoUrl: null
 keywords: android,ci,vso,visual studio team services,hockeyapp
-filepath: 2015-12-03.Updating-the-Android-Version-Code-on-each-Build-with-VSTS.markdown
+filepath: 2015-12-03-Updating-the-Android-Version-Code-on-each-Build-with-VSTS.markdown
 disqus_identifier: 2015-12-03-Updating-the-Android-Version-Code-on-each-Build-with-VSTS
+redirect_from: 
+  - /updating-the-android-version-code-on-each-build-with-vsts/
 ---
 
 A few weeks back, I posted about how you could set up [Continuous Integration and Delivery with Visual Studio Team Services and HockeyApp](chrisrisner.com/Setting-Up-Continuous-Integration-for-Android-with-VSTS-and-HockeyApp/) (at the time it was Visual Studio Online).  Since then at the Connect() event that happened a little later in November we announced [even better integration between VSTS and HockeyApp](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2015/011).  We'll look at some of those integrations another time as for today, I want to talk about how to deal with a very specific problem.
