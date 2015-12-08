@@ -18,11 +18,11 @@ redirect_from:
 
 
 
-For a while now I've been focusing on a number of different technologies on Azure outside of my usual focus on mobile development.  Today, I decided it would be a good idea to share some of the stuff I've learned.  In this post, I'm going to walkthrough how you can get started on Azure with Node.js applications.  I'm going to go through this as though you're setting up a new computer, so some of the steps might prove to be unnecessary for you.  If you haven't installed Node, Git, or Visual Studio Code (or whatever editor you prefer) yet, proceed on to the <a href="#Setup">Setup</a>.  If you're ok with skipping those steps, go jump to <a href="#creatingYourFirstNodeApp">Creating your First Node App</a>.
+For a while now I've been focusing on a number of different technologies on Azure outside of my usual focus on mobile development.  Today, I decided it would be a good idea to share some of the stuff I've learned.  In this post, I'm going to walk-through how you can get started on Azure with Node.js applications.  I'm going to go through this as though you're setting up a new computer, so some of the steps might prove to be unnecessary for you.  If you haven't installed Node, Git, or Visual Studio Code (or whatever editor you prefer) yet, proceed on to the <a href="#Setup">Setup</a>.  If you're ok with skipping those steps, go jump to <a href="#creatingYourFirstNodeApp">Creating your First Node App</a>.
 
 ## Setup<a name="setup">&nbsp;</a>
 
-In this seciton, we'll talk through installing a number of tools.  For the sake of this guide, I'll be doing most of the steps assuming that you're using OS X or Linux.  The steps should be similar if you're on Windows (though if you are, I'd recommend taking a look at the [Node Tools for Visual Studio](https://www.visualstudio.com/en-us/features/node-js-vs.aspx).  First we'll need to install Node.  
+In this section, we'll talk through installing a number of tools.  For the sake of this guide, I'll be doing most of the steps assuming that you're using OS X or Linux.  The steps should be similar if you're on Windows (though if you are, I'd recommend taking a look at the [Node Tools for Visual Studio](https://www.visualstudio.com/en-us/features/node-js-vs.aspx).  First we'll need to install Node.  
 
 ### Installing Node
 Open the Terminal (&#8984; + Space and type in Terminal) and run the following command:
@@ -57,7 +57,7 @@ Let's go ahead and open the [Azure portal](http://portal.azure.com). You should 
 
 <img class="centeredInContent" style="width:550px;" src="http://storage.chrisrisner.com/images/azure-preview-portal.png"/>
 
-This is our administrative and control center for everything in Azure.  There's quite a lot that can also be done from the command line, but we'll be using the portal today.  On the left side, click **New** then seelct **See all** to the right of MARKETPLACE, and select **Everything** from the Marketplace list.  Lastly, search for *node.js* and select **Express Web App** and then click *Create*:
+This is our administrative and control center for everything in Azure.  There's quite a lot that can also be done from the command line, but we'll be using the portal today.  On the left side, click **New** then select **See all** to the right of MARKETPLACE, and select **Everything** from the Marketplace list.  Lastly, search for *node.js* and select **Express Web App** and then click *Create*:
 
 <img class="centeredInContent" style="width:550px;" src="http://storage.chrisrisner.com/images/azure-portal-new-express-app.png"/>
 
@@ -75,7 +75,7 @@ And that's all it takes to get our Node site running.
 
 ## Pulling Down the Code
 
-The next step is to pull down the code so we can make changes and push it back up to Azure.  FTPS is always an option and it's enabled for all web apps if you want to use that.   Since we installed Git up above though, let's use that.  Return to the Azure portal and your web app.  Up above where we clicked on *Browse* go ahead and click on *Settings*.  This will open a Settings blade with many different options.  If you're new to Azure, the first thing you need to do is scroll down until you find *Deployment credentials* and click on that.  Here you can set a username and password to use with both Git and FTPS.  The username will need to be unique so you may have to try a couple times before you succeed.  Once that is done and saved, return to Settings and click on *Continuous Deployment* and then click on *Choose Source*.  There are a number of options we can connect our site to including Visual Studio Online, OneDrive, Local GIT, GitHub, BitBucket, Dropbox, and External Repository.  Today we're interested in pulling down the sample code that was already generated (as opposed to deploying from an existing code source elsewhere) so choose **Local Git Repository** then hit *Ok*.  You'll now be taken to a blade that says *No deployments found* becuase we haven't deployed any changes yet.  Return to Settings and go to the top and find *Properties*.  Scroll down on the Properties blade until you find *GIT URL* and copy the url.  Return to the terminal and clone your repo with the following:
+The next step is to pull down the code so we can make changes and push it back up to Azure.  FTPS is always an option and it's enabled for all web apps if you want to use that.   Since we installed Git up above though, let's use that.  Return to the Azure portal and your web app.  Up above where we clicked on *Browse* go ahead and click on *Settings*.  This will open a Settings blade with many different options.  If you're new to Azure, the first thing you need to do is scroll down until you find *Deployment credentials* and click on that.  Here you can set a username and password to use with both Git and FTPS.  The username will need to be unique so you may have to try a couple times before you succeed.  Once that is done and saved, return to Settings and click on *Continuous Deployment* and then click on *Choose Source*.  There are a number of options we can connect our site to including Visual Studio Online, OneDrive, Local GIT, GitHub, BitBucket, Dropbox, and External Repository.  Today we're interested in pulling down the sample code that was already generated (as opposed to deploying from an existing code source elsewhere) so choose **Local Git Repository** then hit *Ok*.  You'll now be taken to a blade that says *No deployments found* because we haven't deployed any changes yet.  Return to Settings and go to the top and find *Properties*.  Scroll down on the Properties blade until you find *GIT URL* and copy the url.  Return to the terminal and clone your repo with the following:
 
 `git clone <yourGitUrl>`
 
@@ -161,7 +161,7 @@ Let's take a quick look at the **web.config** file so we understand what's going
 </configuration>
 {% endhighlight %}
 
-You can read through the invidual lines to understand what's going on specifically but concisely, we're telling IIS (which is what is running our web app) to run Node and run the **server.js** file.  
+You can read through the individual lines to understand what's going on specifically but concisely, we're telling IIS (which is what is running our web app) to run Node and run the **server.js** file.  
 
 ## Running Locally
 The next step is to run our site locally.  Return to the terminal and navigate to your site's root directory.  Then type this:

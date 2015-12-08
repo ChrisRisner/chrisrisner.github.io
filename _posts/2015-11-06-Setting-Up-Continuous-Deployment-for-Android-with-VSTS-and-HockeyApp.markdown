@@ -20,7 +20,7 @@ redirect_from:
 
 ###Shortly after this post, Visual Studio Online was rebranded as Visual Studio Team Services.  Same great service, more logical name!
 
-Last year in November, I helped with an event in New York called Connect().  At that event, one of the things we showed off was the next generation build system for [Visual Studio Online (VSO)](https://www.visualstudio.com/).  This system enabled building of all sorts of apps.  More than just building the apps though, it also enabled running unit tests, fulfilling the needs of continuous integration, and also allowed for additional abilities like packaging up an application, sending the results somewhere, and much more.  What was so great, and was really the reason for my involvement, was that this next gen build system worked with so many platforms and programming languages.  Of primary importance to me: Android and iOS.  You can [watch the full annoucement related to the VSO build system here](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2014/015) if you like.
+Last year in November, I helped with an event in New York called Connect().  At that event, one of the things we showed off was the next generation build system for [Visual Studio Online (VSO)](https://www.visualstudio.com/).  This system enabled building of all sorts of apps.  More than just building the apps though, it also enabled running unit tests, fulfilling the needs of continuous integration, and also allowed for additional abilities like packaging up an application, sending the results somewhere, and much more.  What was so great, and was really the reason for my involvement, was that this next-gen build system worked with so many platforms and programming languages.  Of primary importance to me: Android and iOS.  You can [watch the full announcement related to the VSO build system here](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2014/015) if you like.
 
 ##HockeyApp
 
@@ -32,7 +32,7 @@ The point of all of this is that if you add these two pieces together, we should
 
 ##Visual Studio Online
 
-The first step is you need to create an account on VSO.  You can do that by going to the [Visual Studio homepage](https://www.visualstudio.com/) and clicking the link for **Get started for free** under Visual Studio Online.  That will prompt you to login with a Microsoft account (or a work or school account).  Now if you're not familiar with VSO, in my mind it is first and foremost a version control system.  A **FREE** one that has support for both Git and Team Foundation.  Within the free tier of VSO, you can have up to five contributers.  So you can have up to 5 people all contributing on the same project for free.  Above and beyond the source control, you also get project management: work items, bugs, tasks, etc.  
+The first step is you need to create an account on VSO.  You can do that by going to the [Visual Studio homepage](https://www.visualstudio.com/) and clicking the link for **Get started for free** under Visual Studio Online.  That will prompt you to login with a Microsoft account (or a work or school account).  Now if you're not familiar with VSO, in my mind it is first and foremost a version control system.  A **FREE** one that has support for both Git and Team Foundation.  Within the free tier of VSO, you can have up to five contributors.  So you can have up to 5 people all contributing on the same project for free.  Above and beyond the source control, you also get project management: work items, bugs, tasks, etc.  
 
 When you first sign up, you'll [create your first project](https://www.visualstudio.com/en-us/get-started/setup/connect-to-visual-studio-online).  This is where you can choose between using Git and Team Foundation Server.  Once that is done, you'll need to check your code in.  I won't dive into all of the details of getting your code into VSO but you can [read more about it here](https://www.visualstudio.com/get-started/code/share-your-code-in-git-vs).  Once your code is in, it's time to get building set up.
 
@@ -42,7 +42,7 @@ Now that your code is checked in, it's time to set up a build.  You first need t
 
 <img src="http://storage.chrisrisner.com/images/vso-build-def.png" alt="VSO Build Definition" style="width:500px;" class="centeredInContent"/>
 
-If this is a brand new project, you won't likely have a Build Defintion already.  Click the green addition symbol in the top left to add a new definition.  Currently there are only four definitions available (Visual Studio, Xamarin.Android, Xamarin.iOS, and Xcode).  None of these will work for us, so choose **Empty** and click OK.  The next step is to begin to add some build steps so click the **+ Add build step...** link.
+If this is a brand new project, you won't likely have a Build Definition already.  Click the green addition symbol in the top left to add a new definition.  Currently there are only four definitions available (Visual Studio, Xamarin.Android, Xamarin.iOS, and Xcode).  None of these will work for us, so choose **Empty** and click OK.  The next step is to begin to add some build steps so click the **+ Add build step...** link.
 
 <img src="http://storage.chrisrisner.com/images/vso-build-steps.png" alt="VSO Build Definition" style="width:500px;" class="centeredInContent"/>
 
@@ -50,7 +50,7 @@ Here we're looking for the first (currently) option for **Android Build**.  Clic
 
 <img src="http://storage.chrisrisner.com/images/vso-android-build-config.png" alt="VSO Build Definition" style="width:500px;" class="centeredInContent"/>
 
-Now we can configure the Android Build steps.  For *Location of Gradle Wrapper* navigate to find your **gradlew.bat**.  For *Project Directory* choose where your project resides in the repository.  For *Gradle Arguments* depending on when you do this, there may be a default one for **build**.  If nothing is there, put in **clean build** to ensure APKs are compiled.  You then have some options for *Android Virtual Device*, *Emulator Options*, and *Control Options*.  We may look at those in more detail another time.  For now, *Save* your changes.  Once you've done so the *Queue build...* button should now be available to be clicked.  Go for it!  If you haven't done anything different from above (create a Queue, used different branches, etc) you'll be able to click *OK* on the next popup and the build will be queued.  Since we're not using our own build agent but a public grouping of them, you may have to wait for the bulid to start, but you should immediately be taken to a window with a text console that will print out as the build proceeds:
+Now we can configure the Android Build steps.  For *Location of Gradle Wrapper* navigate to find your **gradlew.bat**.  For *Project Directory* choose where your project resides in the repository.  For *Gradle Arguments* depending on when you do this, there may be a default one for **build**.  If nothing is there, put in **clean build** to ensure APKs are compiled.  You then have some options for *Android Virtual Device*, *Emulator Options*, and *Control Options*.  We may look at those in more detail another time.  For now, *Save* your changes.  Once you've done so the *Queue build...* button should now be available to be clicked.  Go for it!  If you haven't done anything different from above (create a Queue, used different branches, etc) you'll be able to click *OK* on the next pop-up and the build will be queued.  Since we're not using our own build agent but a public grouping of them, you may have to wait for the build to start, but you should immediately be taken to a window with a text console that will print out as the build proceeds:
 
 <img src="http://storage.chrisrisner.com/images/vso-build-in-progress.png" alt="VSO Build in Progress" class="centeredInContent"/>
 
@@ -72,7 +72,7 @@ sudo npm install -g tfx-cli
 tfx login
 {% endhighlight %}
 
-When you log in, the first prompt will be for your *Collection URL*.  You can get this from the URL of your VSO project.  Unless you've set up custom collections, you're probably looking at a URL like this: https://<YourOrgName>.visualstudio.com/DefaultCollection.  The second prompt is for your *Personal Access Token*.  In order to generate an Access Token, you should go to VSO, click on your name in the top right, and click on **My profile**.  From there [follow these steps to create an Access Token](http://roadtoalm.com/2015/07/22/using-personal-access-tokens-to-access-visual-studio-online/).  Afterwards, enter your token in the Terminal and proceed and you should recieve a *logged in successfully* message.  Next we install another node module and upload it:
+When you log in, the first prompt will be for your *Collection URL*.  You can get this from the URL of your VSO project.  Unless you've set up custom collections, you're probably looking at a URL like this: https://<YourOrgName>.visualstudio.com/DefaultCollection.  The second prompt is for your *Personal Access Token*.  In order to generate an Access Token, you should go to VSO, click on your name in the top right, and click on **My profile**.  From there [follow these steps to create an Access Token](http://roadtoalm.com/2015/07/22/using-personal-access-tokens-to-access-visual-studio-online/).  Afterwards, enter your token in the Terminal and proceed and you should receive a *logged in successfully* message.  Next we install another node module and upload it:
 
 {% highlight console %}
 sudo npm install -g http://aka.ms/vsohockeytask
@@ -83,7 +83,7 @@ tfx build tasks upload ./ --overwrite
 You should then see a message that the task was uploaded successfully.
 
 ## Connecting HockeyApp and our build
-Return to VSO in the browser.  Go back to your Build Definition and click the Edit button.  Click the *Add build step...* button and find HockeyApp (you'll need to swtich the filter to *All* or *Deploy*) and click *Add:
+Return to VSO in the browser.  Go back to your Build Definition and click the Edit button.  Click the *Add build step...* button and find HockeyApp (you'll need to switch the filter to *All* or *Deploy*) and click *Add:
 
 <img src="http://storage.chrisrisner.com/images/vso-hockeyapp-build-step.png" alt="VSO HockeyApp Build Step" class="centeredInContent"/>
 
@@ -115,4 +115,4 @@ After that, if you go into HockeyApp you should see a new version of your applic
 Since I had added myself as a user of the app and chose to *Publish* and *Notify Users*, I received an email shortly afterwards telling me there was a new version of my application and had it installed through the HockeyApp Android app moments later!
 
 ## Summary
-With Visual Studio Online, we have the ability to easily create Git repos for source control management, as well as the ability to manage our projects with work items, bugs, tasks, kanban boards etc.  By connecting that with the build system, we're able to easily set up Continuous Integration.  Adding HockeyApp to the mix gives us the last piece with Continuous Delivery.  Now we can easily enable our application to be built with every checkin and delivered right to our beta testers.
+With Visual Studio Online, we have the ability to easily create Git repos for source control management, as well as the ability to manage our projects with work items, bugs, tasks, kanban boards etc.  By connecting that with the build system, we're able to easily set up Continuous Integration.  Adding HockeyApp to the mix gives us the last piece with Continuous Delivery.  Now we can easily enable our application to be built with every check-in and delivered right to our beta testers.
