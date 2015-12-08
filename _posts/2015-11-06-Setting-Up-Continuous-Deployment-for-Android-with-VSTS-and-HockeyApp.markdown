@@ -13,6 +13,8 @@ keywords: android,ci,vso,visual studio online,hockeyapp
 filepath: 2015-11-06.Setting-up-Continuous-Deployment-for-Android-with-VSTS-and-HockeyApp.markdown
 disqus_identifier: 2015-11-06-Setting-up-Continous-Deployment-for-Android-with-VSO-and-HockeyApp
 redirect_from: 
+  - /Setting-Up-Continuous-Integration-for-Android-with-VSTS-and-HockeyApp/
+  - /setting-up-continuous-integration-for-android-with-vsts-and-hockeyapp/
   - /Setting-Up-Continuous-Integration-for-Android-with-VSO-and-HockeyApp/
   - /setting-up-continuous-integration-for-android-with-vso-and-hockeyapp/
   - /setting-up-continuous-deployment-for-android-with-vso-and-hockeyapp/
