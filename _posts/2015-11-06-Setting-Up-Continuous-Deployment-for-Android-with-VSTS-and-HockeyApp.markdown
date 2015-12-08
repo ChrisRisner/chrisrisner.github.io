@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting up Continuous Integration for Android with VSTS and HockeyApp"
+title: "Setting up Continuous Deployment for Android with VSTS and HockeyApp"
 date: Fri Nov 06 2015 20:16:00 GMT-0800 (PST)
 comments: true
 status: publish
@@ -10,10 +10,12 @@ categories: [Android,Azure,Visual Studio Team Services,CI]
 excerpt: "How to set up Continous Integration for an Android app with Visual Studio Online"
 logoUrl: null
 keywords: android,ci,vso,visual studio online,hockeyapp
-filepath: 2015-11-06.Setting-up-Continuous-Integration-for-Android-with-VSTS-and-HockeyApp.markdown
-disqus_identifier: 2015-11-06-Setting-up-Continous-Integration-for-Android-with-VSO-and-HockeyApp
+filepath: 2015-11-06.Setting-up-Continuous-Deployment-for-Android-with-VSTS-and-HockeyApp.markdown
+disqus_identifier: 2015-11-06-Setting-up-Continous-Deployment-for-Android-with-VSO-and-HockeyApp
 redirect_from: 
   - /Setting-Up-Continuous-Integration-for-Android-with-VSO-and-HockeyApp/
+  - /setting-up-continuous-integration-for-android-with-vso-and-hockeyapp/
+  - /setting-up-continuous-deployment-for-android-with-vso-and-hockeyapp/
 ---
 
 ###Shortly after this post, Visual Studio Online was rebranded as Visual Studio Team Services.  Same great service, more logical name!
