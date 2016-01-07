@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Codemash 2016"
+date: Thu Jan 07 2016 20:16:00 GMT-0800 (PST)
+comments: true
+status: publish
+type: post
+published: true
+categories: [Conferences,.net]
+excerpt: "A quick post about my session at Codemash 2016 focusing on running .NET on Linux and OS X"
+logoUrl: null
+keywords: .NET,Linux,OS X
+filepath: 2016-01-07-Codemash-2016.markdown
+disqus_identifier: 2016-01-07-Codemash-2016
+redirect_from: 
+  - /codemash-2016/
+---
+
+<img style="margin: 0px 0px 5px 5px; display: inline" src="../upload/logo_codemash_2016.png" align="right" />
+
+I just finished giving my presentation at [Codemash 2016](http://codemash.org) and thought it went great.  I presented on running .NET on Linux and OS X and had a nearly full room of very engaged people.  My presentation focused on ASP.NET 5 and .NET Core, their recent status as a Release Candidate, and how developers can use, run, and deploy them on Linux and OS X.  People were [super excited](https://twitter.com/jesseobrien_/status/685114919432404992) to see how fast you could get up to speed on running .NET on Linux.  If you're interested in checking out my slides, you can find them [here](../Presentations/2016-CodeMash-DotNetOnLinuxOSX.pptx).  Thanks to all who attended and reach out to me if you have questions.
