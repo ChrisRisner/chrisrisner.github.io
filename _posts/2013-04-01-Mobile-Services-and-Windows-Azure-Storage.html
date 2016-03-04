@@ -13,6 +13,8 @@ keywords: Mobile Services,Azure,Server,Storage,Table,Blob,connect mobile service
 filepath: 2013-04-01-Mobile-Services-and-Windows-Azure-Storage.html
 disqus_identifier: Mobile-Services-and-Windows-Azure-Storage
 ---
+{% include special/mobile_services_to_apps.html %}
+
 <p>
 <strong>Update 3-20-2015:  If you are running into a cursor error when trying to upload a blob from the Android version like the following:<br />&nbsp;&nbsp;Couldn't read row 0, col -1 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it<br /><br />I'd recommend replacing the code which uses a cursor to get the image bytes with the following: </strong><br /><br />
 &nbsp;&nbsp;Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mImageUri));<br />
