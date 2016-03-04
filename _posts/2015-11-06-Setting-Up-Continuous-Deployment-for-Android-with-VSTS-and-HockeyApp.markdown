@@ -20,25 +20,25 @@ redirect_from:
   - /setting-up-continuous-deployment-for-android-with-vso-and-hockeyapp/
 ---
 
-###Shortly after this post, Visual Studio Online was rebranded as Visual Studio Team Services.  Same great service, more logical name!
+### Shortly after this post, Visual Studio Online was rebranded as Visual Studio Team Services.  Same great service, more logical name!
 
 Last year in November, I helped with an event in New York called Connect().  At that event, one of the things we showed off was the next generation build system for [Visual Studio Online (VSO)](https://www.visualstudio.com/).  This system enabled building of all sorts of apps.  More than just building the apps though, it also enabled running unit tests, fulfilling the needs of continuous integration, and also allowed for additional abilities like packaging up an application, sending the results somewhere, and much more.  What was so great, and was really the reason for my involvement, was that this next-gen build system worked with so many platforms and programming languages.  Of primary importance to me: Android and iOS.  You can [watch the full announcement related to the VSO build system here](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2014/015) if you like.
 
-##HockeyApp
+### HockeyApp
 
 Not long after Connect() (in fact only a month later), [Microsoft announced it was acquiring HockeyApp](http://hockeyapp.net/blog/2014/12/11/hockeyapp-joins-microsoft.html).  If you haven't heard of HockeyApp, it enables you to distribute Android, iOS, and Windows Phone apps through a beta distribution channel, gather feedback, as well as crash analytics.  If you're an iOS developer, you've probably heard of TestFlight which provided similar functionality prior to being acquired by Apple (and kind of does again).  On the Android side, Google eventually added beta distribution to Google Play, but at the time it wasn't as fully featured as HockeyApp.  If you're using those services and are building apps for both iOS and Android, that's two completely different processes.  HockeyApp provides one streamlined process for all kinds of apps.
 
-##The Point
+### The Point
 
 The point of all of this is that if you add these two pieces together, we should be able to make an Android application, set up continuous integration with VSO, then tie into HockeyApp for beta distribution.  What we should be able to do is build our app whenever the code is checked into VSO, run the unit tests, and if they pass, deliver a new version of our application to HockeyApp to distribute to our beta testers.  How magical would this be?  Well today, I'm going to explain how to do it.
 
-##Visual Studio Online
+### Visual Studio Online
 
 The first step is you need to create an account on VSO.  You can do that by going to the [Visual Studio homepage](https://www.visualstudio.com/) and clicking the link for **Get started for free** under Visual Studio Online.  That will prompt you to login with a Microsoft account (or a work or school account).  Now if you're not familiar with VSO, in my mind it is first and foremost a version control system.  A **FREE** one that has support for both Git and Team Foundation.  Within the free tier of VSO, you can have up to five contributors.  So you can have up to 5 people all contributing on the same project for free.  Above and beyond the source control, you also get project management: work items, bugs, tasks, etc.  
 
 When you first sign up, you'll [create your first project](https://www.visualstudio.com/en-us/get-started/setup/connect-to-visual-studio-online).  This is where you can choose between using Git and Team Foundation Server.  Once that is done, you'll need to check your code in.  I won't dive into all of the details of getting your code into VSO but you can [read more about it here](https://www.visualstudio.com/get-started/code/share-your-code-in-git-vs).  Once your code is in, it's time to get building set up.
 
-##Let's Get Building
+### Let's Get Building
 
 Now that your code is checked in, it's time to set up a build.  You first need to navigate to your projects home page and then go to the **BULD** tab.  You can also find it by going to a URL that will look like this https://<YourOrgName>.visualstudio.com/DefaultCollection/<YourProject>/_build.  Make sure you replace the two placeholders there.  For example, my org name is *ChrisRisner* and your project would be named whatever you created in the steps above. 
 
@@ -66,7 +66,7 @@ If your build wasn't succesful, you'll get a much less fun **Build Failed**.  Ho
 
 The screenshot above is from an earlier build I'd done on my project.  At that point, VSO wasn't yet including the proper repositories for the **appcompat** and **design** libraries within **com.android.support**.  Hopefully if you run into any issues it has to do with something you can fix.  If it's something like the issue above, [reach out to the VSO team for help](https://www.visualstudio.com/en-us/support/support-overview-vs).  
 
-##Setting up HockeyApp
+### Setting up HockeyApp
 The next step is to connect our build so when it's done, it sends something over to HockeyApp.  If you don't already have an account, you can sign up for a [free trial at HockeyApp.net](http://hockeyapp.net).  Once that is done, you should [create a new app](http://support.hockeyapp.net/kb/app-management-2/how-to-create-a-new-app) (unless you already have an app setup).  After that we're going to do some work on the command line to add the HockeyApp task to VSO.  Go to the Terminal and enter the following:
 
 {% highlight console %}
@@ -84,7 +84,7 @@ tfx build tasks upload ./ --overwrite
 
 You should then see a message that the task was uploaded successfully.
 
-## Connecting HockeyApp and our build
+### Connecting HockeyApp and our build
 Return to VSO in the browser.  Go back to your Build Definition and click the Edit button.  Click the *Add build step...* button and find HockeyApp (you'll need to switch the filter to *All* or *Deploy*) and click *Add:
 
 <img src="http://storage.chrisrisner.com/images/vso-hockeyapp-build-step.png" alt="VSO HockeyApp Build Step" class="centeredInContent"/>
@@ -116,5 +116,5 @@ After that, if you go into HockeyApp you should see a new version of your applic
 
 Since I had added myself as a user of the app and chose to *Publish* and *Notify Users*, I received an email shortly afterwards telling me there was a new version of my application and had it installed through the HockeyApp Android app moments later!
 
-## Summary
+### Summary
 With Visual Studio Online, we have the ability to easily create Git repos for source control management, as well as the ability to manage our projects with work items, bugs, tasks, kanban boards etc.  By connecting that with the build system, we're able to easily set up Continuous Integration.  Adding HockeyApp to the mix gives us the last piece with Continuous Delivery.  Now we can easily enable our application to be built with every check-in and delivered right to our beta testers.

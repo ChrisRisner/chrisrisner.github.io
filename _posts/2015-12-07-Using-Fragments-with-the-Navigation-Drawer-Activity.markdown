@@ -26,18 +26,18 @@ The Navigation Drawer is a slide out menu that enables users to navigate around 
 
 If you go into Android Studio right now and create a new application and base it off the Navigation Drawer Activity, you'll get a very basic app with a single activity and the nav drawer will be set up fairly similarly to what you see above.  What you won't see though, is how to actually navigate between different "content pages" when you tap the different menu options in the nav drawer!  If you are familiar with some Android development, this might be a bit surprising.  In earlier days of Android development the way you got from one *page* to another was to have several *Activities* and to use an [intent to launch each new activity](http://chrisrisner.com/31-Days-of-Android--Day-5-Adding-Multiple-Activities-and-using-Intents/).  This doesn't really mesh with the nav drawer though as you'd have to have the same nav drawer on several activities
 
-###Enter the Fragment
+### Enter the Fragment
 When Android moved from 2.X to 3.X, they were moving from only focusing on phone form factors to also tablets.  3.X was never officially released to run on phones, but they started thinking about how to make page constructs that weren't just in the form of activities tied to layouts.  The solution they came up with was [Fragments](http://developer.android.com/guide/components/fragments.html).  A fragment is a way of composing a part of an activity.  It has it's own life cycle, deals with it's own inputs, and each activity can contain multiple fragments.  The easiest way to see fragments in action is to create a new application and use the **Master / Detail Flow**.  This creates an application that works on both tablets and phones and shows how you can show multiple fragments at once (on the tablet) or a single fragment (on the phone).  The bulk of the code is the same regardless of if you're showing one fragment or both which is part of the reason you use fragments, so you don't have to reproduce code in multiple places.
  
-###The Problem
+### The Problem
 The problem I ran into with the Navigation Drawer sample is again that it doesn't really demonstrate how you should do navigation inside of it.  As I said before, you can always use the old route of launching new activities.  However, you'll need to then reuse the navigation drawer everywhere.  This can be done and someone I was tweeting with about this issue even put together a [sample of it on GitHub](https://github.com/karnamsupreeth/drawersample).  Unfortunately, if you run that, you'll see that the navigation between different activities isn't as smooth as I'd like it to be.  Namely, the nav drawer doesn't slide back before showing the new activities content.  What I want to happen is when the user taps an item on the nav drawer, the content page should already be loading / loaded while the drawer slides back to be closed.  As far as I've seen so far, this can't be done with multiple activities.  But it can with fragments.  One thing to note is that I believe you could also do custom view inflation and deflation though you'd be wrapping everything in one activity.
 
 **NOTE**: After I'd already started this post, *karnamsupreeth* updated his code sample to provide a brief delay after tapping a nav item and launching the new activity.  This was MUCH closer to what I originally thought of and is a valid way of handling things if you want to use Activities.  I'll continue to post the fragment solution but I'd definitely consider using his example as well.  It still doesn't actually *load* the new activity until after the delay so you're note sliding the drawer back to reveal the new content that has been loaded.
 
-###What's wrong with Fragments
+### What's wrong with Fragments
 Before I get into the specifics of adding fragments to the nav drawer sample, I just want to say that I don't hate fragments, I just don't like them.  Just a few [searches](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=fragments%20vs%20activities) online will yield a lot of conversations about whether fragments are good or [bad](https://corner.squareup.com/2014/10/advocating-against-android-fragments.html).  Because fragments live inside of an activity, and both the activity and fragment have life cycle and event handling, things can be overly complex.  Additionally there are memory implications and other concerns you might run into.  Suffice to say, I'm going forward with fragments in my solution though that doesn't mean I'm sold on them being the best solution.
 
-###The Initial Layout
+### The Initial Layout
 When you first create the Navigation Drawer Activity, there are 5 files we'll look at:
 
 * MainActivity.java - this is the code behind for everything in our app.
@@ -54,7 +54,7 @@ setContentView(R.layout.activity_main);
 
 This is what you typically see in an Activity and binds the UI of a layout file to the Activity code.  In this case, the activity_main layout contains the nav drawer and an *include* statement for the app_bar_main.  The app_bar_main in turn contains the toolbar at the top and does an *include* on the content_main.  It would seem like the solution is to replace the content of the second *include* whenever the user taps an item on the menu.  However, you can't really replace an *include* like that.  We could use custom views and inflate and replace them whenever we want, but that might require a significant amount of additional work (or maybe not, hopefully someone can provide a solution that does that).  Adding fragments ends up being relatively easy.
 
-###Adding Fragments to the Sample
+### Adding Fragments to the Sample
 First, open up the **app_bar_main.xml**, comment out the *include* and add a new *FrameLayout*:
 
 {% highlight xml %}
