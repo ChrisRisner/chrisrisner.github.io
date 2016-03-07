@@ -3,7 +3,7 @@
 paginate: 2 # pagination based on number of posts
 paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
 disqus: chrisrisnercom
 disqus_show_comment_count: true
