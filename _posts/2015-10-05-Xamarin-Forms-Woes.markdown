@@ -14,6 +14,9 @@ filepath: 2015-10-05-Xamarin-Forms-Woes.markdown
 disqus_identifier: 2015-10-05-Xamarin-Forms-Woes
 ---
 
+## Update April 27, 2016
+I've been working on a native Android app for the last few months and, when it's complete, I'm actually going to use Xamarin for my next app.  After having worked with Xamarin more around //Build, I've gotten over most of the issues I had before and found some pretty delightful things.
+
 Last year in May (2014), Xamarin announced the release of [Xamarin 3](https://blog.xamarin.com/announcing-xamarin-3/).  Part of this released included the announcment of [Xamarin.Forms](https://blog.xamarin.com/meet-xamarin.forms-3-native-uis-1-shared-code-base/).  The premise of Xamarin was that if you could program in .NET, you could build mobile apps for Android, iOS, and Windows Phone all at the same time with one single code base.  No need to develop in Objective-C for your iOS app and Java for your Android app.  However, despite doing things with one code base, you were still stuck doing some things on a per platform basis (albeit in C#), but more so you were stuck developing a separate User Interface for each platform.  This also necessitated having a fairly decent understanding of each platform's UI, lifecycle, etc idiosyncrasies.  With Xamarin.Forms, you could either programmaticaly generate a UI or use XAML files to describe a User Interface.  In either situation, that UI would then be generated specific to whatever platform you were running on.  One example of this is the Tabbed Page.  When it's used in Xamarin.Forms, the tab bar shows up at the bottom on iOS and the top for Android and Windows Phone.  Exactly as specified in the "standards of design" for each platform.
 
 ### The Idea

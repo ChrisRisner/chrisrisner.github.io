@@ -14,6 +14,9 @@ filepath: 2015-10-05-Analysis-Paralysis.markdown
 disqus_identifier: 2015-10-05-Analysis-Paralysis
 ---
 
+## Update April 27, 2016
+I've been working on a native Android app for the last few months and, when it's complete, I'm actually going to use Xamarin for my next app.  After having worked with Xamarin more around //Build, I've gotten over most of the issues I had before and found some pretty delightful things.
+
 A while back in June, I [tweeted](https://twitter.com/chrisrisner/status/614491780130717697) the words "Analysis Paralysis".  At the time I was starting to think about building a new mobile app.  As you might imagine given what I do for a living, I wanted to use Azure as the backend for the app and I wanted to be able to publish it for Android, iOS, and Windows Phone.  The question I was grappling with was how did I want to build the app.  
 
 ### How to build an app
