@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Announcing the Azure Usage and Billing Portal"
-date: Thu Jul 14 2016 20:16:00 GMT-0800 (PST)
+date: Thu Jul 14 2016 9:16:00 GMT-0800 (PST)
 comments: true
 status: publish
 type: post
