@@ -6,7 +6,7 @@ comments: true
 status: publish
 type: post
 published: true
-categories: [Azure]
+categories: []
 excerpt: "A painful post about loss."
 logoUrl: null
 keywords: 
