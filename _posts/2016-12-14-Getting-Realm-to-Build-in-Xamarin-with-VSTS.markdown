@@ -82,7 +82,7 @@ What I want to highlight from that call to msbuild is **SolutionDir=C:\a\1\s\src
 that is being overwritten.  So we need to override that overwrite and ensure a value
 is in fact being passed in. 
 
-![Build Xamarin Additional Arguments](../upload/realm-vsts-build-arguments.png)
+![Build Xamarin Additional Arguments]({{ site.url }}/upload/realm-vsts-build-arguments.png)
 
 Thankfully, the Build Xamarin project build step has a spot for **Additional Arguments** at
 the bottom.  In this case, I set the solution directory to the directory of my overall solution
