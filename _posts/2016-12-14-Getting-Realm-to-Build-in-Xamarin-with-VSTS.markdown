@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Getting Realm to Build in Xamarin with VSTS"
+title: "Getting Realm to Build Xamarin Apps with VSTS"
 date: Wed Dec 14 2016 9:16:00 GMT-0800 (PST)
 comments: true
 status: publish
@@ -10,10 +10,10 @@ categories: [Azure,CI,Visual Studio Team Services,Xamarin]
 excerpt: "When adding Realm to a Xamarin project, by default building with Visual Studio Team Services is broken.  This post will explain how to get it to work."
 logoUrl: null
 keywords: Azure,Visual Studio Team Services,Continuous Integration,Xamarin,Realm
-filepath: 2016-12-14-Getting-Realm-to-Build-in-Xamarin-with-VSTS.markdown
-disqus_identifier: 2016-12-14-Getting-Realm-to-Build-in-Xamarin-with-VSTS
+filepath: 2016-12-14-Getting-Realm-to-Build-Xamarin-Apps-with-VSTS.markdown
+disqus_identifier: 2016-12-14-Getting-Realm-to-Build-Xamarin-Apps-with-VSTS
 redirect_from: 
-  - /getting-realm-to-build-in-xamarin-with-vsts/
+  - /getting-realm-to-build-xamarin-apps-with-vsts/
 ---
 
 I've recently been working on a Xamarin.Forms project for Android and 
