@@ -6,10 +6,10 @@ comments: true
 status: publish
 type: post
 published: true
-categories: [Azure]
+categories: [Azure,CI,Visual Studio Team Services]
 excerpt: "When adding Realm to a Xamarin project, by default building with Visual Studio Team Services is broken.  This post will explain how to get it to work."
 logoUrl: null
-keywords: Azure
+keywords: Azure,Visual Studio Team Services,Continuous Integration
 filepath: 2016-12-14-Getting-Realm-to-Build-in-Xamarin-with-VSTS.markdown
 disqus_identifier: 2016-12-14-Getting-Realm-to-Build-in-Xamarin-with-VSTS
 redirect_from: 
