@@ -94,3 +94,22 @@ tools folder location of course:
 
 With that done, I was able to run builds without any issue.  This seem to be an Android only
 issue so you shouldn't need to change anything on your iOS build.  
+
+## Update 2-16-2017: A new error
+
+After a recent update (to my code base), I found that my workaround was no longer working.  The new error I was seeing was:
+
+```
+FodyTarget:
+  Fody: Fody (version 1.29.4.0) Executing
+  Fody: ProjectDirectory: 'D:\a\1\s\src\MyApp\MyApp.PCL\'.
+  Fody: AssemblyPath: 'D:\a\1\s\src\MyApp\MyApp.PCL\obj\Release\MyApp.PCL.dll'
+  Fody: Found path to weavers file 'D:\a\1\s\src\MyApp\MyApp.PCL\FodyWeavers.xml'.
+##[error]Fody: SolutionDir "D:\a\1\s\src\MyApp\MyApp.PCL\src" does not exist.
+```
+
+What this appears to be doing is adding the **SolutionDir** that I specified above to the end of the PCL's path.  I was able to fix this once again by changing my **Additional Arguments** to:
+
+**/p:SolutionDir="/"**
+
+I suspect this was due to a change in the **Realm.targets** XML file for the newer version of Realm that I updated to when I updated NuGets.
