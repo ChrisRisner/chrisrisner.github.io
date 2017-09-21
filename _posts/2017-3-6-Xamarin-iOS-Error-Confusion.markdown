@@ -22,7 +22,7 @@ my application and as I didn't find an easy to understand solution, I thought I 
 document it here.  I'll list the error first then explain the scenario and how to fix
 it.
 
-## AX Exchange error: Error Domain=Accessibility Code=0 "Remote service does not respond to _accessibilityMachPort" UserInfo={NSLocalizedDescription=Remote service does not respond to _accessibilityMachPort}
+### AX Exchange error: Error Domain=Accessibility Code=0 "Remote service does not respond to _accessibilityMachPort" UserInfo={NSLocalizedDescription=Remote service does not respond to _accessibilityMachPort}
 
 Part of the application revolves around uploading files.  For Android this isn't very
 difficult and it even makes *sense* as Android has a file system you can access and
