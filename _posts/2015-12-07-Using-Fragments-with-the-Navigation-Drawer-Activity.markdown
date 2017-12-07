@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Using Fragments with the Navigation Drawer Activity"
-date: Mon Dec 07 2015 20:16:00 GMT-0800 (PST)
-comments: true
+date: Mon Dec 07 2015 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

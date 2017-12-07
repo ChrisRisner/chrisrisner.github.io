@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Accessing Resources Secured By Azure Active Directory with iOS and Android"
-date: Thu Sep 19 2013 11:26:00 GMT-0700 (PDT)
-comments: true
+date: Thu Sep 19 2013 11:26:00
+commentsOn: true
 status: publish
 type: post
 published: true

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Running OpenWhisk on a VM in Azure"
-date: Thu Sep 21 2017 9:16:00 GMT-0800 (PST)
-comments: true
+date: Thu Sep 21 2017 9:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

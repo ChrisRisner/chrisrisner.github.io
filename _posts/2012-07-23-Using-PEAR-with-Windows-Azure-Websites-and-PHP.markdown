@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Using PEAR with Windows Azure Websites and PHP"
-date: Mon Jul 23 2012 10:57:00 GMT-0700 (PDT)
-comments: true
+date: Mon Jul 23 2012 10:57:00
+commentsOn: true
 status: publish
 type: post
 published: true

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Google Apps Execution API"
-date: Tue Oct 06 2015 20:16:00 GMT-0800 (PST)
-comments: true
+date: Tue Oct 06 2015 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

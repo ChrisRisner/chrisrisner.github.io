@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Updating the Android Version Code on each Build with VSTS"
-date: Thu Dec 03 2015 20:16:00 GMT-0800 (PST)
-comments: true
+date: Thu Dec 03 2015 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

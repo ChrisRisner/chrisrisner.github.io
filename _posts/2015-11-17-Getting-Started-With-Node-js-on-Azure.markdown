@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Getting Started with Node.js on Azure"
-date: Tue Nov 17 2015 20:16:00 GMT-0800 (PST)
-comments: true
+date: Tue Nov 17 2015 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

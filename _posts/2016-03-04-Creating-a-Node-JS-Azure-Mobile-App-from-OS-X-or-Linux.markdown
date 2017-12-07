@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Creating a Node.js Azure Mobile App from OS X or Linux"
-date: Fri Mar 04 2016 20:16:00 GMT-0800 (PST)
-comments: true
+date: Fri Mar 04 2016 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true
