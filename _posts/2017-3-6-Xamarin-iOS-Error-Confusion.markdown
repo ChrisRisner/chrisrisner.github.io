@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Xamarin iOS Error Confusion"
-date: Mon Mar 06 2017 9:16:00 GMT-0800 (PST)
-comments: true
+date: Mon Mar 06 2017 9:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

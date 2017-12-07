@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Playing Old Games in Parallels and Windows 8"
-date: Tue Oct 21 2014 15:51:00 GMT-0700 (PDT)
-comments: true
+date: Tue Oct 21 2014 15:51:00
+commentsOn: true
 status: publish
 type: post
 published: true

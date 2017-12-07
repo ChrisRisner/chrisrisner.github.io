@@ -12,6 +12,8 @@ application_insights: 537fb79d-ea81-42f5-88e0-442428c3e255
 permalink: /:title
 title: ChrisRisner.com
 description: "The home for Chris Risner's thoughts on the internet."
+repository               : "ChrisRisner/chrisrisner.github.io"
+url                      : "https://chrisrisner.com"
 
 defaults:
   -
@@ -29,6 +31,16 @@ author:
   bio:     
 #  email_md5: 726351295ec82e145928582f595aa3aa
   email_md5: 285584b876f2d45cfbbfb29ce656fde0
+
+# Staticman comments (full configuration in staticman.yml)
+staticman:
+  branch                 : "master"
+
+# reCaptcha
+  reCaptcha:
+    enabled: true
+    siteKey: "6LfLAjwUAAAAAKOi8qdESCsIsuNKQWprkVwVTOca"
+    secret: "hIjDAFgRYCqZ5vLwealMOgQ27fwTpIh64Wjem8fI6rzs65k6Jr6hDh5A8cTv1gi0LBnc74abCXCUR+hi9lKnozMxnisI2vLnFfcZQYfVCqXyH0d4APJDJJ0qhMxkM6OztcHNx7PjHqms0u4cjVIU1McmbDuxaB02V6z1eMzmdmE="
 
 github_repo_url: https://github.com/chrisrisner/chrisrisner.github.io/
 

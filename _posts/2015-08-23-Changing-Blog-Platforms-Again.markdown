@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Changing Blog Platforms Again"
-date: Sun Aug 23 2015 20:16:00 GMT-0800 (PST)
-comments: true
+date: Sun Aug 23 2015 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Setting up Continuous Deployment for Android with VSTS and HockeyApp"
-date: Fri Nov 06 2015 20:16:00 GMT-0800 (PST)
-comments: true
+date: Fri Nov 06 2015 20:16:00
+commentsOn: true
 status: publish
 type: post
 published: true
