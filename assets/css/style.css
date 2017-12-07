@@ -645,3 +645,139 @@ form {
   font-size: 0.8em;
   font-style: italic;
 }
+
+/* ==========================================================================
+   NOTICE TEXT BLOCKS
+   ========================================================================== */
+
+/**
+ * Default Kramdown usage (no indents!):
+ * <div class="notice" markdown="1">
+ * #### Headline for the Notice
+ * Text for the notice
+ * </div>
+ */
+
+ @mixin notice($notice-color) {
+    margin: 2em 0;
+    padding: 1em;
+    background-color: mix(#fff, $notice-color, 90%);
+    border-left: 0.25em solid mix(#fff, $notice-color, 50%);
+  
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: 0 !important; // override
+      margin-bottom: 0.75em;
+      line-height: 1 !important; // override
+    }
+  
+    @at-root .page-content #{&} a {
+      border-bottom-width: 2px;
+      box-shadow: none !important; // override
+  
+      &:hover {
+        background-color: transparent !important; // override
+      }
+    }
+  
+    a {
+      color: mix(#000, $notice-color, 25%) !important; // override
+    }
+  
+    table {
+      margin-top: 1.5em;
+    }
+  
+    thead {
+      border-color: mix(#fff, $notice-color, 70%);
+    }
+  
+    tr {
+      &:not(:last-child) {
+        border-color: mix(#fff, $notice-color, 70%);
+      }
+    }
+  
+    /* remove space at end */
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  /* default notice */
+  .notice {
+    @include notice($primary-color);
+  }
+  
+  /* info notice */
+  .notice--info {
+    @include notice($info-color);
+  }
+  
+  /* warning notice */
+  .notice--warning {
+    @include notice($warning-color);
+  }
+  
+  /* success notice */
+  .notice--success {
+    @include notice($success-color);
+  }
+  
+  /* danger notice */
+  .notice--danger {
+    @include notice($danger-color);
+  }
+
+  /* ==========================================================================
+   Icons
+   ========================================================================== */
+
+.icon {
+    display: inline-block;
+    position: relative;
+    top: -0.125em; /* fine-tune alignment */
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    vertical-align: middle;
+    fill: currentColor;
+  
+    &.spin {
+      animation: spin 2s infinite linear;
+    }
+  
+    $icons: (
+       (email, #000),
+       (facebook, $facebook-color),
+       (flickr, $flickr-color),
+       (github, $github-color),
+       (googleplus, $google-plus-color),
+       (instagram, $instagram-color),
+       (rss, $rss-color),
+       (twitter, $twitter-color),
+       (youtube, $youtube-color)
+    );
+  
+    @each $icon, $color in $icons {
+      &--#{$icon} {
+        fill: $color;
+      }
+    }
+  
+    /* icon--arrow-left */
+    &--arrow-left {
+      transform: matrix(-1, 0, 0, 1, 0, 0);
+    }
+  }
+  
+  .emoji {
+    width: 1em;
+    max-width: 20px;
+    height: 1em;
+    max-height: 20px;
+    margin: 0;
+  }
