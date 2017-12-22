@@ -8,7 +8,8 @@
           </header>
           <!-- {% assign comments = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date' %}  -->
           {% assign comments = site.data.comments[page.slug] | sort | where_exp: 'item', 'item.replying_to == ""'%} 
-          {% assign comments = comments | sort %}
+          {% assign comments = comments | sort  %}
+          <!-- {% assign comments = comments | sort | reverse %} -->
           <!-- {% assign comments = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | reverse %}  -->
           <!-- {% assign comments = site.data.comments[page.slug] %} -->
           {% for comment in comments %}  
@@ -36,5 +37,5 @@
     <h1>Test</h1>
     {{ site.data.comments[page.slug] }}
     <br /><br />
-    <h2>Test 2</h2>
+    <h2>Test 4</h2>
   </div>
