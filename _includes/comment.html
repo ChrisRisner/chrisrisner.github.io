@@ -21,7 +21,7 @@
     <div class="comment-timestamp">
       {% if include.date %}
         {% if include.index %}<a href="#comment{% if r %}{{ index | prepend: '-' }}{% else %}{{ include.index | prepend: '-' }}{% endif %}" title="Permalink to this comment">{% endif %}
-        <time datetime="{{ include.date | date_to_xmlschema }}">{{ include.date | date: '%B %d, %Y' }}</time>
+        <time datetime="{{ include.date | date_to_xmlschema }}">{{ include.date | date: '%B %d, %Y - %H:%M' }}</time>
         {% if include.index %}</a>{% endif %}
       {% endif %}
     </div>
@@ -33,6 +33,7 @@
         <a rel="nofollow" href="#comment-{{ include.index }}" onclick="return addComment.moveForm('comment-{{ include.index }}', '{{ include.index }}', 'respond', '{{ page.slug }}')"><img class="icon icon--reply" width="16px" height="16px" src="/assets/icons/reply.svg"/> Reply to {{ include.name }}</a>
       </div>
     {% endunless %}
+    <h1>Index: {{ include.index }}</h1>
   </article>
   
   {% capture i %}{{ include.index }}{% endcapture %}
