@@ -8,7 +8,7 @@
           </header>
           <!-- {% assign comments = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date' %}  -->
           <!-- {% assign comments = ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') | reverse) %} -->
-          {% assign comments = ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') | reverse) %}
+          {% assign comments = ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') | sort: 'date' | reverse) %}
           <!-- {% assign comments = site.data.comments[page.slug] | sort | where_exp: 'item', 'item.replying_to == ""'%} 
           {% assign comments = comments | sort  %} -->
           <!-- {% assign comments = comments | sort | reverse %} -->
@@ -48,7 +48,16 @@
         ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') | reverse) <br />
         {{ ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') | reverse) }}
         <br /><br />
-        <h2>Test 16</h2>
+        <h1>Test 5</h1>
+        ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') <br />
+        {{ ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') }}
+        <br /><br />
+        <h1>test 6</h1>
+          ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') | sort: 'date' | reverse) <br />
+          {{ ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') | sort: 'date' | reverse) }}
+          <br /><br />
+        
+        <h2>Test 17</h2>
       {% endif %}
   
       {% include comment-form.html %}
