@@ -7,7 +7,8 @@
             <h3>{% if site.data.comments[page.slug].size > 1 %}{{ site.data.comments[page.slug] | size | append: ' ' }}{% endif %}Comments</h3>
           </header>
           <!-- {% assign comments = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date' %}  -->
-          {% assign comments = ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') | reverse) %}
+          <!-- {% assign comments = ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') | reverse) %} -->
+          {% assign comments = (site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') %}
           <!-- {% assign comments = site.data.comments[page.slug] | sort | where_exp: 'item', 'item.replying_to == ""'%} 
           {% assign comments = comments | sort  %} -->
           <!-- {% assign comments = comments | sort | reverse %} -->
@@ -38,5 +39,5 @@
     <h1>Test</h1>
     {{ site.data.comments[page.slug] }}
     <br /><br />
-    <h2>Test 12</h2>
+    <h2>Test 13</h2>
   </div>
