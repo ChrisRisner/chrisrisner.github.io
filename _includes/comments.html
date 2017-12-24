@@ -48,7 +48,18 @@
         ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') | sort: 'date' | reverse) <br />
         {{ ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') | sort: 'date' | reverse) }}
         <br /><br />
-      
+        <h1>test 7</h1> 
+        comments <br />
+        {{ comments }}
+        <br /><br />
+        <h1>test 8</h1> 
+        comments | sort <br /> 
+        {{ comments | sort }}
+        <br /><br />
+        <h1>test 9</h1> 
+        comments | sort | reverse <br />
+        {{ comments | sort | reverse }}
+        <br /><br />
       <h2>Test 24</h2>
 
     {% endif %}
