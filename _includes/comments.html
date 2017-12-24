@@ -9,7 +9,8 @@
         <!-- {% assign comments = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == blank' %}  -->
         {% assign comments = (site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') %} 
         <!-- {% assign comments = site.data.comments[page.slug] %} -->
-        {% for comment in (comments | sort) %}            
+        {% assign comments = (comments | sort) %}
+        {% for comment in comments %}            
           {% assign index       = forloop.index %}
           {% assign r           = comment[1].replying_to %}
           {% assign replying_to = r | to_integer %}
@@ -60,7 +61,7 @@
         comments | sort | reverse <br />
         {{ comments | sort | reverse }}
         <br /><br />
-      <h2>Test 26</h2>
+      <h2>Test 27</h2>
 
     {% endif %}
 
