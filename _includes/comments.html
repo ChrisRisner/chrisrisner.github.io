@@ -6,9 +6,9 @@
         <header class="section-title">
           <h3>{% if site.data.comments[page.slug].size > 1 %}{{ site.data.comments[page.slug] | size | append: ' ' }}{% endif %}Comments</h3>
         </header>
-        
+        <!-- {% assign comments = site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == blank' %}  -->
         {% assign comments = (site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') %} 
-        
+        <!-- {% assign comments = site.data.comments[page.slug] %} -->
         {% for comment in comments %}            
           {% assign index       = forloop.index %}
           {% assign r           = comment[1].replying_to %}
@@ -49,7 +49,7 @@
         {{ ((site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""') | sort: 'date' | reverse) }}
         <br /><br />
       
-      <h2>Test 22</h2>
+      <h2>Test 24</h2>
 
     {% endif %}
 
