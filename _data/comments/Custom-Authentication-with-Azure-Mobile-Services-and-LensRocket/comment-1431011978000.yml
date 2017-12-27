@@ -1,0 +1,9 @@
+_id: 837c253e-4d54-4133-aad3-1b8376ecd1e6
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>Hey Chris,</p><p>First of all thank you so much for this article, it was very useful for our team to add custom authentication to our back-end.</p><p>Now we are migrating the back-end from NodeJs to .NET and are struggling to replicate this hashing mechanism. I mean, we are able to hash new passwords and authenticate new users easily, however, the users that created the account using the NodeJs (your article) algorithm cannot login anymore as the Hash function we are using doesn't return the same Hash for the same Salt and Password. Know what I mean?</p><p>Do you have any ideas on how we can do this migration?</p>"
+name: Matheus Lustosa
+email: DF08534370514F1A2AEF109B5E5A1006
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-05-07T15:19:38Z'

@@ -1,0 +1,9 @@
+_id: d7b05d02-5a6a-4f88-9fc3-c73b15700992
+_parent: /Adding-Push-Notifications-to-Android-Apps-with-Mobile-Services
+message: "<p>Hi Paul.  Happy to hear this site is a good source of info.  If the user uninstalls your app, you won't receive any notifications or have the chance to update your server to say they've unregistered.  If you're dealing with push notifications though, you'll get a response back when you use push.gcm with a message about the registration ID being unregistered (take a look at #8 here: <a href=\"http://developer.android.com/google/gcm/adv.html#unreg-how)\" rel=\"nofollow noopener\" title=\"http://developer.android.com/google/gcm/adv.html#unreg-how)\">http://developer.android.co...</a>.  I would test this out so you can see the exact format of the message you will get back.  ALso, take a look at this which talks more about how you can also get a mapping if you push to a registration ID and it's been updated on the GCM side: <a href=\"http://msdn.microsoft.com/en-us/library/windowsazure/dn126137.aspx\" rel=\"nofollow noopener\" title=\"http://msdn.microsoft.com/en-us/library/windowsazure/dn126137.aspx\">http://msdn.microsoft.com/e...</a>.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-09-06T04:15:25Z'

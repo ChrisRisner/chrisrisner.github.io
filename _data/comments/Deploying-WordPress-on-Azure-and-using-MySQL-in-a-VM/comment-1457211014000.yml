@@ -1,0 +1,9 @@
+_id: 2ef62444-0715-4ae6-8d8c-4a136198230f
+_parent: /Deploying-WordPress-on-Azure-and-using-MySQL-in-a-VM
+message: "<p>Thats correct Simon.  A VM is hosting the MySQL DB and a WebApp is hosing the WordPress site.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2016-03-05T20:50:14Z'

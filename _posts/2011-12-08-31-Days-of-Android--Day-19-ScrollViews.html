@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "31 Days of Android: Day 19–ScrollViews"
+title: "31 Days of Android: Day 19-ScrollViews"
 date: Thu Dec 08 2011 14:51:37
 commentsOn: true
 status: publish
@@ -14,7 +14,7 @@ filepath: 2011-12-08-31-Days-of-Android--Day-19-ScrollViews.html
 disqus_identifier: 31-Days-of-Android--Day-19_ScrollViews
 redirect_from:
   - /31-Days-of-Android--Day-19%E2%80%93ScrollViews/
-  - /31-Days-of-Android--Day-19–ScrollViews/
+  - /31-Days-of-Android--Day-19-ScrollViews/
 ---
 <p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to continue <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> by starting to talk about two different ways to display more information than will fit on the screen:&#160; <strong>ScrollView</strong>s and <strong>ListView</strong>s.&#160; Today we will focus on <strong>ScrollView</strong>s and tomorrow will be <strong>ListView</strong>s.&#160; Due to the way these two <strong>View</strong>s work, you don’t want to combine the two of them.&#160; Once I’ve gone over both off them tomorrow, I’ll talk about why you should keep them separate.&#160; You can <a title="Android Day Nineteen Initial Source Code" href="http://chrisrisner.com/upload/DayNineteenInitial.zip">download the sample code we’re going to start today with here</a>.</p>  <p><strong>The ScrollView</strong></p>  <p>The <strong>ScrollView</strong> enables you to create screens that very closely resemble a web page.&#160;&#160;&#160; Adding a scroll view to a layout allows you to let the user scroll anything within the <strong>ScrollView</strong> vertically and horizontally.&#160; If you run your app right now, you’ll see there isn’t any need for scrolling:&#160; </p>  <p><img style="display: block; float: none; margin-left: auto; margin-right: auto" title="Android No Scrollview" alt="Android No Scrollview" src="http://chrisrisner.com/upload/android_day_nineteen_pre_scrollview.png" /></p>  <p>However, if you were to add a huge amount of text at the bottom, that might change.&#160; Open your <strong>res/values/strings.xml</strong> file and add a new String.&#160; Name it <strong>big_text</strong> and put a very huge text String in there.&#160; Something like this:</p>  <div class="csharpcode">   <pre class="alt"><span class="kwrd">&lt;</span><span class="html">string</span> <span class="attr">name</span><span class="kwrd">=&quot;big_text&quot;</span><span class="kwrd">&gt;</span>Cow ... tongue<span class="kwrd">&lt;/</span><span class="html">string</span><span class="kwrd">&gt;</span></pre>
 </div>

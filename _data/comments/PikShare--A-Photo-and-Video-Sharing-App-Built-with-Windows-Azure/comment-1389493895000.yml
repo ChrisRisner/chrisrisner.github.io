@@ -1,0 +1,9 @@
+_id: 10d3b0e3-31a5-4e3b-8d19-ab2a60e56b10
+_parent: /PikShare--A-Photo-and-Video-Sharing-App-Built-with-Windows-Azure
+message: "<p>Hi Chris,</p><p>I created the Azure mobile and added all the tables and api needed for this app.  I think I followed everything but I am getting an error when I try to register.</p><p>I am getting errors like</p><p>: E/PikShareService(2376):   <br> IIS was not able to access the web.config file for the Web site or application. This can occur if the NTFS permissions are set incorrectly. <br> IIS was not able to process configuration for the Web site or application. <br>The authenticated user does not have permission to use this DLL. <br>......</p><p>Developing in Android make me want to look at Xamarin Studio.</p>"
+name: wil
+email: 2D435D07D16CE3378356E4AF24073E1D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-01-12T02:31:35Z'

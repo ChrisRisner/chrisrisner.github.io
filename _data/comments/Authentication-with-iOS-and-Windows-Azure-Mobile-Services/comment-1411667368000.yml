@@ -1,0 +1,9 @@
+_id: e3ad6f57-046b-459a-821d-6d22c5edc7a7
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>With the Node.js backend, you're kind of stuck at the whims of the runtime right now which is a 30 day expiration for tokens from any providers (if you do custom auth, you specify your own expiration term).  If you use the .NET backend, I believe you can alter this expiration behavior.  Alternatively, if you do client side authentication (not possible today with all providers) you should be able to get a refresh token from the provider which will allow you to reauth from the client without popping up a login window.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2014-09-25T17:49:28Z'

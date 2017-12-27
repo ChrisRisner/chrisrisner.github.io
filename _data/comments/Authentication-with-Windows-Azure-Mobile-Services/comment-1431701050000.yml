@@ -1,0 +1,9 @@
+_id: 6300b317-86ca-4448-80ad-9d4bd36b37c7
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>There is no built in authentication system for Azure Storage.  What I would recommend you do is authenticate your users and then use something like Azure Mobile Services to function as a proxy layer.  In that way, whenever you want to save data for a specific user, you can put their user ID in as one of the keys (so the container name for blob storage as an example).  Then whenever you want to pull the data, you can use that same proxy layer to query the data for the specific user.  Of course you don't want to actually pull down all the data from your Mobile Service / upload it to, so instead you should use your mobile service to create Secure Access Signature (SAS) Urls which you can then return to your client app. The client can then temporarily write to blob storage / pull data down.  There are a few examples of how to do this on this site if you search for \"Azure Storage Mobile Services\"</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '10'
+hidden: ''
+date: '2015-05-15T14:44:10Z'

@@ -1,0 +1,9 @@
+_id: 660ff6f8-c9ad-4482-a254-0f16747d1fcd
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>If you use Table Storage, there isn't (currently) a way to view this data inside of the Azure portal.  You'd want to check out the Azure Storage Explorer (there are other tools as well as Visual Studio which will let you navigate through Table Storage).  Essentially in this case, you're really not using SQL at all.  It just so happens that when you generate the tables for the Mobile Service, it also generates SQL Tables.  However, in the scripts, you're never sending anything to SQL but instead using Table Storage.  One thing to note is that this post came out before Custom APIs were available.  If I was going to redo this today, I would use Custom APIs to read / write / etc to Table Storage so it didn't have the confusing SQL connotation.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '7'
+hidden: ''
+date: '2014-08-08T00:12:49Z'

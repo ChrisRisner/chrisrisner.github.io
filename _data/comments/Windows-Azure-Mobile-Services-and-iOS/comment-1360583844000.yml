@@ -1,0 +1,9 @@
+_id: d0cc456f-b61d-46ac-9baa-c81540fa8db8
+_parent: /Windows-Azure-Mobile-Services-and-iOS
+message: "<p>Hi Chris, thanks for the post. Is there a way to join tables using mobile services? It seems at the moment the only way to really do this is on the client, which isn't really ideal when dealing with mobile phones. I see that the CRUD operations can be modified, but that isn't really the same thing.</p><p>thanks,</p><p>Adam</p>"
+name: Adam 
+email: F4626123717452034BFE876332F4EF7C
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-02-11T11:57:24Z'

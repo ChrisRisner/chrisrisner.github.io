@@ -1,0 +1,9 @@
+_id: 01e28f5f-d499-4f40-92dc-111b53d093dc
+_parent: /Deploying-WordPress-on-Azure-and-using-MySQL-in-a-VM
+message: "<p>Hi Chris, if hostname (db_host) is the host name for VM in Azure, what is the database name for MySQL DB that I put in wp-config? I keep getting 'Error establishing a database connection' so I believe that is the problem...</p>"
+name: Milan
+email: F0502A092E52B32E6E0B0E38FA7329E4
+url: ''
+replying_to: ''
+hidden: ''
+date: '2016-04-05T18:15:03Z'

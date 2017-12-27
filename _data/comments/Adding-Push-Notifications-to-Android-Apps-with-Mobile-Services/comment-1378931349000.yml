@@ -1,0 +1,9 @@
+_id: 32127032-a857-456c-822f-ade1875f2603
+_parent: /Adding-Push-Notifications-to-Android-Apps-with-Mobile-Services
+message: "<p>Chris, I've downloaded your sample project and set my project url and key inside MobileServiceClient class and my SENDER_ID. I can create a todo item, it's appearing in my mobo app and in Azure Mobile Services data. But the push notification it's not working. Could you tell me your AVD settings, please?</p>"
+name: Thiago
+email: 6D7CF4F1E3305D86B484C5A0AA2839FF
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-09-11T20:29:09Z'

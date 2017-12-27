@@ -1,0 +1,9 @@
+_id: 009df0b7-f007-4110-924a-36b5a26142fe
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>I  had a same problem before. Is your Image file saved in external storage(SDCard)? then you need a permission in androidmenifest file.</p><p>sorry for my english.</p>"
+name: seni
+email: E7087E54E5EAC023EAE8C5FCAF05D1BE
+url: ''
+replying_to: '10'
+hidden: ''
+date: '2014-11-07T07:16:09Z'

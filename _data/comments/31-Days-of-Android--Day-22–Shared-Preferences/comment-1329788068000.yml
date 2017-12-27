@@ -1,0 +1,9 @@
+_id: cdbea065-c6af-4d7d-b7f9-9db91459c4c7
+_parent: /31-Days-of-Android--Day-22-Shared-Preferences
+message: "<p>Thanks Simon.  I haven't spent much time working with multiple processes and preferences yet.  This sounds like a situation where it might make more sense to send a message (intent) from the service back to your UI depending on what you're trying to accomplish.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2012-02-21T01:34:28Z'

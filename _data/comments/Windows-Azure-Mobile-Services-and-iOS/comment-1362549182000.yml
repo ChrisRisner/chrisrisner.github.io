@@ -1,0 +1,9 @@
+_id: f558d76d-fdb2-46ee-a797-8859447f3b65
+_parent: /Windows-Azure-Mobile-Services-and-iOS
+message: "<p>Hi Adam,</p><p>It's not terribly straight forward, but have a look at this post under the \"Relationship on the server\" heading: <a href=\"http://blogs.msdn.com/b/carlosfigueira/archive/2012/09/11/supporting-complex-types-in-azure-mobile-services-clients-implementing-1-n-table-relationships.aspx\" rel=\"nofollow noopener\" title=\"http://blogs.msdn.com/b/carlosfigueira/archive/2012/09/11/supporting-complex-types-in-azure-mobile-services-clients-implementing-1-n-table-relationships.aspx\">http://blogs.msdn.com/b/car...</a>.  In short, you can do it, you just have to manually do a few things on the client and server.</p><p>Chris</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-03-06T05:53:02Z'

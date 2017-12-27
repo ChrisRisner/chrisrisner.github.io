@@ -1,0 +1,9 @@
+_id: 0eb893dc-ad54-466e-99eb-f6ca6c660258
+_parent: /31-Days-of-Android--Day-23-Writing-and-Reading-Files
+message: "<p>If you're writing the file to the default app storage, it will be hidden away in the /data/ directory that you can't access unless your device is rooted.  If you write it to external storage than you can choose the directory or there will be a similar, unprotected data directory.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '12'
+hidden: ''
+date: '2015-02-05T18:20:13Z'

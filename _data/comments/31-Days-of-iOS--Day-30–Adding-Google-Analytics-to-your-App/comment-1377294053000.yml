@@ -1,0 +1,9 @@
+_id: 0f2bad87-15b4-4e4a-96bf-8ce357ba7726
+_parent: /31-Days-of-iOS--Day-30-Adding-Google-Analytics-to-your-App
+message: "<p>As said above, the issue is that you're not using the variable.  This is just because it's being set here and not used.  Technically this isn't really an issue because just by calling [[GAI sharedInstance] trackerWithTrackingId...] you are setting the default value.  You can then set the defaultTracker as Tung pointed out just so the warning goes away but it isn't really necessary.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-08-23T21:40:53Z'

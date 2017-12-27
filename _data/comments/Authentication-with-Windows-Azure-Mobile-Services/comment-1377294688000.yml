@@ -1,0 +1,9 @@
+_id: bd324b8a-4983-4c2b-9dd9-45f360f7e6ec
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>Hi Scott.  Great question (and sorry for the delay).  For the Accounts table, you need to be able to call insert as anyone, so once you launch the permissions should be set to Everyone (App Key perms shouldn't be used once you're live).  The insert script already prevents anyone from just inserting any data.  The other operations should all be locked down to admins only.  For AuthData, Read should be only Authenticated Users.  The other operations should be admin only since you're not using them for anything.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-08-23T21:51:28Z'

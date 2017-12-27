@@ -1,0 +1,9 @@
+_id: 2d995a51-343e-43a2-a486-c560293e1d32
+_parent: /31-Days-of-iOS--Day-10-Singletons-and-the-AppDelegate
+message: "<p>Nice article! Simple and straight forward but there's a thing I don't understand. Why don't you just hold your data in simple, well-named, classic objects - not Singletons. This objects could be properties of either your AppDelegate or ViewController. Sure there's the downside of passing it around but what's so bad about exposing dependencies?</p>"
+name: Aleksandar Palic 💯
+email: EADEBF2BF096F4E870D18B7C400EA58E
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-03-20T09:28:48Z'

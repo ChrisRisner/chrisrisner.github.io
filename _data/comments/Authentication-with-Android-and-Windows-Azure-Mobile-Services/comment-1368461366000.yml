@@ -1,0 +1,9 @@
+_id: 2be6e928-b087-49cf-8a4f-1f53825c93e0
+_parent: /Authentication-with-Android-and-Windows-Azure-Mobile-Services
+message: "<p>Happy you asked.  After posting this, I worked with the SDK team and we found a way to do it with the SDK as is.  It's still not going to be as nice as it is in .NET or iOS due to how Android works with AsyncTasks and UI / background threads, but it does mean the changes are unnecessary.  I'll be posting a walkthrough of doing that shortly.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-05-13T16:09:26Z'

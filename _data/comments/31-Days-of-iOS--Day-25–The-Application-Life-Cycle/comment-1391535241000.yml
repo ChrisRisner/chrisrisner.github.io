@@ -1,0 +1,9 @@
+_id: d1c86dfb-9e68-4bb3-8af2-e67a9e392174
+_parent: /31-Days-of-iOS--Day-25-The-Application-Life-Cycle
+message: "<p>If the phone sleeps, then yes, you'll get the applicationWillResignActive and then the applicationDidEnterBackground methods will be fired.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2014-02-04T17:34:01Z'

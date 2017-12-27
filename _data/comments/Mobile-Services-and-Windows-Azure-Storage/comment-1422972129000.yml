@@ -1,0 +1,9 @@
+_id: 46fa7241-db54-4a0f-8363-7a1776eb1346
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>I'm also facing the same error message on android.</p><p>The error happened during getLoadedBlob, seems like blob was never created successfully. I cannot see any data from my mobileservice -&gt; data section as well. Any advice?</p><p>} else if (intentAction.equals(\"blob.created\")) {</p><p>//If a blob has been created, upload the image</p><p>JsonObject blob = mStorageService.getLoadedBlob();</p><p>String sasUrl = blob.getAsJsonPrimitive(\"sasUrl\").toString();</p><p>(new ImageUploaderTask(sasUrl)).execute();</p><p>}</p>"
+name: Peter
+email: FA090F2439949CA1BC60275CF64899FA
+url: ''
+replying_to: '11'
+hidden: ''
+date: '2015-02-03T14:02:09Z'

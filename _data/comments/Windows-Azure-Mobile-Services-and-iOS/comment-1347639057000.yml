@@ -1,0 +1,9 @@
+_id: 268025fe-5d9e-4645-8424-766a879fd7ec
+_parent: /Windows-Azure-Mobile-Services-and-iOS
+message: "<p>Hi Lorenço, I definitely agree that full support, when it comes, will be awesome!  So that I understand your scenario, are you wanting to store the photo in the WAMS database and then pull it down whenever you do a GET on that table?</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2012-09-14T16:10:57Z'

@@ -1,0 +1,9 @@
+_id: 94d380ab-8260-4884-a074-c1c8f64c5225
+_parent: /31-Days-of-iOS--Day-2-An-Intro-to-Objective-C
+message: "<p>\"You can’t check for string equality either.\"</p><p>On every string object you have a isEqualToString method that can be used. Also checkout <a href=\"https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/Reference/NSString.html#//apple_ref/occ/instm/NSString/isEqualToString:\" rel=\"nofollow noopener\" title=\"https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/Reference/NSString.html#//apple_ref/occ/instm/NSString/isEqualToString:\">https://developer.apple.com...</a></p>"
+name: Sidney
+email: ED1C63EED2AEAAFFB1808014657C91F5
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-12-09T14:33:13Z'

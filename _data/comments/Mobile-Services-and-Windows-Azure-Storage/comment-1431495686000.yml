@@ -1,0 +1,9 @@
+_id: 0eae2339-cb7c-423a-ab47-b0440df792ab
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi , I followed your steps its working fine without any issues in android ,but i want to add authentication part and i should get only authenticated user data how to achieve this .<br>i followed this link for authenticating user <br><a href=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-javascript-backend-service-side-authorization/\" rel=\"nofollow noopener\" title=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-javascript-backend-service-side-authorization/\">http://azure.microsoft.com/...</a><br> and <br><a href=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-android-get-started-users/\" rel=\"nofollow noopener\" title=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-android-get-started-users/\">http://azure.microsoft.com/...</a>, <br>in this i am able to view the customers data in azure portal i don't want to see the table data as u achieved above like that,how to achieve this ?</p>"
+name: James
+email: 8BA7BC5CC5C9BF6F9CC0340EDFCFC000
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-05-13T05:41:26Z'

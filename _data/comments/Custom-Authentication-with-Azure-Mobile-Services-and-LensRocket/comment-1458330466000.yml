@@ -1,0 +1,9 @@
+_id: 41b94285-ce81-4c02-818c-3d5e7e889850
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>Hi Chris,</p><p>Thanks for sharing the information for custom authentication. On the client side, how do you use the token to login the user once you get the response from the server (in Javascript)? All the info I've found was to use an identity provider from the Azure list (AD, Facebook, Google, Twitter, Microsoft Account) like this:</p><p>var MobileServiceClient = WindowsAzure.MobileServiceClient;</p><p>client = new MobileServiceClient(AZURE_URL, AZURE_APP_KEY);<br>client.login(<br>  \"facebook\",<br>  {\"access_token\": token})<br>        .done(function (results) {<br>  alert(\"You are now logged in as: \" + results.userId);<br>        }, function (err) {<br>  alert(\"Error: \" + err);<br>        });</p><p>Then you can manipulate the tables with:</p><p>client.getTable('testTable');</p><p>But how do you login with a custom authentication that's not in the list of Identity Providers of Azure?</p>"
+name: Kai Jin
+email: 039C15B209456CC797561DF7EBBCE4C9
+url: ''
+replying_to: ''
+hidden: ''
+date: '2016-03-18T19:47:46Z'

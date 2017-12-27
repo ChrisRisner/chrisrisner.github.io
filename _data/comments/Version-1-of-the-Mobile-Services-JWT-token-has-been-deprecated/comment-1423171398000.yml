@@ -1,0 +1,9 @@
+_id: bbb6e6c6-9779-4e39-a8c9-5da703d81220
+_parent: /Version-1-of-the-Mobile-Services-JWT-token-has-been-deprecated
+message: "<p>Provided you're using one of the client SDKs to talk to Mobile Services, you just need to set the userID and Auth token values for the MobileServiceClient.CurrentUser, then those values will automatically be included as headers with requests against your Mobile Service.  If you're not using the SDKs then yes, you'd need to pass them with each request.  Mobile Services will automatically verify that the User ID and Auth Token are valid with every request before the request gets to the script layer.  Once a request is in the script, you can rest assured that the User.UserId property is a real user ID and belongs to the user making the request.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2015-02-05T21:23:18Z'

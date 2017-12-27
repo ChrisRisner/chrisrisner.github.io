@@ -1,0 +1,9 @@
+_id: 20cb9d42-dc07-445c-ab74-68e9375c4bb0
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>So the container name format error exists only when you secure the table script? It doesn't make much sense that the container name format would change given the table permissions.  Can you try logging the container name when you have the table secured and when you don't and see if there is any difference?</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '8'
+hidden: ''
+date: '2014-04-17T16:45:03Z'

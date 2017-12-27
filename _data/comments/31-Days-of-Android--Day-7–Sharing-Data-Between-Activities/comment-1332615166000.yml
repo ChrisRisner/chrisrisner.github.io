@@ -1,0 +1,9 @@
+_id: 76c24003-f85c-4d2e-bdc2-e64b765b0445
+_parent: /31-Days-of-Android--Day-7-Sharing-Data-Between-Activities
+message: "<p>I think it's pretty clear when Chris says \"<br> set the class to implement Parcelable \". It means the PassableObject class needs to implement the \"Parcelable\" interface. And just leave the \"superclass\" as the default \"java.lang.Object\".</p>"
+name: Shaohong
+email: AB2007B98C97C85565E2970F1E8ECE68
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2012-03-24T18:52:46Z'

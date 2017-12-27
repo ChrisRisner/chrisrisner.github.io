@@ -1,0 +1,9 @@
+_id: ca23637e-b8d3-4117-ad75-81d62350d870
+_parent: /31-Days-of-iOS--Day-10-Singletons-and-the-AppDelegate
+message: "<p>They're both options.  As far as I'm concerned it's a matter of preference.  Some people prefer the singelton class approach, some people prefer adding properties to the AppDelegate.  I'd suggest using the method you find most appropriate.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-03-23T20:44:44Z'

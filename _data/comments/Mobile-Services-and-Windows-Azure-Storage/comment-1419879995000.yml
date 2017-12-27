@@ -1,0 +1,9 @@
+_id: 7318737e-7eba-4632-b22a-1c97fd7ae407
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Great points Joel.  I'm pushing on the team to build out an iOS SDK for direct access to storage, though again with the caveat that direct access is risky unless used in the right circumstances.  I'd love for you to contact me (via email or the contact form) for more information on the scenario you're looking at.</p><p>Good point on switching over to using Custom APIs.  I'll add a note here soon!</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '13'
+hidden: ''
+date: '2014-12-29T19:06:35Z'

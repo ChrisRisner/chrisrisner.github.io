@@ -1,0 +1,9 @@
+_id: d504e5ea-2866-42d6-8cd1-d1b3e736b955
+_parent: /iOS-and-Windows-Azure-Communication-using-SignalR
+message: "<p>These messages would be missed.  There is no queuing mechanism in iOS to deliver the messages after the app is reopened.  You might be able to catch this on the server / hub side and try to redeliver them later on if they don't get through successfully.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2013-09-19T02:48:20Z'

@@ -1,0 +1,9 @@
+_id: 095516b3-f595-4dc9-9e79-e9607f2012f6
+_parent: /31-Days-of-Android--Day-11-Device-Orientation
+message: "<p>Great tutorials Chris! <br>TIP: If your target API is 13(Android 3.2) above, add \"|screenSize\" on configChange. the onConfigurationChange method will not fire without this.</p>"
+name: Chico
+email: BCB5471F71045A057A5E9F29A99473AA
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-10-18T09:16:48Z'

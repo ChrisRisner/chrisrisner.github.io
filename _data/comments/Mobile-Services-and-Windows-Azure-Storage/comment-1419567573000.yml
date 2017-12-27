@@ -1,0 +1,9 @@
+_id: 740b2656-775d-4ab7-9519-202b2853075b
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Thanks for the tutorial and sample app. Quite helpful.</p><p>I must say, that it is disappointing that in the 2 years since WAToolkit was deprecated the functionality it contained for native iOS access to storage has not been ported to the iOS Mobile Services SDK. This node.js workaround still feels a bit like a hack and I was hoping the native iOS functionality would be brought back before I needed to replace the WAToolkit.</p><p>Anyway, I thought I would suggest adding a note to this post that it's no longer necessary to create the dummy tables to access server scripts and this should be done via Custom API endpoints going forward (which is a bit less of a hack :).</p>"
+name: Joel Milne
+email: 17B46031A701918667BEE23BA7E45A19
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-12-26T04:19:33Z'

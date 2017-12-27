@@ -1,0 +1,9 @@
+_id: 484c0ce8-30a8-4c0c-881f-eaa1e8d6cb7e
+_parent: /31-Days-of-iOS--Day-4-Working-with-Multiple-View-Controllers-and-Storyboards
+message: "<p>Now, to get rid of the warnings and clean things up...</p><p>In SecondViewController.m, I made the following change to get rid of another 'depreciated' warning:</p><p>//  [self dismissModalViewControllerAnimated:YES];  //depreciated closer<br>    [self dismissViewControllerAnimated:YES completion:nil];</p><p>This also works for both the \"Show New View\" button, as well as the \"Item\" button in the Title bar...</p><p>I also removed from Main.Storyboard the Navigation Controller I dragged out earlier. It was causing warnings, and (as it turns out) isn't necessary. I guess all I needed to do was drag the 'Navigation Bar' to the top of the 'View' window... Runs like a champ.</p><p>Thanks again for the help. Having things not work exactly as planned means I have to learn... the hard (but far more effective) way.</p>"
+name: kking85743
+email: 1ADEE9ECFE20DD88817B1B3CD9C2A3D7
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-10-24T21:37:13Z'

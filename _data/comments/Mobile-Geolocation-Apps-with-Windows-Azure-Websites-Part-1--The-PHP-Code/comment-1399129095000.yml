@@ -1,0 +1,9 @@
+_id: 1837ff6c-6133-4077-bd0b-42dd3a26c2e5
+_parent: /Mobile-Geolocation-Apps-with-Windows-Azure-Websites-Part-1--The-PHP-Code
+message: "<p>do i have to use git for this to work?</p><p>I have tons of problems using git. I dont know how to get the proxyusername or the pwd nor the server and i cant do \"$mysql --host=<a href=\"http://hostname.cloudapp.net\" rel=\"nofollow noopener\" title=\"hostname.cloudapp.net\">hostname.cloudapp.net</a> --user=userName --password=password databasename\" i type \" --<a href=\"http://myDBname.cloudapp.net\" rel=\"nofollow noopener\" title=\"myDBname.cloudapp.net\">myDBname.cloudapp.net</a>\" and it tells me command does not exist.</p><p>When i try git push azure master i get an error with the proxy.</p>"
+name: HumaNature
+email: BFE9292B7E82E868705DFD276E3A8F5C
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-05-03T14:58:15Z'

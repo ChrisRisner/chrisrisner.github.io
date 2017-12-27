@@ -1,0 +1,9 @@
+_id: 6883af3b-c9bd-42fa-9e3e-c4e91e9b9207
+_parent: /iOS,-Push-Notifications,-and-Azure
+message: "<p>We are using Visual Studio to create an Apache Cordova app that is connected to an Azure Mobile Service .  We are using the Cordova Push Plugin to receive Notifications in our app.  We have created a JavaScript method in the Azure Mobile Service to send the notifications, this method is triggered by a scheduler.  Please note that the intention is to send each Notification to a particular device.</p><p>The notifications work perfectly for Android devices but not for the iOS devices.</p><p>In iOS the notification is not received however the method in Azure Mobile Service always returns “Success”.<br>If we set the Device Token to \"Null\" , then it works for iOS devices (but sends to all devices not just one).</p><p>Could anyone please help us to resolve this issue?</p><p>Thanks in advance.</p>"
+name: sajith satharasinghe
+email: 764D4A03B27946A7E498B48DB116D752
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-09-18T00:24:39Z'

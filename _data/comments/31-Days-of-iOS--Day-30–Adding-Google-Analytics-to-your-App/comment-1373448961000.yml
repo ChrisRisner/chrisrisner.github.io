@@ -1,0 +1,9 @@
+_id: 1c561e48-9a3c-4724-8309-1fd9729f3339
+_parent: /31-Days-of-iOS--Day-30-Adding-Google-Analytics-to-your-App
+message: "<p>i get an error on the last step</p><p>- (IBAction)tappedButtonOne:(id)sender {</p><p>id&lt;gaitracker&gt; tracker = [[GAI sharedInstance] defaultTracker];</p><p>[tracker sendEventWithCategory:@\"MyFirstScreen\"</p><p>withAction:@\"ButtonPress\"</p><p>withLabel:@\"Button\"</p><p>withValue:nil];</p><p>}</p><p>the id&lt;daitracker&gt; line seems to be the issue with a red highlight.. &amp; the line right below with an orange highlight.</p><p>please help...</p>"
+name: Deondrae
+email: F8AF32BC5D4DA7C19B6A217826CC9A66
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-07-10T09:36:01Z'

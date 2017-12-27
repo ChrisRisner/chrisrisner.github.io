@@ -1,0 +1,9 @@
+_id: 38c53312-51df-4017-ba7c-c7837d18dc3a
+_parent: /31-Days-of-iOS--Day-4-Working-with-Multiple-View-Controllers-and-Storyboards
+message: "<p>Just curious, how can we make the Close button work both times, i.e, on pressing the back button in navigation controller it acts differently and if we have gone to secondviewcontroller modally, then it dismisses the view controller differently. I just want the Close button to work in both conditions.</p>"
+name: Anuj
+email: 9CAA08B98CA18D29AEC54A55CB942B0D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-09-27T22:40:52Z'

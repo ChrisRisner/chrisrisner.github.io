@@ -1,0 +1,9 @@
+_id: 88cb45d8-04af-4942-a080-e7c221afaef9
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Great article , but is now out date since the Windows Azure SDK for iOS has been updated.<br>Replace all  \"getTable\"<br>    self.tablesTable = [_client getTable:@\"Tables\"]; with <br>    self.table = [_client tableWithName :@\"Table\"]:</p><p>And also the Storyboard Layout needs updated.</p><p>Christ in this article from windows azure resource \"</p><p>Upload images to Windows Azure Storage by using Mobile Services\" ,<br><a href=\"http://www.windowsazure.com/en-us/develop/mobile/tutorials/upload-images-to-storage-dotnet/\" rel=\"nofollow noopener\" title=\"http://www.windowsazure.com/en-us/develop/mobile/tutorials/upload-images-to-storage-dotnet/\">http://www.windowsazure.com...</a></p><p>they only inserted one script in the main table , can we do this for iOS as well ?</p><p>Thanks for your help.</p>"
+name: Hernando
+email: 96B16E8A9AE615103E83A2B24C404150
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-01-09T16:07:35Z'

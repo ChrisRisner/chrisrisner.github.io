@@ -1,0 +1,9 @@
+_id: 0706d040-13e1-4a77-acf0-e42962b07fb8
+_parent: /2015-12-07-Using-Fragments-with-the-Navigation-Drawer-Activity
+message: "<p>So Chris, I used your method and it works great! The one thing I am wondering is there a way to configure the back button to go back to the main activity instead of exiting directly out of the app? Also if you add the following code you can change the title of each fragment on the top of the screen simply by using setTitle(\"Some Title\")</p><p>  public boolean onNavigationItemSelected(MenuItem item) {<br>        // Handle navigation view item clicks here.<br>        int id = item.getItemId();<br>        Fragment fragment = null;<br>        Class fragmentClass = null;<br>        if (id == R.id.nav_one) {<br>            fragmentClass = FragmentOne.class; setTitle(\"Title One\");<br>        } else if (id == R.id.nav_two) {<br>            fragmentClass = FragmentTwo.class; setTitle(\"Title Two\");<br>        } else if (id == R.id.nav_three) {<br>            fragmentClass = FragmentThree.class; setTitle(\"Title Three\");<br>        } else if (id == R.id.nav_four) {<br>            fragmentClass = FragmentFour.class; setTitle(\"Title Four\");<br>        } else if (id == R.id.nav_five) {<br>            fragmentClass = FragmentFive.class; setTitle(\"Title Five\");</p>"
+name: Joey Troy
+email: 959FDF489323681307D0055675D34995
+url: ''
+replying_to: ''
+hidden: ''
+date: '2017-05-06T06:01:07Z'

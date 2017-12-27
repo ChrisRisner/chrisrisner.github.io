@@ -1,0 +1,9 @@
+_id: 5bb05f8b-dd3a-4d00-bf01-ae20e6304d40
+_parent: /31-Days-of-iOS--Day-5-Programmatically-showing-View-Controllers
+message: "<p>For some reason, when it performs the segue to the next view controller, it presents a blank white view controller instead of the controller I assigned it to?</p>"
+name: Cameron Bourke
+email: 20C25017026BCCEA51D22F9B43618A31
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-04-21T08:39:29Z'

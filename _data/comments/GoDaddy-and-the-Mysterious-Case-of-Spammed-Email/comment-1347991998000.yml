@@ -1,0 +1,9 @@
+_id: 5b32374f-f7f0-4f91-a75a-989db3377261
+_parent: /GoDaddy-and-the-Mysterious-Case-of-Spammed-Email
+message: "<p>If they said remove the links, I would guess they're assuming your emails are going to spam folders because the spam inspector is looking at the email and deeming it inappropriate (which means you'd have to change email content).  It could, however, be the reputation of the servers sending your emails (GoDaddy).  If that is the case, there really isn't anything you can do and unless you talk to the email provider who is saying your emails are spam and find out the specific reason they are doing it, not much you can do to prove it.  In the 2+ years since I've moved off of GoDaddy, I've never had anyone report that the emails I sent them were going into there spam folders.  So if it is the GoDaddy mail server's fault and they still won't let you send email using external servers, you don't have much of an option besides not using them as your host.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '8'
+hidden: ''
+date: '2012-09-18T18:13:18Z'

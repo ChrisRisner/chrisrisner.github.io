@@ -1,0 +1,9 @@
+_id: 4e5e3e2a-24cc-405b-bd3c-dcb01693453f
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>Hi Chris, thanks for this!  Great work!</p><p> Have you seen any Xamarin examples for iOS &amp; Android where the Service Bus Relay is getting called directly from the client code? In your example you do it via Mobile Services which then relays onto Azure but I need to also integrate ADFS authentication from the device.  The out of the box Microsoft Azure Service Bus Nuget package of course won't work for iOS or Android.   Information on all this with respects to Xamarin iOS and Android is a bit thin on the ground.  Thanks for any help/direction in advance!  Cheers, Steve.</p>"
+name: Stephen Gray
+email: 1231D398583B17B22191DDA349A6A469
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-10-05T11:09:57Z'

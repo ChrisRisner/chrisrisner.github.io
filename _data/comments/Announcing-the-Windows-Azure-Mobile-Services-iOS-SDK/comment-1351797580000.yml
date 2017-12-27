@@ -1,0 +1,9 @@
+_id: 2500279d-b95c-4802-b4d3-f9685f85cc68
+_parent: /Announcing-the-Windows-Azure-Mobile-Services-iOS-SDK
+message: "<p>Problem solved: the problem was I was calling this inside an SLRequest response. I needed to wrap it in dispatch_async( dispatch_get_main_queue(), ^{...});  Then it works great.</p>"
+name: Dave Westwood
+email: 2DE4611CA96BA08575FE8865256A223F
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2012-11-01T19:19:40Z'

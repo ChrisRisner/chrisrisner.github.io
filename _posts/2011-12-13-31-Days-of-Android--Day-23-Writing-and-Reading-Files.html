@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "31 Days of Android: Day 23–Writing and Reading Files"
+title: "31 Days of Android: Day 23-Writing and Reading Files"
 date: Tue Dec 13 2011 01:11:00
 commentsOn: true
 status: publish
@@ -11,10 +11,10 @@ excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'l
 logoUrl: null
 keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,Writing files,reading files,internal storage,external storage,file modes,permissions for write to external storage,fileinputstream,fileoutputstream,reading a file from storage,tutorial
 filepath: 2011-12-13-31-Days-of-Android--Day-23-Writing-and-Reading-Files.html
-disqus_identifier: 31-Days-of-Android--Day-23–Writing-and-Reading-Files
+disqus_identifier: 31-Days-of-Android--Day-23-Writing-and-Reading-Files
 redirect_from:
   - /31-Days-of-Android--Day-23%E2%80%93Writing-and-Reading-Files/
-  - /31-Days-of-Android--Day-23–Writing-and-Reading-Files/
+  - /31-Days-of-Android--Day-23-Writing-and-Reading-Files/
 ---
 <p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/android-200.png" /><strong>UPDATE: It looks like the code for today was accidentally labeled DayTwentyTwo instead DayTwentyThree.  I'll go back and fix this as soon I have a chance.</strong><br /><br />It’s time to continue our sub-series on persistence as part of the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; Yesterday we went over <a title="Android SharedPreferences" href="http://chrisrisner.com/31-Days-of-Android--Day-22%E2%80%93Shared-Preferences">Shared Preferences</a> which is a method for persisting key value pairs.&#160; These can be only readable by your application, or you can open them up to reading or writing by other apps.&#160; Today we’re going to cover another method of persisting data, one that anyone that has programmed in the past is probably familiar with:&#160; file storage.&#160; The Java language supports many different methods for file access, and these can be used in Android as well.&#160; There are two methods of file storage we’ll look at:&#160; internal storage and external storage.&#160; You can <a title="Android Day Twenty Two Initial Code" href="http://chrisrisner.com/upload/DayTwentyTwoInitial.zip">access our starter code here</a>.</p>  <p>&#160;</p>  <p><strong>Using Internal Storage</strong></p>  <p>Internal storage refers to the on device hard drive and does not include SD cards.&#160; Internal storage gives you the ability to prevent other applications from accessing the files you save and are tied directly to your app.&#160; Lets look at how to write to a local file.&#160; Open <strong>src/com.daytwentytwo/DayTwentyTwoActivity.java</strong> and find the <strong>onClickListener</strong> for <strong>button1</strong>.&#160; Here you can add the following code:</p>  <div class="csharpcode">   <pre class="alt">lblTextViewOne.setText(editText1.getText());                            </pre>
 

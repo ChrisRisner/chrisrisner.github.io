@@ -1,0 +1,9 @@
+_id: 865457e6-ba1e-4318-a26d-4039b0af543d
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi!!! Congratulations for your very helpful tutorials!!</p><p>I just have a problem!</p><p>When I want to upload an image (by creating a new Blob in the BlobsActivity screen) with an android device which contains Android 4.1.2 I can do it successfully, but when I want to upload an image from an android device which contains android 4.4.2. or higher, it doesn't happen.</p><p>I have tested this with four android devices:</p><p>Two Android 4.1.2 devices (it works without problems) and one Android 4.4.2 device and the other with Android 4.4.4 (both of them couldn't upload the image).</p><p>Then I went to the Target SDK and I updated to 19 version, also I added permission to read external storage but the error continues.</p><p>I have readed some comments with the same error from the mehvish and Peter users, so I decide to attach two images to show you what is happening in the LogCat of Eclipse, one image shows an error that Eclipse throws when the app can't upload images and the second one shows when the app can upload images succesfully.</p><p>I hope you can help us!!</p><p>So many thanks for your time!! :)</p>"
+name: Rizo Xuxochrist
+email: EFA68F69914ACE709A183BF0C97E8160
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-03-07T20:32:28Z'

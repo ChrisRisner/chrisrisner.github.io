@@ -1,0 +1,9 @@
+_id: edc6907b-7a7a-4e90-9993-ebdfd1043ba5
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Once you have the SAS Url you need to do a POST request as opposed to PUT.  You'll have to do some searching for how to access file contents on the file system from PhoneGap's javascript.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '9'
+hidden: ''
+date: '2014-10-22T23:01:05Z'

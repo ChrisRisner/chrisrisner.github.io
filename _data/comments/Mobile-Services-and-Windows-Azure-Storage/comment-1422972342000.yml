@@ -1,0 +1,9 @@
+_id: 7021d34d-74c3-4e24-813b-74d75769165c
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>sorry rephrase, error happen during code section below<br>Cursor cursor = getContentResolver().query(mImageUri, null,null, null, null);<br>cursor.moveToFirst();<br>int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);</p>"
+name: Peter
+email: FA090F2439949CA1BC60275CF64899FA
+url: ''
+replying_to: '11'
+hidden: ''
+date: '2015-02-03T14:05:42Z'

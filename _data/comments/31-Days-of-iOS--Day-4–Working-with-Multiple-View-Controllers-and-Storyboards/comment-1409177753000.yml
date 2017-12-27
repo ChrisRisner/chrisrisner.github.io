@@ -1,0 +1,9 @@
+_id: 32b56194-62c4-402c-bb0b-fc0cc21756b1
+_parent: /31-Days-of-iOS--Day-4-Working-with-Multiple-View-Controllers-and-Storyboards
+message: "<p>I know this tutorial is \"old\" but gold :) so <br>[self dismissModalViewControllerAnimated: YES]; has been deprecated. Instead I'm using [self dismissViewControllerAnimated:NO completion:nil]; . Builds and deploys but when clicking the button to close that triggers that method the iOS simulator crashes and I get an error. Been reading online different solutions but none make sense. Any ideas?</p>"
+name: Daniel
+email: 04BB27AB94CF2AE16CA4655D9980C828
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-08-27T22:15:53Z'

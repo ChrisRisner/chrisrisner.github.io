@@ -1,0 +1,9 @@
+_id: 62174b10-7928-4166-885f-96d88bf3310e
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>My (limited) understanding of MVVMCross is that it's supposed to help make it easier to share all of the non-UI code between your projects (i.e. Models, View Models).  You still have to do the actual view (UI) and controller (code the UI plugs into) for each client but everything else should be shared.  Again, I could be mistaken.</p><p>Considering porting it to Xamarin so we'd also have a Windows Phone and Windows Store version though my UI skills on those platforms are nil.</p><p>Thanks for reading!</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2014-04-17T17:13:15Z'

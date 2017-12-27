@@ -1,0 +1,9 @@
+_id: 069a416c-885e-43a5-afc9-cf7f80d1989d
+_parent: /Connecting-an-Existing-Database-to-Windows-Azure-Mobile-Services
+message: "<p>Sorry to hear that Saad.  Are you sure you're hitting the REST API for the table?  Are you actually getting data back when you hit them but the scripts aren't running or is nothing working?  I would first make sure you're able to hit the table.  I would then put a \"console.log('test');\" statement at the beginning of the request and check the Logging tab in the portal to see if it's being hit.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-04-15T06:18:17Z'

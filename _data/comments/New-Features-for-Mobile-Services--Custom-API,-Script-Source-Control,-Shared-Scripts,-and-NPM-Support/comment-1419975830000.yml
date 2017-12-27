@@ -1,0 +1,9 @@
+_id: 40d09fa4-875c-46e0-b82f-b7df9ced060f
+_parent: /New-Features-for-Mobile-Services--Custom-API,-Script-Source-Control,-Shared-Scripts,-and-NPM-Support
+message: "<p>Thanks a lot Chris for addressing my queries.</p><p>In option (1), the success call back for bulk insert gets tricky.</p><p>Does the JS SDK support where IN clause of SQL? Can I query for multiple rows by supplying a list of ids in a single api call?</p><p>Can the MobileSerivces.js be used in production websites? If</p>"
+name: ykpramodh
+email: 36C70F050822808592C26F2DA8A92D87
+url: ''
+replying_to: '2'
+hidden: ''
+date: '2014-12-30T21:43:50Z'

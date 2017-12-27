@@ -1,0 +1,9 @@
+_id: 147e45b1-d188-489b-9d26-051897376848
+_parent: /31-Days-of-iOS--Day-11-Saving-data-using-NSUserDefaults
+message: "<p>i had parsed my json response and put in the dropdown like this    <a href=\"http://i.imgur.com/DsCtoD7.png\" rel=\"nofollow noopener\" title=\"http://i.imgur.com/DsCtoD7.png\">http://i.imgur.com/DsCtoD7.png</a></p><p>if i select a value it selects then how to save the data . if i click the save button  all the values should be saved.....i fetch those values dynamically.for dynamic  getting values use nsuserdefaults is enough or use specific database..is the right one..give the suggestion</p>"
+name: katrina kaif01
+email: 7521863071B1EADC15F81ECD25F955AE
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-12-08T07:55:25Z'

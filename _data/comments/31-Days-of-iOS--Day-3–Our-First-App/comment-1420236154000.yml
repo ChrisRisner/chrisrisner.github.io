@@ -1,0 +1,9 @@
+_id: b589810c-867c-4c0b-8e46-e92fd13dbaf4
+_parent: /31-Days-of-iOS--Day-3-Our-First-App
+message: "<p>Seems that the label won't update for me with on XCode 6.1 for iOS 8.1 running on OS X 10.10.1</p><p>I tried replacing self.lblInfo and self.txtText with _lblInfo and _txtText but that didn't have any effect.</p><p>Any ideas?</p>"
+name: Rob Franco
+email: 97870F79ABD8A1654909A5DF3E782A94
+url: ''
+replying_to: '2'
+hidden: ''
+date: '2015-01-02T22:02:34Z'

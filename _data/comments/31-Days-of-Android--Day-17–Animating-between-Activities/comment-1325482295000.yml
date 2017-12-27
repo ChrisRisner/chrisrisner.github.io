@@ -1,0 +1,9 @@
+_id: 0a9173fa-8174-4f42-b96e-bd72cac207d9
+_parent: /31-Days-of-Android--Day-17-Animating-between-Activities
+message: "<p>I'm pretty sure this would work.  You'll need to lock either the current activity to a portrait orientation or the second one to a landscape orientation.  That's pretty easy to do though.  You can read about specifying activity orientation here: <a href=\"http://chrisrisner.com/31-Days-of-Android--Day-11%E2%80%93Device-Orientation\" rel=\"nofollow noopener\" title=\"http://chrisrisner.com/31-Days-of-Android--Day-11%E2%80%93Device-Orientation\">http://chrisrisner.com/31-D...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2012-01-02T05:31:35Z'

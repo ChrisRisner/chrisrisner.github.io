@@ -1,0 +1,9 @@
+_id: 827c5cdc-c9c5-4ba6-ab8c-18bf0319f872
+_parent: /31-Days-of-Android--Day-22-Shared-Preferences
+message: "<p>I found preference shared by multiple processes are not reliable. I save something into preference in a remove service, my UI could not get it immediately. Sometimes, it takes about several seconds to get the saved preference.</p>"
+name: Simonxcheng
+email: 4BE480E3CF2C888F9769A7EF521914D2
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-01-26T19:52:05Z'

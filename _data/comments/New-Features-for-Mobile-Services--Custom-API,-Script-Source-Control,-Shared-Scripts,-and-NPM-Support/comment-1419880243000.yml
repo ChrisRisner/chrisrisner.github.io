@@ -1,0 +1,9 @@
+_id: 34cf3c7e-0c56-47b3-b3d4-5364d4858b7c
+_parent: /New-Features-for-Mobile-Services--Custom-API,-Script-Source-Control,-Shared-Scripts,-and-NPM-Support
+message: "<p>You have three options for doing multiple inserts:  <br>1.  Perform the operation three times from your client (bad as this will inflate your API call #s)<br>2.  Create a custom API that can handle performing multiple inserts (as you suggested)<br>3.  Edit your insert script so it's capable of handling one or multiple inserts (not unlike what you'd do for a custom API).</p><p>2 and 3 are the better options and they'll end up being very similar.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '2'
+hidden: ''
+date: '2014-12-29T19:10:43Z'

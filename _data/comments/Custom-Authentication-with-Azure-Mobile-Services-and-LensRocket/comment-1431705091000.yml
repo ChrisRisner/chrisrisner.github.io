@@ -1,0 +1,9 @@
+_id: fa14f15d-8478-4306-ab9d-cde493f08b4f
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>Hello Chris, I did exatcly what the article suggested and it works for creating new accounts but I cannot login with old accounts as the hashing function is different, any ideas?</p>"
+name: Matheus Lustosa
+email: DF08534370514F1A2AEF109B5E5A1006
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2015-05-15T15:51:31Z'

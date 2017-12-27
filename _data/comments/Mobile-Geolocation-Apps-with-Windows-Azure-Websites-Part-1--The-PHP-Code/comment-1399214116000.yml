@@ -1,0 +1,9 @@
+_id: 54003d32-ea15-4bb2-9dc6-4e17a6e18eb7
+_parent: /Mobile-Geolocation-Apps-with-Windows-Azure-Websites-Part-1--The-PHP-Code
+message: "<p>can you explain this pls</p><p>\"If you’re running OS X, you should find MySQL in /usr/local/mysql. If you don’t, go ahead and install it. Afterwards, open up a terminal window and navigate to /usr/local/mysql. You’ll then need to connect to your database like so:</p><p>$cd /usr/local/mysql <br>$mysql --host=<a href=\"http://hostname.cloudapp.net\" rel=\"nofollow noopener\" title=\"hostname.cloudapp.net\">hostname.cloudapp.net</a> --user=userName --password=password databasename\"</p><p>i downloaded an sql server but  i can use \"--host=<a href=\"http://hostname.cloudapp.net\" rel=\"nofollow noopener\" title=\"hostname.cloudapp.net\">hostname.cloudapp.net</a> --user=userName --password=password databasename\" it would save me tons of time on the internet searching, thanks.</p>"
+name: HumaNature
+email: BFE9292B7E82E868705DFD276E3A8F5C
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-05-04T14:35:16Z'

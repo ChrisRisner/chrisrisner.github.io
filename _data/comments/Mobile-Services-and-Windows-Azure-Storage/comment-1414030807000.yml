@@ -1,0 +1,9 @@
+_id: 7f7747ae-3527-4748-9fe5-fd6e846a2520
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>mmm.... now I can write in the container with PUT, the problem that the URL I get to see ' data: image/jpeg; base64,'. It is apparently not finding the file and therefore does not write to the base64.</p>"
+name: Peter  Joseph Concha Regatto
+email: FD6915CC2122905AB9DF26006101C2D7
+url: ''
+replying_to: '9'
+hidden: ''
+date: '2014-10-23T02:20:07Z'

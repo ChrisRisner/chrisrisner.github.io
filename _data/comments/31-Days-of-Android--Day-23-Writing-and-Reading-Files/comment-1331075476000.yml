@@ -1,0 +1,9 @@
+_id: 2d8867b6-2f7d-4fd7-acea-9fe23b3c9a52
+_parent: /31-Days-of-Android--Day-23-Writing-and-Reading-Files
+message: "<p>I have a question. When I use MODE_WORLD_READABLE, and MODE_WORLD_WRITEABLE, does that just mean that the file that is created has the User permissions set to -rw-?</p><p>In other words, does any file with read and write access turned on, stored in internal memory, become readable and writable by any other app, despite the UID sandboxing? I mean, I've looked at a lot of files in my handset's internal memory, and most seem to have read and write turned on by default, which seems like a security risk.</p>"
+name: Simon Belmont
+email: DFDB23433BBA4F7F826392DF5EF64458
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-03-06T23:11:16Z'

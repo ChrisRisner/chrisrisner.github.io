@@ -1,0 +1,9 @@
+_id: 654bfb6c-fd5a-40d3-b986-1924a49a55fb
+_parent: /31-Days-of-iOS--Day-30-Adding-Google-Analytics-to-your-App
+message: "<p>It's because you didnot use the local variable \"tracker\" anywhere in that code block. You can assign the default tracker to that tracker to prevent that warning and get reference to it later.</p><p>Your code should be:<br>id&lt;gaitracker&gt; tracker = [[GAI sharedInstance] trackerWithTrackingId:@\"UA-309591-57\"];<br>[GAI sharedInstance].defaultTracker = tracker;</p><p>When you want to retrieve that tracker object to manually track something, you can get it this way:</p><p>id&lt;gaitracker&gt; tracker = [[GAI sharedInstance] defaultTracker];</p>"
+name: Tung Nguyen
+email: BCAC01A0654500BD79AFEB45881050DD
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-07-11T08:35:30Z'

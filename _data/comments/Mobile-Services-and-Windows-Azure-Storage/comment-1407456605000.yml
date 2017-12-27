@@ -1,0 +1,9 @@
+_id: f0b8dcdf-0ced-4d37-8626-919bbed09405
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi George,  Blob Storage is fairly simple, however, you can apply metadata to a blob allowing you to store certain extra information.  Check out this link for more info: <a href=\"http://msdn.microsoft.com/en-us/library/hh225342.aspx\" rel=\"nofollow noopener\" title=\"http://msdn.microsoft.com/en-us/library/hh225342.aspx\">http://msdn.microsoft.com/e...</a>.  Storing an original and a thumbnail is totally possible though you'd either need to handle uploading the two different sizes from the client or you'd need to have a Worker Role or Web Job running which frequently fetches new images, downsizes them, and adds a thumbnail to blob storage.  Either way you may want to consider also using Table Storage to keep track of that info.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '8'
+hidden: ''
+date: '2014-08-08T00:10:05Z'

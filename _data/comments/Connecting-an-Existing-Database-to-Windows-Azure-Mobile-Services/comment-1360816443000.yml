@@ -1,0 +1,9 @@
+_id: 39fae8c9-c121-4513-abaa-2a65e7cf88fd
+_parent: /Connecting-an-Existing-Database-to-Windows-Azure-Mobile-Services
+message: "<p>Thanks for this post. I had totally missed the part about the id column. Had to go through some renames to get my existing tables since, of course, I named it TableId. Figures.</p>"
+name: Dave Iffland
+email: F0371E59F45B1A246C08FA998EB6AA0D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-02-14T04:34:03Z'

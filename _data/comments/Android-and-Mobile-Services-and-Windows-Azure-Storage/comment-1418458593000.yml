@@ -1,0 +1,9 @@
+_id: bacf8dbd-83ef-44d9-af76-e3121e5932fa
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>it happens because the name of the blob is incorrect see this instructions:</p><p>The container name must be a valid DNS name, conforming to the following naming rules:</p><p>- Container names must start with a letter or number, and can contain only letters, numbers, and the dash (-) character.</p><p>- Every dash (-) character must be immediately preceded and followed by a letter or number; consecutive dashes are not permitted in container names.</p><p>- All letters in a container name must be lowercase.</p><p>- Container names must be from 3 through 63 characters long.</p><p>- Avoid blob names that end with a dot (.), a forward slash (/), or a sequence or combination of the two.</p>"
+name: Sergio J. Peralta
+email: 3625448657DA4CAFA79C2C0551A2EBE8
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2014-12-13T08:16:33Z'

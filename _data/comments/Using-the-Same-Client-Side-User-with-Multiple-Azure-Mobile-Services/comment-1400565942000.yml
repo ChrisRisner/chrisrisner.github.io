@@ -1,0 +1,9 @@
+_id: 19c7892b-f59b-4a5c-967c-85e80da473ee
+_parent: /Using-the-Same-Client-Side-User-with-Multiple-Azure-Mobile-Services
+message: "<p>For anyone else that sees this and has the same question, the command above works just fine on .NET Mobile Services as well.  Just enter the name of the service.  For whatever reason, those services just don't show up when you list out your services from the CLI.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2014-05-20T06:05:42Z'

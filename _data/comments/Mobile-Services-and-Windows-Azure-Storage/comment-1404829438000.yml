@@ -1,0 +1,9 @@
+_id: 171621ac-3429-44be-afd1-562d47e31ce4
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>It sounds like when you created your Mobile Service in the Azure portal, you choose a .NET backend vs a JavaScript one.  The .NET version doesn't have the data tab.  You'll need to generate a JavaScript backed Mobile Service to duplicate this post.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2014-07-08T14:23:58Z'

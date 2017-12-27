@@ -1,0 +1,9 @@
+_id: 577d07e5-a2f1-40a3-b664-7a52ad69257e
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>The access token property is no longer available on the server. I can't seem to find anything regarding why this was removed. The code above will not work since the provider specific object has no accessToken property using the latest services. Anyone have an idea when and why this was removed?</p><p>There is also an enhanced users preview which is supposed to provide more user information in the call to getIdentities but enabling has no effect on the results.</p>"
+name: Werner van Deventer
+email: B371D34968A5FB2D53B6200DE941B5DE
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-07-17T09:11:27Z'

@@ -1,0 +1,9 @@
+_id: 4b59fa50-9032-470e-9032-b3548ecf5822
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>As of right now, using the Azure module is still the best way to access table and blob storage from Mobile Services.  When you say parameters, do you mean query string parameters or something else?</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2013-10-04T15:57:50Z'

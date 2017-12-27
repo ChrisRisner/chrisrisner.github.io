@@ -1,0 +1,9 @@
+_id: 892e72db-c61e-4b1d-9743-84db319f3305
+_parent: /Accessing-the-Shared-Preferences-of-a-Different-Application-in-Android
+message: "<p>This post saves my day... Thank you!</p><p>As Vikash said, since API 17 the MODE_WORLD_WRITEABLE (READABLE) are deprecated. The \"official\" suggestion is to use other methods, such as BroadcastReceiver.</p>"
+name: Andy
+email: 05B090D69C176D707281D8BA404A930E
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-11-09T23:55:01Z'

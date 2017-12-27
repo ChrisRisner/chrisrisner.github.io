@@ -1,0 +1,9 @@
+_id: dc8f05e3-9cb9-4e1f-b42a-4bcf562e116c
+_parent: /2017-3-6-Xamarin-iOS-Error-Confusion
+message: "<p>I get the same error when trying to request a review with the new iOS 10.3 functionality. Removing the lines as you suggest also fixes that problem.</p><p>So be aware if you use SKStoreReviewController.RequestReview() to request reviews.</p><p>----<br>App Developer @ <a href=\"http://Modeudsalg.dk\" rel=\"nofollow noopener\" title=\"Modeudsalg.dk\">Modeudsalg.dk</a></p>"
+name: Steffen
+email: 74C01902A0D6AB52126392526552D275
+url: ''
+replying_to: ''
+hidden: ''
+date: '2017-06-28T11:12:12Z'

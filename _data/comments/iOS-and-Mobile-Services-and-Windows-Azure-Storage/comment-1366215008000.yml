@@ -1,0 +1,9 @@
+_id: 40cb1150-0e2f-41f0-9913-c0383461277c
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hello, Chris, can you help me about dificult bellow ?</p><p>How can I pass parameters to read function in Windows Azure mobile service ?</p><p>In code bellow I call the read function , but I want pass Parm1 to manipulate in Windos Azure.</p><p>[itemTable readWhere:predicate completion:^(NSArray *items, NSInteger totalCount, NSError *error) {</p><p>I want in Windows Azure make something like this...</p><p>function read(query, user, request) {<br>var parm1 = query.parameters.Parm1;</p><p>request.execute();<br>}</p><p>Tks for help me.</p><p>Paulo</p>"
+name: Paulo Cauca
+email: D41D8CD98F00B204E9800998ECF8427E
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-04-17T16:10:08Z'

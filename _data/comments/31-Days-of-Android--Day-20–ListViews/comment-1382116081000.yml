@@ -1,0 +1,9 @@
+_id: 81d816ab-724b-4e18-962a-41e9737ef7c9
+_parent: /31-Days-of-Android--Day-20-ListViews
+message: "<p>Without seeing your source code I can only speak in theory, but...</p><p>Your activity should have a reference to the ArrayAdapter you're using to back your ListView.  That ArrayAdapter keeps the reference to the datasource.  So depending on if you're handling the edits in your Activity or the ArrayAdapter, you should be able to access the item (in the datasource) at whatever position is being edited and then update the necessary values.</p><p>For a convoluted example, let's say you had a button to the right of the textview in the rows above.  You could put an OnClickListener on each button in the ArrayAdapter's getView method.  Inside of that onClickListener, you could update the stringValues[position] value(as well as the textview to show a change if you wanted).  You would need to change getView method header to something like:<br>public View getView(final int position, ...)<br>so you can access the position value in the onClickListener.</p><p>Hope that helps / makes sense.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-10-18T17:08:01Z'

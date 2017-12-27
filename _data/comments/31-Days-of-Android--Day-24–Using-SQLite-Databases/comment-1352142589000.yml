@@ -1,0 +1,9 @@
+_id: 56975819-9449-4d92-8a4d-d85438a97a40
+_parent: /31-Days-of-Android--Day-24-Using-SQLite-Databases
+message: "<p>Are you doing this with a device or the emulator?  If you're doing it on the emulator you should be able to access the SQLite db set up for your app.  If you're trying on a device, you won't have access to the data directory on an unrooted device.  Basically, the data folder is protected on a normal android device to prevent apps from accessing the information and data of other applications.  When your device is rooted, you are able to access that folder.  The risk being that other applications can then access that data.  There are a lot of tutorials online that you should be able to search for if you would like to proceed with rooting your device.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2012-11-05T19:09:49Z'

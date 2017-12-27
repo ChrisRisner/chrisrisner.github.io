@@ -1,0 +1,9 @@
+_id: b9a8a36b-b67d-4e60-8aef-b4b206def1d0
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>Yes, I am using another Mobile Service. I see where you are heading :-)</p><p>The thing is that whey I apply the \"jwthelper.hash (my .net version)\" to get the password that is generated using the plain password and the database user's salt. This generated password is not equals to the user's db password. I'm kind of lost.</p>"
+name: Matheus Lustosa
+email: DF08534370514F1A2AEF109B5E5A1006
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2015-05-15T17:04:13Z'

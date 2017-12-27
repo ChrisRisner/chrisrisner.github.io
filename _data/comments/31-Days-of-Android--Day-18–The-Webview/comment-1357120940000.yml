@@ -1,0 +1,9 @@
+_id: 2b138823-857e-4dcc-a266-606e52004c2d
+_parent: /31-Days-of-Android--Day-18-The-Webview
+message: "<p>Hi Chris,</p><p>May i just let you know that these tutorials are of extremely good quality, well structured,<br>resourceful and fun, so many thanks for all your effort, if i ever make any coin out developing<br>android apps i'll be sure to throw some your way...</p><p>may i just add that i may have found a typo or something in the following code:</p><p>public class AppJavaScriptInterface {<br>    private Context context;<br>    public JavaScriptInterface(Context context) {</p><p>[edit] change to: public AppJavaScriptInterface(Context context) { [edit]<br>        this.context = context;<br>    }<br>    public void showToast(String text) {<br>        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();<br>    }<br>}</p><p>the line: <br> public JavaScriptInterface(Context context) {</p><p>seems to be missing the App bit just after public member is declared...<br>i added what i have done on this line between [edit]...</p><p>hope this makes sense...</p><p>not sure but this may solve Melody's issue</p>"
+name: smelly
+email: F7BA5EAF791D44868A46D00FAABF169B
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-01-02T10:02:20Z'

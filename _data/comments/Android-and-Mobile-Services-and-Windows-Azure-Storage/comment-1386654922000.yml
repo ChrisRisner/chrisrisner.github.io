@@ -1,0 +1,9 @@
+_id: 1fe27b6e-6f5a-49a4-aa50-c168dc67afe9
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Mark, yes parameter support is now in the Android SDK so you don't need to work with my fork for it.  As to accessing storage, the Azure module is still the way to go.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2013-12-10T05:55:22Z'

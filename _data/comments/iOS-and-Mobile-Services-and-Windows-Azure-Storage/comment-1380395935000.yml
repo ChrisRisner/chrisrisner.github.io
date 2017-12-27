@@ -1,0 +1,9 @@
+_id: 5dfa9ee8-552d-4963-bc0d-e92378330a13
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Chris, thanks for this awesome post!</p><p>I have been using getSasUrlForNewBlob to post picture blobs to my azure containers, however, sometimes I was returned NULL, I am wondering besides following your instructions (client&amp;server), what else am I maybe missing?</p>"
+name: yingja!
+email: 9F44EA12CC6AC5D500BEBF6062D0EDE0
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-09-28T19:18:55Z'

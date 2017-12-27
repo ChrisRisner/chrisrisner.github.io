@@ -1,0 +1,9 @@
+_id: 90d0ad64-46c9-4ed5-bb94-733e12bdf1b1
+_parent: /Changing-the-SDK-Path-with-Android-Studio
+message: "<p>In Android Studio</p><p>Go to</p><p>    File -&gt; project Structure into Project Structure<br>    Left -&gt; SDK Location<br>    SDK location select Android SDK location (old version use Press +, add another sdk)</p>"
+name: Latest Tutorials
+email: 2AD106D92E5C2DEAFFA34914BC88D7BE
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-04-02T07:33:07Z'

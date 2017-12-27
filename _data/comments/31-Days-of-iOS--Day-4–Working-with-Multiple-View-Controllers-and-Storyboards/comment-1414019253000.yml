@@ -1,0 +1,9 @@
+_id: 39a5ffbd-2946-4b19-bb42-00da7047eb48
+_parent: /31-Days-of-iOS--Day-4-Working-with-Multiple-View-Controllers-and-Storyboards
+message: "<p>You can detect (store the state if needed) whether you're showing a modal or via navigation controller and then perform the necessary close functionality in that method.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2014-10-22T23:07:33Z'

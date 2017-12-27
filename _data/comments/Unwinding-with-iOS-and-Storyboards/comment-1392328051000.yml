@@ -1,0 +1,9 @@
+_id: 769586e9-2886-4715-a090-2273a1c21f3b
+_parent: /Unwinding-with-iOS-and-Storyboards
+message: "<p>I think unwinding should work in this situation where as it would be very complicated to handle it in code (popping, and then having the vc you returned to pop itself and so on).</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2014-02-13T21:47:31Z'

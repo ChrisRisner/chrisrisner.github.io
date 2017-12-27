@@ -1,0 +1,9 @@
+_id: 2827fd4f-a463-4fb3-bb39-28335b3a1706
+_parent: /Adding-Push-Notifications-to-Android-Apps-with-Mobile-Services
+message: "<p>With the change from using a custom push system behind the scenes to using Azure Notification Hubs, there are a few modifications you may need to make.  I'd recommend walking through this tutorial: <a href=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-javascript-backend-ios-get-started-push/\" rel=\"nofollow noopener\" title=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-javascript-backend-ios-get-started-push/\">http://azure.microsoft.com/...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2015-05-15T14:28:00Z'

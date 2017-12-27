@@ -1,0 +1,9 @@
+_id: 0e613c42-36fe-461f-b038-acadb6aa83a8
+_parent: /Storing-Images-from-Android-in-Windows-Azure-Mobile-Services
+message: "<p>When I installed the application to the emulator, I only saw one app icon, but when I installed the app to my phone, two icons showed up on the app list. One of the icons opens an empty version of the app that could not refresh or add new tasks. The other icon opened the app with all the functions working. When I deleted the app icon for the app that didn't do anything, both apps were deleted.</p>"
+name: Albert
+email: C65114F2B84ED7DC8AACDD97A144CCEF
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-03-06T18:02:21Z'

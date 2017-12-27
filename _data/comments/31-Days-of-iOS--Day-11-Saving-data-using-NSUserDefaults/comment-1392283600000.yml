@@ -1,0 +1,9 @@
+_id: f454aade-61a3-40ec-8c98-f63fe49d79c3
+_parent: /31-Days-of-iOS--Day-11-Saving-data-using-NSUserDefaults
+message: "<p>Great article, could you tell me what happens if there is an update of my app, will it overwrite the NSUserDefaults or is this stored separate on the device and not affected by updating an app???</p>"
+name: Saskia Beeldman
+email: 85EA67BA225A26D6FB1A215D68129EDA
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-02-13T09:26:40Z'

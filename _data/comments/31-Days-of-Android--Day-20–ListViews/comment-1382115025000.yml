@@ -1,0 +1,9 @@
+_id: 71d646f1-a90e-4df4-a277-9b34d9ed721e
+_parent: /31-Days-of-Android--Day-20-ListViews
+message: "<p>Just to be clear, after making the change in the row on screen, you're having trouble updating the datasource the listview relies upon OR you are having issues updating the display fields in the row (but if you scroll that row off and then back on screen, the changes show up)?</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-10-18T16:50:25Z'

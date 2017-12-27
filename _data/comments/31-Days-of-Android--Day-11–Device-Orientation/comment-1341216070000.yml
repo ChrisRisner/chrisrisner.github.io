@@ -1,0 +1,9 @@
+_id: 0f86ee56-9d8a-4d20-bfd2-85ed8ccfebad
+_parent: /31-Days-of-Android--Day-11-Device-Orientation
+message: "<p>Great turotials, but I’d like to point out:</p><p>“You can safely assume that ROTATION_0 and ROTATION_180 are portrait and ROTATION_90 and ROTATION_270 are landscape.“…Not<br>on an HTC ChaCha (Blackberry form factor android with a normally landscape<br>screen).  On this device, ROTATION_0 is actually landscape.  Also<br>when you rotate the screen to be portrait, it says “Not Portrait, Landscape!” and “Rotation<br>90”. The onConfigurationChanged() code does work<br>OK.</p>"
+name: Andy Joiner
+email: C9E1E4FCC26552EAE99F2D06D3441859
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-07-02T08:01:10Z'

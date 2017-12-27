@@ -1,0 +1,9 @@
+_id: bdec451f-3e29-49f4-829e-db128d711ee9
+_parent: /Accessing-Twitter-API-v1-1-from-Mobile-Services-Scripts
+message: "<p>Hi Chris,<br>I'd like to grab the user's display name or real name and profile image from whichever service they log in through (Google, Facebook, Microsoft, or Twitter).  Ideally that could happen in my Azure Mobile Services scripting layer when I go to create their user record.  Do you know of any tutorials or libraries out there that work through that?  I noted the one above you mentioned handles twitter.</p><p>Thanks for any info!</p>"
+name: byr8n
+email: 70343046D64F608157BFD0A2D97AA7E7
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2014-06-05T03:01:53Z'

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "31 Days of Android: Day 24–Using SQLite Databases"
+title: "31 Days of Android: Day 24-Using SQLite Databases"
 date: Wed Dec 14 2011 01:27:00
 commentsOn: true
 status: publish
@@ -10,14 +10,14 @@ categories: [Android, Google, Java, Mobile, Phone, Programming]
 excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'll wrap up the third day on persistence by talking about using SQLite in your Android applications."
 logoUrl: null
 keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,SQLite,databases,database,SQLite crud,Android database,using ADB to connect to your emulator,using ADB to explore database,upgrading Android databases,tutorial
-filepath: 2011-12-14-31-Days-of-Android--Day-24–Using-SQLite-Databases.html
-disqus_identifier: 31-Days-of-Android--Day-24–Using-SQLite-Databases
+filepath: 2011-12-14-31-Days-of-Android--Day-24-Using-SQLite-Databases.html
+disqus_identifier: 31-Days-of-Android--Day-24-Using-SQLite-Databases
 redirect_from:
   - /2011-12-14-31-Days-of-Android--Day-24%E2%80%93Using-SQLite-Databases/
-  - /2011-12-14-31-Days-of-Android--Day-24–Using-SQLite-Databases/
-  - /31-Days-of-Android--Day-24–Using-SQLite-Databases/
+  - /2011-12-14-31-Days-of-Android--Day-24-Using-SQLite-Databases/
+  - /31-Days-of-Android--Day-24-Using-SQLite-Databases/
 ---
-<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android SQLite Databases" alt="Android SQLite Databases" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to wrap up our sub-series on persistence as we continue on with the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; We’ve already covered <a title="Android Shared Preferences" href="http://chrisrisner.com/31-Days-of-Android--Day-22%E2%80%93Shared-Preferences">Shared Preferences</a> and <a title="Android Writing and Reading Files" href="http://chrisrisner.com/31-Days-of-Android--Day-23%E2%80%93Writing-and-Reading-Files">writing and reading files</a>.&#160; This leaves today to talk about <a title="SQLite" href="http://en.wikipedia.org/wiki/Sqllite">SQLite</a>.&#160; SQLite is a small format embedded relational database system which is fancy talk for saying it’s a tiny database that you can use in your applications.&#160; For any database needs, SQLite is the recommended approach you should take.&#160; Today we’ll look at how to create a database for your app, how to do the standard CRUD (Create, Read, Update, and Delete) with your db, and lastly, how to handle changes to your database.&#160; You can <a title="Android Day Twenty Four Initial Source Code" href="http://chrisrisner.com/upload/DayTwentyFourInitial.zip">grab the sample code we’ll start with today here</a>.</p>  <p>&#160;</p>  <p><strong>Creating a Database</strong></p>  <p>In order to create a database you need to override the <strong>SQLiteOpenHelper</strong> class and override the <strong>onCreate</strong> method to handle the actual creation.&#160; Let’s start by adding a new class to your project.&#160; Right click on <strong>src/com.daytwentyfour</strong> and go to <strong>New –&gt; Class</strong>.&#160; Name your class “<strong>DatabaseOpenHelper</strong>” and enter <strong>android.database.sqlite.SQLiteOpenHelper</strong> as the superclass.&#160; When you create the class it will already have stubs for <strong>onCreate</strong> and <strong>onUpgrade</strong> for you to implement.&#160; You will still need to add a constructor for your class though:</p>  <div class="csharpcode">   <pre class="alt"><span class="kwrd">private</span> final <span class="kwrd">static</span> String databaseName = <span class="str">&quot;DayTwentyFourDb&quot;</span>;</pre>
+<p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android SQLite Databases" alt="Android SQLite Databases" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to wrap up our sub-series on persistence as we continue on with the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a>.&#160; We’ve already covered <a title="Android Shared Preferences" href="http://chrisrisner.com/31-Days-of-Android--Day-22%E2%80%93Shared-Preferences">Shared Preferences</a> and <a title="Android Writing and Reading Files" href="http://chrisrisner.com/31-Days-of-Android--Day-23%E2%80%93Writing-and-Reading-Files">writing and reading files</a>.&#160; This leaves today to talk about <a title="SQLite" href="http://en.wikipedia.org/wiki/Sqllite">SQLite</a>.&#160; SQLite is a small format embedded relational database system which is fancy talk for saying it’s a tiny database that you can use in your applications.&#160; For any database needs, SQLite is the recommended approach you should take.&#160; Today we’ll look at how to create a database for your app, how to do the standard CRUD (Create, Read, Update, and Delete) with your db, and lastly, how to handle changes to your database.&#160; You can <a title="Android Day Twenty Four Initial Source Code" href="http://chrisrisner.com/upload/DayTwentyFourInitial.zip">grab the sample code we’ll start with today here</a>.</p>  <p>&#160;</p>  <p><strong>Creating a Database</strong></p>  <p>In order to create a database you need to override the <strong>SQLiteOpenHelper</strong> class and override the <strong>onCreate</strong> method to handle the actual creation.&#160; Let’s start by adding a new class to your project.&#160; Right click on <strong>src/com.daytwentyfour</strong> and go to <strong>New -&gt; Class</strong>.&#160; Name your class “<strong>DatabaseOpenHelper</strong>” and enter <strong>android.database.sqlite.SQLiteOpenHelper</strong> as the superclass.&#160; When you create the class it will already have stubs for <strong>onCreate</strong> and <strong>onUpgrade</strong> for you to implement.&#160; You will still need to add a constructor for your class though:</p>  <div class="csharpcode">   <pre class="alt"><span class="kwrd">private</span> final <span class="kwrd">static</span> String databaseName = <span class="str">&quot;DayTwentyFourDb&quot;</span>;</pre>
 
   <pre><span class="kwrd">private</span> final <span class="kwrd">static</span> <span class="kwrd">int</span>    databaseVersion = 1;</pre>
 
@@ -137,7 +137,7 @@ redirect_from:
 }
 .csharpcode .lnum { color: #606060; }</style>
 
-<p>Here, you’re dropping the “<strong>DayTwentyFour</strong>” table if it exists and then recreating it.&#160; We will talk more about upgrading later but for now, this will suffice.&#160; Next you need to create an Adapter.&#160; This isn’t a defined concept but seems to be an accepted pattern for database access in Android.&#160; Right click on <strong>src/com.daytwentyfour </strong>and go to <strong>New –&gt; Class</strong>.&#160; Name your new class “<strong>DatabaseAdapter</strong>” and leave it with the <strong>java.lang.Object</strong> as it’s superclass.&#160; The first step is to add a few member variables and a constructor:</p>
+<p>Here, you’re dropping the “<strong>DayTwentyFour</strong>” table if it exists and then recreating it.&#160; We will talk more about upgrading later but for now, this will suffice.&#160; Next you need to create an Adapter.&#160; This isn’t a defined concept but seems to be an accepted pattern for database access in Android.&#160; Right click on <strong>src/com.daytwentyfour </strong>and go to <strong>New -&gt; Class</strong>.&#160; Name your new class “<strong>DatabaseAdapter</strong>” and leave it with the <strong>java.lang.Object</strong> as it’s superclass.&#160; The first step is to add a few member variables and a constructor:</p>
 
 <div class="csharpcode">
   <pre class="alt"><span class="kwrd">private</span> Context context;</pre>
@@ -274,7 +274,7 @@ redirect_from:
 
 <p>The second option is slightly more complicated but important for something we’re going to do later.&#160; Open up a command line window and navigate to your android SDK directory.&#160; For example, mine is located at c:\Program files (x86)\Android\android-sdk.&#160; From there, you need to go into the platform-tools folder so you can access <strong>adb.exe</strong>.&#160; ADB can be used to connect to emulators and devices from the command line.&#160; If you’re not sure what the device or emulator you want to connect to is named, you can run <strong>adb devices</strong>.&#160; This should list out all currently connected devices and running emulators.&#160; My emulator is showing up as <strong>emulator-5554</strong>.&#160; Next you need to run <strong>adb</strong> and connect to the emulator with a shell like so:</p>
 
-<p>$ adb –s emulator-5554 shell</p>
+<p>$ adb -s emulator-5554 shell</p>
 
 <p>After that, you’ll be running the command line ON the device.&#160; To check the same directory you did above in <strong>File Explorer</strong>, execute this command:</p>
 
@@ -688,7 +688,7 @@ redirect_from:
 
 <p>&#160;</p>
 
-<p>This should get you pretty far with using databases.&#160; An important reminder is that if the user goes into <strong>Settings –&gt; Manage Applications</strong> and pulls up your application and hits the <strong>Clear Data</strong> button, you’re database WILL be deleted.</p>
+<p>This should get you pretty far with using databases.&#160; An important reminder is that if the user goes into <strong>Settings -&gt; Manage Applications</strong> and pulls up your application and hits the <strong>Clear Data</strong> button, you’re database WILL be deleted.</p>
 
 <p><strong></strong></p>
 

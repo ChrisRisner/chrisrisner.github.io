@@ -1,0 +1,9 @@
+_id: da34d01c-7ac0-48c5-a237-1aac0adc4548
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>I have found the answers here:</p><p><a href=\"http://www.thejoyofcode.com/Setting_the_auth_token_in_the_Mobile_Services_client_and_caching_the_user_rsquo_s_identity_Day_10_.aspx\" rel=\"nofollow noopener\" title=\"http://www.thejoyofcode.com/Setting_the_auth_token_in_the_Mobile_Services_client_and_caching_the_user_rsquo_s_identity_Day_10_.aspx\">http://www.thejoyofcode.com...</a></p><p>var client = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(<br>\"&lt;your-app-url&gt;\",<br>    \"&lt;your-app-key&gt;\");</p><p>client.currentUser = {<br>    userId: \"Foo:123456789\",<br>    mobileServiceAuthenticationToken: \"&lt;your-users-jwt&gt;\"<br>};</p>"
+name: Kai Jin
+email: 039C15B209456CC797561DF7EBBCE4C9
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2016-03-19T16:57:55Z'

@@ -1,0 +1,9 @@
+_id: 825d4c88-6658-477f-8fa4-8ecfd2d1abd2
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>Hi Chris,</p><p>Great code.  I'm trying to get this to work in one of my project however, and keep getting this compiler error on the ios specific code file:</p><p>Error CS0508: `iOSSpecific.Authenticate(object, object)': return type must be `System.Threading.Tasks.Task&lt;microsoft.windowsazure.mobileservices.mobileserviceuser&gt;' to match overridden member `PlatformSpecific.Authenticate(object, object)'</p><p>I'm at a complete loss as to why this would be happening and any advice would be much appreciated.</p><p>Thanks.</p>"
+name: Dan
+email: FAFC59DE23C019DBDE96858FB3D5D9BF
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-07-06T06:28:57Z'

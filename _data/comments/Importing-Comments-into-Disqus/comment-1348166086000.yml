@@ -1,0 +1,9 @@
+_id: 0c9350c6-6531-41a6-996e-8f7c84039252
+_parent: /Importing-Comments-into-Disqus
+message: "<p>Hi Guillaume,<br>If I recall correctly, I just put in the comment ID I had in my original database.  If that's the case, you should be able to put in any IDs you want. I would go through the (also painful) process of making up IDs and then figuring out where to put the appropriate parent ID.  I imagine jcomments has some method of tracking what's attached as a reply so I'd think you could script it to add IDs for each one and a parent where appropriate.  Hope that helps.<br>Chris</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '22'
+hidden: ''
+date: '2012-09-20T18:34:46Z'

@@ -1,0 +1,9 @@
+_id: 607b9820-eacf-46a7-a635-e1f0a9a0cb9a
+_parent: /Accessing-Twitter-API-v1-1-from-Mobile-Services-Scripts
+message: "<p>I'm not sure if the users/show api will work with application only auth.  However, there is a much simpler way to talk to the Twitter API (that I still need to post about).  Take a look at <a href=\"https://github.com/WindowsAzure-TrainingKit/Demo-EventBuddy/blob/master/Demo.md\" rel=\"nofollow noopener\" title=\"https://github.com/WindowsAzure-TrainingKit/Demo-EventBuddy/blob/master/Demo.md\">https://github.com/WindowsA...</a>.  Specifically, check out where it's using the OAuth module to call the users/show api.  I'll be posting about that soon.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2013-12-10T06:12:57Z'

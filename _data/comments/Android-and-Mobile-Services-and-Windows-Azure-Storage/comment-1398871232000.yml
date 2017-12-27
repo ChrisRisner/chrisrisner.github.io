@@ -1,0 +1,9 @@
+_id: fafda8c9-111f-4f46-82b1-8b492f583750
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>I can't get this to work in Android. I keep getting a NoClassDefFoundError. Has anyone got any idea what I am doing wrong?</p><p>I have - downloaded the modified Azure SDK from GitHib, downloaded the example app from GitHub, imported both into my workspace in Eclipse and linked the two projects but when I run (either in the android emulator or on my phone) when it tries to instantiate StorageService I get the aforementioned exception. Any help would be much appreciated as I have been looking at this for ages.</p>"
+name: ckw
+email: E594175F88AC7E4BBE0D9FDCCC47DA29
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-04-30T15:20:32Z'

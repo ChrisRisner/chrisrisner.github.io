@@ -1,0 +1,9 @@
+_id: fdaa522a-6c7b-4425-b92e-c73c95dbd195
+_parent: /Using-Existing-Databases-with-Windows-Azure-Mobile-Services-without-changing-the-Schema
+message: "<p>Hi Chris,</p><p>I'm getting an error when trying to create a table with the mobile service after I create the SQL view. Do you have any idea what could be the issue here?</p><p>This is the error I'm getting:</p><p>The following table was not created: \"TodoItem\" Error 400</p><p>Cannot alter 'existingdb.TodoItem' because it is not a table.</p>"
+name: Mark
+email: 88871C98C6F91FF1393869CA2B7AF922
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-03-24T17:04:30Z'

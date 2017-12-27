@@ -1,0 +1,9 @@
+_id: be71a71f-9483-4ae3-ba0c-0ae659a1cd63
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>A few tips for when you have problems connecting your device:<br>- Make sure the IOS project is set as startup project and select 'iPhone' in the configuration.<br>- Turn off the auto start of iPhoto when your iPhone connects.</p><p>iPhoto did the trick for me. If your device still does not show up, try to restart Visual Studio and/or the build host.</p>"
+name: Guido Kersten
+email: 0C3DF418D9106CE325A495146A40886F
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-10-09T18:42:59Z'

@@ -1,0 +1,9 @@
+_id: fa75ef14-fca5-4e0c-9643-8427d9a74d54
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Chris, Thank you, this is just what I was looking for. I have a question: I'm planning to make an app for Android where users authenticate first and when they do so they can store and access their own files \"blobs\" (something like dropbox or skydrive). I think what I have to change is the insert and read scripts for the blob containers but I have no clue where to add such parameters.<br>Can you tell me how? I'll be very grateful!</p>"
+name: Guest
+email: 3190F293CD2933B4110F06C746D03707
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-03-21T19:04:25Z'

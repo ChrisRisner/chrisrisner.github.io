@@ -1,0 +1,9 @@
+_id: dc365472-42bc-408d-a825-181e73e9e2e2
+_parent: /Authentication-with-Android-and-Windows-Azure-Mobile-Services
+message: "<p>Excellent code, no doubt. I did notice that I get a crash sometimes when my response object is null (any sort of communication failure). Throwing in a resoponse!=null check fixed the problem.</p><p>Line 13:</p><p>StatusLine status = response.getStatus();</p><p>int statusCode = status.getStatusCode();</p><p>if (statusCode == 401) {</p>"
+name: Alexander
+email: 7B284D7D778F9C0AAE1B1CC1A70B11C1
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-06-04T03:48:09Z'

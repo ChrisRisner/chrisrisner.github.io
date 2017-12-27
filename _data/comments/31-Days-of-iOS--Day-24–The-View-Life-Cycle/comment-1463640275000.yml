@@ -1,0 +1,9 @@
+_id: b3e37bd4-597e-48d8-991a-6e62a753892d
+_parent: /31-Days-of-iOS--Day-24-The-View-Life-Cycle
+message: "<p>When Going to the next View I think after viewWillDisappear and viewDidDisappear , viewDidLoad of the next view should be called.</p>"
+name: Simranjot
+email: 310987E89B1C371E7DC2023D1AF310D0
+url: ''
+replying_to: ''
+hidden: ''
+date: '2016-05-19T06:44:35Z'

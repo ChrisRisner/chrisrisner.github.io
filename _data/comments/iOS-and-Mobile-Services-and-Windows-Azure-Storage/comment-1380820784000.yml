@@ -1,0 +1,9 @@
+_id: f583da16-15f2-4774-91ba-4441dfbfa461
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi, is there a way to check if a blob name exists without to read all them? This is to avoid to override it with the insert method.<br>Thanks</p>"
+name: alessandr0
+email: 9C5EC656B8B83D8E02C89C99ED9B6E23
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-10-03T17:19:44Z'

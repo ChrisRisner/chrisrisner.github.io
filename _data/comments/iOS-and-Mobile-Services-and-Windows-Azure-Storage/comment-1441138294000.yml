@@ -1,0 +1,9 @@
+_id: 9bba2548-fa26-472d-a966-9ac1e8089841
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Sorry for missing this George.  If you, or anyone else is looking, this is because the latest version of the SDK for Mobile Services for iOS has changed the handelRequest method.  I would suggest pulling down the iOS Quick Start for Mobile Services and comparing how that implements the method and compare the two.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '10'
+hidden: ''
+date: '2015-09-01T20:11:34Z'

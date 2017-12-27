@@ -1,0 +1,9 @@
+_id: 174b601c-e288-40a0-9c2c-281a8f5433fe
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>I am trying to get profile image from facebook.  I get a URL but that URL is not actual image file.  I have to do a http request on that URL to get back actually link to a jpg file.  Is there a better way to do this because this is slow.  Thanks Chris</p>"
+name: wil
+email: AD8080BF6B1ACA663CF843BB49A7D498
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-12-13T21:14:27Z'

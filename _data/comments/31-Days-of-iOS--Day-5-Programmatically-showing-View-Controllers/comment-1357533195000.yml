@@ -1,0 +1,9 @@
+_id: 52b8d57c-13bb-4546-ab5e-3c35cd4564ee
+_parent: /31-Days-of-iOS--Day-5-Programmatically-showing-View-Controllers
+message: "<p>I was just wondering, are Segues considered bad for any purpose? while following along with your tutorial I found Segues more intuitive as opposed to programmatically invoking a view. Plus there is a visual element in the story board that the Segues added which showed the navigation clearly.(which I liked better than programmatically invoking a view)</p>"
+name: Venkata Koppaka
+email: 15A66C321A62A5FB034EABDC10A03B25
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-01-07T04:33:15Z'

@@ -1,0 +1,9 @@
+_id: f3c0e9cc-b79d-409c-ae76-00472d2c4c29
+_parent: /Accessing-Twitter-API-v1-1-from-Mobile-Services-Scripts
+message: "<p>Hi This blog is mentioning how to access v1.1 using <a href=\"https://dev.twitter.com/docs/auth/oauth\" rel=\"nofollow noopener\" title=\"https://dev.twitter.com/docs/auth/oauth\">https://dev.twitter.com/doc...</a> right? But can we use <a href=\"https://dev.twitter.com/docs/auth/application-only-auth\" rel=\"nofollow noopener\" title=\"https://dev.twitter.com/docs/auth/application-only-auth\">https://dev.twitter.com/doc...</a> since it is simpler? Or does \"<a href=\"https://api.twitter.com/1.1/users/show.json?user_id=\" rel=\"nofollow noopener\" title=\"https://api.twitter.com/1.1/users/show.json?user_id=\">https://api.twitter.com/1.1...</a>\" not work with application only auth?</p><p>I am hoping to make the intergration simple. If you have sample to use application only auth for azure script. It will be really really helpful! :)</p>"
+name: Ganesh
+email: 10AEBDD1917C3502A8117DD6EA6770FA
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-11-27T06:47:03Z'

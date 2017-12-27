@@ -1,0 +1,9 @@
+_id: 2525cf5b-6c46-4680-9659-da1a7c5bb43d
+_parent: /Using-Existing-Databases-with-Windows-Azure-Mobile-Services-without-changing-the-Schema
+message: "<p>Try creating thew view after you generate the table.  There may have been a change to check and see if an existing item (even a view) exists with the name.  Alternatively, create the view with a different name, then after you create the table, go back in and switch the view name to match the table.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2015-05-15T14:26:10Z'

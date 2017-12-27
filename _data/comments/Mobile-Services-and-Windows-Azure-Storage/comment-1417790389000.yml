@@ -1,0 +1,9 @@
+_id: c32f191b-ac9b-448f-b933-79a0b3f332cf
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>I'm thoroughly disappointed with Microsoft on how hard it is to use Azure from iOS.  I am a long time .Net developer just getting into iOS, so it seemed like Azure was my best bet for cloud storage.  I have simple needs for this project - just a small table with basic insert and update and query abilities.  So Azure Table Storage seems perfect.  I have a strong preference to using a RESTful interface to keep my code simple and avoid using unnecessary SDKs.  However, after a week of trying it appears it's basically impossible to correctly build up the Signature String required by the REST interface for Table Storage - this is incredibly disappointing - a REST interface should be easy to call.</p><p>So my alternative is to use the SDK, but it turns out I can't call table storage directly from the SDK either - wow.  This means I would have to write a service layer, create a mobile service in Azure, pull in the SDK and then talk to that.  No thanks, I'll switch to Amazon and use their SDK to talk directly to DynamoDB.</p><p>I only leave this comment as the best way I can figure to give the feedback to Microsoft that their tooling to use Azure from iOS is greatly disappointing.</p>"
+name: Keith
+email: 1E18D6D9AF874D0081E265F28EE9A0D5
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-12-05T14:39:49Z'

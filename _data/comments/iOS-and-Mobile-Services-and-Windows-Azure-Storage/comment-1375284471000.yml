@@ -1,0 +1,9 @@
+_id: 1e357361-a2e2-4aba-91b7-aab06b2a806e
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Sorry for the slow reply Mosib.  If you're just doing queries against the built in SQL Storage (i.e. Mobile Services Tables) you'll use NSPredicates and the MSQuery object.  Take a look at the quick start todo application to see how a simple query is done and then you can look at the MSQuery reference here: <a href=\"http://www.windowsazure.com/en-us/develop/mobile/how-to-guides/work-with-ios-client-library/#query-object\" rel=\"nofollow noopener\" title=\"http://www.windowsazure.com/en-us/develop/mobile/how-to-guides/work-with-ios-client-library/#query-object\">http://www.windowsazure.com...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '2'
+hidden: ''
+date: '2013-07-31T15:27:51Z'

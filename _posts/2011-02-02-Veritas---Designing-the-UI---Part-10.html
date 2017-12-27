@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Veritas – Designing the UI – Part 10"
+title: "Veritas - Designing the UI - Part 10"
 date: Wed Feb 02 2011 11:40:00
 commentsOn: true
 status: publish
@@ -13,7 +13,7 @@ keywords: Veritas,Blog,Weblog,User Interface,Initial User Interface,Controller,s
 filepath: 2011-02-02-Veritas---Designing-the-UI---Part-10.html
 disqus_identifier: Veritas---Designing-the-UI---Part-10
 redirect_from:
-  - /Veritas-–-Designing-the-UI-–-Part-10/
+  - /Veritas---Designing-the-UI---Part-10/
 ---
 <p>Now that we’ve shown how to <a title="Incorporating MetaWeblogAPI" href="http://chrisrisner.com/Veritas-%E2%80%93-Incorporating-MetaWeblog-API-%E2%80%93-Part-9">incorporate MetaWeblog API</a>, we’re able to get data into our blog.&#160; This means that once we actually have a UI around our site, we can actually show off our blog.&#160; So today’s entry is going to create our basic UI.&#160; Important to note is that we’re not going to do anything REALLY fancy.&#160; Meaning that we’re not going to create any awesome templating engine or make it super easy to change the UI through any sort of administration engine.&#160; Hopefully we’ll do this down the road (so you wouldn’t have to mess with CSS if you wanted to change how the site looks or where different elements appear) but that’s beyond the scope of this entry.</p>  <p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" align="right" src="http://chrisrisner.com/upload/BlogMasterAndViewFolders.jpg" /></p>  <p>&#160;</p>  <p>The first thing we’re going to do is lay a few ground work pieces.&#160; Specifically, we need to add some folders beneath our Web projects Views folder.&#160; Then we’re going to create our master pages.&#160; Specifically we’re going to need a folder for the Admin section, the Blog section, and our home section.&#160; Then we’ll need both Admin and Site master pages.&#160; As you can see from the screenshot, we also have a Forum folder and Forum master page.&#160; We’re not going to do anything with these for a while yet but eventually we’ll add a forum to the engine.</p>  <p>&#160;</p>  <p>We aren’t going to do anything to the master pages yet, except add some links to the javascript files we’ll use.&#160; For now, we’re just going to add references to JQuery and JQueryUI.&#160; Now, we could easily grab the latest version of these scripts and plop them into our scripts folder.&#160; However, wouldn’t it be nice if we could just let someone else host these files?&#160; Someone that was capable of hosting tons of data and serving it up quickly and efficiently?&#160; Thankfully, <a title="Google Javascript APIs" href="http://code.google.com/apis/loader/">Google is going to help us out here</a>.&#160; After requesting an API key, you can load up several different javascript files without having to worry about it yourself.&#160; Here is what we’ve put in the head section of our master pages:</p>  <div class="csharpcode">   <pre class="alt"><span class="lnum">   1:  </span>&lt;script type=<span class="str">&quot;text/javascript&quot;</span> src=<span class="str">'https://www.google.com/jsapi?key=&lt;%: <br />                  (ViewData[&quot;BlogConfig&quot;] as BlogConfig).GoogleApiKey %&gt;'</span>&gt;&lt;/script&gt;</pre>
 

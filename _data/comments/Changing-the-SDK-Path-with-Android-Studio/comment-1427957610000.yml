@@ -1,0 +1,9 @@
+_id: 232df689-281b-4ef4-b28b-3fbd722165e7
+_parent: /Changing-the-SDK-Path-with-Android-Studio
+message: "<p>but, android studio is not creating SDK folder, in my drive. and asking point sdk target, how its possible,</p><p>its few problems i found, its taking time to load gradle process extra,</p><p>emulator is not working and Haxm installer is the big problem, bcz when i download it form sdk manger,, we need to manually instal by go to sdk folder where we install,</p><p>but I actually cant found it in android folder.. so its very terrible. I point it another sdk, which download in zip,, and open sdk manger and updated all things..</p><p>even, when I imported new project, it will open new IDE, why its new one, and errors</p><p>Directory index is not initialized yet for Project 'C:\\Users\\W2WTS\\AndroidStudioProjects\\Camera2Basic2' Camera2Basic2</p><p>Language level changes will take effect on project reload.</p><p>Would you like to reload project \"Camera2Basic2\" now?..</p><p>What hell is going on it...</p>"
+name: veeru
+email: FFD288450229A4EFC9CE7C89286371FC
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-04-02T06:53:30Z'

@@ -1,0 +1,9 @@
+_id: 5c8a15d6-2cef-4687-97b0-20a79b982c96
+_parent: /31-Days-of-iOS--Day-18-Opening-your-App-from-a-Website
+message: "<p>HI, i believe when you kill the App and re-launch using a URL link, the OpenURL delegate method is not called? Because I used it as a form of registration through clicking a link in my own app. When the user tapped the URL link while the app is not launched, we automatically log in using the data from the previous case. Is there a way to fix this?</p>"
+name: hairui
+email: 72F0E04527D53D63B4DC462AFDEDBB2E
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-10-09T08:50:51Z'

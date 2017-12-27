@@ -1,0 +1,9 @@
+_id: 84fedf20-0f1b-40a0-bb15-61283cb7f872
+_parent: /Authentication-with-Android-and-Windows-Azure-Mobile-Services
+message: "<p>Hi! Your code worked flawlessly until I had to switch to new mobileservices client library 2.0.1-beta, and now the handleRequest method signature in ServiceFilter changed, and I can't figure out how to fix it. Can you help?</p>"
+name: Paweł Grobelniak
+email: 170ECE154F56A1C61A5135A7F06196C8
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-10-29T18:45:35Z'

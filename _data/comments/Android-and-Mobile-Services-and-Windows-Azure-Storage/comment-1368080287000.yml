@@ -1,0 +1,9 @@
+_id: d7bca950-7c1b-4f82-8d6c-01b0de6c8f78
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>This is the error from the lob tab<br>Error in script '/table/BlobBlobs.insert.js'. Error: The provided URI \"http://ipolice/\" is invalid. [external code] at insert (&lt;/table&gt;:9:29) at &lt;/table&gt;:1:8<br>Is it because i insert the wrong application key and account name?<br>Is the application key the key from the mobile service tab or the primary access key from the storage tab? And i reckon the account name should be the name of the storage/mobile service..</p>"
+name: βrγΑΠ♠ΤΕø
+email: D41D8CD98F00B204E9800998ECF8427E
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2013-05-09T06:18:07Z'

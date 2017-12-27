@@ -1,0 +1,9 @@
+_id: 9b1d5a6a-6509-4e28-b074-7bc87f933808
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>Sorry for the delay on replying to you Stephen.  I'm not entirely sure but I can certainly follow up and try to find out.  You should be able to use ADAL on Xamarin (I think you could also connect to Auth0 if that doesn't work).  In theory you could then connect directly to the endpoint for the Service Bus Relay and verify the security of the token at the endpoint the relay points to.  Is that basically what you want to do?</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2015-12-01T21:30:16Z'

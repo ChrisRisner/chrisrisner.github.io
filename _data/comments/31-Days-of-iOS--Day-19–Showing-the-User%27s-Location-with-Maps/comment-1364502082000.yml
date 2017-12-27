@@ -1,0 +1,9 @@
+_id: 9b932ad9-1ea9-4ae6-ba26-675c1e4cc172
+_parent: /31-Days-of-iOS--Day-19-Showing-the-User%27s-Location-with-Maps
+message: "<p>I followed the point by point, tutorial letter by letter, however despite having entered \"self.mapView.showsUserLocation = YES;\" under \"[super viewDidLoad];\", I am NOT asked permission to use my location. Only when I click \"Shows User location\" in the Attributes Inpsector, does it work. Any idea as to why?</p>"
+name: Lars
+email: B47B94871DC769C19CA29D1334E94FE4
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-03-28T20:21:22Z'

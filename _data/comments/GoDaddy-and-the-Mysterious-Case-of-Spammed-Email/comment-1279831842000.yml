@@ -1,0 +1,9 @@
+_id: 5c9df31f-08be-4698-8ed2-c3aaac3fd484
+_parent: /GoDaddy-and-the-Mysterious-Case-of-Spammed-Email
+message: "<p>Sad to see that so many other people are running into the same problem.  I actually had a conversation with a friend that works for GD and he said that \"spammers had sent emails as though they were coming from my domain\" which is what was causing my emails to get blacklisted and that it wasn't GD's mail relays causing issues.    I'm pretty sure that's both not likely and not possible.  If it wasn't the mail relays, my emails should have been treated like spam whether sent through the mail relay or through Google Apps interface and they weren't.  Furthermore, I would assume I'd have gotten some sort of email from someone saying that there was spam coming from my domain.    Sadly as long as the complainers are in the minority, they don't have any real motivation to change.</p>"
+name: Chris
+email: 285584B876F2D45CFBBFB29CE656FDE0
+url: ''
+replying_to: ''
+hidden: ''
+date: '2010-07-22T20:50:42Z'

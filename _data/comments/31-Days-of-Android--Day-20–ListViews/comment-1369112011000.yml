@@ -1,0 +1,9 @@
+_id: c8f524e5-04fd-40ff-ba33-5e857753f5f6
+_parent: /31-Days-of-Android--Day-20-ListViews
+message: "<p>Hi,</p><p>I have to develop an app where I have 100 songs. When the user clicks on any song, the window should display a text file which has the song's lyrics(i have 100 text files for 100 songs). The problem is I don't know how to display song1.txt when song1 item in the list view is clicked. Can you help me please? Thanks in advance.</p>"
+name: Rasha 
+email: 71A937F2A99322167FD273F58DD3F0C8
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-05-21T04:53:31Z'

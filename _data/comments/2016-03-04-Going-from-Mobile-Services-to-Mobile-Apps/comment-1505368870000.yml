@@ -1,0 +1,9 @@
+_id: efccaa90-fe75-4f07-89b4-05cbbdcdcfa4
+_parent: /2016-03-04-Going-from-Mobile-Services-to-Mobile-Apps
+message: "<p>Hi, Chris! Thank you for this very useful content. I've just read the \"Android and Mobile Services and Windows Azure Storage\".  I know that \"Mobile Services\" are now \"Mobile Apps\" and I've started a new Android app using Mobile Apps. My problem is that I want to be able to store and sync image files, not only data. I guess that I cannot simply insert, update and delete image files like I do with the other data types. How can I achieve this, generally? Can I still follow your tutorial I mentioned above? Should I combine another Azure service along with Mobile Apps?  Please, any hint to the correct direction will be very useful to me. Thank you!</p>"
+name: Lazaros Papadopoulos
+email: 379C45AC6C744CD44877261FDABD0D6B
+url: ''
+replying_to: ''
+hidden: ''
+date: '2017-09-14T06:01:10Z'

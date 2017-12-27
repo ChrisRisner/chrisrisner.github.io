@@ -1,0 +1,9 @@
+_id: 91d1eafa-19bd-40ef-88b2-4226a9accbee
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>Hi, awesome stuff. However I get exceptions from the MobileService client saying that the token is invalid:</p><p>Error: The authentication token has an invalid signature.</p><p>It is much shorter than the token I get if I authenticate with Google. Is it supposed to work still? Has Microsoft changed something on their side perhaps? I would really love to get this working. Any ideas? Thanks /Magnus</p>"
+name: Magnus
+email: 76AEE39C72E745DB408C1B25005252B2
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-11-30T13:34:08Z'

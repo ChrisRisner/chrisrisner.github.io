@@ -1,0 +1,9 @@
+_id: 405a79a7-720e-4b30-a650-8c33bbc52c9a
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>i was download and run the source code.but it wont works.I am unable to login facebook account as well as remaining can you help me chris this is the error.<br>AuthenticationDemo[98973:660987] Authentication Error: Error Domain=NSURLErrorDomain Code=-1003 \"A server with the specified hostname could not be found.\" UserInfo={NSErrorFailingURLStringKey=<a href=\"https://mymobileservicename.azure-mobile.net/login/facebook\" rel=\"nofollow noopener\" title=\"https://mymobileservicename.azure-mobile.net/login/facebook\">https://mymobileservicename...</a>, _kCFStreamErrorCodeKey=8, NSErrorFailingURLKey=<a href=\"https://mymobileservicename.azure-mobile.net/login/facebook\" rel=\"nofollow noopener\" title=\"https://mymobileservicename.azure-mobile.net/login/facebook\">https://mymobileservicename...</a>, NSLocalizedDescription=A server with the specified hostname could not be found., _kCFStreamErrorDomainKey=12, NSUnderlyingError=0x7d235e10 {Error Domain=kCFErrorDomainCFNetwork Code=-1003 \"A server with the specified hostname could not be found.\" UserInfo={_kCFStreamErrorCodeKey=8, NSErrorFailingURLStringKey=<a href=\"https://mymobileservicename.azure-mobile.net/login/facebook\" rel=\"nofollow noopener\" title=\"https://mymobileservicename.azure-mobile.net/login/facebook\">https://mymobileservicename...</a>, NSErrorFailingURLKey=<a href=\"https://mymobileservicename.azure-mobile.net/login/facebook\" rel=\"nofollow noopener\" title=\"https://mymobileservicename.azure-mobile.net/login/facebook\">https://mymobileservicename...</a>, NSLocalizedDescription=A server with the specified hostname could not be found., _kCFStreamErrorDomainKey=12}}}</p>"
+name: ShivaChowdary Boddapati
+email: 9B80DC19205DADC8C5CE9E4788ED9A7D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2017-08-10T09:35:02Z'

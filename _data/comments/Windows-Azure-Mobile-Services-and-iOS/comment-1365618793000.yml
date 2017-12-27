@@ -1,0 +1,9 @@
+_id: fd6e0977-1d71-4268-be67-947600c4cc40
+_parent: /Windows-Azure-Mobile-Services-and-iOS
+message: "<p>Thanks Hector.  You'll actually want to take a look at the official iOS SDK for Mobile Services <a href=\"http://www.windowsazure.com/ios\" rel=\"nofollow noopener\" title=\"http://www.windowsazure.com/ios\">http://www.windowsazure.com...</a>.  That has all of the methods built in to do all the data operations (including deleting) so you don't even have to worry about setting the HTTP Methods.  For your reference though, here is the Delete API reference which shows how the command would need to go over (if you weren't using the SDK) - <a href=\"http://msdn.microsoft.com/en-us/library/windowsazure/jj710107.aspx\" rel=\"nofollow noopener\" title=\"http://msdn.microsoft.com/en-us/library/windowsazure/jj710107.aspx\">http://msdn.microsoft.com/e...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2013-04-10T18:33:13Z'

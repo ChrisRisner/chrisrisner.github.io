@@ -1,0 +1,9 @@
+_id: 14091942-b6da-4f43-bc1c-94b879e1d556
+_parent: /Accessing-Resources-Secured-by-Azure-Active-Directory-with-iOS-and-Android
+message: "<p>I would take a look at using the ADAL libraries which should help make polling the ADAL Graph API easier: <a href=\"http://blogs.technet.com/b/ad/archive/2014/01/30/preview-release-of-ios-and-android-sdk-now-available.aspx\" rel=\"nofollow noopener\" title=\"http://blogs.technet.com/b/ad/archive/2014/01/30/preview-release-of-ios-and-android-sdk-now-available.aspx\">http://blogs.technet.com/b/...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '2'
+hidden: ''
+date: '2014-04-17T17:08:16Z'

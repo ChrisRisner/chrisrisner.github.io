@@ -1,0 +1,9 @@
+_id: 0c4c823c-52db-45de-b830-7cd43f82eaff
+_parent: /MVC2---Adding-Data-Annotation-Validation-for-Entity-Framework-Entities
+message: "<p>Wait until they drop .net 4.0 later this week / today.  Don't use Entity Framework 3.5 and MVC2.  They work very very poorly together.</p>"
+name: Chris
+email: 285584B876F2D45CFBBFB29CE656FDE0
+url: ''
+replying_to: ''
+hidden: ''
+date: '2010-04-12T06:40:33Z'

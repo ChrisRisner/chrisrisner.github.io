@@ -1,0 +1,9 @@
+_id: d25e2fc3-a58a-418e-893f-c4c9c104a996
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Hernado, this sample is using the iOS SDK though getTable will still work (it's been deprecated but still works fine).  If i have a chance, I'll update the code in GitHub but it should be pretty trivial for you or anyone that pulls it down to do it for now as well.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '8'
+hidden: ''
+date: '2014-01-28T22:31:52Z'

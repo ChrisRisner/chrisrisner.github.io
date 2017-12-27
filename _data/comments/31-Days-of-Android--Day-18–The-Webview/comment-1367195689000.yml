@@ -1,0 +1,9 @@
+_id: bd87ab89-d83b-466d-ba38-b465ee4fde89
+_parent: /31-Days-of-Android--Day-18-The-Webview
+message: "<p>Hi Chris,</p><p>I liked the clear style of this tutorial very much! Reading and understanding it is a breeze!<br>The only question that I have is about this line:<br>\"If you were trying to navigate between locally built web pages, you’d need to override this functionality.\"<br>It seems to me that override is needed only when downloading html pages from the web, but won't hurt anything with local files either.<br>Also, please expand your web view example, if possible, with an HTML5 local storage example, thanks in advance!<br>Best Regards!<br>Nick</p><p>P.S. 2/18/2014<br>Recently I stumbled a couple of times to a situation, which proved to me that it is much better to add the extra line of code indeed, and to override the functionality!...<br>Nick</p>"
+name: AndroAppDev
+email: 46D05087E96EF3126BDCB0A6CD728EAF
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-04-29T00:34:49Z'

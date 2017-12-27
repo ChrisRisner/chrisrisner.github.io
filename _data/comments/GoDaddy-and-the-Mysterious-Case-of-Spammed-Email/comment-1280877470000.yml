@@ -1,0 +1,9 @@
+_id: a45be238-df4b-43c2-a25f-6c88511655e1
+_parent: /GoDaddy-and-the-Mysterious-Case-of-Spammed-Email
+message: "<p>The problem is you are setting the from address in the email to a google hosted domain but Google's servers did not send the email, so when their servers see the inbound email they assume its spam. You can change the from address to something not hosted by Google or set your whitelist to allow the email.</p>"
+name: Suffered The Same
+email: 03D1258AA5E5CAA0A427131314A5A73A
+url: ''
+replying_to: ''
+hidden: ''
+date: '2010-08-03T23:17:50Z'

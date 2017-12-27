@@ -1,0 +1,9 @@
+_id: 8aa23e0c-a8bf-417c-aff1-9b16ac29dc02
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>It should be a POST when you're sending the data up to blob storage.  So there's that and then I'd make sure you're definitely sending up data.  Nothing will fail if you try to send up an empty NSData object.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2014-07-03T16:20:07Z'

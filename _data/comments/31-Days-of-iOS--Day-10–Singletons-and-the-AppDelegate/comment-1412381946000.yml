@@ -1,0 +1,9 @@
+_id: 8cb77009-0888-4944-8cb0-534a0e296a5a
+_parent: /31-Days-of-iOS--Day-10-Singletons-and-the-AppDelegate
+message: "<p>Chris, I've just read a dozen discussion online about singletons and not a single one (sorry) explained how to use them when they are created. Your sentence \"  After you’ve added an import statement for MySingleton.h to ViewController.m we can change our methods to use the singleton:.\" And the following code block explain it all.  I'll single you out for giving me a singular insight. </p>"
+name: Tangobango
+email: A594B0CBDC63AAC0A3F695292FD6DCC7
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-10-04T00:19:06Z'

@@ -1,0 +1,9 @@
+_id: 718b382f-4358-4e6a-8577-1c5118bf8511
+_parent: /Performing-Multiple-SQL-Queries-with-queryRaw-in-Azure-Mobile-Services-Scripts
+message: "<p>Hi Chris.  Thanks for another great post.  You probably already know about it, but I have also found the async.js node module to be quite handy for achieving multiple sql calls (and other functionality) with just one return on success or error (<a href=\"https://github.com/caolan/async)\" rel=\"nofollow noopener\" title=\"https://github.com/caolan/async)\">https://github.com/caolan/a...</a>.  So far have used the parallel and waterfall methods and seems to be doing the job.</p>"
+name: Annie Watkins
+email: 94B1E801B927F810B448B7BB9AAB0C52
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-12-18T21:15:58Z'

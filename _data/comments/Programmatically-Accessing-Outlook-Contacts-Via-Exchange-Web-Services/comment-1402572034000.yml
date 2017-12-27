@@ -1,0 +1,9 @@
+_id: 0f487d7d-db3e-4719-9372-1a8a86fc1eb3
+_parent: /Programmatically-Accessing-Outlook-Contacts-Via-Exchange-Web-Services
+message: "<p>I am getting error when I use System.Net.CredentialCache.DefaultCredentials instead of new NetworkCredential(\"user name\", \"pwd\", \"<a href=\"http://domain.com\" rel=\"nofollow noopener\" title=\"domain.com\">domain.com</a>\");<br>I want to read the emails of current logged in users<br>How to do it</p>"
+name: kk
+email: F63DD949ED263EF4CCD17D73A3E1F798
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-06-12T11:20:34Z'

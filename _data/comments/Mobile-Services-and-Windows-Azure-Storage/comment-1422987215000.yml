@@ -1,0 +1,9 @@
+_id: 4f8d2c1e-f11c-4347-ab3a-f53282451506
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>My recommendation would be to do the following:  <br>1.  Upload your table data to an endpoint (like we're doing above).<br>2.  The script for that endpoint should first get a Blob SAS URL (as explained below) and add that URL to the table data (so the data inserted into table storage will contain the URL for the image).<br>3.  The script endpoint should then handback to the client the SAS URL (again as above)<br>4.  From the client when you receive that data, you can then post the image to the SAS URL.<br>5.  When you then query to retrieve a row, you'll hand the data back to the client which will include the URL for the blob (if you want to protect the data, you'll have to get a SAS URL each time here)<br>6.  The client will then load the images via the URL as needed (I wouldn't recommend trying to pull the image data from the Mobile Services endpoint and return it from there)</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '15'
+hidden: ''
+date: '2015-02-03T18:13:35Z'

@@ -1,0 +1,9 @@
+_id: 6ccbb4e7-ff7a-44e8-8464-5fbfcaf575c2
+_parent: /Adding-Auth-and-Logging-out-of-an-iOS-Windows-Azure-Mobile-Services-App
+message: "<p>In Android, the code would look like this:</p><p>CookieSyncManager.createInstance(mContext);<br>CookieManager cookieManager = CookieManager.getInstance();<br>cookieManager.removeAllCookie();</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-04-15T06:19:42Z'

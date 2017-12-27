@@ -1,0 +1,9 @@
+_id: 29cc16c1-deab-4ec6-a5f6-4a5ca8354ec7
+_parent: /Importing-Comments-into-Disqus
+message: "<p>Hi ChrisThanks for this EXCELLENT post. Importing custom comments is poorly documented in Disqus and their support is also not useful, but I guess I am trialling the free version of Disqus.I have tried a few imports and got zero comments imported. Could not guess why. Agree with your observations above. <br>What I eventually discovered on Google is <a href=\"http://import.disqus.com\" rel=\"nofollow noopener\" title=\"http://import.disqus.com\">http://import.disqus.com</a> . If you log in to your Disqus account, then go to  <a href=\"http://import.disqus.com\" rel=\"nofollow noopener\" title=\"http://import.disqus.com\">http://import.disqus.com</a>  and select your forum, you can see two tabs, one of which is 'All Imports'. If you click on that, you will see the error message and line of your XML that broke.Hope this helps someone else.<br></p>"
+name: Dex
+email: A0F6A68FFF69A58FA78E6024C63AAE60
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-07-03T03:44:19Z'

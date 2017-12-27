@@ -1,0 +1,9 @@
+_id: cee5cc83-fc7e-45ed-8d93-ad705fc858b2
+_parent: /31-Days-of-Android--Day-4-Our-First-App
+message: "<p>when i add this</p><p>lblTextViewOne.setText(R.string.test_one);<br>this comes which hovers below test_one<br>test_one cannot be resolved or is not a field</p>"
+name: varshinee
+email: 270187BE437FC4AEEE94BC18BCDC753E
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-07-28T03:22:56Z'

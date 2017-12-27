@@ -1,0 +1,9 @@
+_id: 5aedc587-ce2d-4771-b777-4f3511e5213c
+_parent: /Connecting-an-Existing-Database-to-Windows-Azure-Mobile-Services
+message: "<p>Using a Hybrid connection will be safer than just exposing your on-premises SQL Server to the world for what it's worth.  Out of the box Azure Mobile Apps doesn't really support switching connection strings on demand.  You could build this out but you'd need to extend the server side SDK you're using.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '7'
+hidden: ''
+date: '2017-03-10T17:13:41Z'

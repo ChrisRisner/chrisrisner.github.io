@@ -1,0 +1,9 @@
+_id: 4bf032a4-ab37-468e-929e-571e8309f25d
+_parent: /31-Days-of-Android--Day-7-Sharing-Data-Between-Activities
+message: "<p>Thanks Andrew.  With Android it's better to always check if something has been unloaded / is null since you don't explicitly control when things will be collected, Android does.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2014-08-29T20:28:25Z'

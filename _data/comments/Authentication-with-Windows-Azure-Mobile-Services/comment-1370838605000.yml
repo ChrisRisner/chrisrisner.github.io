@@ -1,0 +1,9 @@
+_id: bf56afbd-6716-445b-83d7-0c592a9ea38c
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>Excellent tutorial Chris! Thanks so much.   I've been struggling with implementing a custom provider since January.    A custom provider is the ONLY option for most companies and government agencies, so this is a much needed example.</p><p>I do have one question about your tutorial.   When creating the tables, you say:<br>\"Click the + Create button at the bottom of the screen and create a table named Accounts with the default permissions.  Do the same thing and create tables named AuthData and BadAuth.\"</p><p>Doesn't that leave the Account table open to read for anybody with an application key?   What are the most restrictive permissions we can put on the AuthData and Accounts table without breaking the provider?</p>"
+name: Scott W
+email: 22D5EF7E2D9BAD11248E7C14F33EAFEE
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-06-10T04:30:05Z'

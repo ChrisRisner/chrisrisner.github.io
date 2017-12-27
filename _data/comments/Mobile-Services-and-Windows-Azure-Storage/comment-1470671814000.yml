@@ -1,0 +1,9 @@
+_id: fa70c361-d4a4-437d-8a69-898cc08851e9
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>By default, Azure Mobile Services (and now Azure App Service Mobile Apps) are built to work very well with Azure SQL Database.  Absolutely nothing stops you from using Azure Table Storage, it just requires some additional work from you.  Read over this so you'll better understand how to use Table Storage from Mobile Apps: <a href=\"https://azure.microsoft.com/en-us/blog/azure-mobile-apps-september-2015-update/\" rel=\"nofollow noopener\" title=\"https://azure.microsoft.com/en-us/blog/azure-mobile-apps-september-2015-update/\">https://azure.microsoft.com...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '20'
+hidden: ''
+date: '2016-08-08T15:56:54Z'

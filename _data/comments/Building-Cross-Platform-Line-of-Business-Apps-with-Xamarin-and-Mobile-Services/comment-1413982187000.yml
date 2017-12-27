@@ -1,0 +1,9 @@
+_id: 474994ce-b2fd-4d61-9b6e-d5340c84fa38
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>I really like your naming and approach for PlatformSpecific -- I had something similar but your name and implementation is better.  Is there a reason why you make GetInstance a method instead of a property (e.g. PlatformSpecific.Instance.SomeMethod)?</p>"
+name: Aaron
+email: E22DCE3E914D9E426762222A3D36DD76
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-10-22T12:49:47Z'

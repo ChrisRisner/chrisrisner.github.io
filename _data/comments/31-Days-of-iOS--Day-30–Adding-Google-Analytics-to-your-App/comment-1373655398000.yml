@@ -1,0 +1,9 @@
+_id: 82050338-e50b-4e25-99e1-77d3f850b4ee
+_parent: /31-Days-of-iOS--Day-30-Adding-Google-Analytics-to-your-App
+message: "<p>Why r setting the tracked view name on viewDidLoad? Google suggests that you put it on viewDidAppear. Your solution is working better for me as I'm getting the \" Tracked view controller missing view name.\" error when I do it in the Google way. Thanks!</p>"
+name: Hendi
+email: 7E711944AE858B6D92DC4E0D31256C4D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-07-12T18:56:38Z'

@@ -1,0 +1,9 @@
+_id: e8cdcfc5-a08d-4b86-af2e-99ce0d15aeb0
+_parent: /iOS-and-Windows-Azure-Communication-using-SignalR
+message: "<p>Provided the app is running on the device when you send the information, it certainly could replace the need for push notifications.  However, when the app is in the background, you wouldn't be able to deliver information to it unless your listener could somehow run in a background thread that wouldn't be killed when your app was backgrounded.  At this time, I don't think that's possible (AFAIK).</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2012-12-21T21:13:12Z'

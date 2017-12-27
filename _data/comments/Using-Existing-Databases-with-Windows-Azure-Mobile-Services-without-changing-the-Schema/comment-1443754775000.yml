@@ -1,0 +1,9 @@
+_id: 021bddb4-f365-4998-a759-92bf61f9db9d
+_parent: /Using-Existing-Databases-with-Windows-Azure-Mobile-Services-without-changing-the-Schema
+message: "<p>Hi Chris,<br>you seem like the appropriate person to answer some of my queries (pun intended).</p><p>I am encountering a similar situation as you have given in your example. That is however, there are existing primary keys that are not a nvarchar(36) GUID and would not map to the required Id column. On top of this I am requiring the extra data sync system property columns; CreatedAt, UpdatedAt, Deleted, Version.</p><p>From reading this post I see that I could potentially modify the backed sql DB to give the required tables the appropriate system property columns and then map them to views in my services schema. Using the required id column as an index for the service and leaving the primary keys as is, to maintain compatibility with the other applications using the existing database.</p><p>My question is then, given my added requirements and constraints, do you consider this approach still best practice?</p><p>And also, does interfacing with the tables through views in this manner come with any limitations as to what operations can be performed? I do realise you state that all CRUD operations work through the view - is this only the case where all not-null or defaulted columns are included in the view?</p><p>Cheers.</p>"
+name: Montgomery Anderson
+email: 188606F390736158AB5FB903F62E67E4
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-10-02T02:59:35Z'

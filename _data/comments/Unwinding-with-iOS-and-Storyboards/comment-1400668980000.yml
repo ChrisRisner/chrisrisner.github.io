@@ -1,0 +1,9 @@
+_id: 730088fb-254f-472f-bec7-78ef6adcf0ea
+_parent: /Unwinding-with-iOS-and-Storyboards
+message: "<p>Thanks Chris for the tutorial.  When I unwind from the last VC to the first VC, the UIViewController dealloc: methods in the middle VC do not get invoked.  Do you know what maybe the problem?</p>"
+name: Lộc Đ. Phạm
+email: 0AF55F078D416192ED174EEE11DBC435
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-05-21T10:43:00Z'

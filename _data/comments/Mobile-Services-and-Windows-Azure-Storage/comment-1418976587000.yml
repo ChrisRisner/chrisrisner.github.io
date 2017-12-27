@@ -1,0 +1,9 @@
+_id: 6433ffe3-1fb4-4d39-87c0-7aadd28b64f8
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>We do need an SDK for talking directly to storage from iOS, however, talking to any storage system (including Azure Table Storage, and DynamoDB) directly from your mobile app is always risky, especially if you intend to release the app to the public.  If you don't intend to release an app publicly, than I can't imagine you'd be making more requests than you'd easily be able to do in the free tier of Mobile Services.  Then you'd have a proxy which would protect you further from man-in-the-middle attacks as well.   The best way to leave feedback that will reach everyone at Azure is to fill something out at <a href=\"http://feedback.azure.com\" rel=\"nofollow noopener\" title=\"http://feedback.azure.com\">http://feedback.azure.com</a>.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '12'
+hidden: ''
+date: '2014-12-19T08:09:47Z'

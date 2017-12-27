@@ -1,0 +1,9 @@
+_id: 4cfe1ed0-479d-4bda-80bd-a088969e5774
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>Great article and I got it working on my side. Usually we store user's information from Facebook, Twitter, Microsoft and Google, So we can use it later rather than sending the request again to get the same information again and again. What I would like to do is keep every user's information into one table like accounts. Accounts will have the information about every user coming from different providers(Facebook, Twitter and Custom etc). This would be ideal situation for me so if I want to get data later any time I would know to go to Accounts.</p><p>Please give me pointers on how to do the above scenario.</p><p>Thanks,<br>Attiqe</p>"
+name: Attiqe Ur Rehman
+email: A3E93AC07B84279A1FF73B6B9C02AC51
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-09-13T08:20:24Z'

@@ -1,0 +1,9 @@
+_id: 5b48e57b-7369-420a-a064-ace7bfeec08e
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Thank you so much! This is a really wonderfull guide!</p><p>It works like a charm, even though I'm receiving a little error, this is the log from my mobile service:</p><p>Error</p><p>Error in script '/table/BlobContainers.insert.js'. Error: Container name format is incorrect.<br>    [external code]<br>    at insert (&lt;/table&gt;:11:21)<br>    at &lt;/table&gt;:1:8<br>    [external code]</p><p>As you can see, this happens every time I'm trying to start a Blob Storage Container. <br>At Eclipse I receive the following log: 03-19 16:52:44.518: E/StorageService(18253): {\"code\":500,\"error\":\"Error: Internal Server Error\"}</p><p>Doing a little experiment I found out that if I modify \"BlobContainer\" table's permission everything work, but when I set them back to default:<br>Insert, delete &amp; update = Anyone with application key<br>Read = everyone<br>The problem came back and Eclipse shows the same error.<br>Any suggestions?<br>Thank you!</p>"
+name: Francisco Tineo
+email: 3190F293CD2933B4110F06C746D03707
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-03-19T21:00:45Z'

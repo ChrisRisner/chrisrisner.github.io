@@ -1,0 +1,9 @@
+_id: 4812fec8-ad25-49eb-8871-ae00c341e0bd
+_parent: /Installing-extjwnl-to-a-MySQL-Database-on-OS-X-or-Linux
+message: "<p>Hi Alexander.  Sorry for my slow reply.  I just took a crack at installing Wordnet to MySQL on Windows.  It's not too difficult but does require a few steps:<br>1.  Install WordNet for windows: <a href=\"http://wordnet.princeton.edu/wordnet/download/current-version/#win\" rel=\"nofollow noopener\" title=\"http://wordnet.princeton.edu/wordnet/download/current-version/#win\">http://wordnet.princeton.ed...</a><br>2.  Install extJWNL <a href=\"http://extjwnl.sourceforge.net/#download\" rel=\"nofollow noopener\" title=\"http://extjwnl.sourceforge.net/#download\">http://extjwnl.sourceforge....</a><br>3.  Update the file_properties.xml file to point at your installation of WordNet.  This file will be located at extJWNL-InstallPath/src/extnwnl/main/resources/net/sf/extjwnl/file_properties.xml.  You need to update the dictionary_path near the bottom of the file.  For example, mine was set to:  &lt;param name=\"dictionary_path\" value=\"C:\\Program Files (x86)\\WordNet\\2.1\\dict\"/&gt;<br>4.  Create a new database schema in MySQL (for example: jwnl). <br>5.  Create a new user and grant it full access to the jwnl database (set the username and password to jwnl for now).  <br>6.  Open a command line prompt and navigate to the extJWNL root directory.  <br>7.  Execute the following command:<br>.\\bin\\dict2db .\\src\\extjwnl\\main\\resources\\net\\sf\\extjwnl\\file_properties.xml .\\src\\utilities\\main\\sql\\create.sql com.mysql.jdbc.Driver \"jdbc:mysql://localhost/jwnl?user=jwnl&amp;password=jwnl\"</p><p>That should do it for you.  Let me know if you have any issues and I'll see what I can do to help.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2011-11-21T01:43:07Z'

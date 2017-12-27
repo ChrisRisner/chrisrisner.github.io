@@ -1,0 +1,9 @@
+_id: b280a3a7-483d-4e57-abf5-b207b398c2f3
+_parent: /2015-12-07-Using-Fragments-with-the-Navigation-Drawer-Activity
+message: "<p>Ok, I just winged it and hoped for the best! :-)</p><p>Normal layout and -large layout attached as pics.  In OnCreate (and similarly in OnNavigationItemSelected) I use findViewById to see which view is loaded and set a class level variable to indicate single or multi pane.  The class level variable is set in OnCreate and used in OnNavigationItemSelected.</p><p>If multi pane, I use fragment manager to load both fragments into the main and detail frames.  I take care to handle the fact that I initially pass null into the new instance constructor on my detail fragment.</p><p>Hope I didn't miss anything?!</p>"
+name: Michelle McCabe
+email: 58A7D960E374C974983511116EA1B290
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2016-08-09T12:25:00Z'

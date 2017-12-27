@@ -1,0 +1,9 @@
+_id: fad82fff-493b-4517-94c3-4e7c78957fa8
+_parent: /Unwinding-with-iOS-and-Storyboards
+message: "<p>It's possible to do a unwind segue for two UIViewControllers that are not from the same UINavigationController?</p><p>I was trying this, but it does not work, the error it throws is that UIViewController doesn't belong to the same UINavigationController</p>"
+name: origds
+email: E63B3BC0E9EDE49592F0C16FC287DF1D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-09-26T20:12:32Z'

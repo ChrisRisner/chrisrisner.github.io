@@ -1,0 +1,9 @@
+_id: 9e463945-8814-47f0-b2fc-25e11a89890c
+_parent: /Authentication-with-Android-and-Windows-Azure-Mobile-Services
+message: "<p>If i copy the code into another project, it gives me a ClassCastException. android.app.Application cannot be cast to com.xxxxxx.xxxxxxx.AuthenticationApplication</p>"
+name: Jinx
+email: A3E32FD357DDA2DC8C0F4EDAA57922D3
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-09-13T17:14:30Z'

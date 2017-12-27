@@ -1,0 +1,9 @@
+_id: 8e48a1db-e3c6-4c60-ae46-47505f210228
+_parent: /31-Days-of-iOS--Day-5-Programmatically-showing-View-Controllers
+message: "<p>In so far as I know, segues are not considered bad.  Prior to using storyboards, developers had separate xib files for each View Controller and didn't have segues.  While I think using storyboards (and segues) is the new \"default\" it's still possible to showing and hiding views programmatically.  It's something that not everyone will do or need to do, but something that's worth covering for the cases where it's required (i.e. presenting a view that's part of a framework, etc)</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '2'
+hidden: ''
+date: '2013-01-07T18:15:51Z'

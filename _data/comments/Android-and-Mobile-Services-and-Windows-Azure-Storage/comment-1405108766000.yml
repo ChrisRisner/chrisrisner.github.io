@@ -1,0 +1,9 @@
+_id: af4c24b0-2543-43aa-a9a0-1c3048b317b2
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi - thanks for all the tutorials. I'm new to the game and learning a ton. Struggling to make this app work - probably making a stupid error.<br>Everything is fine through to the dialog where you select an image to upload. I am able to select an image but when I press create - to create the blob. Nothing happens when the create button is pressed. I checked the dashboard and the container seems to have been created but not the blob. I double checked I got all the scripts right. I can't see anything off in the client code - but then I'm not deep enough to error check that other than for basic mistakes. There are no build issues or error messages.<br>Any thoughts?<br>Thanks!</p>"
+name: dexternero
+email: 246243051DF8C24D20A0A3A50C496526
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-07-11T19:59:26Z'

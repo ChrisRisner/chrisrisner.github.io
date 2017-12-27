@@ -1,0 +1,9 @@
+_id: 82d09e23-4609-4abc-824a-24eeb079c354
+_parent: /31-Days-of-iOS--Day-4-Working-with-Multiple-View-Controllers-and-Storyboards
+message: "<p>Tried this in v7.1 and did this instead - dragged 'Navigation Bar' to the 'View Controller Scene' pane, which added a 'Root View Controller Scene' and a 'Navigation Controller Scene' in that same pane, and placed a 'Navigation Controller' and 'Root View Controller' on the Main.storyboard layout. I then added a 'Navigation Bar' to the top of the 'View' (above Hello World!) and placed a 'Bar Button Item' on that bar. The 'Story Board' looks similar, but no link is shown between the Nav &amp; View. What did I miss?</p><p>The dialog to add a file is a little different, but easy enough to parse. However, I didn't get a \"initWithNibName\" when I created the file. Is this a depreciated function? (apparently so, it works without it...)</p><p>In the \"Segue Action Selector\", both modal and push are listed as depreciated. I used it anyway, and will see what happens... When I used Push (for Item button), it cratered in main, so I changed it's Segue to 'Show (e.g. Push)' and it transitioned to the new view, but without a 'Back' button, and the Close Modal button worked... I then changed the \"Show New View\" Segue from 'Modal' to 'Present Modally', and it all works. It also dropped the 'depreciated' warnings. 8)</p>"
+name: kking85743
+email: 1ADEE9ECFE20DD88817B1B3CD9C2A3D7
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-10-24T21:12:52Z'

@@ -1,0 +1,9 @@
+_id: ebdca9a9-5b88-4718-8e35-b128a4d3cc18
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Thank you for quick response.</p><p>I went through the article but it's too complex for new bee like me. Is it possible for you to come up with step by step article in future days on this topic? I am sure its most common scenario. In my case I am storing device temperature (IoT) in azure table storage through event hub. Now I want to pull data/push data from mobile clients like android/iOS.</p>"
+name: Deepak Rao
+email: 27F28AE1CEDF6909E455FD2F7AE431BA
+url: ''
+replying_to: '20'
+hidden: ''
+date: '2016-08-10T11:27:50Z'

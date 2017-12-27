@@ -1,0 +1,9 @@
+_id: 19f84e5a-35f7-4065-afa0-2794fe9801cb
+_parent: /31-Days-of-iOS--Day-4-Working-with-Multiple-View-Controllers-and-Storyboards
+message: "<p>That code works?  Completion expects a block and not a boolean I would think.  I'd be curious what error you were getting when you passed in NIL.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2014-08-27T23:10:16Z'

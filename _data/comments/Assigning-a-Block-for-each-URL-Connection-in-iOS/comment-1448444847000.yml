@@ -1,0 +1,9 @@
+_id: a1588765-5864-482e-b99c-1bb6dd76e11f
+_parent: /Assigning-a-Block-for-each-URL-Connection-in-iOS
+message: "<p>It was a useful post. Thanks.<br>few improvements/updates to my code<br>1) Using IOS 9, stringWithFormat changed a little=&gt;  NSString* connectionHash = [NSString stringWithFormat:@\"%ld\", connection.hash]; <br>2) defined a typedef  ' typedef void (^ Callback)(NSString *, NSString *);' <br> so instead of repeating 'withCallback: (void (^)(NSString *))callback' in many calling functions,  I was able to use withCallback:(Callback)callback<br>3) Used didFailWithError with a change in StateObject =&gt; @property (nonatomic, copy) void (^ callbackBlock)(NSString *response,NSString *error);<br>     in didFailWithError, used connectionState.callbackBlock(nil,error.description);<br>   in connectionDidFinishLoading, used connectionState.callbackBlock(txt,nil);</p>"
+name: saif a
+email: B88236D47D635DCCA33B861600160F73
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-11-25T09:47:27Z'

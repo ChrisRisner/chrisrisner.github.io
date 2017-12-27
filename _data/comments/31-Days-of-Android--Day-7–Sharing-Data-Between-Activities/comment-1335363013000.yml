@@ -1,0 +1,9 @@
+_id: 4039efc9-473d-4605-adae-80b50c719dd4
+_parent: /31-Days-of-Android--Day-7-Sharing-Data-Between-Activities
+message: "<p>31 Days is the best tut so far.</p><p>I know you mentioned in a previous day's lesson that some things would not happen when switching to ActivityTwo via menu selection because the code was only implemented in the button click handler, but there are two bugs (1 and a half bugs?) you might not have caught. I've been adding the code to DayFour where we started the coding. I left nothing out and just commented the pertinent points of the exercise as I coded.</p><p>First bug:<br>[code] public static String MyStaticString; [/code]<br>Should be:<br>[code] public static String MyStaticString = \"\"; [/code]</p><p>It seems that the String class does not initialize the string to null or it does and null != \"\" so when you check for the empty string, it is not and throws a null pointer (IIRC) exception. THe button click method does however set the string so the bug only shows up when switching to ActivityTwo via the menu.</p><p>Second Bug:<br>This was actually the first bug to show up for some reason. After fixing both bugs and unfixing them, the first bug throws and have to Force Close.</p><p>The PassableObject is never instanciated unless button 2 is clicked, so switching to ActivityTwo without first doing so via the menu results in another null pointer error in:<br>[code] textView1.setText(passableObject.getMyStringValue()); [/code]<br>but<br>[code]<br>if(passableObject != null)<br>            textView1.setText(passableObject.getMyStringValue());<br>[/code]<br>works. Hope the code tags work, too [tongue in cheek]</p><p>4 days of Java and 400 years of C++ and similar dialects must have a certain synergy 8)</p>"
+name: Mike
+email: DEF4B5AAC0E827E01E76A6D50453374C
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-04-25T14:10:13Z'

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "31 Days of Android: Day 14–Table Layout and Frame Layout"
+title: "31 Days of Android: Day 14-Table Layout and Frame Layout"
 date: Sun Dec 04 2011 06:09:00
 commentsOn: true
 status: publish
@@ -11,11 +11,11 @@ excerpt: "This is another tutorial in the 31 Days of Android series.  Today we'l
 logoUrl: null
 keywords: Android,31 days of Android,Google,Google Android,Android Intro,How to develop for android,tablelayout,framelayout,table,tablerow,shrinkcolumns,stretchcolumns,frame,overlaying elements,text on top of image,Tutorial
 filepath: 2011-12-04-31-Days-of-Android--Day-14-Table-Layout-and-Frame-Layout.html
-disqus_identifier: 31-Days-of-Android--Day-14–Table-Layout-and-Frame-Layout
+disqus_identifier: 31-Days-of-Android--Day-14-Table-Layout-and-Frame-Layout
 redirect_from:
   - /2011-12-04-31-Days-of-Android--Day-14%E2%80%93Table-Layout-and-Frame-Layout/
-  - /2011-12-04-31-Days-of-Android--Day-14–Table-Layout-and-Frame-Layout/
-  - /31-Days-of-Android--Day-14–Table-Layout-and-Frame-Layout/
+  - /2011-12-04-31-Days-of-Android--Day-14-Table-Layout-and-Frame-Layout/
+  - /31-Days-of-Android--Day-14-Table-Layout-and-Frame-Layout/
 ---
 <p><img style="margin: 0px 0px 5px 5px; display: inline; float: right" title="Android Day Fourteen" alt="Android Day Fourteen" align="right" src="http://chrisrisner.com/upload/android-200.png" />Today we’re going to continue the <a title="31 Days of Android" href="http://chrisrisner.com/31-Days-of-Android">31 Days of Android</a> by talking about the last two common layouts, the <strong>TableLayout</strong> and the <strong>FrameLayout</strong>.&#160; These may not be as common at the <strong><a title="Android Day 12 Linear Layout" href="http://chrisrisner.com/31-Days-of-Android--Day-12%E2%80%93Linear-Layouts">LinearLayout</a></strong> or the <strong><a title="Day 13 - Relative Layouts" href="http://chrisrisner.com/31-Days-of-Android--Day-13%E2%80%93Relative-Layouts">RelativeLayout</a></strong> but certainly serve their purpose.&#160; You can <a title="Android Day 14 Initial Code" href="http://chrisrisner.com/upload/DayFourteenInitial.zip">download the code we’re going to start with here</a>.</p>  <p><strong>TableLayout</strong>s are exactly what you’d expect from the name.&#160; You can use them to position child <strong>View</strong>s into rows and columns.&#160; If you’ve used HTML tables before, you should be able to pick this up very easily.&#160; The exception to them being like HTML tables is that you cannot span columns.&#160; To see the <strong>TableLayout</strong> in action, let’s look at the <strong>main.xml</strong> file in <strong>res/layout</strong>.&#160; Right now it’s root is a <strong>LinearLayout</strong>.&#160; You will need to change that to a <strong>TableLayout</strong>.&#160; Once you’ve done that, the xml should look like this:</p>  <div class="csharpcode">   <pre class="alt">&lt;?xml version=<span class="str">&quot;1.0&quot;</span> encoding=<span class="str">&quot;utf-8&quot;</span>?&gt;</pre>
 

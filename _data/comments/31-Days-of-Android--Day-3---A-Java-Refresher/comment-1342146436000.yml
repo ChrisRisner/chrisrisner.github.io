@@ -1,0 +1,9 @@
+_id: 4f1ac32e-01fb-4b88-8ed4-62634db7a2f0
+_parent: /31-Days-of-Android--Day-3---A-Java-Refresher
+message: "<p>Hi Rupert,</p><p>That was struck out because originally in this article I said they had to be final static variables, so something like:     final static int myInt = 5;However, you don't need them to be static.  Something like this would be acceptable:     final int myInt 5;<br>     switch (5) {<br>          case myInt:<br>              //do something;<br>              break;<br>    }</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2012-07-13T02:27:16Z'

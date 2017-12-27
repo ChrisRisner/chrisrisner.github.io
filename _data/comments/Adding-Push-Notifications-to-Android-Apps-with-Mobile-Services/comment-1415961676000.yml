@@ -1,0 +1,9 @@
+_id: 9f4f958a-e03b-43df-82b7-6740af86e8f2
+_parent: /Adding-Push-Notifications-to-Android-Apps-with-Mobile-Services
+message: "<p>Hi Chris, <br>I followed your tutorial step by step. It registers and insert into mobile service well. But I can't receive any notifications. I tried a lot but onMessage never called. Is there any reasons?<br>PS: I downloaded your complete code but it didn't work too. </p>"
+name: KN
+email: 50CD4644E354AF40C4AD6C4EBFBB8953
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-11-14T10:41:16Z'

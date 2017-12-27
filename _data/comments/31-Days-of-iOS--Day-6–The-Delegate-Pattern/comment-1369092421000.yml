@@ -1,0 +1,9 @@
+_id: 71f4eff8-9d18-4c1a-85d9-5c68e7f1ab6a
+_parent: /31-Days-of-iOS--Day-6-The-Delegate-Pattern
+message: "<p>Hi, is the modal view supposed to close and return to the first view (the screen with all the controls) when you get to it through the \"Show new view\" button? Mine doesn't.</p><p>I went over the tutorial several times, looking for errors and couldn't find any, then downloaded your code and ran it and it doesn't close that second view either.</p><p>I'm using xCode Version 4.6.2 (4H1003), targetting the ios6.1 simulator.</p><p>Thanks!</p><p>Alex</p>"
+name: alex
+email: 30F39CEA66C00AED728F3CDB08D0F247
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-05-20T23:27:01Z'

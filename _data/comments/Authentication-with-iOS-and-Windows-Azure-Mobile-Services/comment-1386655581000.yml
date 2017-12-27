@@ -1,0 +1,9 @@
+_id: bf35119b-7c9b-444a-981e-be7844b80810
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>Yes, you can get their provider identity information using the user.getIdentities method in a server side script.  You can then talk to the API provider (whether it's facebook, twitter, etc).  You'll have to perform the web request against the provider yourself though.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-12-10T06:06:21Z'

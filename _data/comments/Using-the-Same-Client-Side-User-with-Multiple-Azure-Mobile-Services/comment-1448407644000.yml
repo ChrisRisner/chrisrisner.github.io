@@ -1,0 +1,9 @@
+_id: 89e8328a-e3c0-408b-8480-d55b3f0b0388
+_parent: /Using-the-Same-Client-Side-User-with-Multiple-Azure-Mobile-Services
+message: "<p>In the article you stated, \"If you’re doing auth with Facebook, Google, Microsoft or Twitter accounts, then the User Id you get handed back (in the from of provider : providerId so ex: facebook : 12345678) will be the same no matter which app you authenticate with.\", however, I've found that when authenticating to facebook, the UserId is different, for example, when authenticating from an ASP.NET Web Application and an equivalent Mobile Services hitting using the same app secret and app id. I've also found, for example, when upgrading from Mobile Services 2.0.0-beta-2 to 2.0.0-beta-3, my UserIds changed for all users that authenticated. Have you seen this yourself? It concerns me greatly as we get closer to releasing an app that we want to make available via a native mobile app and an ASP.NET Web Application.</p>"
+name: John Rennemeyer
+email: E64F051D7CB3DC096E9C9187BFD440F4
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-11-24T23:27:24Z'

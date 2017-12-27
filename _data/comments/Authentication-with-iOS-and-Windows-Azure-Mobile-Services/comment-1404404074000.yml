@@ -1,0 +1,9 @@
+_id: 623c56fe-37c8-48b3-b7cf-89eebc76abbc
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>Happy they've been helpful.  If you're doing Xamarin, it will be pretty easy to move from this sample to that.  Take a look at the tutorial found here (<a href=\"http://azure.microsoft.com/en-us/documentation/articles/partner-xamarin-mobile-services-ios-get-started-users/)\" rel=\"nofollow noopener\" title=\"http://azure.microsoft.com/en-us/documentation/articles/partner-xamarin-mobile-services-ios-get-started-users/)\">http://azure.microsoft.com/...</a> which is for Xamarin.iOS but there is a link at the top to Xamarin.Android.  That will cover how to do all of the individual provider auths.  For custom auth, you can look at the same tutorials to see how to make calls against tables (or use the more recent custom APIs to handle the registration and login part).  If you're still using JS backend, the backend won't change at all.  Let me know if you have other questions.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2014-07-03T16:14:34Z'

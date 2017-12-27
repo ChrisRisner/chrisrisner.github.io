@@ -1,0 +1,9 @@
+_id: 3a5b90c5-55dd-4dae-9765-7936411e425b
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Chris, I have a table which has a column for images. everything works fine until i try to send an image to this table along with other data. I get an error saying \"Request body maximum size limit was exceeded.\". I understand that I have to use blob storage for images. Can u please tell me how to send the image to the blob storage while sending the other data to the table and then get that image back along with the other data when I want to retrieve it?</p>"
+name: Edward
+email: 8948C7FFF576C8C0D9BFA33C08877CC9
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-01-31T15:09:18Z'

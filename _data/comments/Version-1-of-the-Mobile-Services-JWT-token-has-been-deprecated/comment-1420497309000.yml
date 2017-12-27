@@ -1,0 +1,9 @@
+_id: c6e92324-8958-487b-9aaf-777aeec5ee93
+_parent: /Version-1-of-the-Mobile-Services-JWT-token-has-been-deprecated
+message: "<p>dumb question.</p><p>Don't I have to pass in token in the header each time I do a call to the mobile services right?  whether I get it from 3rd party like FB or custom login?</p><p>If I set 'logged in' user only permission to insert then it will need a way to validate that you are who you say you are and logged in.  Does MobileServiceClient object knows currentuser that somehow?</p><p>thanks<br>wil</p>"
+name: wil
+email: AD8080BF6B1ACA663CF843BB49A7D498
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-01-05T22:35:09Z'

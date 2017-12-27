@@ -1,0 +1,9 @@
+_id: ce14385b-0f9e-4c06-95d5-6e52db91e493
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>As noted at the top, this post is out of date as Mobile Services has been transitioned to Azure App Service Mobile Apps.  You can still get access to an App Service's signing key which you can use similarly to how the master key is used above.  Read more about it here: <a href=\"https://shellmonger.com/2017/03/02/azure-app-service-authentication-in-an-asp-net-core-application/\" rel=\"nofollow noopener\" title=\"https://shellmonger.com/2017/03/02/azure-app-service-authentication-in-an-asp-net-core-application/\">https://shellmonger.com/201...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2017-05-16T17:45:32Z'

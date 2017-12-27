@@ -1,0 +1,9 @@
+_id: b312b777-df8d-443d-b42a-cacc3102c8fa
+_parent: /31-Days-of-Android--Day-5-Adding-Multiple-Activities-and-using-Intents
+message: "<p>Yusuf, the easiest way to figure out what's going on is to check the output of LogCat when your app crashes.  This should give you an error you can search.  Just putting a button in the layout shouldn't cause any issues but it all depends on what you're doing.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2014-10-22T23:03:08Z'

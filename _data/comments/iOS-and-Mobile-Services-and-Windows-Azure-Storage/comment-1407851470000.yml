@@ -1,0 +1,9 @@
+_id: 2a507d6d-c60b-4d9c-9bdf-75703f9a7bb8
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Chris,</p><p>First, awesome tutorial and info.  Helped me greatly but I am running into a problem.  I can run your same project fine and have been able to create containers and input blobs no problem.  Then, I attempted to add it to my project (which I am running the latest Azure framework) and I always get a warning in the implementation stating that the following method/protocal is not declared...although it is in the .h and in the actual .m:</p><p>(void) handleRequest:(NSURLRequest *)request<br>                onNext:(MSFilterNextBlock)onNext<br>            onResponse:(MSFilterResponseBlock)onResponse</p><p>Always warns not declared but am able to compile and run, but when it attempts to create the container, errors with same as above.  Any thoughts on this?  I did think about just deleting the latest azure framework and using the one you complied with but thought I would try you first.  Once again, thanks.  You have been a great source of help throughout my xcode experience!</p><p>Geo...</p>"
+name: George Lovitz
+email: 4C32CED649FA9E0AABBC22C8A98BE4AA
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-08-12T13:51:10Z'

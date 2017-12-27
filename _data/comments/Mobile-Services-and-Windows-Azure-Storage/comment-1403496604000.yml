@@ -1,0 +1,9 @@
+_id: df2ef48f-2a48-4165-af6d-bfa956878c97
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>PUT-ting image blobs up with your example code appeared successful (NSURLConnectionDelegate reported all bytes as sent, and I got the Finished Loading call), but the container has no blobs in the Azure portal. Do you have any idea what could be happening? Thanks.</p>"
+name: Craig
+email: 25D09604F6C447BE443BB12500964827
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-06-23T04:10:04Z'

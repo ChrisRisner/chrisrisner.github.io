@@ -1,0 +1,9 @@
+_id: d9274591-1dca-4d84-a97c-f9064d8aa532
+_parent: /Authentication-with-iOS-and-Windows-Azure-Mobile-Services
+message: "<p>Hi Chris,</p><p>In regards to expired authentication tokens, do you perhaps have an alternative method of handling those? As a user, I would get pretty frustrated logging in all the time. Seems like there should be a way to keep that authentication token valid while the user is still active within the expiration period, and then maybe force a logout/login once there hasn't been any activity within that expiration period. Thanks!</p>"
+name: Mike
+email: 5AE6AB8B81B8EFB7660CCD73D04F3734
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-09-01T06:35:26Z'

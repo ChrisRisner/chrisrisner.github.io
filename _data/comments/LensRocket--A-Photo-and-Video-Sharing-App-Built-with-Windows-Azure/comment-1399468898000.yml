@@ -1,0 +1,9 @@
+_id: edb2a90e-1570-4b59-9fd8-1f67c9e36ce7
+_parent: /LensRocket--A-Photo-and-Video-Sharing-App-Built-with-Windows-Azure
+message: "<p>It's difficult to tell without knowing the specific error you're getting but my guess is that you missed the step in the \"Client Application Changes\" section where you need to pull down the ActionBar Pull to Refresh Library. For legal reasons, that library isn't included in the source of LensRocket so you need to pull it down yourself.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2014-05-07T13:21:38Z'

@@ -1,0 +1,9 @@
+_id: 1966aba4-a644-45ab-9787-242e9e733621
+_parent: /Storing-Images-from-Android-in-Windows-Azure-Mobile-Services
+message: "<p>it is throwing an error help me</p><p>java.lang.IllegalStateException: Couldn't read row 0, col -1 from CursorWindow.  Make sure the Cursor is initialized correctly before accessing data from it.</p>"
+name: Dogiparthi Praneeth
+email: C9F318A3A03848E438F91907122F0F55
+url: ''
+replying_to: ''
+hidden: ''
+date: '2017-08-25T11:18:53Z'

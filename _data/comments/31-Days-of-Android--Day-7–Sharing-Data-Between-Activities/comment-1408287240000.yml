@@ -1,0 +1,9 @@
+_id: 8d6de136-e253-4482-824b-29ec2c33b682
+_parent: /31-Days-of-Android--Day-7-Sharing-Data-Between-Activities
+message: "<p>WARNING NOTE: Extending the Application Class like a Singleton will cause your app to crash every now and then! Please read <a href=\"http://www.developerphil.com/dont-store-data-in-the-application-object/\" rel=\"nofollow noopener\" title=\"http://www.developerphil.com/dont-store-data-in-the-application-object/\">http://www.developerphil.co...</a><br>If you extend the Application class with checks every time you access (read and write) a variable stored in the class, for instance by adding a boolean variable which is set to false when initialized and set to true when the data is loaded you can reload data if it has been discarded.</p>"
+name: Andrew Rump
+email: B8DABE9A14889A8419DC512B2D1F8670
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-08-17T14:54:00Z'

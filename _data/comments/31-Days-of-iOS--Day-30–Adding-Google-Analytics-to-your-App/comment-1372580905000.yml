@@ -1,0 +1,9 @@
+_id: 736bae6e-5e8e-4893-9d28-68e778670188
+_parent: /31-Days-of-iOS--Day-30-Adding-Google-Analytics-to-your-App
+message: "<p>Hi there, really enjoyed this tutorial.</p><p>I am having a small issue though. In app delegate.m, for the line of code:</p><p>id&lt;gaitracker&gt; tracker = [[GAI sharedInstance] trackerWithTrackingId:@\"XXXX\"];</p><p>I am getting a semantic issue \"Unused variable 'tracker'\"</p><p>I am 100% sure that i have followed your tutorial correctly.</p><p>The app still works fine in the simulator, but when I log into the google analytics portal i cannot get any screens or events.</p><p>I downloaded your project also and I get the same semantic issue on the same line of code.</p><p>I really hope you can help me as analytics is the last part of my app i need to do before I attempt to release it on the appstore. I am really excited as this will be my first app.</p><p>thanks again Chris,</p><p>Hope to hear from you soon</p>"
+name: Shayno
+email: E0955F0A9CCB80EC8C691D384C14085B
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-06-30T08:28:25Z'

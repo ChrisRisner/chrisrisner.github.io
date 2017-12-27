@@ -1,0 +1,9 @@
+_id: 2b7bc3c8-6342-4def-9b88-66c2d506a604
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Paulo,</p><p>To pass parameters, you'll need to use MSTable's readWithQueryString method.  So something like this:</p><p>NSString *queryString = [NSString stringWithFormat:@\"param1=%@\", @\"MyParam\"];<br>[self.tableRowsTable readWithQueryString:queryString completion:^...</p><p>Then in your script you access it using the request object like this:<br>request.parameters.param1</p><p>Chris</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-04-18T21:49:30Z'

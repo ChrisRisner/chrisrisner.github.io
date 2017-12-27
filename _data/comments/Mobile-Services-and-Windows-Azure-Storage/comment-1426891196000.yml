@@ -1,0 +1,9 @@
+_id: 313be625-8f3a-4427-be87-5464f9b160f8
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Replace the code using the cursor to get the image data with the following:</p><p>Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mImageUri));<br>ByteArrayOutputStream bos = new ByteArrayOutputStream();<br>bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);<br>byte[] bytes = bos.toByteArray();</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '10'
+hidden: ''
+date: '2015-03-20T22:39:56Z'

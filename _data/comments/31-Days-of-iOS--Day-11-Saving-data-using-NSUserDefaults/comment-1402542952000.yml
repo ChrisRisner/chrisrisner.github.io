@@ -1,0 +1,9 @@
+_id: cfbaeb16-b09b-46bc-bfe9-6a6ea7bd04e4
+_parent: /31-Days-of-iOS--Day-11-Saving-data-using-NSUserDefaults
+message: "<p>hello Chris..<br>I'm new on iOS, if I create NSUserDefault in A view controller like this NSUserDefaults *myData = [NSUserDefaults standardUserDefaults];. How can I get  myData in other controller?</p>"
+name: ihsan
+email: 36892F26720153D1C4EF6543EE391621
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-06-12T03:15:52Z'

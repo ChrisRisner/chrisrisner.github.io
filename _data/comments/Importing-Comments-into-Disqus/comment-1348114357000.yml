@@ -1,0 +1,9 @@
+_id: edf0e2e2-8894-4591-aa63-52b5449e3798
+_parent: /Importing-Comments-into-Disqus
+message: "<p>Thanks for this article. I am now in the painful process of manually importing comments from jcomments and I wonder about comment id. Should I make one up for each comment? What if it overlaps with an existing one? I would leave it ut but when there are replies to comments, you need the parent comment id. Any advice would be most welcome! Thanks</p>"
+name: Guillaume Erard
+email: 9ADF0664E861E5246634EAF52C138263
+url: ''
+replying_to: ''
+hidden: ''
+date: '2012-09-20T04:12:37Z'

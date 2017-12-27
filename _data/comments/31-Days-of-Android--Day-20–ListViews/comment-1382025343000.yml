@@ -1,0 +1,9 @@
+_id: 490573d0-2811-4307-9561-906b0d6932c8
+_parent: /31-Days-of-Android--Day-20-ListViews
+message: "<p>I feel I'm a bit late to the party on this, but a great series so far - and it's not even taken me 19 days!<br>One thing I can't get my head around, no matter how much I google, is how to push data that I've updated (using click/long-click, EditTexts and all manner of strange suggestions) back into the underlying source.<br>I come across what appear to be the usual issues such as the new data remaining until the view scrolls off-screen etc. but I can't find an example/tutorial of how to make sure that changed data remains changed.<br>Is that simply that this isn't the best way to do it? I've achieved the results using a scroll-view, but only by ignoring the \"too many views\" warning so I'm sure that's not the way forward.</p>"
+name: DeadMeatGF
+email: 091D284EEF528B47C67FDA4224A37A9F
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-10-17T15:55:43Z'

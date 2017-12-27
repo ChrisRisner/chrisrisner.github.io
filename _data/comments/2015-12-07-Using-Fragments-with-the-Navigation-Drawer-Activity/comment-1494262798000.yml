@@ -1,0 +1,9 @@
+_id: b2911303-61a7-41d1-b895-80a7a037dd4f
+_parent: /2015-12-07-Using-Fragments-with-the-Navigation-Drawer-Activity
+message: "<p>Thanks Joey.  You should be able to override the on back pressed method to prevent exiting the app and instead go back in the navigation stack.  I don't recall if it stores the last page the user was at though so you may have to store that manually.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '14'
+hidden: ''
+date: '2017-05-08T16:59:58Z'

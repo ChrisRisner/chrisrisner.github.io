@@ -1,0 +1,9 @@
+_id: bceefa1f-3fc2-4b4f-86ad-ec5092928c30
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>Hi Chris. <br>Great article. I am new to javascript and azure tables, and i can't quite figure out how you storing the costum account's parameters into a new table in the insert script. Im trying to insert a PartitionKey and a RowKey, and i can't figure out where to put em in the script, so the proper values will be assigned.</p><p>i hope you can give me some pointers</p><p>thx</p>"
+name: Ferslev Andersen
+email: 1A2E9790F4B5D1E8064EC77E1CDF8928
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-10-09T11:37:39Z'

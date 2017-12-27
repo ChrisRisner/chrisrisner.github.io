@@ -1,0 +1,9 @@
+_id: ba99b13c-3aad-43f6-b63e-fb2c1ecce63b
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>I was using exactly the same script you provided in another post (<a href=\"http://chrisrisner.com/Mobile-Services-and-Windows-Azure-Storage)\" rel=\"nofollow noopener\" title=\"http://chrisrisner.com/Mobile-Services-and-Windows-Azure-Storage)\">http://chrisrisner.com/Mobi...</a>, I don't think the script is the issue, and the NULL situation does not happen every time (around 30%, which is a lot higher than I would expect). Maybe it's because I set the mobile service to run in asia, and testing from U.S., and that could cause some network timeout?</p>"
+name: yingja!
+email: 9F44EA12CC6AC5D500BEBF6062D0EDE0
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-10-04T06:06:42Z'

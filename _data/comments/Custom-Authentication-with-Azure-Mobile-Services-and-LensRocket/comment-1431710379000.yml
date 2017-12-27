@@ -1,0 +1,9 @@
+_id: 8d2ece3d-c049-48ae-ae01-8cc7c9ffd551
+_parent: /Custom-Authentication-with-Azure-Mobile-Services-and-LensRocket
+message: "<p>Ahhhhh, so I think this is the issue.  One of the parameters to the zumoJwt method is the master key.  The same thing is there in the .NET version.  In order for auths to be portable between the two services, you need to use the same master key.  I don't believe you can set the master key from the portal at this point but you can do it using the Azure CLI (<a href=\"http://chrisrisner.com/Using-the-Same-Client-Side-User-with-Multiple-Azure-Mobile-Services)\" rel=\"nofollow noopener\" title=\"http://chrisrisner.com/Using-the-Same-Client-Side-User-with-Multiple-Azure-Mobile-Services)\">http://chrisrisner.com/Usin...</a>.  Try that out and let me know what you find.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2015-05-15T17:19:39Z'

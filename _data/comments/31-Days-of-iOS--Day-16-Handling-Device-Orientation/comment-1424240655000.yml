@@ -1,0 +1,9 @@
+_id: 03ee350a-6c13-4889-8576-887da52eb53c
+_parent: /31-Days-of-iOS--Day-16-Handling-Device-Orientation
+message: "<p>Hello,</p><p>When I run the app in the simulator, it works but when I rotate the device - nothing shows.  So first view , app shows normal.  Rotate and it goes to a blank white screen in the simulator.  Same if I rotate the other direction.   Any ideas or clues?</p>"
+name: GreenX
+email: DAE5E721DFCCC125805A0D1EE47F2A42
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-02-18T06:24:15Z'

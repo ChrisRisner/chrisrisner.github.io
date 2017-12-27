@@ -1,0 +1,9 @@
+_id: fc0247a3-e8f4-4562-89f5-84c88c6b047e
+_parent: /Unwinding-with-iOS-and-Storyboards
+message: "<p>This unwinding is included in the apple-online tutorial for beginners and I'm kind of stuck there. It is set modal and I have the controller subclasses and everything, but I can't draw from a button to that \"exit\" box. It is possible to draw from the button to the box \"first responder\" or to any other view/navigation controller though. Any hint?</p>"
+name: Igor Hasenheim
+email: C9F8041AA4AA32EADAE4002CA0229287
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-01-06T15:39:22Z'

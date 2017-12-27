@@ -1,0 +1,9 @@
+_id: ab91b52a-f097-4371-be80-b2009ed7e17a
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Yes, here's the log:</p><p>An unhandled exception occurred. Error: One of your scripts caused the service to become unresponsive and the service was restarted. This is commonly caused by a script executing an infinite loop or a long, blocking operation. The service was restarted after the script continuously executed for longer than 1000 milliseconds.<br>    at EventEmitter.&lt;anonymous&gt; (C:\\DWASFiles\\Sites\\FilmDiary\\VirtualDirectory0\\site\\wwwroot\\runtime\\server.js:84:17)<br>    at EventEmitter.emit (events.js:88:20)</p>"
+name: yingja!
+email: 9F44EA12CC6AC5D500BEBF6062D0EDE0
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-10-04T04:39:49Z'

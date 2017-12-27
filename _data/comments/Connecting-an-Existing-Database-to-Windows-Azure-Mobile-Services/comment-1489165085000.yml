@@ -1,0 +1,9 @@
+_id: 16293ab4-e2f1-40c3-b639-6dabd367d699
+_parent: /Connecting-an-Existing-Database-to-Windows-Azure-Mobile-Services
+message: "<p>Actually I was able to do that only by changing the connection string. The case is that our users can use different databases. I think of something like a table with client codes and connections strings. And on login dynamically to decide which connection string to use (for the different databases).</p><p>Do you think that this will work for us ?</p>"
+name: Plamen 태권도 Yovchev
+email: FCB55047046401281FE1DC19E689C9CB
+url: ''
+replying_to: '7'
+hidden: ''
+date: '2017-03-10T16:58:05Z'

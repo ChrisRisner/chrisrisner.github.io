@@ -1,0 +1,9 @@
+_id: ebe77b08-2334-4a54-89e9-fe2ac180f905
+_parent: /Unwinding-with-iOS-and-Storyboards
+message: "<p>What if you are unwinding from a child navigation controller and want to go back to parent navigation controller? When I'm in child navigation controller, popping to root view only takes me back to the root view of the CHILD navigation controller. I want to go back to the parent.</p>"
+name: Adam
+email: B04828058D72DC446B3A1EB16A85F119
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-02-08T05:16:25Z'

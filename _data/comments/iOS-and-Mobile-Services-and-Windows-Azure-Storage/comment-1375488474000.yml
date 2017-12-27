@@ -1,0 +1,9 @@
+_id: 2faf6b08-4f69-49fe-8c30-884a2fde565c
+_parent: /iOS-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hello Chris<br>in Blob storage the url is mobile serivce or account name to release a connection ?<br>for example:</p><p>MSClient *newClient = [MSClient clientWithApplicationURLString:@\"<a href=\"https://mobileserviceurl.azure-mobile.net/\" rel=\"nofollow noopener\" title=\"https://mobileserviceurl.azure-mobile.net/\">https://mobileserviceurl.az...</a>\" withApplicationKey:@\"applicationkey\"];</p><p>or</p><p>MSClient *newClient = [MSClient clientWithApplicationURLString:@\"<a href=\"https://accountname.blob.core.windows.net/\" rel=\"nofollow noopener\" title=\"https://accountname.blob.core.windows.net/\">https://accountname.blob.co...</a>\" withApplicationKey:@\"primaryapplicationkey\"];</p><p>and how to use the containersTable and blobsTable in [getTable:@\"\"]; because if I connect with mobile service I get the following error,</p><p>2013-08-02 19:00:12.916 StorageDemo[2356:c07] ERROR Error Domain=NSCocoaErrorDomain Code=3840 \"The operation couldn’t be completed. (Cocoa error 3840.)\" (Invalid value around character 3.) UserInfo=0x888c630 {NSDebugDescription=Invalid value around character 3., com.Microsoft.WindowsAzureMobileServices.ErrorResponseKey=&lt;nshttpurlresponse: 0x888e590=\"\"&gt;, com.Microsoft.WindowsAzureMobileServices.ErrorRequestKey=&lt;nsmutableurlrequest http:=\"\" <a href=\"http://accountname.blob.core.windows.net\" rel=\"nofollow noopener\" title=\"accountname.blob.core.windows.net\">accountname.blob.core.windo...</a>=\"\" tables=\"\" blobcontainertest=\"\"&gt;}</p><p>I looked for references on errors and how to connect to blob storage but do not mention anything about this</p><p>I hope you can help me and your help is appreciated</p>"
+name: hector enrique martinez reyes
+email: 3CB17B7A19AF824E18640C823B3B7C98
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-08-03T00:07:54Z'

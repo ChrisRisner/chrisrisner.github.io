@@ -1,0 +1,9 @@
+_id: 7f7c5479-d39f-48b9-9ef6-0d52b8f94915
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>One question I have is:  Since when we create tables you state:  \"That’s fine and in fact, since this view is tied to what’s in the SQL Database and we’re going to use Table Storage, we’ll never see our data here.\"  How do we view that rows/entries in the table?  I went into the SQL DB that was created via the Mobile service and it is empty yet when I run the app (iOS), it shows the tables created.</p>"
+name: George Lovitz
+email: 4C32CED649FA9E0AABBC22C8A98BE4AA
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-08-06T14:48:15Z'

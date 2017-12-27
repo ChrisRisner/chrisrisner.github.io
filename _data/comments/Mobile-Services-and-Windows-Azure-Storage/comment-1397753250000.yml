@@ -1,0 +1,9 @@
+_id: 7482fddf-ba17-41b8-8b95-8b289dbf606a
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>So you'd want to use the createContainerIfNotExists method to create a container (probably per user) and then insert blobs to their specific container by generating SaaS as illustrated above.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '3'
+hidden: ''
+date: '2014-04-17T16:47:30Z'

@@ -1,0 +1,9 @@
+_id: 34fa417e-3555-40ae-92fe-31fe96cdfdde
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>One other question:  Is it possible to create other columns in the Blob storage?  Meaning, right now when I view a container I created, it has NAME, URL, LAST MODIFIED and SIZE for columns.  I would like to actually have a few other fields in there.  Ideally, I would like to store two images, original and a thumbnail.  Possible?  Can user defined fields be created in a container just like in a table?  Sorry for all questions, nube and trying to wrap my head around this.  Thx in advance.</p>"
+name: George Lovitz
+email: 4C32CED649FA9E0AABBC22C8A98BE4AA
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-08-06T14:51:31Z'

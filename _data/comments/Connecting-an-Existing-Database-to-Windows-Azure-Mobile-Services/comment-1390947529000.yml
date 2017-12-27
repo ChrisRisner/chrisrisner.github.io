@@ -1,0 +1,9 @@
+_id: b8039772-2056-44c7-8031-5218773c1592
+_parent: /Connecting-an-Existing-Database-to-Windows-Azure-Mobile-Services
+message: "<p>Happy this helped.  I'm not sure it's properly documented everywhere YET but the assumption today is that you are creating tables and performing CRUD through your Mobile Service which will automatically add the iD column (which is now a String).  Once there is a better story around importing / connecting to existing databases (what this article describes isn't exactly \"turn key\"), the ID column should be better documented.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2014-01-28T22:18:49Z'

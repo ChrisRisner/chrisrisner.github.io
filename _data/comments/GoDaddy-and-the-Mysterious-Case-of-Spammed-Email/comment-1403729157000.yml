@@ -1,0 +1,9 @@
+_id: 8fe64009-1ef3-466c-bbf2-859abd250079
+_parent: /GoDaddy-and-the-Mysterious-Case-of-Spammed-Email
+message: "<p>Google WILL mark mail from @gmail.com addresses as possible spam if they were NOT sent through gmails own servers (in this case, godaddy's relay). The CSR was correct, it's a problem google created by changing their filtering algorithms.</p>"
+name: oj ma
+email: 41D276422EEC68285BA889343A0EF877
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-06-25T20:45:57Z'

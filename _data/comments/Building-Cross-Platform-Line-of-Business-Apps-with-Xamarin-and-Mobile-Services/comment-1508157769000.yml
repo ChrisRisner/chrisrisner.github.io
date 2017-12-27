@@ -1,0 +1,9 @@
+_id: d20da1ef-356f-4a77-93b7-e09abac219e9
+_parent: /Building-Cross-Platform-Line-of-Business-Apps-with-Xamarin-and-Mobile-Services
+message: "<p>Hi Chris, Thanks for this guidance.</p><p>Little late in the game, seems like when we try to invoke the relay service from our Xamarin iOS app , we are running into compatibility issues with out of the box Microsoft Azure Service Bus Nuget package. Since this nuget is throwing issues, kindly advise if you know of any alternate solution.</p><p>Thanks for any help/direction in advance! Cheers, Rahul</p>"
+name: rahul kumar
+email: 63F3F4A408226BDBACBADF74D73CC485
+url: ''
+replying_to: ''
+hidden: ''
+date: '2017-10-16T12:42:49Z'

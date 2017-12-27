@@ -1,0 +1,9 @@
+_id: 4bcf916a-52be-45a9-8b63-2a12aab51de2
+_parent: /31-Days-of-iOS--Day-10-Singletons-and-the-AppDelegate
+message: "<p>In the the AppDelegate.h when i am try with method setInfo it is saying bad call error.<br>Is there a problem with getter and setter of info.</p>"
+name: Peeyush
+email: 0053B5D60B4E163A735C5D3101B7D45B
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-11-19T06:42:44Z'

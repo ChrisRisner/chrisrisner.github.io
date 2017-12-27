@@ -1,0 +1,9 @@
+_id: 22a13cfd-19ba-46a9-aac7-36e13dcc194a
+_parent: /31-Days-of-iOS--Day-3-Our-First-App
+message: "<p>Hi Chris,</p><p>I've got some problems with your tutorial. I followed your instructions and created a new project, but my projet lacks the three auto-generated methods OpeningViewController.m:  viewDidLoad, viewDidUnload, and shouldAutorotateToInterfaceOrientatoin.</p><p>When I want to add the line<br>lblInfo.text = txtText.text;<br>Xcode shows me errors and want to use _lblInfo and _txtText.</p><p>I'm using Xcode 4.6 with OS X 10.7.5. Any help is appreciated :)</p>"
+name: Markus Rudel
+email: D10AEC1CC925DD25B46A824F7D5EB0F4
+url: ''
+replying_to: ''
+hidden: ''
+date: '2013-03-07T10:28:54Z'

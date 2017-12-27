@@ -1,0 +1,9 @@
+_id: 08439fa6-c7e1-43de-ad04-ff82837ff5ee
+_parent: /Android-and-Mobile-Services-and-Windows-Azure-Storage
+message: "<p>I don't \"believe\" you'd need to make any changes.  The Mobile Services SDK works with Android 2.2 and up so that shouldn't cause any issues.  There may be some different method calls in the Table View but i believe it's all the same back to level 10.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2013-08-23T21:28:11Z'

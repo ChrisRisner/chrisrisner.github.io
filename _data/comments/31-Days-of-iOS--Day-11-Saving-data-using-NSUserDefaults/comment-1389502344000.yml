@@ -1,0 +1,9 @@
+_id: 18289669-defd-4ef8-87f1-e85a8741c33f
+_parent: /31-Days-of-iOS--Day-11-Saving-data-using-NSUserDefaults
+message: "<p>when I do this in xcode 5 I get the following problem:<br>{</p><p>    [super viewWillAppear:animated];</p><p>    self.dataLabel.text = [self.dataObject description];</p><p>}</p><p>- It says property 'dataLabel' not found on object of type 'DataViewController *'</p><p>Could you tell me how to fix this urgently as this is due tomorrow?</p>"
+name: Thomas Ross Camelo
+email: A34E2EE2368C85305B982DE53C82DFAC
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-01-12T04:52:24Z'

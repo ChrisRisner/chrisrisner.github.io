@@ -1,0 +1,9 @@
+_id: 3262cc7d-8a40-4b16-8e6a-e39bd77157ba
+_parent: /31-Days-of-Android--Day-10-The-Back-Button
+message: "<p>You control whether or not the actionbar is visible or not so I'm not sure why you'd need to check in code.  Are you giving the user the ability to toggle whether or not it is visible?  If so, you can just keep track of that.  I suspect that's not what you mean though.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-12-10T05:53:55Z'

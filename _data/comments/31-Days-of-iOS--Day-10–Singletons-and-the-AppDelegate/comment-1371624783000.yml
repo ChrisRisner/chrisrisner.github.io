@@ -1,0 +1,9 @@
+_id: 5c6bb7c4-5322-41df-a643-146b6b6a72da
+_parent: /31-Days-of-iOS--Day-10-Singletons-and-the-AppDelegate
+message: "<p>AppDelegate should handle app behavior in states of launch, background entry and so on. You should not make it more complex as it's not a good design pattern. But you can always keep a reference to your dataStore class in your AppDelegate, and access it via AppDelegate. This way you abstract data storing from your AppDelegate but you will still be able to easily get to it.</p>"
+name: Arsalan
+email: A6B72D60A9ADD30D3EC111BD2418E226
+url: ''
+replying_to: '1'
+hidden: ''
+date: '2013-06-19T06:53:03Z'

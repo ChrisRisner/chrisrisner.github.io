@@ -1,0 +1,9 @@
+_id: 1b439f17-fe99-4452-b8c6-0da4c2c0cc62
+_parent: /PikShare--A-Photo-and-Video-Sharing-App-Built-with-Windows-Azure
+message: "<p>Hi Wil, sorry to hear you're still having trouble.  Are you seeing this error continuously?  I've seen this error pop up at the very first request against the service and then had everything work afterwards.  I've had it on my todolist to get a reliable reproduction of this so the team can investigate.  If you're seeing it to that means just setting up PikShare would result in the issue.</p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '6'
+hidden: ''
+date: '2014-01-14T19:52:37Z'

@@ -1,0 +1,9 @@
+_id: 65b475dc-ac98-4f54-b9df-1a1e62a466f4
+_parent: /Mobile-Services-and-Windows-Azure-Storage
+message: "<p>Hi Chris,<br>There is a limitation for number of records returned by a storage table in a single query to 1000.<br>How should we handle records more than 1000, either by mobile client or on table script.<br>Are there any example code on handling it on the iOS.</p>"
+name: Aniket Rawat
+email: 6A3489ACEA264155A11E2617055DFAA5
+url: ''
+replying_to: ''
+hidden: ''
+date: '2015-01-19T11:05:23Z'

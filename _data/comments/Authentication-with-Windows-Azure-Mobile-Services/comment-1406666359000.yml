@@ -1,0 +1,9 @@
+_id: 6f64c554-0716-4a2f-940e-6fdf24de5ce3
+_parent: /Authentication-with-Windows-Azure-Mobile-Services
+message: "<p>Hi George, the scripts act as intercepts for any request against your Mobile Service tables.  Check out these two tutorials (there are links to the other client OSs at the top) for more understanding: <a href=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-ios-get-started-data/\" rel=\"nofollow noopener\" title=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-ios-get-started-data/\">http://azure.microsoft.com/...</a> and <a href=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-ios-validate-modify-data-server-scripts/\" rel=\"nofollow noopener\" title=\"http://azure.microsoft.com/en-us/documentation/articles/mobile-services-ios-validate-modify-data-server-scripts/\">http://azure.microsoft.com/...</a></p>"
+name: Chris
+email: 6D623B8F7019E7088D7597CAD5984645
+url: ''
+replying_to: '4'
+hidden: ''
+date: '2014-07-29T20:39:19Z'

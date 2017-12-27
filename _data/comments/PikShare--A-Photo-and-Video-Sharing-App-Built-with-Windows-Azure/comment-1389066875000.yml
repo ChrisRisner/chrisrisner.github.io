@@ -1,0 +1,9 @@
+_id: 61480a1f-6a7a-4b19-9e32-abd90c4fb88e
+_parent: /PikShare--A-Photo-and-Video-Sharing-App-Built-with-Windows-Azure
+message: "<p>Hi Chris,  I tried to compile but getting all kind of errors.  I am getting two main issues.</p><p>1. DescriptionResourcePathLocationType</p><p>error: Error: No resource found that matches the given name: attr 'ptrHeaderHeight'.styles.xml/SplashScreenActivity/res/valuesline 39Android AAPT Problem</p><p>2.DescriptionResourcePathLocationType</p><p>PullToRefreshAttacher cannot be resolved to a type<a href=\"http://PiksListActivity.java\" rel=\"nofollow noopener\" title=\"PiksListActivity.java\">PiksListActivity.java</a>/SplashScreenActivity/src/com/msted/pikshare/activitiesline 52Java Problem</p><p>Is this a third party lib?</p><p>thanks</p>"
+name: wil
+email: 2D435D07D16CE3378356E4AF24073E1D
+url: ''
+replying_to: ''
+hidden: ''
+date: '2014-01-07T03:54:35Z'
