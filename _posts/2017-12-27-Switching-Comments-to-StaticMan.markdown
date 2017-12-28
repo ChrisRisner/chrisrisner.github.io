@@ -34,7 +34,8 @@ While looking around further, I stumbled upon [this post on mademistakes.com](ht
 
 One of the big things I want to call out because I ran into issues with it multiple times is the ordering of the comments.  Specifically, ordering didn't seem to be the same when running the site locally and when it was showing up in GitHub Pages.  I want to share what the **comments.html** looks like:
 
-```
+{% raw %}
+```liquid
 {% assign count = 0 %}
 {% assign comments = (site.data.comments[page.slug] | where_exp: 'item', 'item.replying_to == ""' | sort: 'date') %} 
 {% assign comments = (comments | sort) %}
@@ -56,6 +57,7 @@ One of the big things I want to call out because I ran into issues with it multi
   {% endif %}
 {% endfor %}
 ```
+{% endraw %}
 
 For some reason, the query where we're trying to get comments that have nothing in the *replying_to* field doesn't work.  I've seen other examples where they compare against blank as in *where_exp: 'item', 'item.replying to == blank'* but that didn't work for me either.  The sorting was very bizarre and didn't make very much sense as, as near as I could tell, different rebuilds of the site lead to different ordering of the comments.
 
