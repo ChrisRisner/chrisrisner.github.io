@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Switching Comments to StaticMan"
-date: Thu Dec 28 2017 9:16:00
+date: Wed Dec 27 2017 9:16:00
 commentsOn: true
 status: publish
 type: post
@@ -9,9 +9,9 @@ published: true
 categories: [GitHub,Blogging]
 excerpt: "This post will walk through how you can deploy OpenWhisk onto a VM running in Azure."
 logoUrl: null
-keywords: Serverless,Azure,VM
-filepath: 2017-12-28-Switching-Comments-to-StaticMan.markdown
-disqus_identifier: 2017-12-28-Switching-Comments-to-StaticMan
+keywords: GitHub,Blogging
+filepath: 2017-12-27-Switching-Comments-to-StaticMan.markdown
+disqus_identifier: 2017-12-27-Switching-Comments-to-StaticMan
 redirect_from: 
   - /switching-comments-to-staticman/
 ---
