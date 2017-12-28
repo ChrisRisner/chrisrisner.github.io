@@ -6,7 +6,7 @@ commentsOn: true
 status: publish
 type: post
 published: true
-categories: [Conferences,.net]
+categories: [Conferences,.Net]
 excerpt: "A quick post about my session at Codemash 2016 focusing on running .NET on Linux and OS X"
 logoUrl: null
 keywords: .NET,Linux,OS X
