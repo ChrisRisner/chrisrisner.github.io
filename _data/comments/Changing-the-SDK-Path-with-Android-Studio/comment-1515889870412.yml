@@ -1,0 +1,12 @@
+_id: 37668920-f8c2-11e7-a28b-b54677bf8a61
+_parent: /Changing-the-SDK-Path-with-Android-Studio
+message: >-
+  i moved the folder from 1- C:\Program Files (x86)\Android  To C:\Android  2- 
+  => go to configure =>Settings =>Android SDK => change the path  to the new
+  folder location(And complete the installation).
+name: HBZ
+email: 27e132d96b3886e92b7b71f3fad69a56
+url: ''
+replying_to: '5'
+hidden: ''
+date: '2018-01-14T00:31:10.410Z'
