@@ -1,0 +1,11 @@
+_id: a5f272e0-007a-11e8-ab0e-6f6c72cf2eed
+_parent: /Accessing-the-Shared-Preferences-of-a-Different-Application-in-Android
+message: >-
+  If it's private, users shouldn't be able to edit the Shared Preferences unless
+  they've rooted the device, as far as I'm aware.
+name: Chris
+email: 285584b876f2d45cfbbfb29ce656fde0
+url: 'http://chrisrisner.com'
+replying_to: '5'
+hidden: ''
+date: '2018-01-23T20:19:01.500Z'
