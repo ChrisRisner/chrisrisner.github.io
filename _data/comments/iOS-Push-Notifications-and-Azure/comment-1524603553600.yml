@@ -1,0 +1,13 @@
+_id: 57536de0-4802-11e8-85d8-6bb18f49d95b
+_parent: /iOS-Push-Notifications-and-Azure
+message: >-
+  You can send over any tag you'd like when you register.  So you'd just have to
+  have a unique way of identifying one device from another (i.e. ChrisPhone vs
+  EricPhone).
+name: Chris
+email: 285584b876f2d45cfbbfb29ce656fde0
+url: 'http://chrisrisner.com'
+replying_to: '6'
+hidden: ''
+date: '2018-04-24T20:59:13.599Z'
+layout: post
