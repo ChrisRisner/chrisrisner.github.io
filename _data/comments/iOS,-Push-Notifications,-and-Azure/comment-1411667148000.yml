@@ -1,5 +1,5 @@
 _id: afcf0dd5-dece-456e-9a41-21ba8bdcc696
-_parent: /iOS,-Push-Notifications,-and-Azure
+_parent: /iOS-Push-Notifications-and-Azure
 message: "<p>Sorry, I thought I had replied to this.  Tags are basically how you control who is pushed to.  In your scenario where you have users and games, you'd probably want each user to register with hubs with their username as a tag and some ID for each game as a tag.  You'd want / need to keep track of this information in whatever backend server / db you're using for the games.  Then when you need to push information to a specific player, you'd push to the userId tag for the user.  If you want to push to all players in a game, you push to that game's tag.  I hope that helps.  Let me know if you have other questions.</p>"
 name: Chris
 email: 6D623B8F7019E7088D7597CAD5984645

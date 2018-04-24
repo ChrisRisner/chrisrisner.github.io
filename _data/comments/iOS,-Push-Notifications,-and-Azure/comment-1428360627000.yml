@@ -1,5 +1,5 @@
 _id: c5edac4f-d39c-4d41-a542-fee640d9273a
-_parent: /iOS,-Push-Notifications,-and-Azure
+_parent: /iOS-Push-Notifications-and-Azure
 message: "<p>Is calling registerNativeWithDeviceToken() from the device itself is a best practice? <br>Alternatively,  the token from APNS could be sent from the client to the back-end, and there we would register the token with NH (maybe with a tag also). This way we don't have to save the connection string on the device itself which seems like a vulnerability.</p>"
 name: yaron levi
 email: B2877CD7C33C0C7FBEF1E65594DAEAE2

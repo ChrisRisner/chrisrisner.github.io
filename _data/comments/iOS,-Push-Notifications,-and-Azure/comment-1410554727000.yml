@@ -1,5 +1,5 @@
 _id: c30d6957-b02e-42df-ae98-bf4ce5a6dec8
-_parent: /iOS,-Push-Notifications,-and-Azure
+_parent: /iOS-Push-Notifications-and-Azure
 message: "<p>I'm still a little unclear on the \"tags\".  Where exactly are these tags kept?  Not sure if I am understand how they work.  If I have an app that has several games running, and I want to notify each user who is within that game, would each Tag be a separate game?  And if so, where is this \"tag\" stored?  On the server?  In a DB table ?  Sorry but new to notification and Azure.</p>"
 name: George Lovitz
 email: 4C32CED649FA9E0AABBC22C8A98BE4AA
