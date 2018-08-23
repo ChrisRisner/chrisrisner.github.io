@@ -1,0 +1,12 @@
+_id: cf387760-a71b-11e8-84c0-8991013dd0ff
+_parent: /Unwinding-with-iOS-and-Storyboards
+message: >-
+  Believe it or not is still valid in 2018, canPerformUnwindSegueAction is the
+  key for more than two stack VC and unwindexit. Unwind returns as a recursive
+  method and this just ignore all between source and the final destination.
+name: Beto Bens
+email: 4eb8b7f6045a060e11985bb2f6fea5e9
+url: ''
+replying_to: ''
+hidden: ''
+date: '2018-08-23T21:30:52.162Z'
