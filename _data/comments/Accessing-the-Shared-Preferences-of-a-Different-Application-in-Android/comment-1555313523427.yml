@@ -1,0 +1,13 @@
+_id: 8fedf5b0-5f50-11e9-95ce-8bd1e95ba62d
+_parent: /Accessing-the-Shared-Preferences-of-a-Different-Application-in-Android
+message: >-
+  World-readable files can be a security flaw. So android first deprecated it
+  and then completely removed it. MODE_WORLD_READABLE was deprecated in versions
+  till Android M. But in Android N it is no longer supported and throws
+  SecurityException.
+name: Mandeep Yadav
+email: 638c47c1e3b40d05aed7d95d6f3aa51a
+url: ''
+replying_to: ''
+hidden: ''
+date: '2019-04-15T07:32:03.426Z'
