@@ -1,0 +1,13 @@
+_id: 9c3cd7c0-88fc-11e9-a7b0-114ab89eb4fd
+_parent: /Using-Fragments-with-the-Navigation-Drawer-Activity
+message: >-
+  Great article but you didn't explain how you add the fragment reference so
+  that your application compiles can you provide an example of how to ?. Ie i
+  think i need to add something in the gradle file for fragments to be in the
+  template app.
+name: DAVID BUCKLEY
+email: a0316f2c6c386fad8e583302247e049e
+url: ''
+replying_to: ''
+hidden: ''
+date: '2019-06-07T08:16:54.938Z'
