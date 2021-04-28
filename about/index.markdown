@@ -27,4 +27,4 @@ no matter what programming language they're using and what platform they want to
 ## What do I do for fun?
 
 When I'm not working on work, I'm working on my own development projects.  When I actually put the computer away,
-I spend time with my wife and dog in the Pacific Northwest sailing, hiking, kayaking, and other fun things.
+I spend time with my dog in the Pacific Northwest boating, eating, and doing other fun things.
