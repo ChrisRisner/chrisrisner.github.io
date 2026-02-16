@@ -1,0 +1,77 @@
+{
+  "album_title": "Food",
+  "folder_name": "Food",
+  "cover_filename": "PXL_20260106_123833486.jpg",
+  "photos": [
+    {
+      "filename": "PXL_20260106_123833486.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:06 12:38:33",
+        "focal_length": "2.02 mm",
+        "shutter_speed": "1/14705s",
+        "aperture": "f/1.7",
+        "iso": 175,
+        "lens_model": "Pixel 10 Pro XL back camera 2.02mm f/1.7"
+      }
+    },
+    {
+      "filename": "PXL_20260108_143619468.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:08 14:36:19",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/169s",
+        "aperture": "f/1.68",
+        "iso": 165,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260108_192129913.NIGHT.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:08 19:21:29",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/49s",
+        "aperture": "f/1.68",
+        "iso": 229,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260108_201623391.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:08 20:16:23",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/999s",
+        "aperture": "f/1.68",
+        "iso": 699,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260112_022822279.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:11 18:28:22",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/1.68",
+        "iso": 252,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    }
+  ]
+}

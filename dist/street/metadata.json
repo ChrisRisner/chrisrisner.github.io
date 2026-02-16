@@ -1,0 +1,38 @@
+{
+  "slug": "street",
+  "title": "Street",
+  "folder": "Street",
+  "photos": [
+    {
+      "filename": "street-porto-shop.JPG",
+      "src": "/media/street/large_street-porto-shop.JPG",
+      "thumb": "/media/street/thumb_street-porto-shop.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 0,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 1,
+    "portrait_count": 0,
+    "landscape_count": 1,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "signs",
+    "next_album": null
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:22.037817Z",
+    "builder_version": "1.0.0"
+  }
+}

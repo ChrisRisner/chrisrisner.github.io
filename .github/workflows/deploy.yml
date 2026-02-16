@@ -1,0 +1,57 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Build Site
+        env:
+          SITE_BASE_URL: /${{ github.event.repository.name }}
+        run: |
+          # If the repo name is the special user page repo, clear the base URL
+          if [[ "${{ github.event.repository.name }}" == *"chrisrisner.github.io"* ]]; then
+            export SITE_BASE_URL=""
+          fi
+          python src/build.py
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,175 @@
+{
+  "album_title": "My Long Title Is Long",
+  "folder_name": "My Long Title Is Long",
+  "cover_filename": "PXL_20260108_201624698.jpg",
+  "photos": [
+    {
+      "filename": "PXL_20260108_201624698.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:08 20:16:24",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/805s",
+        "aperture": "f/1.68",
+        "iso": 792,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260109_205646878.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:09 15:56:46",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/1.68",
+        "iso": 520,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "_DSC0992.JPG",
+      "width": 2160,
+      "height": 3240,
+      "metadata": {
+        "camera_model": "NIKON Z 8",
+        "date_taken": "2026:01:06 10:15:10",
+        "focal_length": "65.0 mm",
+        "shutter_speed": "1/500s",
+        "aperture": "f/5.6",
+        "iso": 64,
+        "lens_model": "NIKKOR Z 24-120mm f/4 S"
+      }
+    },
+    {
+      "filename": "PXL_20260104_132037214.jpg",
+      "width": 3648,
+      "height": 2736,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:04 13:20:37",
+        "focal_length": "2.713 mm",
+        "shutter_speed": "1/824s",
+        "aperture": "f/2.2",
+        "iso": 50,
+        "lens_model": "Pixel 10 Pro XL front camera 2.713mm f/2.2"
+      }
+    },
+    {
+      "filename": "PXL_20260104_133151138.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:04 13:31:51",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/973s",
+        "aperture": "f/1.68",
+        "iso": 20,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260107_110747365.MP.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:07 11:07:47",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/499s",
+        "aperture": "f/1.68",
+        "iso": 33,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260108_201032724.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:08 20:10:32",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/108s",
+        "aperture": "f/1.68",
+        "iso": 328,
+        "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20260108_205354612.NIGHT.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 10 Pro XL",
+        "date_taken": "2026:01:08 20:53:54",
+        "focal_length": "17.906 mm",
+        "shutter_speed": "1/14s",
+        "aperture": "f/2.8",
+        "iso": 421,
+        "lens_model": "Pixel 10 Pro XL back camera 17.906mm f/2.8"
+      }
+    },
+    {
+      "filename": "_DSC0953.JPG",
+      "width": 3240,
+      "height": 2160,
+      "metadata": {
+        "camera_model": "NIKON Z 8",
+        "date_taken": "2026:01:04 11:09:45",
+        "focal_length": "57.0 mm",
+        "shutter_speed": "1/800s",
+        "aperture": "f/7.1",
+        "iso": 64,
+        "lens_model": "NIKKOR Z 24-120mm f/4 S"
+      }
+    },
+    {
+      "filename": "_DSC0972.JPG",
+      "width": 3240,
+      "height": 2160,
+      "metadata": {
+        "camera_model": "NIKON Z 8",
+        "date_taken": "2026:01:04 13:30:14",
+        "focal_length": "38.0 mm",
+        "shutter_speed": "1/200s",
+        "aperture": "f/7.1",
+        "iso": 64,
+        "lens_model": "NIKKOR Z 24-120mm f/4 S"
+      }
+    },
+    {
+      "filename": "_DSC1008.JPG",
+      "width": 3240,
+      "height": 2160,
+      "metadata": {
+        "camera_model": "NIKON Z 8",
+        "date_taken": "2026:01:06 10:33:22",
+        "focal_length": "61.0 mm",
+        "shutter_speed": "1/400s",
+        "aperture": "f/5.0",
+        "iso": 64,
+        "lens_model": "NIKKOR Z 24-120mm f/4 S"
+      }
+    },
+    {
+      "filename": "_DSC1012.JPG",
+      "width": 3240,
+      "height": 2160,
+      "metadata": {
+        "camera_model": "NIKON Z 8",
+        "date_taken": "2026:01:06 10:43:04",
+        "focal_length": "28.0 mm",
+        "shutter_speed": "1/320s",
+        "aperture": "f/9.0",
+        "iso": 64,
+        "lens_model": "NIKKOR Z 24-120mm f/4 S"
+      }
+    }
+  ]
+}

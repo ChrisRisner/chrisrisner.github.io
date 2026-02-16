@@ -1,0 +1,413 @@
+{
+  "slug": "portugal",
+  "title": "Portugal",
+  "folder": "Portugal",
+  "photos": [
+    {
+      "filename": "portugal-algave-cliffs.JPG",
+      "src": "/media/portugal/large_portugal-algave-cliffs.JPG",
+      "thumb": "/media/portugal/thumb_portugal-algave-cliffs.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 0,
+      "meta": {
+        "date": "2026-01-06"
+      }
+    },
+    {
+      "filename": "portugal-arch.jpg",
+      "src": "/media/portugal/large_portugal-arch.jpg",
+      "thumb": "/media/portugal/thumb_portugal-arch.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 1,
+      "meta": {
+        "date": "2026-01-06"
+      }
+    },
+    {
+      "filename": "portugal-bookstore.jpg",
+      "src": "/media/portugal/large_portugal-bookstore.jpg",
+      "thumb": "/media/portugal/thumb_portugal-bookstore.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 2,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-braga-castle.JPG",
+      "src": "/media/portugal/large_portugal-braga-castle.JPG",
+      "thumb": "/media/portugal/thumb_portugal-braga-castle.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 3,
+      "meta": {
+        "date": "2026-01-02"
+      }
+    },
+    {
+      "filename": "portugal-braga-mont.JPG",
+      "src": "/media/portugal/large_portugal-braga-mont.JPG",
+      "thumb": "/media/portugal/thumb_portugal-braga-mont.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 4,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-cannonballs.jpg",
+      "src": "/media/portugal/large_portugal-cannonballs.jpg",
+      "thumb": "/media/portugal/thumb_portugal-cannonballs.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 5,
+      "meta": {
+        "date": "2026-01-02"
+      }
+    },
+    {
+      "filename": "portugal-cascaius-boats.JPG",
+      "src": "/media/portugal/large_portugal-cascaius-boats.JPG",
+      "thumb": "/media/portugal/thumb_portugal-cascaius-boats.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "portugal-cave.jpg",
+      "src": "/media/portugal/large_portugal-cave.jpg",
+      "thumb": "/media/portugal/thumb_portugal-cave.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 7,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "portugal-duoro-valley.JPG",
+      "src": "/media/portugal/large_portugal-duoro-valley.JPG",
+      "thumb": "/media/portugal/thumb_portugal-duoro-valley.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 8,
+      "meta": {
+        "date": "2026-01-04"
+      }
+    },
+    {
+      "filename": "portugal-horse-statue.JPG",
+      "src": "/media/portugal/large_portugal-horse-statue.JPG",
+      "thumb": "/media/portugal/thumb_portugal-horse-statue.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 9,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "portugal-lisboa.jpg",
+      "src": "/media/portugal/large_portugal-lisboa.jpg",
+      "thumb": "/media/portugal/thumb_portugal-lisboa.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 10,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "portugal-monastery.JPG",
+      "src": "/media/portugal/large_portugal-monastery.JPG",
+      "thumb": "/media/portugal/thumb_portugal-monastery.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 11,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "portugal-monument-discoveries.JPG",
+      "src": "/media/portugal/large_portugal-monument-discoveries.JPG",
+      "thumb": "/media/portugal/thumb_portugal-monument-discoveries.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 12,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "portugal-palace-view.JPG",
+      "src": "/media/portugal/large_portugal-palace-view.JPG",
+      "thumb": "/media/portugal/thumb_portugal-palace-view.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 13,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "portugal-pastries.JPG",
+      "src": "/media/portugal/large_portugal-pastries.JPG",
+      "thumb": "/media/portugal/thumb_portugal-pastries.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 14,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-path.jpg",
+      "src": "/media/portugal/large_portugal-path.jpg",
+      "thumb": "/media/portugal/thumb_portugal-path.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 15,
+      "meta": {
+        "date": "2026-01-06"
+      }
+    },
+    {
+      "filename": "portugal-pena-palace.JPG",
+      "src": "/media/portugal/large_portugal-pena-palace.JPG",
+      "thumb": "/media/portugal/thumb_portugal-pena-palace.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 16,
+      "meta": {
+        "date": "2025-12-31"
+      }
+    },
+    {
+      "filename": "portugal-porto-chruch-tiles-2.JPG",
+      "src": "/media/portugal/large_portugal-porto-chruch-tiles-2.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-chruch-tiles-2.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 17,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-porto-fountain.JPG",
+      "src": "/media/portugal/large_portugal-porto-fountain.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-fountain.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 18,
+      "meta": {
+        "date": "2025-12-31"
+      }
+    },
+    {
+      "filename": "portugal-porto-market-sardines.JPG",
+      "src": "/media/portugal/large_portugal-porto-market-sardines.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-market-sardines.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 19,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-porto-market.JPG",
+      "src": "/media/portugal/large_portugal-porto-market.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-market.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 20,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-porto-more-tiles.JPG",
+      "src": "/media/portugal/large_portugal-porto-more-tiles.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-more-tiles.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 21,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "portugal-porto-river-view.JPG",
+      "src": "/media/portugal/large_portugal-porto-river-view.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-river-view.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 22,
+      "meta": {
+        "date": "2026-01-01"
+      }
+    },
+    {
+      "filename": "portugal-porto-river.jpg",
+      "src": "/media/portugal/large_portugal-porto-river.jpg",
+      "thumb": "/media/portugal/thumb_portugal-porto-river.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 23,
+      "meta": {
+        "date": "2026-01-01"
+      }
+    },
+    {
+      "filename": "portugal-porto-tile-church.JPG",
+      "src": "/media/portugal/large_portugal-porto-tile-church.JPG",
+      "thumb": "/media/portugal/thumb_portugal-porto-tile-church.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 24,
+      "meta": {
+        "date": "2025-12-31"
+      }
+    },
+    {
+      "filename": "portugal-sintra-fountain.JPG",
+      "src": "/media/portugal/large_portugal-sintra-fountain.JPG",
+      "thumb": "/media/portugal/thumb_portugal-sintra-fountain.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 25,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "portugal-sintra-statue.JPG",
+      "src": "/media/portugal/large_portugal-sintra-statue.JPG",
+      "thumb": "/media/portugal/thumb_portugal-sintra-statue.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 26,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "portugal-sunshine.jpg",
+      "src": "/media/portugal/large_portugal-sunshine.jpg",
+      "thumb": "/media/portugal/thumb_portugal-sunshine.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 27,
+      "meta": {}
+    },
+    {
+      "filename": "portugal-tram.jpg",
+      "src": "/media/portugal/large_portugal-tram.jpg",
+      "thumb": "/media/portugal/thumb_portugal-tram.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 28,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "portugal-wine.JPG",
+      "src": "/media/portugal/large_portugal-wine.JPG",
+      "thumb": "/media/portugal/thumb_portugal-wine.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 29,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 30,
+    "portrait_count": 10,
+    "landscape_count": 20,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "ireland",
+    "next_album": "signs"
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:22.026155Z",
+    "builder_version": "1.0.0"
+  }
+}

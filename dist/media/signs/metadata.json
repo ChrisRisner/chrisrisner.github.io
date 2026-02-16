@@ -1,0 +1,745 @@
+{
+  "album_title": "Signs",
+  "folder_name": "Signs",
+  "cover_filename": "DSC_0656.JPG",
+  "photos": [
+    {
+      "filename": "DSC_0656.JPG",
+      "width": 1080,
+      "height": 1620,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:19 13:02:54",
+        "focal_length": "40.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/6.3",
+        "iso": 200
+      }
+    },
+    {
+      "filename": "DSC_0777.JPG",
+      "width": 1080,
+      "height": 1620,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:20 11:18:23",
+        "focal_length": "40.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/4.8",
+        "iso": 400
+      }
+    },
+    {
+      "filename": "PXL_20221225_123012042.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2022:12:25 13:30:12",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/208s",
+        "aperture": "f/1.85",
+        "iso": 66,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20230102_133256308.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:01:02 14:32:56",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/26s",
+        "aperture": "f/1.85",
+        "iso": 4533,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20230507_151435264.MP.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:05:07 08:14:35",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/304s",
+        "aperture": "f/1.85",
+        "iso": 45,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20240409_001302121.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:04:08 17:13:02",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/257s",
+        "aperture": "f/2.8",
+        "iso": 27,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20240412_161723430.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:04:12 09:17:23",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/324s",
+        "aperture": "f/2.8",
+        "iso": 14,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20240413_020655812.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:04:12 19:06:55",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/189s",
+        "aperture": "f/1.68",
+        "iso": 33,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240422_010823743.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:04:21 18:08:23",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/531s",
+        "aperture": "f/2.8",
+        "iso": 17,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20240503_113529306.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:05:03 12:35:29",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/147s",
+        "aperture": "f/1.68",
+        "iso": 379,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240503_155842720.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:05:03 16:58:42",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/99s",
+        "aperture": "f/1.68",
+        "iso": 17,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240610_092145494.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:06:10 18:21:45",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/155s",
+        "aperture": "f/1.68",
+        "iso": 19,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240611_082604970.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:06:11 17:26:04",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/205s",
+        "aperture": "f/2.8",
+        "iso": 29,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20240614_085947651.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:06:14 17:59:47",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/233s",
+        "aperture": "f/2.8",
+        "iso": 30,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20240615_032312148.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:06:15 12:23:12",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/312s",
+        "aperture": "f/2.8",
+        "iso": 13,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20240707_145554220.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:07:07 10:55:54",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/563s",
+        "aperture": "f/1.68",
+        "iso": 27,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240720_001937939.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:07:19 17:19:37",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/1.68",
+        "iso": 174,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240826_032226972.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:08:25 20:22:26",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/23s",
+        "aperture": "f/2.8",
+        "iso": 1676,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20241010_143415103.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:10 15:34:15",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/217s",
+        "aperture": "f/1.68",
+        "iso": 1520,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241013_084736598.MP.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:13 09:47:36",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/121s",
+        "aperture": "f/1.68",
+        "iso": 22,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241013_115725565.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:13 12:57:25",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/506s",
+        "aperture": "f/1.68",
+        "iso": 24,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241013_194405893.MP.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:13 20:44:05",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/99s",
+        "aperture": "f/1.68",
+        "iso": 80,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241014_202650237.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:14 21:26:50",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/99s",
+        "aperture": "f/1.68",
+        "iso": 137,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241015_160203308.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:15 17:02:03",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/99s",
+        "aperture": "f/1.68",
+        "iso": 44,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20250426_001918269.MP.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2025:04:25 17:19:18",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/862s",
+        "aperture": "f/1.68",
+        "iso": 20,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20250613_005934512.MP.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2025:06:12 17:59:34",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/461s",
+        "aperture": "f/1.68",
+        "iso": 18,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20250810_195944274.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2025:08:10 12:59:44",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/258s",
+        "aperture": "f/1.68",
+        "iso": 18,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20250901_014001293.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2025:08:31 18:40:01",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/15s",
+        "aperture": "f/1.68",
+        "iso": 2537,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "original_77f4df7b-4501-4fda-b4c8-a57af3893c06_PXL_20241010_143302026.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:10 15:33:02",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/49s",
+        "aperture": "f/1.68",
+        "iso": 2085,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "20250412_090013.jpg",
+      "width": 1091,
+      "height": 789,
+      "metadata": {}
+    },
+    {
+      "filename": "DSC_0402.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:17 19:46:36",
+        "focal_length": "55.0 mm",
+        "shutter_speed": "1/100s",
+        "aperture": "f/5.6",
+        "iso": 12800
+      }
+    },
+    {
+      "filename": "DSC_0557.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:18 16:02:45",
+        "focal_length": "48.0 mm",
+        "shutter_speed": "1/200s",
+        "aperture": "f/5.3",
+        "iso": 800
+      }
+    },
+    {
+      "filename": "DSC_0558.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2022:12:25 11:51:24",
+        "focal_length": "47.0 mm",
+        "shutter_speed": "1/125s",
+        "aperture": "f/6.0",
+        "iso": 2200,
+        "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+      }
+    },
+    {
+      "filename": "DSC_0559.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:18 16:03:20",
+        "focal_length": "52.0 mm",
+        "shutter_speed": "1/200s",
+        "aperture": "f/5.6",
+        "iso": 800
+      }
+    },
+    {
+      "filename": "DSC_0643.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:19 12:45:54",
+        "focal_length": "35.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/5.0",
+        "iso": 400
+      }
+    },
+    {
+      "filename": "DSC_0787.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2022:12:30 10:59:35",
+        "focal_length": "22.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/5.0",
+        "iso": 200,
+        "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+      }
+    },
+    {
+      "filename": "DSC_0788.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:20 14:53:12",
+        "focal_length": "52.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/5.6",
+        "iso": 450
+      }
+    },
+    {
+      "filename": "DSC_0831.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:21 14:32:15",
+        "focal_length": "55.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/8.0",
+        "iso": 160
+      }
+    },
+    {
+      "filename": "DSC_0928.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON D3400",
+        "date_taken": "2018:02:22 12:26:06",
+        "focal_length": "45.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/7.1",
+        "iso": 200
+      }
+    },
+    {
+      "filename": "DSC_0963.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2023:05:11 09:32:51",
+        "focal_length": "37.0 mm",
+        "shutter_speed": "1/400s",
+        "aperture": "f/7.1",
+        "iso": 100,
+        "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+      }
+    },
+    {
+      "filename": "DSC_0982.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2023:05:13 11:08:45",
+        "focal_length": "35.0 mm",
+        "shutter_speed": "1/1000s",
+        "aperture": "f/5.3",
+        "iso": 200,
+        "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+      }
+    },
+    {
+      "filename": "DSC_0994.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2023:05:13 14:19:53",
+        "focal_length": "25.0 mm",
+        "shutter_speed": "1/250s",
+        "aperture": "f/11.0",
+        "iso": 160,
+        "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+      }
+    },
+    {
+      "filename": "DSC_2718.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2024:10:10 20:31:55",
+        "focal_length": "40.0 mm",
+        "shutter_speed": "1/60s",
+        "aperture": "f/2.5",
+        "iso": 12800,
+        "lens_model": "NIKKOR Z 40mm f/2"
+      }
+    },
+    {
+      "filename": "DSC_2837.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2024:10:13 11:08:20",
+        "focal_length": "38.0 mm",
+        "shutter_speed": "1/125s",
+        "aperture": "f/5.6",
+        "iso": 1800,
+        "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+      }
+    },
+    {
+      "filename": "IMG_20191118_154938.jpg",
+      "width": 4032,
+      "height": 3024,
+      "metadata": {
+        "camera_model": "Pixel 4 XL",
+        "date_taken": "2019:11:18 15:49:38",
+        "focal_length": "4.38 mm",
+        "shutter_speed": "1/419s",
+        "aperture": "f/1.73",
+        "iso": 62
+      }
+    },
+    {
+      "filename": "PXL_20221222_062206617.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2022:12:22 07:22:06",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/100s",
+        "aperture": "f/1.85",
+        "iso": 525,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20230402_021958535.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:04:01 19:19:58",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/1.85",
+        "iso": 138,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20230430_151818014.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:04:30 08:18:18",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/272s",
+        "aperture": "f/1.85",
+        "iso": 113,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20240612_031641093.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:06:12 12:16:41",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/1890s",
+        "aperture": "f/1.68",
+        "iso": 19,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240710_192758560.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:07:10 15:27:58",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/1037s",
+        "aperture": "f/1.68",
+        "iso": 16,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20240826_032328366.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:08:25 20:23:28",
+        "focal_length": "18.0 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/2.8",
+        "iso": 65,
+        "lens_model": "Pixel 8 Pro back camera 18.0mm f/2.8"
+      }
+    },
+    {
+      "filename": "PXL_20241006_101329942.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:06 11:13:29",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/131s",
+        "aperture": "f/1.68",
+        "iso": 839,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241006_110843651.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:06 12:08:43",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/216s",
+        "aperture": "f/1.68",
+        "iso": 151,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    },
+    {
+      "filename": "PXL_20241014_132913683.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:10:14 14:29:13",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/1689s",
+        "aperture": "f/1.68",
+        "iso": 1684,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1277 @@
+{
+  "timestamp": "2026-02-16T09:45:20.355874",
+  "scan_duration_seconds": 12.45,
+  "summary": {
+    "albums_added": 0,
+    "albums_removed": 0,
+    "photos_added": 0,
+    "photos_removed": 0,
+    "photos_updated": 92
+  },
+  "albums_added": [],
+  "albums_removed": [],
+  "changes": [
+    {
+      "album": "Art",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "art-portugal-street.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "art-elephants.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "art-singapore-gas-masks.JPG",
+          "changes": {
+            "artist": {
+              "old": "CHRIS RISNER",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "2017",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-graffiti.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "art-building.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-art.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "art-key-and-bird.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Portugal",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "portugal-cannonballs.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-path.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-river.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-lisboa.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-arch.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-cave.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-tram.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-sunshine.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "portugal-bookstore.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Ireland",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "ireland-hawk.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-kettle.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-cliffs-of-moher.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-chruch-pews.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "irelend-convent.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dublin-crest.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dunmore-head.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-lookout.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-elephant-tusks.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dunquin-pier.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-wine-celler.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-cemetary.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-wolf-hounds.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-castle-view.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dogs.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-ashord-tunnel.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-ashford-castle.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-abbey.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-ashford-painting.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "ireland-trail.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Signs",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "signs-brain.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "sign-tattoos.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "signs-namaste.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "signs-size-matters.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "signs-milk-friends.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "signs-vulva.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "sign-cheezy.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "signs-ireland-guinness.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Hawaii",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "hawaii-kauai-cliffs-2.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-sunset.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-golf-course.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-animals-chicken.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-night-beach.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-beach.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-cliffs.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-koy-pond.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-fields.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Africa",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "africa-zebras.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-distant-lion.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-resting-cheetahs.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-hippo.JPG",
+          "changes": {
+            "artist": {
+              "old": "CHRIS RISNER",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "2017",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-hyena.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "safari-birds.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-tree.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-wildebeasts.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-eating-cheetahs.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-elephants.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-lion-head.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-elephant-group.jpg",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-close-bird.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-zebra-reflection.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-trail.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-fighting-lions.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-elephant.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-deer.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-trees.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-sleeping-lion.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-giraffe.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-bones.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-birds.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-monkeys.JPG",
+          "changes": {
+            "artist": {
+              "old": "CHRIS RISNER",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "2017",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-lion-close.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-kissing-cheetahs.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-zebras-field.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-lizard.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-baby-zebra.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-bird-in-water.JPG",
+          "changes": {
+            "artist": {
+              "old": "(not set)",
+              "new": "Chris Risner"
+            },
+            "copyright": {
+              "old": "(not set)",
+              "new": "Copyright 2026 Chris Risner"
+            }
+          }
+        },
+        {
+          "filename": "africa-close-bird.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 15:44:55",
+                "focal_length": "300.0 mm",
+                "shutter_speed": "1/1000s",
+                "aperture": "f/6.3",
+                "iso": 320
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-deer.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 12:31:14",
+                "focal_length": "165.0 mm",
+                "shutter_speed": "1/1250s",
+                "aperture": "f/6.3",
+                "iso": 200
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-elephant.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 11:47:40",
+                "focal_length": "135.0 mm",
+                "shutter_speed": "1/1000s",
+                "aperture": "f/5.6",
+                "iso": 250
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-giraffe.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 16:04:51",
+                "focal_length": "280.0 mm",
+                "shutter_speed": "1/1250s",
+                "aperture": "f/6.3",
+                "iso": 200
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-sleeping-lion.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 11:24:58",
+                "focal_length": "300.0 mm",
+                "shutter_speed": "1/500s",
+                "aperture": "f/6.3",
+                "iso": 1400
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-trail.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 14:22:15",
+                "focal_length": "80.0 mm",
+                "shutter_speed": "1/500s",
+                "aperture": "f/8.0",
+                "iso": 180
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-tree.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 10:49:20",
+                "focal_length": "70.0 mm",
+                "shutter_speed": "1/500s",
+                "aperture": "f/8.0",
+                "iso": 110
+              }
+            }
+          }
+        },
+        {
+          "filename": "africa-zebras.JPG",
+          "changes": {
+            "metadata": {
+              "old": {},
+              "new": {
+                "camera_model": "NIKON D3400",
+                "date_taken": "2017:01:24 16:27:41",
+                "focal_length": "195.0 mm",
+                "shutter_speed": "1/1000s",
+                "aperture": "f/5.6",
+                "iso": 360
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

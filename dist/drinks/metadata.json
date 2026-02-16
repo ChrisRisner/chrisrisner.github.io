@@ -1,0 +1,116 @@
+{
+  "slug": "drinks",
+  "title": "Drinks",
+  "folder": "Drinks",
+  "photos": [
+    {
+      "filename": "IMG_20200310_175435.jpg",
+      "src": "/media/drinks/large_IMG_20200310_175435.jpg",
+      "thumb": "/media/drinks/thumb_IMG_20200310_175435.jpg",
+      "w": 900,
+      "h": 1200,
+      "aspect_ratio": 0.75,
+      "orientation": "portrait",
+      "sort_index": 0,
+      "meta": {
+        "date": "2020-03-10"
+      }
+    },
+    {
+      "filename": "PXL_20230903_115346626.PORTRAIT.jpg",
+      "src": "/media/drinks/large_PXL_20230903_115346626.PORTRAIT.jpg",
+      "thumb": "/media/drinks/thumb_PXL_20230903_115346626.PORTRAIT.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 1,
+      "meta": {
+        "date": "2023-09-03"
+      }
+    },
+    {
+      "filename": "PXL_20230905_113819349.PORTRAIT.jpg",
+      "src": "/media/drinks/large_PXL_20230905_113819349.PORTRAIT.jpg",
+      "thumb": "/media/drinks/thumb_PXL_20230905_113819349.PORTRAIT.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 2,
+      "meta": {
+        "date": "2023-09-05"
+      }
+    },
+    {
+      "filename": "PXL_20230909_092756333.jpg",
+      "src": "/media/drinks/large_PXL_20230909_092756333.jpg",
+      "thumb": "/media/drinks/thumb_PXL_20230909_092756333.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 3,
+      "meta": {
+        "date": "2023-09-09"
+      }
+    },
+    {
+      "filename": "DSC_1569.JPG",
+      "src": "/media/drinks/large_DSC_1569.JPG",
+      "thumb": "/media/drinks/thumb_DSC_1569.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 4,
+      "meta": {
+        "date": "2023-09-08"
+      }
+    },
+    {
+      "filename": "PXL_20230909_060436899.jpg",
+      "src": "/media/drinks/large_PXL_20230909_060436899.jpg",
+      "thumb": "/media/drinks/thumb_PXL_20230909_060436899.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 5,
+      "meta": {
+        "date": "2023-09-09"
+      }
+    },
+    {
+      "filename": "PXL_20240413_173300630.MP.jpg",
+      "src": "/media/drinks/large_PXL_20240413_173300630.MP.jpg",
+      "thumb": "/media/drinks/thumb_PXL_20240413_173300630.MP.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2024-04-13"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 7,
+    "portrait_count": 4,
+    "landscape_count": 3,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": null,
+    "next_album": "food"
+  },
+  "generated": {
+    "timestamp": "2026-02-03T21:18:58.688874Z",
+    "builder_version": "1.0.0"
+  }
+}

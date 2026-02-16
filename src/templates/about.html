@@ -1,0 +1,16 @@
+{% set is_about = true %}
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.2/dist/photoswipe.css">
+{% endblock %}
+
+{% block content %}
+    <h2>About</h2>
+    <p>My name is Chris and I'm a (very) amateur photographer located in Seattle, Washington.  I've always been interested in photography and decided to start sharing some of my pictures online.  </p>
+    <p>I've been shooting on Nikon cameras for about a decade now.  My first was a Nikon D3500 DSLR, followed by a Z50.  I currently shoot with a Z8.  For my phone camera, I'm currently using a Pixel 10 Pro XL.</p>
+    <p>This site is a more or less blatant rip off of <a href="https://stephanfoto.com">Stephan Morais' Photography site</a> because I thought it looked great.</p>
+    <p>Most of this site was put together using GitHub Copilot and the RPI approach in <a href="https://github.com/microsoft/hve-core">HVE Core</a>.</p>
+{% endblock %}

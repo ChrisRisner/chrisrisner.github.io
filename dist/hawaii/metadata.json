@@ -1,0 +1,153 @@
+{
+  "slug": "hawaii",
+  "title": "Hawaii",
+  "folder": "Hawaii",
+  "photos": [
+    {
+      "filename": "hawaii-animals-chicken.jpg",
+      "src": "/media/hawaii/large_hawaii-animals-chicken.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-animals-chicken.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 0,
+      "meta": {
+        "date": "2025-01-12"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-beach.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai-beach.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-beach.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 1,
+      "meta": {
+        "date": "2025-01-17"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-cliffs-2.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai-cliffs-2.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-cliffs-2.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 2,
+      "meta": {
+        "date": "2025-01-13"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-cliffs.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai-cliffs.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-cliffs.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 3,
+      "meta": {
+        "date": "2025-01-13"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-fields.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai-fields.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-fields.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 4,
+      "meta": {
+        "date": "2025-01-16"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-golf-course.JPG",
+      "src": "/media/hawaii/large_hawaii-kauai-golf-course.JPG",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-golf-course.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 5,
+      "meta": {
+        "date": "2025-01-13"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-night-beach.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai-night-beach.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-night-beach.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2025-01-16"
+      }
+    },
+    {
+      "filename": "hawaii-kauai-sunset.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai-sunset.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai-sunset.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 7,
+      "meta": {
+        "date": "2025-01-16"
+      }
+    },
+    {
+      "filename": "hawaii-kauai.jpg",
+      "src": "/media/hawaii/large_hawaii-kauai.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-kauai.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 8,
+      "meta": {}
+    },
+    {
+      "filename": "hawaii-koy-pond.jpg",
+      "src": "/media/hawaii/large_hawaii-koy-pond.jpg",
+      "thumb": "/media/hawaii/thumb_hawaii-koy-pond.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 9,
+      "meta": {
+        "date": "2025-01-12"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 10,
+    "portrait_count": 3,
+    "landscape_count": 7,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "art",
+    "next_album": "ireland"
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:22.011474Z",
+    "builder_version": "1.0.0"
+  }
+}

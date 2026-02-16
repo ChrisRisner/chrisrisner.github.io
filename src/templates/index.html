@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.2/dist/photoswipe.css">
+{% endblock %}
+
+{% block content %}
+    {% if current_album %}
+    <div class="album-header">
+        <h2>{{ current_album.title }}</h2>
+        {% if current_album.subtitle %}
+        <p class="album-subtitle">{{ current_album.subtitle }}</p>
+        {% endif %}
+    </div>
+    {% if current_album.summary %}
+    <div class="album-summary">
+        <p>{{ current_album.summary }}</p>
+    </div>
+    {% endif %}
+    <div class="album-grid" id="gallery">
+        {% for photo in current_album.photos %}
+        <a href="{{ base_url }}{{ photo.src }}"
+           data-pswp-width="{{ photo.w }}"
+           data-pswp-height="{{ photo.h }}"
+           target="_blank"
+           class="photo-link">
+            <img class="photo-item" src="{{ base_url }}{{ photo.src }}" alt="" loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}">
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <!-- Home View: List of Albums -->
+    <div class="album-grid">
+        {% for album in db.albums %}
+        <a href="{{ base_url }}/{{ album.slug }}/" class="album-card">
+            <img src="{{ base_url }}{{ album.cover }}" alt="{{ album.title }}">
+            <h3>{{ album.title }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}

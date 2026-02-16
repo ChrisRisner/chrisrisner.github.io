@@ -1,0 +1,8 @@
+# robots.txt for https://chrisrisner.com
+# Allow all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://chrisrisner.com/sitemap.xml

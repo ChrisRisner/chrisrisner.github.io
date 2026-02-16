@@ -1,0 +1,142 @@
+{
+  "slug": "signs",
+  "title": "Signs",
+  "folder": "Signs",
+  "photos": [
+    {
+      "filename": "sign-cheezy.jpg",
+      "src": "/media/signs/large_sign-cheezy.jpg",
+      "thumb": "/media/signs/thumb_sign-cheezy.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 0,
+      "meta": {
+        "date": "2024-10-06"
+      }
+    },
+    {
+      "filename": "sign-tattoos.jpg",
+      "src": "/media/signs/large_sign-tattoos.jpg",
+      "thumb": "/media/signs/thumb_sign-tattoos.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 1,
+      "meta": {
+        "date": "2026-01-08"
+      }
+    },
+    {
+      "filename": "signs-brain.jpg",
+      "src": "/media/signs/large_signs-brain.jpg",
+      "thumb": "/media/signs/thumb_signs-brain.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 2,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "signs-ireland-guinness.JPG",
+      "src": "/media/signs/large_signs-ireland-guinness.JPG",
+      "thumb": "/media/signs/thumb_signs-ireland-guinness.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 3,
+      "meta": {
+        "date": "2024-10-07"
+      }
+    },
+    {
+      "filename": "signs-milk-friends.jpg",
+      "src": "/media/signs/large_signs-milk-friends.jpg",
+      "thumb": "/media/signs/thumb_signs-milk-friends.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 4,
+      "meta": {
+        "date": "2025-12-31"
+      }
+    },
+    {
+      "filename": "signs-namaste.jpg",
+      "src": "/media/signs/large_signs-namaste.jpg",
+      "thumb": "/media/signs/thumb_signs-namaste.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 5,
+      "meta": {
+        "date": "2026-01-06"
+      }
+    },
+    {
+      "filename": "signs-pizza-portugal.JPG",
+      "src": "/media/signs/large_signs-pizza-portugal.JPG",
+      "thumb": "/media/signs/thumb_signs-pizza-portugal.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "signs-size-matters.jpg",
+      "src": "/media/signs/large_signs-size-matters.jpg",
+      "thumb": "/media/signs/thumb_signs-size-matters.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 7,
+      "meta": {
+        "date": "2026-01-02"
+      }
+    },
+    {
+      "filename": "signs-vulva.jpg",
+      "src": "/media/signs/large_signs-vulva.jpg",
+      "thumb": "/media/signs/thumb_signs-vulva.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 8,
+      "meta": {
+        "date": "2025-12-27"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 9,
+    "portrait_count": 6,
+    "landscape_count": 3,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "portugal",
+    "next_album": "street"
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:22.032614Z",
+    "builder_version": "1.0.0"
+  }
+}

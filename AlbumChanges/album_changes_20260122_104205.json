@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-01-22T10:42:05.140550",
+  "scan_duration_seconds": 6.72,
+  "summary": {
+    "albums_added": 0,
+    "albums_removed": 0,
+    "photos_added": 0,
+    "photos_removed": 0,
+    "photos_updated": 0
+  },
+  "albums_added": [],
+  "albums_removed": [],
+  "changes": []
+}

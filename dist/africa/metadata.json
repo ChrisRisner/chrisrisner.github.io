@@ -1,0 +1,363 @@
+{
+  "slug": "africa",
+  "title": "Africa",
+  "folder": "Africa",
+  "photos": [
+    {
+      "filename": "africa-baby-zebra.JPG",
+      "src": "/media/africa/large_africa-baby-zebra.JPG",
+      "thumb": "/media/africa/thumb_africa-baby-zebra.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 0,
+      "meta": {
+        "date": "2017-01-29"
+      }
+    },
+    {
+      "filename": "africa-bird-in-water.JPG",
+      "src": "/media/africa/large_africa-bird-in-water.JPG",
+      "thumb": "/media/africa/thumb_africa-bird-in-water.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 1,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-birds.JPG",
+      "src": "/media/africa/large_africa-birds.JPG",
+      "thumb": "/media/africa/thumb_africa-birds.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 2,
+      "meta": {
+        "date": "2017-01-26"
+      }
+    },
+    {
+      "filename": "africa-bones.JPG",
+      "src": "/media/africa/large_africa-bones.JPG",
+      "thumb": "/media/africa/thumb_africa-bones.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 3,
+      "meta": {
+        "date": "2017-01-27"
+      }
+    },
+    {
+      "filename": "africa-close-bird.JPG",
+      "src": "/media/africa/large_africa-close-bird.JPG",
+      "thumb": "/media/africa/thumb_africa-close-bird.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 4,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-deer.JPG",
+      "src": "/media/africa/large_africa-deer.JPG",
+      "thumb": "/media/africa/thumb_africa-deer.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 5,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-distant-lion.JPG",
+      "src": "/media/africa/large_africa-distant-lion.JPG",
+      "thumb": "/media/africa/thumb_africa-distant-lion.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-eating-cheetahs.JPG",
+      "src": "/media/africa/large_africa-eating-cheetahs.JPG",
+      "thumb": "/media/africa/thumb_africa-eating-cheetahs.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 7,
+      "meta": {
+        "date": "2017-01-28"
+      }
+    },
+    {
+      "filename": "africa-elephant-group.jpg",
+      "src": "/media/africa/large_africa-elephant-group.jpg",
+      "thumb": "/media/africa/thumb_africa-elephant-group.jpg",
+      "w": 1600,
+      "h": 1197,
+      "aspect_ratio": 1.337,
+      "orientation": "landscape",
+      "sort_index": 8,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-elephant.JPG",
+      "src": "/media/africa/large_africa-elephant.JPG",
+      "thumb": "/media/africa/thumb_africa-elephant.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 9,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-elephants.JPG",
+      "src": "/media/africa/large_africa-elephants.JPG",
+      "thumb": "/media/africa/thumb_africa-elephants.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 10,
+      "meta": {
+        "date": "2017-01-29"
+      }
+    },
+    {
+      "filename": "africa-fighting-lions.JPG",
+      "src": "/media/africa/large_africa-fighting-lions.JPG",
+      "thumb": "/media/africa/thumb_africa-fighting-lions.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 11,
+      "meta": {
+        "date": "2017-01-26"
+      }
+    },
+    {
+      "filename": "africa-giraffe.JPG",
+      "src": "/media/africa/large_africa-giraffe.JPG",
+      "thumb": "/media/africa/thumb_africa-giraffe.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 12,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-hippo.JPG",
+      "src": "/media/africa/large_africa-hippo.JPG",
+      "thumb": "/media/africa/thumb_africa-hippo.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 13,
+      "meta": {
+        "date": "2017-01-30"
+      }
+    },
+    {
+      "filename": "africa-hyena.JPG",
+      "src": "/media/africa/large_africa-hyena.JPG",
+      "thumb": "/media/africa/thumb_africa-hyena.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 14,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-kissing-cheetahs.JPG",
+      "src": "/media/africa/large_africa-kissing-cheetahs.JPG",
+      "thumb": "/media/africa/thumb_africa-kissing-cheetahs.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 15,
+      "meta": {
+        "date": "2017-01-28"
+      }
+    },
+    {
+      "filename": "africa-lion-close.JPG",
+      "src": "/media/africa/large_africa-lion-close.JPG",
+      "thumb": "/media/africa/thumb_africa-lion-close.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 16,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-lion-head.JPG",
+      "src": "/media/africa/large_africa-lion-head.JPG",
+      "thumb": "/media/africa/thumb_africa-lion-head.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 17,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-lizard.JPG",
+      "src": "/media/africa/large_africa-lizard.JPG",
+      "thumb": "/media/africa/thumb_africa-lizard.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 18,
+      "meta": {
+        "date": "2017-01-26"
+      }
+    },
+    {
+      "filename": "africa-monkeys.JPG",
+      "src": "/media/africa/large_africa-monkeys.JPG",
+      "thumb": "/media/africa/thumb_africa-monkeys.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 19,
+      "meta": {
+        "date": "2017-01-30"
+      }
+    },
+    {
+      "filename": "africa-resting-cheetahs.JPG",
+      "src": "/media/africa/large_africa-resting-cheetahs.JPG",
+      "thumb": "/media/africa/thumb_africa-resting-cheetahs.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 20,
+      "meta": {
+        "date": "2017-01-27"
+      }
+    },
+    {
+      "filename": "africa-sleeping-lion.JPG",
+      "src": "/media/africa/large_africa-sleeping-lion.JPG",
+      "thumb": "/media/africa/thumb_africa-sleeping-lion.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 21,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-trail.JPG",
+      "src": "/media/africa/large_africa-trail.JPG",
+      "thumb": "/media/africa/thumb_africa-trail.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 22,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-tree.JPG",
+      "src": "/media/africa/large_africa-tree.JPG",
+      "thumb": "/media/africa/thumb_africa-tree.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 23,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    },
+    {
+      "filename": "africa-trees.JPG",
+      "src": "/media/africa/large_africa-trees.JPG",
+      "thumb": "/media/africa/thumb_africa-trees.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 24,
+      "meta": {
+        "date": "2017-01-25"
+      }
+    },
+    {
+      "filename": "africa-zebras.JPG",
+      "src": "/media/africa/large_africa-zebras.JPG",
+      "thumb": "/media/africa/thumb_africa-zebras.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 25,
+      "meta": {
+        "date": "2017-01-24"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 26,
+    "portrait_count": 1,
+    "landscape_count": 25,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": null,
+    "next_album": "art"
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:21.993759Z",
+    "builder_version": "1.0.0"
+  }
+}

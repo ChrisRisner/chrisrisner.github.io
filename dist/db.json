@@ -1,0 +1,1188 @@
+{
+  "albums": [
+    {
+      "slug": "africa",
+      "title": "Africa",
+      "subtitle": "Photos from a safari in Tanzania in January 2017.",
+      "summary": "",
+      "cover": "/media/africa/thumb_africa-baby-zebra.JPG",
+      "photos": [
+        {
+          "src": "/media/africa/large_africa-baby-zebra.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:29 08:45:09"
+          },
+          "thumb": "/media/africa/thumb_africa-baby-zebra.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-bird-in-water.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:25 12:44:36"
+          },
+          "thumb": "/media/africa/thumb_africa-bird-in-water.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-birds.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:26 18:32:44"
+          },
+          "thumb": "/media/africa/thumb_africa-birds.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-bones.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:27 15:49:53"
+          },
+          "thumb": "/media/africa/thumb_africa-bones.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-close-bird.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 15:44:55"
+          },
+          "thumb": "/media/africa/thumb_africa-close-bird.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-deer.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 12:31:14"
+          },
+          "thumb": "/media/africa/thumb_africa-deer.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-distant-lion.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:25 09:41:07"
+          },
+          "thumb": "/media/africa/thumb_africa-distant-lion.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-eating-cheetahs.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:28 09:05:42"
+          },
+          "thumb": "/media/africa/thumb_africa-eating-cheetahs.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-elephant-group.jpg",
+          "w": 1600,
+          "h": 1197,
+          "meta": {
+            "date_taken": "2017:01:25 13:23:21"
+          },
+          "thumb": "/media/africa/thumb_africa-elephant-group.jpg"
+        },
+        {
+          "src": "/media/africa/large_africa-elephant.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 11:47:40"
+          },
+          "thumb": "/media/africa/thumb_africa-elephant.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-elephants.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:29 09:37:41"
+          },
+          "thumb": "/media/africa/thumb_africa-elephants.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-fighting-lions.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:26 09:09:23"
+          },
+          "thumb": "/media/africa/thumb_africa-fighting-lions.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-giraffe.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 16:04:51"
+          },
+          "thumb": "/media/africa/thumb_africa-giraffe.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-hippo.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:30 12:06:02"
+          },
+          "thumb": "/media/africa/thumb_africa-hippo.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-hyena.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:25 07:06:50"
+          },
+          "thumb": "/media/africa/thumb_africa-hyena.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-kissing-cheetahs.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:28 09:08:35"
+          },
+          "thumb": "/media/africa/thumb_africa-kissing-cheetahs.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-lion-close.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2017:01:25 09:48:55"
+          },
+          "thumb": "/media/africa/thumb_africa-lion-close.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-lion-head.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:25 10:42:26"
+          },
+          "thumb": "/media/africa/thumb_africa-lion-head.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-lizard.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:26 09:50:28"
+          },
+          "thumb": "/media/africa/thumb_africa-lizard.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-monkeys.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:30 11:13:47"
+          },
+          "thumb": "/media/africa/thumb_africa-monkeys.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-resting-cheetahs.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:27 09:13:09"
+          },
+          "thumb": "/media/africa/thumb_africa-resting-cheetahs.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-sleeping-lion.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 11:24:58"
+          },
+          "thumb": "/media/africa/thumb_africa-sleeping-lion.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-trail.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 14:22:15"
+          },
+          "thumb": "/media/africa/thumb_africa-trail.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-tree.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 10:49:20"
+          },
+          "thumb": "/media/africa/thumb_africa-tree.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-trees.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:25 07:37:23"
+          },
+          "thumb": "/media/africa/thumb_africa-trees.JPG"
+        },
+        {
+          "src": "/media/africa/large_africa-zebras.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2017:01:24 16:27:41"
+          },
+          "thumb": "/media/africa/thumb_africa-zebras.JPG"
+        }
+      ]
+    },
+    {
+      "slug": "art",
+      "title": "Art",
+      "subtitle": "Interesting art from around the world.",
+      "summary": "",
+      "cover": "/media/art/thumb_art-portugal-hands-boat.JPG",
+      "photos": [
+        {
+          "src": "/media/art/large_art-braga-fountain.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:02 10:24:56"
+          },
+          "thumb": "/media/art/thumb_art-braga-fountain.JPG"
+        },
+        {
+          "src": "/media/art/large_art-braga-statue.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:02 11:59:18"
+          },
+          "thumb": "/media/art/thumb_art-braga-statue.JPG"
+        },
+        {
+          "src": "/media/art/large_art-braga-tiles-2.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 17:17:17"
+          },
+          "thumb": "/media/art/thumb_art-braga-tiles-2.JPG"
+        },
+        {
+          "src": "/media/art/large_art-braga-tiles.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:02 11:04:38"
+          },
+          "thumb": "/media/art/thumb_art-braga-tiles.JPG"
+        },
+        {
+          "src": "/media/art/large_art-building.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 16:42:42"
+          },
+          "thumb": "/media/art/thumb_art-building.jpg"
+        },
+        {
+          "src": "/media/art/large_art-carriage.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:28 11:47:20"
+          },
+          "thumb": "/media/art/thumb_art-carriage.JPG"
+        },
+        {
+          "src": "/media/art/large_art-elephants.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:28 16:06:12"
+          },
+          "thumb": "/media/art/thumb_art-elephants.jpg"
+        },
+        {
+          "src": "/media/art/large_art-key-and-bird.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:27 12:55:56"
+          },
+          "thumb": "/media/art/thumb_art-key-and-bird.jpg"
+        },
+        {
+          "src": "/media/art/large_art-porto-fresco.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 11:35:13"
+          },
+          "thumb": "/media/art/thumb_art-porto-fresco.JPG"
+        },
+        {
+          "src": "/media/art/large_art-porto-garbage.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:01 15:16:40"
+          },
+          "thumb": "/media/art/thumb_art-porto-garbage.JPG"
+        },
+        {
+          "src": "/media/art/large_art-porto-rabbit.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:01 15:17:35"
+          },
+          "thumb": "/media/art/thumb_art-porto-rabbit.JPG"
+        },
+        {
+          "src": "/media/art/large_art-porto-tiles.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:03 09:36:42"
+          },
+          "thumb": "/media/art/thumb_art-porto-tiles.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-bee-art.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 13:16:05"
+          },
+          "thumb": "/media/art/thumb_art-portugal-bee-art.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-face.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 13:16:23"
+          },
+          "thumb": "/media/art/thumb_art-portugal-face.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-figurine.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:28 12:30:14"
+          },
+          "thumb": "/media/art/thumb_art-portugal-figurine.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-graffiti.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:03 16:46:40"
+          },
+          "thumb": "/media/art/thumb_art-portugal-graffiti.jpg"
+        },
+        {
+          "src": "/media/art/large_art-portugal-hands-boat.JPG",
+          "w": 856,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 13:22:29"
+          },
+          "thumb": "/media/art/thumb_art-portugal-hands-boat.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-head.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:28 12:27:18"
+          },
+          "thumb": "/media/art/thumb_art-portugal-head.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-lady.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:29 13:22:01"
+          },
+          "thumb": "/media/art/thumb_art-portugal-lady.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-sintra-face.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:30 12:34:24"
+          },
+          "thumb": "/media/art/thumb_art-portugal-sintra-face.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-sintra-navigation.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:30 12:42:46"
+          },
+          "thumb": "/media/art/thumb_art-portugal-sintra-navigation.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-sintra.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:30 11:31:22"
+          },
+          "thumb": "/media/art/thumb_art-portugal-sintra.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-street-2.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 13:23:59"
+          },
+          "thumb": "/media/art/thumb_art-portugal-street-2.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-street-art.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:29 13:15:20"
+          },
+          "thumb": "/media/art/thumb_art-portugal-street-art.JPG"
+        },
+        {
+          "src": "/media/art/large_art-portugal-street.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 10:16:28"
+          },
+          "thumb": "/media/art/thumb_art-portugal-street.jpg"
+        },
+        {
+          "src": "/media/art/large_art-singapore-gas-masks.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2018:04:12 20:13:11"
+          },
+          "thumb": "/media/art/thumb_art-singapore-gas-masks.JPG"
+        },
+        {
+          "src": "/media/art/large_portugal-art.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:08 12:59:15"
+          },
+          "thumb": "/media/art/thumb_portugal-art.jpg"
+        },
+        {
+          "src": "/media/art/large_portugal-church-2.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:28 10:39:20"
+          },
+          "thumb": "/media/art/thumb_portugal-church-2.JPG"
+        },
+        {
+          "src": "/media/art/large_portugal-church.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:27 12:10:59"
+          },
+          "thumb": "/media/art/thumb_portugal-church.JPG"
+        },
+        {
+          "src": "/media/art/large_portugal-statue.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:27 12:35:55"
+          },
+          "thumb": "/media/art/thumb_portugal-statue.JPG"
+        }
+      ]
+    },
+    {
+      "slug": "hawaii",
+      "title": "Hawaii",
+      "subtitle": "Photos from travels around Hawaii - mostly Kauai.",
+      "summary": "",
+      "cover": "/media/hawaii/thumb_hawaii-kauai-night-beach.jpg",
+      "photos": [
+        {
+          "src": "/media/hawaii/large_hawaii-animals-chicken.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:12 11:59:35"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-animals-chicken.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-beach.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:17 10:11:15"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-beach.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-cliffs-2.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:13 16:12:56"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-cliffs-2.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-cliffs.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:13 16:27:07"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-cliffs.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-fields.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:16 13:10:20"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-fields.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-golf-course.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:01:13 07:30:30"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-golf-course.JPG"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-night-beach.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:16 04:02:26"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-night-beach.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai-sunset.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:16 07:35:20"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-kauai-sunset.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-kauai.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {},
+          "thumb": "/media/hawaii/thumb_hawaii-kauai.jpg"
+        },
+        {
+          "src": "/media/hawaii/large_hawaii-koy-pond.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:01:12 10:39:05"
+          },
+          "thumb": "/media/hawaii/thumb_hawaii-koy-pond.jpg"
+        }
+      ]
+    },
+    {
+      "slug": "ireland",
+      "title": "Ireland",
+      "subtitle": "Photos from traveling around Ireland.",
+      "summary": "",
+      "cover": "/media/ireland/thumb_ireland-dunquin-pier.JPG",
+      "photos": [
+        {
+          "src": "/media/ireland/large_ireland-abbey.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:09 10:21:21"
+          },
+          "thumb": "/media/ireland/thumb_ireland-abbey.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-ashford-castle.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:10 16:57:40"
+          },
+          "thumb": "/media/ireland/thumb_ireland-ashford-castle.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-ashford-painting.jpg",
+          "w": 1524,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:09 17:58:30"
+          },
+          "thumb": "/media/ireland/thumb_ireland-ashford-painting.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-ashord-tunnel.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:09 16:29:12"
+          },
+          "thumb": "/media/ireland/thumb_ireland-ashord-tunnel.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-castle-view.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:10 18:36:58"
+          },
+          "thumb": "/media/ireland/thumb_ireland-castle-view.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-cemetary.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:08 14:49:09"
+          },
+          "thumb": "/media/ireland/thumb_ireland-cemetary.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-chruch-pews.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:07 15:55:53"
+          },
+          "thumb": "/media/ireland/thumb_ireland-chruch-pews.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-cliffs-of-moher.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:13 09:38:58"
+          },
+          "thumb": "/media/ireland/thumb_ireland-cliffs-of-moher.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-dogs.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:10 09:31:14"
+          },
+          "thumb": "/media/ireland/thumb_ireland-dogs.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-dublin-crest.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:07 15:42:38"
+          },
+          "thumb": "/media/ireland/thumb_ireland-dublin-crest.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-dunmore-head.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:14 11:46:34"
+          },
+          "thumb": "/media/ireland/thumb_ireland-dunmore-head.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-dunquin-pier.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:14 12:17:31"
+          },
+          "thumb": "/media/ireland/thumb_ireland-dunquin-pier.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-hawk.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:09 15:28:15"
+          },
+          "thumb": "/media/ireland/thumb_ireland-hawk.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-kettle.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:11 12:59:59"
+          },
+          "thumb": "/media/ireland/thumb_ireland-kettle.JPG"
+        },
+        {
+          "src": "/media/ireland/large_ireland-lookout.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:14 11:37:01"
+          },
+          "thumb": "/media/ireland/thumb_ireland-lookout.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-trail.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:14 12:01:57"
+          },
+          "thumb": "/media/ireland/thumb_ireland-trail.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-wine-celler.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:10 17:18:28"
+          },
+          "thumb": "/media/ireland/thumb_ireland-wine-celler.jpg"
+        },
+        {
+          "src": "/media/ireland/large_ireland-wolf-hounds.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:10 08:54:07"
+          },
+          "thumb": "/media/ireland/thumb_ireland-wolf-hounds.JPG"
+        },
+        {
+          "src": "/media/ireland/large_irelend-convent.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2024:10:11 11:49:58"
+          },
+          "thumb": "/media/ireland/thumb_irelend-convent.JPG"
+        }
+      ]
+    },
+    {
+      "slug": "portugal",
+      "title": "Portugal",
+      "subtitle": "Travels in Portugal",
+      "summary": "Photos from Lisbon, Porto, the Duoro Valley, Braga, Sintra, and the Algarve.",
+      "cover": "/media/portugal/thumb_portugal-braga-mont.JPG",
+      "photos": [
+        {
+          "src": "/media/portugal/large_portugal-algave-cliffs.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:06 10:41:50"
+          },
+          "thumb": "/media/portugal/thumb_portugal-algave-cliffs.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-arch.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:06 10:09:36"
+          },
+          "thumb": "/media/portugal/thumb_portugal-arch.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-bookstore.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:03 15:06:43"
+          },
+          "thumb": "/media/portugal/thumb_portugal-bookstore.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-braga-castle.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:02 14:19:13"
+          },
+          "thumb": "/media/portugal/thumb_portugal-braga-castle.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-braga-mont.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 17:21:23"
+          },
+          "thumb": "/media/portugal/thumb_portugal-braga-mont.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-cannonballs.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:02 10:50:38"
+          },
+          "thumb": "/media/portugal/thumb_portugal-cannonballs.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-cascaius-boats.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:30 17:01:32"
+          },
+          "thumb": "/media/portugal/thumb_portugal-cascaius-boats.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-cave.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:30 12:16:19"
+          },
+          "thumb": "/media/portugal/thumb_portugal-cave.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-duoro-valley.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:04 13:30:07"
+          },
+          "thumb": "/media/portugal/thumb_portugal-duoro-valley.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-horse-statue.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:29 10:53:02"
+          },
+          "thumb": "/media/portugal/thumb_portugal-horse-statue.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-lisboa.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 18:21:55"
+          },
+          "thumb": "/media/portugal/thumb_portugal-lisboa.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-monastery.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:28 10:45:40"
+          },
+          "thumb": "/media/portugal/thumb_portugal-monastery.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-monument-discoveries.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:28 11:02:09"
+          },
+          "thumb": "/media/portugal/thumb_portugal-monument-discoveries.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-palace-view.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:28 12:30:35"
+          },
+          "thumb": "/media/portugal/thumb_portugal-palace-view.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-pastries.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 10:26:42"
+          },
+          "thumb": "/media/portugal/thumb_portugal-pastries.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-path.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:06 13:41:41"
+          },
+          "thumb": "/media/portugal/thumb_portugal-path.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-pena-palace.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:31 06:21:51"
+          },
+          "thumb": "/media/portugal/thumb_portugal-pena-palace.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-chruch-tiles-2.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 09:39:15"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-chruch-tiles-2.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-fountain.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:31 16:14:44"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-fountain.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-market-sardines.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 10:59:59"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-market-sardines.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-market.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 10:49:21"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-market.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-more-tiles.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 14:02:10"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-more-tiles.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-river-view.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:01 12:42:37"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-river-view.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-river.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:01 15:28:29"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-river.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-porto-tile-church.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:31 13:42:52"
+          },
+          "thumb": "/media/portugal/thumb_portugal-porto-tile-church.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-sintra-fountain.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:30 11:52:05"
+          },
+          "thumb": "/media/portugal/thumb_portugal-sintra-fountain.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-sintra-statue.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:30 12:29:37"
+          },
+          "thumb": "/media/portugal/thumb_portugal-sintra-statue.JPG"
+        },
+        {
+          "src": "/media/portugal/large_portugal-sunshine.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {},
+          "thumb": "/media/portugal/thumb_portugal-sunshine.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-tram.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:28 19:12:48"
+          },
+          "thumb": "/media/portugal/thumb_portugal-tram.jpg"
+        },
+        {
+          "src": "/media/portugal/large_portugal-wine.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 10:36:30"
+          },
+          "thumb": "/media/portugal/thumb_portugal-wine.JPG"
+        }
+      ]
+    },
+    {
+      "slug": "signs",
+      "title": "Signs",
+      "subtitle": "Signs from around the world.",
+      "summary": "",
+      "cover": "/media/signs/thumb_signs-brain.jpg",
+      "photos": [
+        {
+          "src": "/media/signs/large_sign-cheezy.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:06 11:13:29"
+          },
+          "thumb": "/media/signs/thumb_sign-cheezy.jpg"
+        },
+        {
+          "src": "/media/signs/large_sign-tattoos.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:08 13:30:43"
+          },
+          "thumb": "/media/signs/thumb_sign-tattoos.jpg"
+        },
+        {
+          "src": "/media/signs/large_signs-brain.jpg",
+          "w": 1594,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:29 13:13:21"
+          },
+          "thumb": "/media/signs/thumb_signs-brain.jpg"
+        },
+        {
+          "src": "/media/signs/large_signs-ireland-guinness.JPG",
+          "w": 800,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2024:10:07 09:44:22"
+          },
+          "thumb": "/media/signs/thumb_signs-ireland-guinness.JPG"
+        },
+        {
+          "src": "/media/signs/large_signs-milk-friends.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:31 19:01:19"
+          },
+          "thumb": "/media/signs/thumb_signs-milk-friends.jpg"
+        },
+        {
+          "src": "/media/signs/large_signs-namaste.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:06 12:10:46"
+          },
+          "thumb": "/media/signs/thumb_signs-namaste.jpg"
+        },
+        {
+          "src": "/media/signs/large_signs-pizza-portugal.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2025:12:29 13:22:54"
+          },
+          "thumb": "/media/signs/thumb_signs-pizza-portugal.JPG"
+        },
+        {
+          "src": "/media/signs/large_signs-size-matters.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2026:01:02 21:30:42"
+          },
+          "thumb": "/media/signs/thumb_signs-size-matters.jpg"
+        },
+        {
+          "src": "/media/signs/large_signs-vulva.jpg",
+          "w": 904,
+          "h": 1200,
+          "meta": {
+            "date_taken": "2025:12:27 13:02:50"
+          },
+          "thumb": "/media/signs/thumb_signs-vulva.jpg"
+        }
+      ]
+    },
+    {
+      "slug": "street",
+      "title": "Street",
+      "subtitle": "Street photography from around the world.",
+      "summary": "",
+      "cover": "/media/street/thumb_street-porto-shop.JPG",
+      "photos": [
+        {
+          "src": "/media/street/large_street-porto-shop.JPG",
+          "w": 1600,
+          "h": 1067,
+          "meta": {
+            "date_taken": "2026:01:03 09:31:14"
+          },
+          "thumb": "/media/street/thumb_street-porto-shop.JPG"
+        }
+      ]
+    }
+  ]
+}

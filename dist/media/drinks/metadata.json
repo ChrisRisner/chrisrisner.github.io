@@ -1,0 +1,104 @@
+{
+  "album_title": "Drinks",
+  "folder_name": "Drinks",
+  "cover_filename": "IMG_20200310_175435.jpg",
+  "photos": [
+    {
+      "filename": "IMG_20200310_175435.jpg",
+      "width": 3024,
+      "height": 4032,
+      "metadata": {
+        "camera_model": "Pixel 4 XL",
+        "date_taken": "2020:03:10 17:54:35",
+        "focal_length": "4.38 mm",
+        "shutter_speed": "1/60s",
+        "aperture": "f/1.73",
+        "iso": 109
+      }
+    },
+    {
+      "filename": "PXL_20230903_115346626.PORTRAIT.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:09:03 20:53:46",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/100s",
+        "aperture": "f/1.85",
+        "iso": 868,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20230905_113819349.PORTRAIT.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:09:05 20:38:19",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/33s",
+        "aperture": "f/1.85",
+        "iso": 2400,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20230909_092756333.jpg",
+      "width": 3072,
+      "height": 4080,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:09:09 18:27:56",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/34s",
+        "aperture": "f/1.85",
+        "iso": 116,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "DSC_1569.JPG",
+      "width": 1620,
+      "height": 1080,
+      "metadata": {
+        "camera_model": "NIKON Z 50",
+        "date_taken": "2023:09:08 12:09:26",
+        "focal_length": "40.0 mm",
+        "shutter_speed": "1/160s",
+        "aperture": "f/2.8",
+        "iso": 400,
+        "lens_model": "NIKKOR Z 40mm f/2"
+      }
+    },
+    {
+      "filename": "PXL_20230909_060436899.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 6 Pro",
+        "date_taken": "2023:09:09 15:04:36",
+        "focal_length": "6.81 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/1.85",
+        "iso": 2186,
+        "lens_model": "Pixel 6 Pro back camera 6.81mm f/1.85"
+      }
+    },
+    {
+      "filename": "PXL_20240413_173300630.MP.jpg",
+      "width": 4080,
+      "height": 3072,
+      "metadata": {
+        "camera_model": "Pixel 8 Pro",
+        "date_taken": "2024:04:13 10:33:00",
+        "focal_length": "6.9 mm",
+        "shutter_speed": "1/120s",
+        "aperture": "f/1.68",
+        "iso": 123,
+        "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+      }
+    }
+  ]
+}

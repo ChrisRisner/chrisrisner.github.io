@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="{{ base_url }}/static/style.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="layout">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <button id="menu-toggle" aria-label="Toggle Menu">☰</button>
+            <h1>Chris Risner Photography</h1>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <h1><a href="{{ base_url }}/" style="text-decoration:none; color:inherit;">Chris Risner Photography</a></h1>
+            <nav>
+                <ul class="nav-list">
+                    {% for album in db.albums %}
+                    <li>
+                        <a href="{{ base_url }}/{{ album.slug }}/" class="nav-link {{ 'active' if current_album is defined and current_album and current_album.slug == album.slug else '' }}">
+                            {{ album.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            <a href="{{ base_url }}/about/" class="nav-link {{ 'active' if is_about is defined and is_about else '' }}">About</a>
+            <div class="social-links">
+                <a href="https://www.instagram.com/whenin.blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.threads.com/@chris.risner" aria-label="Threads">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                </a>
+                <a href="mailto:chris@chrisrisner.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="{{ main_class if main_class is defined else 'content' }}" id="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- App Logic -->
+    <script type="module" src="{{ base_url }}/static/app.js"></script>
+</body>
+</html>

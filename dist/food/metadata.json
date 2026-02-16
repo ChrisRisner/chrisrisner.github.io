@@ -1,0 +1,90 @@
+{
+  "slug": "food",
+  "title": "Food",
+  "folder": "Food",
+  "photos": [
+    {
+      "filename": "PXL_20260106_123833486.jpg",
+      "src": "/media/food/large_PXL_20260106_123833486.jpg",
+      "thumb": "/media/food/thumb_PXL_20260106_123833486.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 0,
+      "meta": {
+        "date": "2026-01-06"
+      }
+    },
+    {
+      "filename": "PXL_20260108_143619468.jpg",
+      "src": "/media/food/large_PXL_20260108_143619468.jpg",
+      "thumb": "/media/food/thumb_PXL_20260108_143619468.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 1,
+      "meta": {
+        "date": "2026-01-08"
+      }
+    },
+    {
+      "filename": "PXL_20260108_192129913.NIGHT.jpg",
+      "src": "/media/food/large_PXL_20260108_192129913.NIGHT.jpg",
+      "thumb": "/media/food/thumb_PXL_20260108_192129913.NIGHT.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 2,
+      "meta": {
+        "date": "2026-01-08"
+      }
+    },
+    {
+      "filename": "PXL_20260108_201623391.jpg",
+      "src": "/media/food/large_PXL_20260108_201623391.jpg",
+      "thumb": "/media/food/thumb_PXL_20260108_201623391.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 3,
+      "meta": {
+        "date": "2026-01-08"
+      }
+    },
+    {
+      "filename": "PXL_20260112_022822279.jpg",
+      "src": "/media/food/large_PXL_20260112_022822279.jpg",
+      "thumb": "/media/food/thumb_PXL_20260112_022822279.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 4,
+      "meta": {
+        "date": "2026-01-11"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 5,
+    "portrait_count": 4,
+    "landscape_count": 1,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "drinks",
+    "next_album": "my-long-title-is-long"
+  },
+  "generated": {
+    "timestamp": "2026-02-03T21:18:58.692167Z",
+    "builder_version": "1.0.0"
+  }
+}

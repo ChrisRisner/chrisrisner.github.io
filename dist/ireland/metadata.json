@@ -1,0 +1,272 @@
+{
+  "slug": "ireland",
+  "title": "Ireland",
+  "folder": "Ireland",
+  "photos": [
+    {
+      "filename": "ireland-abbey.JPG",
+      "src": "/media/ireland/large_ireland-abbey.JPG",
+      "thumb": "/media/ireland/thumb_ireland-abbey.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 0,
+      "meta": {
+        "date": "2024-10-09"
+      }
+    },
+    {
+      "filename": "ireland-ashford-castle.jpg",
+      "src": "/media/ireland/large_ireland-ashford-castle.jpg",
+      "thumb": "/media/ireland/thumb_ireland-ashford-castle.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 1,
+      "meta": {
+        "date": "2024-10-10"
+      }
+    },
+    {
+      "filename": "ireland-ashford-painting.jpg",
+      "src": "/media/ireland/large_ireland-ashford-painting.jpg",
+      "thumb": "/media/ireland/thumb_ireland-ashford-painting.jpg",
+      "w": 1524,
+      "h": 1200,
+      "aspect_ratio": 1.27,
+      "orientation": "landscape",
+      "sort_index": 2,
+      "meta": {
+        "date": "2024-10-09"
+      }
+    },
+    {
+      "filename": "ireland-ashord-tunnel.JPG",
+      "src": "/media/ireland/large_ireland-ashord-tunnel.JPG",
+      "thumb": "/media/ireland/thumb_ireland-ashord-tunnel.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 3,
+      "meta": {
+        "date": "2024-10-09"
+      }
+    },
+    {
+      "filename": "ireland-castle-view.jpg",
+      "src": "/media/ireland/large_ireland-castle-view.jpg",
+      "thumb": "/media/ireland/thumb_ireland-castle-view.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 4,
+      "meta": {
+        "date": "2024-10-10"
+      }
+    },
+    {
+      "filename": "ireland-cemetary.jpg",
+      "src": "/media/ireland/large_ireland-cemetary.jpg",
+      "thumb": "/media/ireland/thumb_ireland-cemetary.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 5,
+      "meta": {
+        "date": "2024-10-08"
+      }
+    },
+    {
+      "filename": "ireland-chruch-pews.JPG",
+      "src": "/media/ireland/large_ireland-chruch-pews.JPG",
+      "thumb": "/media/ireland/thumb_ireland-chruch-pews.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2024-10-07"
+      }
+    },
+    {
+      "filename": "ireland-cliffs-of-moher.JPG",
+      "src": "/media/ireland/large_ireland-cliffs-of-moher.JPG",
+      "thumb": "/media/ireland/thumb_ireland-cliffs-of-moher.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 7,
+      "meta": {
+        "date": "2024-10-13"
+      }
+    },
+    {
+      "filename": "ireland-dogs.jpg",
+      "src": "/media/ireland/large_ireland-dogs.jpg",
+      "thumb": "/media/ireland/thumb_ireland-dogs.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 8,
+      "meta": {
+        "date": "2024-10-10"
+      }
+    },
+    {
+      "filename": "ireland-dublin-crest.jpg",
+      "src": "/media/ireland/large_ireland-dublin-crest.jpg",
+      "thumb": "/media/ireland/thumb_ireland-dublin-crest.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 9,
+      "meta": {
+        "date": "2024-10-07"
+      }
+    },
+    {
+      "filename": "ireland-dunmore-head.JPG",
+      "src": "/media/ireland/large_ireland-dunmore-head.JPG",
+      "thumb": "/media/ireland/thumb_ireland-dunmore-head.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 10,
+      "meta": {
+        "date": "2024-10-14"
+      }
+    },
+    {
+      "filename": "ireland-dunquin-pier.JPG",
+      "src": "/media/ireland/large_ireland-dunquin-pier.JPG",
+      "thumb": "/media/ireland/thumb_ireland-dunquin-pier.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 11,
+      "meta": {
+        "date": "2024-10-14"
+      }
+    },
+    {
+      "filename": "ireland-hawk.jpg",
+      "src": "/media/ireland/large_ireland-hawk.jpg",
+      "thumb": "/media/ireland/thumb_ireland-hawk.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 12,
+      "meta": {
+        "date": "2024-10-09"
+      }
+    },
+    {
+      "filename": "ireland-kettle.JPG",
+      "src": "/media/ireland/large_ireland-kettle.JPG",
+      "thumb": "/media/ireland/thumb_ireland-kettle.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 13,
+      "meta": {
+        "date": "2024-10-11"
+      }
+    },
+    {
+      "filename": "ireland-lookout.jpg",
+      "src": "/media/ireland/large_ireland-lookout.jpg",
+      "thumb": "/media/ireland/thumb_ireland-lookout.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 14,
+      "meta": {
+        "date": "2024-10-14"
+      }
+    },
+    {
+      "filename": "ireland-trail.jpg",
+      "src": "/media/ireland/large_ireland-trail.jpg",
+      "thumb": "/media/ireland/thumb_ireland-trail.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 15,
+      "meta": {
+        "date": "2024-10-14"
+      }
+    },
+    {
+      "filename": "ireland-wine-celler.jpg",
+      "src": "/media/ireland/large_ireland-wine-celler.jpg",
+      "thumb": "/media/ireland/thumb_ireland-wine-celler.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 16,
+      "meta": {
+        "date": "2024-10-10"
+      }
+    },
+    {
+      "filename": "ireland-wolf-hounds.JPG",
+      "src": "/media/ireland/large_ireland-wolf-hounds.JPG",
+      "thumb": "/media/ireland/thumb_ireland-wolf-hounds.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 17,
+      "meta": {
+        "date": "2024-10-10"
+      }
+    },
+    {
+      "filename": "irelend-convent.JPG",
+      "src": "/media/ireland/large_irelend-convent.JPG",
+      "thumb": "/media/ireland/thumb_irelend-convent.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 18,
+      "meta": {
+        "date": "2024-10-11"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 19,
+    "portrait_count": 7,
+    "landscape_count": 12,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "hawaii",
+    "next_album": "portugal"
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:22.015886Z",
+    "builder_version": "1.0.0"
+  }
+}

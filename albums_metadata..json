@@ -1,0 +1,2278 @@
+{
+  "Art": {
+    "album_title": "Art",
+    "subtitle": "Interesting art from around the world.",
+    "summary": "",
+    "folder_name": "Art",
+    "cover_filename": "art-portugal-hands-boat.JPG",
+    "photos": [
+      {
+        "filename": "art-braga-fountain.JPG",
+        "photo_name": "art-braga-fountain.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:02 10:24:56",
+          "focal_length": "82.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/4.0",
+          "iso": 140,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 0
+      },
+      {
+        "filename": "art-braga-statue.JPG",
+        "photo_name": "art-braga-statue.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:02 11:59:18",
+          "focal_length": "120.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 4000,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 1
+      },
+      {
+        "filename": "art-braga-tiles-2.JPG",
+        "photo_name": "art-braga-tiles-2.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:02 14:29:05",
+          "focal_length": "35.0 mm",
+          "shutter_speed": "1/40s",
+          "aperture": "f/4.0",
+          "iso": 220,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 2
+      },
+      {
+        "filename": "art-braga-tiles.JPG",
+        "photo_name": "art-braga-tiles.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:02 11:04:38",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/25s",
+          "aperture": "f/4.0",
+          "iso": 1600,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 3
+      },
+      {
+        "filename": "art-building.jpg",
+        "photo_name": "art-building.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:29 16:42:42",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/445s",
+          "aperture": "f/1.68",
+          "iso": 23,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 4
+      },
+      {
+        "filename": "art-carriage.JPG",
+        "photo_name": "art-carriage.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 11:47:20",
+          "focal_length": "120.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 9000,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 5
+      },
+      {
+        "filename": "art-elephants.jpg",
+        "photo_name": "art-elephants.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:28 16:06:12",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/99s",
+          "aperture": "f/1.68",
+          "iso": 1237,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 6
+      },
+      {
+        "filename": "art-key-and-bird.jpg",
+        "photo_name": "art-key-and-bird.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:27 12:55:56",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/126s",
+          "aperture": "f/1.68",
+          "iso": 29,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 7
+      },
+      {
+        "filename": "art-porto-fresco.JPG",
+        "photo_name": "art-porto-fresco.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 11:35:13",
+          "focal_length": "43.0 mm",
+          "shutter_speed": "1/50s",
+          "aperture": "f/4.0",
+          "iso": 110,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 8
+      },
+      {
+        "filename": "art-porto-garbage.JPG",
+        "photo_name": "art-porto-garbage.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:01 15:16:40",
+          "focal_length": "48.0 mm",
+          "shutter_speed": "1/50s",
+          "aperture": "f/4.0",
+          "iso": 140,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 9
+      },
+      {
+        "filename": "art-porto-rabbit.JPG",
+        "photo_name": "art-porto-rabbit.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:01 15:17:35",
+          "focal_length": "45.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/5.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 10
+      },
+      {
+        "filename": "art-porto-tiles.JPG",
+        "photo_name": "art-porto-tiles.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 09:36:42",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/25s",
+          "aperture": "f/4.0",
+          "iso": 800,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 11
+      },
+      {
+        "filename": "art-portugal-bee-art.JPG",
+        "photo_name": "art-portugal-bee-art.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:16:05",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/7.1",
+          "iso": 200,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 12
+      },
+      {
+        "filename": "art-portugal-face.JPG",
+        "photo_name": "art-portugal-face.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:16:23",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/400s",
+          "aperture": "f/7.1",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 13
+      },
+      {
+        "filename": "art-portugal-figurine.JPG",
+        "photo_name": "art-portugal-figurine.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 12:30:14",
+          "focal_length": "81.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/4.0",
+          "iso": 5600,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 14
+      },
+      {
+        "filename": "art-portugal-graffiti.jpg",
+        "photo_name": "art-portugal-graffiti.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:03 16:46:40",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/692s",
+          "aperture": "f/1.68",
+          "iso": 1186,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 15
+      },
+      {
+        "filename": "art-portugal-hands-boat.JPG",
+        "photo_name": "art-portugal-hands-boat.JPG",
+        "width": 2043,
+        "height": 2864,
+        "aspect_ratio": 0.713,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:22:29",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/2.0",
+          "iso": 72,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 16
+      },
+      {
+        "filename": "art-portugal-head.JPG",
+        "photo_name": "art-portugal-head.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 12:27:18",
+          "focal_length": "95.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/4.0",
+          "iso": 20000,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 17
+      },
+      {
+        "filename": "art-portugal-lady.JPG",
+        "photo_name": "art-portugal-lady.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:22:01",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/2.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 18
+      },
+      {
+        "filename": "art-portugal-sintra-face.JPG",
+        "photo_name": "art-portugal-sintra-face.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 12:34:24",
+          "focal_length": "72.0 mm",
+          "shutter_speed": "1/80s",
+          "aperture": "f/4.0",
+          "iso": 110,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 19
+      },
+      {
+        "filename": "art-portugal-sintra-navigation.JPG",
+        "photo_name": "art-portugal-sintra-navigation.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 12:42:46",
+          "focal_length": "120.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 100,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 20
+      },
+      {
+        "filename": "art-portugal-sintra.JPG",
+        "photo_name": "art-portugal-sintra.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 11:31:22",
+          "focal_length": "88.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 21
+      },
+      {
+        "filename": "art-portugal-street-2.JPG",
+        "photo_name": "art-portugal-street-2.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:23:59",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/2.8",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 22
+      },
+      {
+        "filename": "art-portugal-street-art.JPG",
+        "photo_name": "art-portugal-street-art.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:15:20",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/5.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 23
+      },
+      {
+        "filename": "art-portugal-street.jpg",
+        "photo_name": "art-portugal-street.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:29 10:16:28",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/107s",
+          "aperture": "f/1.68",
+          "iso": 33,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 24
+      },
+      {
+        "filename": "art-singapore-gas-masks.JPG",
+        "photo_name": "art-singapore-gas-masks.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2018:04:12 20:13:11",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/3.8",
+          "iso": 7200
+        },
+        "sort_index": 25
+      },
+      {
+        "filename": "portugal-art.jpg",
+        "photo_name": "portugal-art.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:08 12:59:15",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/204s",
+          "aperture": "f/1.68",
+          "iso": 29,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 26
+      },
+      {
+        "filename": "portugal-church-2.JPG",
+        "photo_name": "portugal-church-2.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 10:39:20",
+          "focal_length": "86.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/4.0",
+          "iso": 1800,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 27
+      },
+      {
+        "filename": "portugal-church.JPG",
+        "photo_name": "portugal-church.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:27 12:10:59",
+          "focal_length": "48.0 mm",
+          "shutter_speed": "1/50s",
+          "aperture": "f/4.0",
+          "iso": 1000,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 28
+      },
+      {
+        "filename": "portugal-statue.JPG",
+        "photo_name": "portugal-statue.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:27 12:35:55",
+          "focal_length": "110.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 100,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 29
+      }
+    ]
+  },
+  "Portugal": {
+    "album_title": "Portugal",
+    "subtitle": "Travels in Portugal",
+    "summary": "Photos from Lisbon, Porto, the Duoro Valley, Braga, Sintra, and the Algarve.",
+    "cover_filename": "portugal-braga-mont.JPG",
+    "folder_name": "Portugal",
+    "photos": [
+      {
+        "filename": "portugal-algave-cliffs.JPG",
+        "photo_name": "portugal-algave-cliffs.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:06 10:41:50",
+          "focal_length": "42.0 mm",
+          "shutter_speed": "1/320s",
+          "aperture": "f/9.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 0
+      },
+      {
+        "filename": "portugal-arch.jpg",
+        "photo_name": "portugal-arch.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:06 10:09:36",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/4651s",
+          "aperture": "f/1.68",
+          "iso": 20,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 1
+      },
+      {
+        "filename": "portugal-bookstore.jpg",
+        "photo_name": "portugal-bookstore.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:03 15:06:43",
+          "focal_length": "2.02 mm",
+          "shutter_speed": "1/33s",
+          "aperture": "f/1.7",
+          "iso": 56,
+          "lens_model": "Pixel 10 Pro XL back camera 2.02mm f/1.7"
+        },
+        "sort_index": 2
+      },
+      {
+        "filename": "portugal-braga-castle.JPG",
+        "photo_name": "portugal-braga-castle.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:02 14:19:13",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/5.6",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 3
+      },
+      {
+        "filename": "portugal-braga-mont.JPG",
+        "photo_name": "portugal-braga-mont.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:02 10:24:09",
+          "focal_length": "37.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/5.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 4
+      },
+      {
+        "filename": "portugal-cannonballs.jpg",
+        "photo_name": "portugal-cannonballs.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:02 10:50:38",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/180s",
+          "aperture": "f/1.68",
+          "iso": 53,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 5
+      },
+      {
+        "filename": "portugal-cascaius-boats.JPG",
+        "photo_name": "portugal-cascaius-boats.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 17:01:32",
+          "focal_length": "71.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 6
+      },
+      {
+        "filename": "portugal-cave.jpg",
+        "photo_name": "portugal-cave.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:30 12:16:19",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/76s",
+          "aperture": "f/1.68",
+          "iso": 98,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 7
+      },
+      {
+        "filename": "portugal-duoro-valley.JPG",
+        "photo_name": "portugal-duoro-valley.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:04 13:30:07",
+          "focal_length": "52.0 mm",
+          "shutter_speed": "1/320s",
+          "aperture": "f/9.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 8
+      },
+      {
+        "filename": "portugal-horse-statue.JPG",
+        "photo_name": "portugal-horse-statue.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 10:53:02",
+          "focal_length": "75.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/5.6",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 9
+      },
+      {
+        "filename": "portugal-lisboa.jpg",
+        "photo_name": "portugal-lisboa.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:29 18:21:55",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/99s",
+          "aperture": "f/1.68",
+          "iso": 73,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 10
+      },
+      {
+        "filename": "portugal-monastery.JPG",
+        "photo_name": "portugal-monastery.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 10:45:40",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/40s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 11
+      },
+      {
+        "filename": "portugal-monument-discoveries.JPG",
+        "photo_name": "portugal-monument-discoveries.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 11:02:09",
+          "focal_length": "52.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/8.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 12
+      },
+      {
+        "filename": "portugal-palace-view.JPG",
+        "photo_name": "portugal-palace-view.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:28 12:30:35",
+          "focal_length": "75.0 mm",
+          "shutter_speed": "1/80s",
+          "aperture": "f/4.0",
+          "iso": 3600,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 13
+      },
+      {
+        "filename": "portugal-pastries.JPG",
+        "photo_name": "portugal-pastries.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 10:26:42",
+          "focal_length": "39.0 mm",
+          "shutter_speed": "1/40s",
+          "aperture": "f/4.0",
+          "iso": 280,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 14
+      },
+      {
+        "filename": "portugal-path.jpg",
+        "photo_name": "portugal-path.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:06 13:41:41",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/3030s",
+          "aperture": "f/1.68",
+          "iso": 22,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 15
+      },
+      {
+        "filename": "portugal-pena-palace.JPG",
+        "photo_name": "portugal-pena-palace.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 09:23:27",
+          "focal_length": "120.0 mm",
+          "shutter_speed": "1/200s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 16
+      },
+      {
+        "filename": "portugal-porto-chruch-tiles-2.JPG",
+        "photo_name": "portugal-porto-chruch-tiles-2.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 09:39:15",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/5.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 17
+      },
+      {
+        "filename": "portugal-porto-fountain.JPG",
+        "photo_name": "portugal-porto-fountain.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:31 16:14:44",
+          "focal_length": "120.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 18
+      },
+      {
+        "filename": "portugal-porto-market-sardines.JPG",
+        "photo_name": "portugal-porto-market-sardines.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 10:59:59",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/50s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 19
+      },
+      {
+        "filename": "portugal-porto-market.JPG",
+        "photo_name": "portugal-porto-market.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 10:49:21",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/4.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 20
+      },
+      {
+        "filename": "portugal-porto-more-tiles.JPG",
+        "photo_name": "portugal-porto-more-tiles.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 14:02:10",
+          "focal_length": "24.0 mm",
+          "shutter_speed": "1/100s",
+          "aperture": "f/5.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 21
+      },
+      {
+        "filename": "portugal-porto-river-view.JPG",
+        "photo_name": "portugal-porto-river-view.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:01 12:42:37",
+          "focal_length": "47.0 mm",
+          "shutter_speed": "1/160s",
+          "aperture": "f/6.3",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 22
+      },
+      {
+        "filename": "portugal-porto-river.jpg",
+        "photo_name": "portugal-porto-river.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:01 15:28:29",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/282s",
+          "aperture": "f/1.68",
+          "iso": 26,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 23
+      },
+      {
+        "filename": "portugal-porto-tile-church.JPG",
+        "photo_name": "portugal-porto-tile-church.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:31 13:42:52",
+          "focal_length": "42.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/8.0",
+          "iso": 64,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 24
+      },
+      {
+        "filename": "portugal-sintra-fountain.JPG",
+        "photo_name": "portugal-sintra-fountain.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 11:52:05",
+          "focal_length": "33.5 mm",
+          "shutter_speed": "1/40s",
+          "aperture": "f/4.0",
+          "iso": 72,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 25
+      },
+      {
+        "filename": "portugal-sintra-statue.JPG",
+        "photo_name": "portugal-sintra-statue.JPG",
+        "width": 2160,
+        "height": 3240,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:30 12:29:37",
+          "focal_length": "120.0 mm",
+          "shutter_speed": "1/125s",
+          "aperture": "f/4.0",
+          "iso": 2800,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 26
+      },
+      {
+        "filename": "portugal-sunshine.jpg",
+        "photo_name": "portugal-sunshine.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:31 16:34:46",
+          "focal_length": "6.900000095367432 mm"
+        },
+        "sort_index": 27
+      },
+      {
+        "filename": "portugal-tram.jpg",
+        "photo_name": "portugal-tram.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:28 19:12:48",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/99s",
+          "aperture": "f/1.68",
+          "iso": 372,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 28
+      },
+      {
+        "filename": "portugal-wine.JPG",
+        "photo_name": "portugal-wine.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 10:36:30",
+          "focal_length": "41.0 mm",
+          "shutter_speed": "1/40s",
+          "aperture": "f/4.0",
+          "iso": 180,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 29
+      }
+    ]
+  },
+  "Ireland": {
+    "album_title": "Ireland",
+    "subtitle": "Photos from traveling around Ireland.",
+    "summary": "",
+    "folder_name": "Ireland",
+    "cover_filename": "ireland-dunquin-pier.JPG",
+    "photos": [
+      {
+        "filename": "ireland-abbey.JPG",
+        "photo_name": "ireland-abbey.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:09 10:21:21",
+          "focal_length": "16.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/4.0",
+          "iso": 320,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 0
+      },
+      {
+        "filename": "ireland-ashford-castle.jpg",
+        "photo_name": "ireland-ashford-castle.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:10 16:57:40",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/99s",
+          "aperture": "f/1.68",
+          "iso": 278,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 1
+      },
+      {
+        "filename": "ireland-ashford-painting.jpg",
+        "photo_name": "ireland-ashford-painting.jpg",
+        "width": 3479,
+        "height": 2740,
+        "aspect_ratio": 1.27,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:09 17:58:30",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/49s",
+          "aperture": "f/1.68",
+          "iso": 108,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 2
+      },
+      {
+        "filename": "ireland-ashord-tunnel.JPG",
+        "photo_name": "ireland-ashord-tunnel.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:09 16:29:12",
+          "focal_length": "16.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/3.5",
+          "iso": 400,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 3
+      },
+      {
+        "filename": "ireland-castle-view.jpg",
+        "photo_name": "ireland-castle-view.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:10 18:36:58",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/75s",
+          "aperture": "f/1.68",
+          "iso": 21,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 4
+      },
+      {
+        "filename": "ireland-cemetary.jpg",
+        "photo_name": "ireland-cemetary.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:08 14:49:09",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/798s",
+          "aperture": "f/1.68",
+          "iso": 20,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 5
+      },
+      {
+        "filename": "ireland-chruch-pews.JPG",
+        "photo_name": "ireland-chruch-pews.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:07 15:55:53",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/6.3",
+          "iso": 12800,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 6
+      },
+      {
+        "filename": "ireland-cliffs-of-moher.JPG",
+        "photo_name": "ireland-cliffs-of-moher.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:13 09:38:58",
+          "focal_length": "38.0 mm",
+          "shutter_speed": "1/50s",
+          "aperture": "f/5.6",
+          "iso": 100,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 7
+      },
+      {
+        "filename": "ireland-dogs.jpg",
+        "photo_name": "ireland-dogs.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:10 09:31:14",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/158s",
+          "aperture": "f/1.68",
+          "iso": 581,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 8
+      },
+      {
+        "filename": "ireland-dublin-crest.jpg",
+        "photo_name": "ireland-dublin-crest.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:07 15:42:38",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/476s",
+          "aperture": "f/1.68",
+          "iso": 19,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 9
+      },
+      {
+        "filename": "ireland-dunmore-head.JPG",
+        "photo_name": "ireland-dunmore-head.JPG",
+        "width": 1080,
+        "height": 1620,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:14 11:46:34",
+          "focal_length": "16.0 mm",
+          "shutter_speed": "1/800s",
+          "aperture": "f/3.5",
+          "iso": 100,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 10
+      },
+      {
+        "filename": "ireland-dunquin-pier.JPG",
+        "photo_name": "ireland-dunquin-pier.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:14 12:17:31",
+          "focal_length": "16.0 mm",
+          "shutter_speed": "1/320s",
+          "aperture": "f/3.5",
+          "iso": 100,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 11
+      },
+      {
+        "filename": "ireland-hawk.jpg",
+        "photo_name": "ireland-hawk.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:09 15:28:15",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/630s",
+          "aperture": "f/1.68",
+          "iso": 160,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 13
+      },
+      {
+        "filename": "ireland-kettle.JPG",
+        "photo_name": "ireland-kettle.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:11 12:59:59",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/160s",
+          "aperture": "f/6.3",
+          "iso": 400,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 14
+      },
+      {
+        "filename": "ireland-lookout.jpg",
+        "photo_name": "ireland-lookout.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:14 11:37:01",
+          "focal_length": "2.23 mm",
+          "shutter_speed": "1/1494s",
+          "aperture": "f/1.95",
+          "iso": 42,
+          "lens_model": "Pixel 8 Pro back camera 2.23mm f/1.95"
+        },
+        "sort_index": 15
+      },
+      {
+        "filename": "ireland-trail.jpg",
+        "photo_name": "ireland-trail.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:14 12:01:57",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/766s",
+          "aperture": "f/1.68",
+          "iso": 20,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 16
+      },
+      {
+        "filename": "ireland-wine-celler.jpg",
+        "photo_name": "ireland-wine-celler.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:10 17:18:28",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/99s",
+          "aperture": "f/1.68",
+          "iso": 1727,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 17
+      },
+      {
+        "filename": "ireland-wolf-hounds.JPG",
+        "photo_name": "ireland-wolf-hounds.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:10 08:54:07",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/6.3",
+          "iso": 25600,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 18
+      },
+      {
+        "filename": "irelend-convent.JPG",
+        "photo_name": "irelend-convent.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:11 11:49:58",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/6.3",
+          "iso": 280,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 19
+      }
+    ]
+  },
+  "Signs": {
+    "album_title": "Signs",
+    "subtitle": "Signs from around the world.",
+    "summary": "",
+    "folder_name": "Signs",
+    "cover_filename": "signs-brain.jpg",
+    "photos": [
+      {
+        "filename": "sign-cheezy.jpg",
+        "photo_name": "sign-cheezy.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2024:10:06 11:13:29",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/131s",
+          "aperture": "f/1.68",
+          "iso": 839,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 0
+      },
+      {
+        "filename": "sign-tattoos.jpg",
+        "photo_name": "sign-tattoos.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:08 13:30:43",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/443s",
+          "aperture": "f/1.68",
+          "iso": 60,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 1
+      },
+      {
+        "filename": "signs-brain.jpg",
+        "photo_name": "signs-brain.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:29 13:13:21",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/505s",
+          "aperture": "f/1.68",
+          "iso": 46,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 2
+      },
+      {
+        "filename": "signs-ireland-guinness.JPG",
+        "photo_name": "signs-ireland-guinness.JPG",
+        "width": 1080,
+        "height": 1620,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2024:10:07 09:44:22",
+          "focal_length": "23.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/4.2",
+          "iso": 400,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 3
+      },
+      {
+        "filename": "signs-milk-friends.jpg",
+        "photo_name": "signs-milk-friends.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:31 19:01:19",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/49s",
+          "aperture": "f/1.68",
+          "iso": 2254,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 4
+      },
+      {
+        "filename": "signs-namaste.jpg",
+        "photo_name": "signs-namaste.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:06 12:10:46",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/489s",
+          "aperture": "f/1.68",
+          "iso": 84,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 5
+      },
+      {
+        "filename": "signs-pizza-portugal.JPG",
+        "photo_name": "signs-pizza-portugal.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2025:12:29 13:22:54",
+          "focal_length": "50.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/4.0",
+          "iso": 72,
+          "lens_model": "NIKKOR Z 50mm f/1.8 S"
+        },
+        "sort_index": 6
+      },
+      {
+        "filename": "signs-size-matters.jpg",
+        "photo_name": "signs-size-matters.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2026:01:02 21:30:42",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/33s",
+          "aperture": "f/1.68",
+          "iso": 536,
+          "lens_model": "Pixel 10 Pro XL back camera 6.9mm f/1.68"
+        },
+        "sort_index": 7
+      },
+      {
+        "filename": "signs-vulva.jpg",
+        "photo_name": "signs-vulva.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 10 Pro XL",
+          "date_taken": "2025:12:27 13:02:50",
+          "focal_length": "2.02 mm",
+          "shutter_speed": "1/276s",
+          "aperture": "f/1.7",
+          "iso": 66,
+          "lens_model": "Pixel 10 Pro XL back camera 2.02mm f/1.7"
+        },
+        "sort_index": 8
+      }
+    ]
+  },
+  "Street": {
+    "album_title": "Street",
+    "subtitle": "Street photography from around the world.",
+    "summary": "",
+    "folder_name": "Street",
+    "photos": [
+      {
+        "filename": "street-porto-shop.JPG",
+        "photo_name": "street-porto-shop.JPG",
+        "width": 3240,
+        "height": 2160,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 8",
+          "date_taken": "2026:01:03 09:31:14",
+          "focal_length": "55.0 mm",
+          "shutter_speed": "1/60s",
+          "aperture": "f/4.0",
+          "iso": 80,
+          "lens_model": "NIKKOR Z 24-120mm f/4 S"
+        },
+        "sort_index": 0
+      }
+    ]
+  },
+  "Hawaii": {
+    "album_title": "Hawaii",
+    "subtitle": "Photos from travels around Hawaii - mostly Kauai.",
+    "summary": "",
+    "folder_name": "Hawaii",
+    "cover_filename": "hawaii-kauai-night-beach.jpg",
+    "photos": [
+      {
+        "filename": "hawaii-animals-chicken.jpg",
+        "photo_name": "hawaii-animals-chicken.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:12 11:59:35",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/410s",
+          "aperture": "f/1.68",
+          "iso": 19,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 0
+      },
+      {
+        "filename": "hawaii-kauai-beach.jpg",
+        "photo_name": "hawaii-kauai-beach.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:17 10:11:15",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/475s",
+          "aperture": "f/1.68",
+          "iso": 22,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 1
+      },
+      {
+        "filename": "hawaii-kauai-cliffs-2.jpg",
+        "photo_name": "hawaii-kauai-cliffs-2.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:13 16:12:56",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/962s",
+          "aperture": "f/1.68",
+          "iso": 21,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 2
+      },
+      {
+        "filename": "hawaii-kauai-cliffs.jpg",
+        "photo_name": "hawaii-kauai-cliffs.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:13 16:27:07",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/840s",
+          "aperture": "f/1.68",
+          "iso": 23,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 3
+      },
+      {
+        "filename": "hawaii-kauai-fields.jpg",
+        "photo_name": "hawaii-kauai-fields.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:16 13:10:20",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/3690s",
+          "aperture": "f/1.68",
+          "iso": 21,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 4
+      },
+      {
+        "filename": "hawaii-kauai-golf-course.JPG",
+        "photo_name": "hawaii-kauai-golf-course.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON Z 50",
+          "date_taken": "2025:01:13 07:30:30",
+          "focal_length": "16.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/4.0",
+          "iso": 250,
+          "lens_model": "NIKKOR Z DX 16-50mm f/3.5-6.3 VR"
+        },
+        "sort_index": 5
+      },
+      {
+        "filename": "hawaii-kauai-night-beach.jpg",
+        "photo_name": "hawaii-kauai-night-beach.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:16 04:02:26",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "15.99954s",
+          "aperture": "f/1.68",
+          "iso": 322,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 6
+      },
+      {
+        "filename": "hawaii-kauai-sunset.jpg",
+        "photo_name": "hawaii-kauai-sunset.jpg",
+        "width": 4080,
+        "height": 3072,
+        "aspect_ratio": 1.328,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:16 07:35:20",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/247s",
+          "aperture": "f/1.68",
+          "iso": 22,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 7
+      },
+      {
+        "filename": "hawaii-kauai.jpg",
+        "photo_name": "hawaii-kauai.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:17 10:36:38",
+          "focal_length": "6.900000095367432 mm"
+        },
+        "sort_index": 8
+      },
+      {
+        "filename": "hawaii-koy-pond.jpg",
+        "photo_name": "hawaii-koy-pond.jpg",
+        "width": 3072,
+        "height": 4080,
+        "aspect_ratio": 0.753,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "Pixel 8 Pro",
+          "date_taken": "2025:01:12 10:39:05",
+          "focal_length": "6.9 mm",
+          "shutter_speed": "1/439s",
+          "aperture": "f/1.68",
+          "iso": 19,
+          "lens_model": "Pixel 8 Pro back camera 6.9mm f/1.68"
+        },
+        "sort_index": 9
+      }
+    ]
+  },
+  "Africa": {
+    "album_title": "Africa",
+    "subtitle": "Photos from a safari in Tanzania in January 2017.",
+    "summary": "",
+    "folder_name": "Africa",
+    "photos": [
+      {
+        "filename": "africa-baby-zebra.JPG",
+        "photo_name": "africa-baby-zebra.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:29 08:45:09",
+          "focal_length": "230.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/5.6",
+          "iso": 500
+        },
+        "sort_index": 0
+      },
+      {
+        "filename": "africa-bird-in-water.JPG",
+        "photo_name": "africa-bird-in-water.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:25 12:44:36",
+          "focal_length": "260.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.0",
+          "iso": 220
+        },
+        "sort_index": 1
+      },
+      {
+        "filename": "africa-birds.JPG",
+        "photo_name": "africa-birds.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:26 18:32:44",
+          "focal_length": "55.0 mm",
+          "shutter_speed": "1/250s",
+          "aperture": "f/5.6",
+          "iso": 800
+        },
+        "sort_index": 2
+      },
+      {
+        "filename": "africa-bones.JPG",
+        "photo_name": "africa-bones.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:27 15:49:53",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.3",
+          "iso": 220
+        },
+        "sort_index": 3
+      },
+      {
+        "filename": "africa-close-bird.JPG",
+        "photo_name": "africa-close-bird.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 15:44:55",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.3",
+          "iso": 320
+        },
+        "sort_index": 4
+      },
+      {
+        "filename": "africa-deer.JPG",
+        "photo_name": "africa-deer.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 12:31:14",
+          "focal_length": "165.0 mm",
+          "shutter_speed": "1/1250s",
+          "aperture": "f/6.3",
+          "iso": 200
+        },
+        "sort_index": 5
+      },
+      {
+        "filename": "africa-distant-lion.JPG",
+        "photo_name": "africa-distant-lion.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:25 09:41:07",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.3",
+          "iso": 200
+        },
+        "sort_index": 6
+      },
+      {
+        "filename": "africa-eating-cheetahs.JPG",
+        "photo_name": "africa-eating-cheetahs.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:28 09:05:42",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.3",
+          "iso": 280
+        },
+        "sort_index": 7
+      },
+      {
+        "filename": "africa-elephant-group.jpg",
+        "photo_name": "africa-elephant-group.jpg",
+        "width": 4000,
+        "height": 2992,
+        "aspect_ratio": 1.337,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "Nexus 6P",
+          "date_taken": "2017:01:25 13:23:21",
+          "focal_length": "4.67 mm",
+          "shutter_speed": "1/3508s",
+          "aperture": "f/2.0",
+          "iso": 62
+        },
+        "sort_index": 8
+      },
+      {
+        "filename": "africa-elephant.JPG",
+        "photo_name": "africa-elephant.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 11:47:40",
+          "focal_length": "135.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/5.6",
+          "iso": 250
+        },
+        "sort_index": 9
+      },
+      {
+        "filename": "africa-elephants.JPG",
+        "photo_name": "africa-elephants.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:29 09:37:41",
+          "focal_length": "125.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/5.6",
+          "iso": 200
+        },
+        "sort_index": 10
+      },
+      {
+        "filename": "africa-fighting-lions.JPG",
+        "photo_name": "africa-fighting-lions.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:26 09:09:23",
+          "focal_length": "110.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/8.0",
+          "iso": 125
+        },
+        "sort_index": 11
+      },
+      {
+        "filename": "africa-giraffe.JPG",
+        "photo_name": "africa-giraffe.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 16:04:51",
+          "focal_length": "280.0 mm",
+          "shutter_speed": "1/1250s",
+          "aperture": "f/6.3",
+          "iso": 200
+        },
+        "sort_index": 12
+      },
+      {
+        "filename": "africa-hippo.JPG",
+        "photo_name": "africa-hippo.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:30 12:06:02",
+          "focal_length": "260.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.0",
+          "iso": 200
+        },
+        "sort_index": 13
+      },
+      {
+        "filename": "africa-hyena.JPG",
+        "photo_name": "africa-hyena.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:25 07:06:50",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/6.3",
+          "iso": 1250
+        },
+        "sort_index": 14
+      },
+      {
+        "filename": "africa-kissing-cheetahs.JPG",
+        "photo_name": "africa-kissing-cheetahs.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:28 09:08:35",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.3",
+          "iso": 280
+        },
+        "sort_index": 15
+      },
+      {
+        "filename": "africa-lion-close.JPG",
+        "photo_name": "africa-lion-close.JPG",
+        "width": 1080,
+        "height": 1620,
+        "aspect_ratio": 0.667,
+        "orientation": "portrait",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:25 09:48:55",
+          "focal_length": "220.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/5.6",
+          "iso": 400
+        },
+        "sort_index": 16
+      },
+      {
+        "filename": "africa-lion-head.JPG",
+        "photo_name": "africa-lion-head.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:25 10:42:26",
+          "focal_length": "240.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.0",
+          "iso": 200
+        },
+        "sort_index": 17
+      },
+      {
+        "filename": "africa-lizard.JPG",
+        "photo_name": "africa-lizard.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:26 09:50:28",
+          "focal_length": "250.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/6.0",
+          "iso": 800
+        },
+        "sort_index": 18
+      },
+      {
+        "filename": "africa-monkeys.JPG",
+        "photo_name": "africa-monkeys.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:30 11:13:47",
+          "focal_length": "155.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/5.6",
+          "iso": 200
+        },
+        "sort_index": 19
+      },
+      {
+        "filename": "africa-resting-cheetahs.JPG",
+        "photo_name": "africa-resting-cheetahs.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:27 09:13:09",
+          "focal_length": "112.0 mm",
+          "shutter_speed": "1/200s",
+          "aperture": "f/10.0",
+          "iso": 400
+        },
+        "sort_index": 20
+      },
+      {
+        "filename": "africa-sleeping-lion.JPG",
+        "photo_name": "africa-sleeping-lion.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 11:24:58",
+          "focal_length": "300.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/6.3",
+          "iso": 1400
+        },
+        "sort_index": 21
+      },
+      {
+        "filename": "africa-trail.JPG",
+        "photo_name": "africa-trail.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 14:22:15",
+          "focal_length": "80.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/8.0",
+          "iso": 180
+        },
+        "sort_index": 22
+      },
+      {
+        "filename": "africa-tree.JPG",
+        "photo_name": "africa-tree.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 10:49:20",
+          "focal_length": "70.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/8.0",
+          "iso": 110
+        },
+        "sort_index": 23
+      },
+      {
+        "filename": "africa-trees.JPG",
+        "photo_name": "africa-trees.JPG",
+        "width": 1620,
+        "height": 1080,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:25 07:37:23",
+          "focal_length": "70.0 mm",
+          "shutter_speed": "1/500s",
+          "aperture": "f/8.0",
+          "iso": 100
+        },
+        "sort_index": 24
+      },
+      {
+        "filename": "africa-zebras.JPG",
+        "photo_name": "africa-zebras.JPG",
+        "width": 6000,
+        "height": 4000,
+        "aspect_ratio": 1.5,
+        "orientation": "landscape",
+        "metadata": {
+          "camera_model": "NIKON D3400",
+          "date_taken": "2017:01:24 16:27:41",
+          "focal_length": "195.0 mm",
+          "shutter_speed": "1/1000s",
+          "aperture": "f/5.6",
+          "iso": 360
+        },
+        "sort_index": 28
+      }
+    ]
+  }
+}

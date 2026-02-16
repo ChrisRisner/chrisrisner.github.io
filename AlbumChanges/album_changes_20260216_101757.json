@@ -1,0 +1,1171 @@
+{
+  "timestamp": "2026-02-16T10:17:57.827371",
+  "scan_duration_seconds": 14.88,
+  "summary": {
+    "albums_added": 0,
+    "albums_removed": 0,
+    "photos_added": 0,
+    "photos_removed": 5,
+    "photos_updated": 120
+  },
+  "albums_added": [],
+  "albums_removed": [],
+  "changes": [
+    {
+      "album": "Art",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "art-braga-tiles-2.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-lady.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-street.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-elephants.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-singapore-gas-masks.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-sintra-navigation.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-graffiti.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-hands-boat.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-head.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-building.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-art.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-porto-tiles.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-sintra.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-street-art.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-church.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-braga-tiles.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-figurine.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-statue.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-porto-garbage.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-braga-statue.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-sintra-face.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-church-2.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-street-2.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-carriage.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-key-and-bird.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-bee-art.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-porto-rabbit.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-braga-fountain.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-porto-fresco.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "art-portugal-face.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Portugal",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "portugal-cascaius-boats.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-palace-view.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-cannonballs.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-pastries.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-sintra-statue.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-more-tiles.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-chruch-tiles-2.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-tile-church.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-wine.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-monument-discoveries.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-path.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-river-view.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-fountain.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-river.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-duoro-valley.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-market.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-braga-castle.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-lisboa.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-arch.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-cave.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-porto-market-sardines.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-pena-palace.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-braga-mont.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-tram.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-sunshine.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-monastery.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-algave-cliffs.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-sintra-fountain.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-bookstore.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "portugal-horse-statue.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Ireland",
+      "photos_added": [],
+      "photos_removed": [
+        {
+          "filename": "ireland-elephant-tusks.JPG",
+          "previous_sort_index": 12,
+          "reason": "no longer in folder"
+        }
+      ],
+      "photos_updated": [
+        {
+          "filename": "ireland-hawk.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-kettle.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-cliffs-of-moher.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-chruch-pews.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "irelend-convent.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dublin-crest.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dunmore-head.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-lookout.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dunquin-pier.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-wine-celler.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-cemetary.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-wolf-hounds.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-castle-view.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-dogs.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-ashord-tunnel.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-ashford-castle.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-abbey.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-ashford-painting.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "ireland-trail.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Signs",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "signs-brain.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "sign-tattoos.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "signs-pizza-portugal.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "signs-namaste.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "signs-size-matters.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "signs-milk-friends.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "signs-vulva.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "sign-cheezy.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "signs-ireland-guinness.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Street",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "street-porto-shop.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Hawaii",
+      "photos_added": [],
+      "photos_removed": [],
+      "photos_updated": [
+        {
+          "filename": "hawaii-kauai-cliffs-2.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-sunset.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-golf-course.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-animals-chicken.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-night-beach.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-beach.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-cliffs.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-koy-pond.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "hawaii-kauai-fields.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "album": "Africa",
+      "photos_added": [],
+      "photos_removed": [
+        {
+          "filename": "safari-birds.JPG",
+          "previous_sort_index": 29,
+          "reason": "no longer in folder"
+        },
+        {
+          "filename": "africa-wildebeasts.JPG",
+          "previous_sort_index": 25,
+          "reason": "no longer in folder"
+        },
+        {
+          "filename": "africa-zebra-reflection.JPG",
+          "previous_sort_index": 26,
+          "reason": "no longer in folder"
+        },
+        {
+          "filename": "africa-zebras-field.JPG",
+          "previous_sort_index": 27,
+          "reason": "no longer in folder"
+        }
+      ],
+      "photos_updated": [
+        {
+          "filename": "africa-zebras.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-resting-cheetahs.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-hippo.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-hyena.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-tree.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-eating-cheetahs.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-elephants.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-elephant-group.jpg",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-close-bird.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-trail.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-fighting-lions.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-elephant.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-deer.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-sleeping-lion.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-giraffe.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-bones.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-birds.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-monkeys.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-kissing-cheetahs.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-lizard.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        },
+        {
+          "filename": "africa-baby-zebra.JPG",
+          "changes": {
+            "gps": {
+              "old": "present",
+              "new": "removed"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

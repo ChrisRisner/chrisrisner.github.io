@@ -1,0 +1,415 @@
+{
+  "slug": "art",
+  "title": "Art",
+  "folder": "Art",
+  "photos": [
+    {
+      "filename": "art-braga-fountain.JPG",
+      "src": "/media/art/large_art-braga-fountain.JPG",
+      "thumb": "/media/art/thumb_art-braga-fountain.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 0,
+      "meta": {
+        "date": "2026-01-02"
+      }
+    },
+    {
+      "filename": "art-braga-statue.JPG",
+      "src": "/media/art/large_art-braga-statue.JPG",
+      "thumb": "/media/art/thumb_art-braga-statue.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 1,
+      "meta": {
+        "date": "2026-01-02"
+      }
+    },
+    {
+      "filename": "art-braga-tiles-2.JPG",
+      "src": "/media/art/large_art-braga-tiles-2.JPG",
+      "thumb": "/media/art/thumb_art-braga-tiles-2.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 2,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "art-braga-tiles.JPG",
+      "src": "/media/art/large_art-braga-tiles.JPG",
+      "thumb": "/media/art/thumb_art-braga-tiles.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 3,
+      "meta": {
+        "date": "2026-01-02"
+      }
+    },
+    {
+      "filename": "art-building.jpg",
+      "src": "/media/art/large_art-building.jpg",
+      "thumb": "/media/art/thumb_art-building.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 4,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-carriage.JPG",
+      "src": "/media/art/large_art-carriage.JPG",
+      "thumb": "/media/art/thumb_art-carriage.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 5,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "art-elephants.jpg",
+      "src": "/media/art/large_art-elephants.jpg",
+      "thumb": "/media/art/thumb_art-elephants.jpg",
+      "w": 1594,
+      "h": 1200,
+      "aspect_ratio": 1.328,
+      "orientation": "landscape",
+      "sort_index": 6,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "art-key-and-bird.jpg",
+      "src": "/media/art/large_art-key-and-bird.jpg",
+      "thumb": "/media/art/thumb_art-key-and-bird.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 7,
+      "meta": {
+        "date": "2025-12-27"
+      }
+    },
+    {
+      "filename": "art-porto-fresco.JPG",
+      "src": "/media/art/large_art-porto-fresco.JPG",
+      "thumb": "/media/art/thumb_art-porto-fresco.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 8,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "art-porto-garbage.JPG",
+      "src": "/media/art/large_art-porto-garbage.JPG",
+      "thumb": "/media/art/thumb_art-porto-garbage.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 9,
+      "meta": {
+        "date": "2026-01-01"
+      }
+    },
+    {
+      "filename": "art-porto-rabbit.JPG",
+      "src": "/media/art/large_art-porto-rabbit.JPG",
+      "thumb": "/media/art/thumb_art-porto-rabbit.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 10,
+      "meta": {
+        "date": "2026-01-01"
+      }
+    },
+    {
+      "filename": "art-porto-tiles.JPG",
+      "src": "/media/art/large_art-porto-tiles.JPG",
+      "thumb": "/media/art/thumb_art-porto-tiles.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 11,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "art-portugal-bee-art.JPG",
+      "src": "/media/art/large_art-portugal-bee-art.JPG",
+      "thumb": "/media/art/thumb_art-portugal-bee-art.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 12,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-portugal-face.JPG",
+      "src": "/media/art/large_art-portugal-face.JPG",
+      "thumb": "/media/art/thumb_art-portugal-face.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 13,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-portugal-figurine.JPG",
+      "src": "/media/art/large_art-portugal-figurine.JPG",
+      "thumb": "/media/art/thumb_art-portugal-figurine.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 14,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "art-portugal-graffiti.jpg",
+      "src": "/media/art/large_art-portugal-graffiti.jpg",
+      "thumb": "/media/art/thumb_art-portugal-graffiti.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 15,
+      "meta": {
+        "date": "2026-01-03"
+      }
+    },
+    {
+      "filename": "art-portugal-hands-boat.JPG",
+      "src": "/media/art/large_art-portugal-hands-boat.JPG",
+      "thumb": "/media/art/thumb_art-portugal-hands-boat.JPG",
+      "w": 856,
+      "h": 1200,
+      "aspect_ratio": 0.713,
+      "orientation": "portrait",
+      "sort_index": 16,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-portugal-head.JPG",
+      "src": "/media/art/large_art-portugal-head.JPG",
+      "thumb": "/media/art/thumb_art-portugal-head.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 17,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "art-portugal-lady.JPG",
+      "src": "/media/art/large_art-portugal-lady.JPG",
+      "thumb": "/media/art/thumb_art-portugal-lady.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 18,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-portugal-sintra-face.JPG",
+      "src": "/media/art/large_art-portugal-sintra-face.JPG",
+      "thumb": "/media/art/thumb_art-portugal-sintra-face.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 19,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "art-portugal-sintra-navigation.JPG",
+      "src": "/media/art/large_art-portugal-sintra-navigation.JPG",
+      "thumb": "/media/art/thumb_art-portugal-sintra-navigation.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 20,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "art-portugal-sintra.JPG",
+      "src": "/media/art/large_art-portugal-sintra.JPG",
+      "thumb": "/media/art/thumb_art-portugal-sintra.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 21,
+      "meta": {
+        "date": "2025-12-30"
+      }
+    },
+    {
+      "filename": "art-portugal-street-2.JPG",
+      "src": "/media/art/large_art-portugal-street-2.JPG",
+      "thumb": "/media/art/thumb_art-portugal-street-2.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 22,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-portugal-street-art.JPG",
+      "src": "/media/art/large_art-portugal-street-art.JPG",
+      "thumb": "/media/art/thumb_art-portugal-street-art.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 23,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-portugal-street.jpg",
+      "src": "/media/art/large_art-portugal-street.jpg",
+      "thumb": "/media/art/thumb_art-portugal-street.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 24,
+      "meta": {
+        "date": "2025-12-29"
+      }
+    },
+    {
+      "filename": "art-singapore-gas-masks.JPG",
+      "src": "/media/art/large_art-singapore-gas-masks.JPG",
+      "thumb": "/media/art/thumb_art-singapore-gas-masks.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 25,
+      "meta": {
+        "date": "2018-04-12"
+      }
+    },
+    {
+      "filename": "portugal-art.jpg",
+      "src": "/media/art/large_portugal-art.jpg",
+      "thumb": "/media/art/thumb_portugal-art.jpg",
+      "w": 904,
+      "h": 1200,
+      "aspect_ratio": 0.753,
+      "orientation": "portrait",
+      "sort_index": 26,
+      "meta": {
+        "date": "2026-01-08"
+      }
+    },
+    {
+      "filename": "portugal-church-2.JPG",
+      "src": "/media/art/large_portugal-church-2.JPG",
+      "thumb": "/media/art/thumb_portugal-church-2.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 27,
+      "meta": {
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "filename": "portugal-church.JPG",
+      "src": "/media/art/large_portugal-church.JPG",
+      "thumb": "/media/art/thumb_portugal-church.JPG",
+      "w": 1600,
+      "h": 1067,
+      "aspect_ratio": 1.5,
+      "orientation": "landscape",
+      "sort_index": 28,
+      "meta": {
+        "date": "2025-12-27"
+      }
+    },
+    {
+      "filename": "portugal-statue.JPG",
+      "src": "/media/art/large_portugal-statue.JPG",
+      "thumb": "/media/art/thumb_portugal-statue.JPG",
+      "w": 800,
+      "h": 1200,
+      "aspect_ratio": 0.667,
+      "orientation": "portrait",
+      "sort_index": 29,
+      "meta": {
+        "date": "2025-12-27"
+      }
+    }
+  ],
+  "stats": {
+    "total_photos": 30,
+    "portrait_count": 16,
+    "landscape_count": 14,
+    "cameras": [],
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    }
+  },
+  "navigation": {
+    "prev_album": "africa",
+    "next_album": "hawaii"
+  },
+  "generated": {
+    "timestamp": "2026-02-16T21:32:22.006093Z",
+    "builder_version": "1.0.0"
+  }
+}
